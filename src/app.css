@@ -1,16 +1,92 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
+@import "tailwindcss";
 
 @theme {
-	--font-sans: 'Inter', sans-serif;
+  /* Legacy tokens */
+  --color-fyra-red-50: #fbf6f5;
+  --color-fyra-red-100: #f8edeb;
+  --color-fyra-red-200: #f2dbd9;
+  --color-fyra-red-300: #e6bfbb;
+  --color-fyra-red-400: #d89894;
+  --color-fyra-red-500: #c6716d;
+  --color-fyra-red-600: #a54a4b;
+  --color-fyra-red-700: #923e40;
+  --color-fyra-red-800: #7b363b;
+  --color-fyra-red-900: #6a3136;
+  --color-fyra-red-950: #3a171a;
+
+  --color-fyra-gray-50: #fafafa;
+  --color-fyra-gray-100: #f4f4f5;
+  --color-fyra-gray-200: #e4e4e7;
+  --color-fyra-gray-300: #d5d5d7;
+  --color-fyra-gray-400: #a2a2a9;
+  --color-fyra-gray-500: #727279;
+  --color-fyra-gray-600: #53535a;
+  --color-fyra-gray-700: #404045;
+  --color-fyra-gray-800: #27272a;
+  --color-fyra-gray-900: #18181a;
+  --color-fyra-gray-950: #09090b;
+
+
+
+}
+
+@font-face {
+  font-family: "Satoshi-Variable";
+  src:
+    url('/fonts/Satoshi-Variable.woff2') format('woff2'),
+    url('/fonts/Satoshi-Variable.woff') format('woff'),
+    url('/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Variable";
+  src:
+    url('/fonts/Satoshi-VariableItalic.woff2') format('woff2'),
+    url('/fonts/Satoshi-VariableItalic.woff') format('woff'),
+    url('/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+@theme {
+  --font-sans: "Satoshi-Variable", "Satoshi-Regular", sans-serif;
 }
 
 html {
-	@apply bg-zinc-950 text-white overflow-x-hidden;
-	scrollbar-width: none;
+  @apply bg-fyra-gray-900 text-white w-screen overflow-x-clip;
 }
 
 body {
-	@apply w-screen overflow-x-hidden;
+  @apply w-screen overflow-x-clip;
+}
+
+@theme inline {
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }

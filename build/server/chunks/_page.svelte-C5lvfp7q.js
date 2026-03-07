@@ -1,0 +1,23 @@
+import { h as head, ab as slot } from './index-D0qXBiJg.js';
+
+function AsciiStyleBackground($$renderer, $$props) {
+  $$renderer.push(`<div class="relative w-full overflow-hidden" style="background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 100%), url('/assets/about.webp'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; filter: invert(0.985563) sepia(66%) saturate(449%) hue-rotate(354deg) brightness(101%) contrast(89%); image-rendering: pixelated; image-rendering: crisp-edges; min-height: 100vh;"><div class="absolute inset-0 bg-gradient-to-r from-gray-f-900/90 via-gray-f-900/80 to-gray-f-900/70"></div> <div class="relative z-10"><!--[-->`);
+  slot($$renderer, $$props, "default", {});
+  $$renderer.push(`<!--]--></div></div>`);
+}
+function _page($$renderer) {
+  head("1uha8ag", $$renderer, ($$renderer2) => {
+    $$renderer2.title(($$renderer3) => {
+      $$renderer3.push(`<title>Fyra Stack — Infrastructure without breaking the bank, or your mind.</title>`);
+    });
+  });
+  AsciiStyleBackground($$renderer, {
+    children: ($$renderer2) => {
+      $$renderer2.push(`<div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40"><div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8"><div class="hidden sm:flex items-center gap-3"><img src="/logo.svg" alt="Fyra Stack" class="h-11"/></div> <div class="mt-24 sm:mt-32 lg:mt-16"><a href="#" class="inline-flex space-x-6"></a></div> <h1 class="mt-10 text-4xl font-semibold tracking-tight text-pretty text-gray-f-500 sm:text-5xl dark:text-white sm:leading-14">Infrastructure without breaking the bank, or your <u class="decoration-red-f-500 underline decoration-3 sm:decoration-4 underline-offset-4 sm:underline-offset-6">mind</u>.</h1> <p class="mt-8 text-lg text-pretty text-gray-f-300 sm:text-xl/8 dark:text-gray-f-200">We are an infrastructure provider focused on running bare metal that just works. Built from the ground up to support the open source projects you love, and the communities around them.</p> <div class="mt-10 flex items-center gap-x-6"><a href="/services/vps" class="rounded-xs bg-gray-f-800 border-gray-f-500 border px-4 py-3 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:-rotate-3 hover:bg-gray-f-600 hover:border-red-f-500">Get started</a> <a href="#services" class="text-sm/6 font-semibold text-gray-f-500 dark:text-white">Reserve your stack <span aria-hidden="true">→</span></a></div></div> <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32"><div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none"><img width="2432" height="1442" src="/dummy-vibecode-screenshot.png" alt="App screenshot" class="w-304 rounded-md bg-gray-50 shadow-xl ring-1 ring-gray-900/10 dark:hidden"/> <img width="2432" height="1442" src="/dummy-vibecode-screenshot.png" alt="App screenshot" class="w-304 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 not-dark:hidden"/></div></div></div>`);
+    },
+    $$slots: { default: true }
+  });
+}
+
+export { _page as default };
+//# sourceMappingURL=_page.svelte-C5lvfp7q.js.map

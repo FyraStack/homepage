@@ -1,0 +1,48 @@
+<div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+
+	<!-- Top blob -->
+	<div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+		<div
+			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
+		></div>
+	</div>
+
+	<div class="mx-auto max-w-4xl py-32 sm:py-40">
+
+		<!-- Announcement badge -->
+		<div class="mb-8 flex justify-center">
+			<div class="relative border border-fyra-gray-700 bg-fyra-gray-800/60 px-3.5 py-2 text-sm text-fyra-gray-400">
+				Catch us at SCALE 23x — come talk infrastructure.
+				<a href="https://www.socallinuxexpo.org/scale/23x" target="_blank" rel="noopener noreferrer" class="ml-1 font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300">
+					<span aria-hidden="true" class="absolute inset-0"></span>Find our booth <span aria-hidden="true">→</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="text-center">
+			<h1 class="text-3xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
+				Infrastructure without breaking the bank, or your mind.
+			</h1>
+			<p class="mt-8 sm:px-16 lg:px-32 text-base font-base text-pretty text-fyra-gray-400 sm:text-xl/7">
+			Built from the ground up to support the open source projects we love, and the communities around them.			</p>
+			<div class="mt-10 flex items-center justify-center gap-4 flex-wrap">
+				<a
+					href="/pricing"
+					class="text-sm font-medium text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
+				>
+					View pricing <span aria-hidden="true">→</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bottom blob -->
+	<div aria-hidden="true" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+		<div
+			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
+		></div>
+	</div>
+
+</div>

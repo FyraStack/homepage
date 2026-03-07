@@ -1,3 +1,11 @@
 {
-	"/": []
+	"/": [],
+	"/about": [],
+	"/api/prereserve": [
+		"src/routes/api/prereserve/+server.ts"
+	],
+	"/docs": [],
+	"/pricing": [],
+	"/services/colocation": [],
+	"/services/vps": []
 }
