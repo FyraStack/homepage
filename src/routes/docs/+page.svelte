@@ -149,7 +149,7 @@
 </svelte:head>
 
 <!-- ─── Header ──────────────────────────────────────────────────────── -->
-<div class="relative overflow-hidden border-b border-fyra-gray-800">
+<main class="relative overflow-hidden border-b border-fyra-gray-800">
 	<div class="pointer-events-none absolute inset-0 opacity-[0.07]">
 		<img src="/stack-pattern.svg" alt="" class="h-full w-full object-cover object-center" aria-hidden="true" />
 	</div>
@@ -197,7 +197,7 @@
 			<span class="text-[12px] text-fyra-gray-500">Serial console included</span>
 		</div>
 	</div>
-</div>
+</main>
 
 <!-- ─── Quick start ──────────────────────────────────────────────────── -->
 <section id="quick-start" class="border-b border-fyra-gray-800">
@@ -237,14 +237,14 @@
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
 		{#each guides as guide}
 			<div class="bg-fyra-gray-900 p-6">
-				<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-500">{guide.category}</p>
+				<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400">{guide.category}</p>
 				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
 				<ul class="mt-5 flex flex-col gap-2">
 					{#each guide.articles as article}
 						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-600">{article.label}</span>
-								<span class="shrink-0 text-[10px] font-medium uppercase tracking-widest text-fyra-gray-700">Soon</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span class="shrink-0 text-[10px] font-medium uppercase tracking-widest text-fyra-gray-400">Soon</span>
 							{:else}
 								<a href="#" class="text-sm text-fyra-gray-300 hover:text-fyra-gray-50 transition-colors duration-100">{article.label}</a>
 							{/if}

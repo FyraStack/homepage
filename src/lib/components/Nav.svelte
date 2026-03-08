@@ -127,7 +127,7 @@
 			</nav>
 
 			<!-- Right side -->
-			<div class="flex items-center gap-1">
+			<div class="flex items-center gap-1 md:hidden">
 
 				<!-- CTA -->
 

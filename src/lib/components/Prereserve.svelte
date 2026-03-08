@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { vpsPlans } from '$lib/components/VPSPlans.svelte';
+	import { vpsPlans } from '$lib/components/services/vps/VPSPlans.svelte';
 	import { colocationPlans } from '$lib/data/colocationPlans';
 
 	let {
@@ -67,7 +67,7 @@
 	}
 
 	const inputClass = "w-full bg-fyra-gray-800 border border-fyra-gray-700 text-fyra-gray-100 placeholder:text-fyra-gray-600 text-sm px-3 py-2.5 focus:outline-none focus:border-fyra-gray-500 transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed";
-	const labelClass = "text-[11px] font-medium uppercase tracking-widest text-fyra-gray-500";
+	const labelClass = "text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400";
 </script>
 
 <svelte:window
@@ -105,7 +105,7 @@
 	</div>
 {/if}
 
-<section class="border-b border-fyra-gray-800">
+<section class="">
 	<div>
 
 		<!-- Form -->
@@ -149,7 +149,7 @@
 									{/if}
 								</span>
 								<svg
-									class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-500 transition-transform duration-150 {planDropdownOpen ? 'rotate-180' : ''}"
+									class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen ? 'rotate-180' : ''}"
 									viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
 								>
 									<path d="M2 3.5 5 6.5 8 3.5" />

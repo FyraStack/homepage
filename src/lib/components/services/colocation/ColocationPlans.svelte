@@ -10,6 +10,10 @@
 	let currentPlan = $derived(colocationPlans.find(p => p.name === selectedPlanName) ?? colocationPlans[0]);
 </script>
 
+<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Pricing that's competitive.</h2>
+		<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
+	</div>
 <div class="grid grid-cols-7">
 	<div class="col-span-7 p-5 flex justify-between flex-col border-b border-fyra-gray-800">
 		<!-- top -->

@@ -5,6 +5,7 @@
 		"src/routes/api/prereserve/+server.ts"
 	],
 	"/docs": [],
+	"/mockup": [],
 	"/pricing": [],
 	"/services/colocation": [],
 	"/services/vps": []

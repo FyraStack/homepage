@@ -1,5 +1,5 @@
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-<main class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+<div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 
 	<!-- Top blob -->
 	<div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
@@ -10,32 +10,12 @@
 	</div>
 
 	<div class="mx-auto max-w-4xl py-32 sm:py-40">
-
-		<!-- Announcement badge -->
-		<div class="mb-8 flex justify-center">
-			<div class="relative border border-fyra-gray-700 bg-fyra-gray-800/60 px-3.5 py-2 text-sm text-fyra-gray-400">
-				Catch us at SCALE 23x — come talk infrastructure.
-				<a href="https://www.socallinuxexpo.org/scale/23x" target="_blank" rel="noopener noreferrer" class="ml-1 font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300">
-					<span aria-hidden="true" class="absolute inset-0"></span>Find our booth <span aria-hidden="true">→</span>
-				</a>
-			</div>
-		</div>
-
 		<div class="text-center">
-			<h1 class="text-3xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
-				Infrastructure without breaking the bank, or your mind.
+			<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
+   We run the servers, you run your stack.
 			</h1>
-			<p class="mt-8 sm:px-16 lg:px-32 text-base font-base text-pretty text-fyra-gray-400 sm:text-xl/7">
-			Built from the ground up to support the open source projects we love, and the communities around them.			</p>
-			<div class="mt-10 flex items-center justify-center gap-4 flex-wrap">
-				<a
-
-					href="/pricing"
-					class="text-sm font-medium text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
-				>
-					View pricing <span aria-hidden="true">→</span>
-				</a>
-			</div>
+			<p class="mt-8 mb-16 sm:px-16 lg:px-32 text-base font-base text-pretty text-fyra-gray-400 sm:text-xl/7">
+			Providing hosting you can trust, without breaking the bank, or your mind.</p>
 		</div>
 	</div>
 
@@ -47,4 +27,4 @@
 		></div>
 	</div>
 
-</main>
+</div>

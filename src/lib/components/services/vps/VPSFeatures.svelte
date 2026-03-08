@@ -4,16 +4,15 @@
 		<!-- Left: headline -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
 			<h2 class="text-4xl font-semibold leading-tight tracking-tight text-fyra-gray-50 ">
-Stack is different.
+			<!-- Made for engineers, not your boss. -->
+			VPS that just works.
 			</h2>
 
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
 			Stack is provided by Fyra Labs, an open-source community that develops Terra and Ultramarine Linux.
 			</p>
 
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
-			We focus on bare-metal that just works, built from the ground up to support the open source projects you love; all without breaking the bank, or your mind.
-			</p>
+
 		</div>
 
 		<!-- Right: bento grid -->
@@ -22,12 +21,12 @@ Stack is different.
 			<!-- Fast by default — full width, with decoration -->
 			<div class="relative col-span-2 overflow-hidden bg-fyra-gray-900 p-8">
 				<div class="pointer-events-none absolute right-0 top-0 h-full w-2/5 select-none">
-					<img src="/stack-pattern.svg" alt="" class="h-full w-full object-cover object-left opacity-20" aria-hidden="true" />
-					<div class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"></div>
+          <img src="/homepage-mockup.png" alt="" class="w-full object-top object-left" aria-hidden="true" />
+         					<div class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"></div>
 				</div>
 				<div class="relative">
-					<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
-					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">NVMe storage, 20 Gbps network, and built for speed, not marketing.</p>
+					<p class="text-lg font-semibold text-fyra-gray-50">Simple control panel</p>
+					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">Developed with engineers in mind from the beginning.</p>
 				</div>
 			</div>
 
@@ -39,8 +38,8 @@ Stack is different.
 
 			<!-- Independent -->
 			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg font-semibold text-fyra-gray-50">Independent</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">No venture capital means we actually care about you.</p>
+				<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">NVMe storage, 20 Gbps network, on enterprise hardware.</p>
 			</div>
 
 			<!-- Real support -->

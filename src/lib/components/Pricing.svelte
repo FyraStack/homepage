@@ -53,12 +53,12 @@
 				<!-- Price block -->
 				<div class="flex items-end justify-between gap-4 border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 					<div>
-						<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-500">{plan.name}</p>
+						<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400">{plan.name}</p>
 						<div class="mt-3 flex items-baseline gap-1">
 							<span class="text-4xl font-bold tracking-tight text-fyra-gray-50">${plan.price}</span>
-							<span class="text-sm font-medium text-fyra-gray-500">/mo</span>
+							<span class="text-sm font-medium text-fyra-gray-400">/mo</span>
 						</div>
-						<p class="mt-1 text-sm text-fyra-gray-600">{plan.description}</p>
+						<p class="mt-1 text-sm text-fyra-gray-400">{plan.description}</p>
 					</div>
 					<a
 						href="/services/{plan.slug}"
