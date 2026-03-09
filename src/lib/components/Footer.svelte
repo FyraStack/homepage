@@ -6,8 +6,7 @@
 			heading: "Product",
 			links: [
 
-				{ label: "Pricing",      href: "/pricing"  },
-				{ label: "Docs",         href: "/docs"  },
+							{ label: "Docs",         href: "/docs"  },
 				{ label: "Status",       href: "https://status.fyrastack.com",  external: true },
 			],
 		},

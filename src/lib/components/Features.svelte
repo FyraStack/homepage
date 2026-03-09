@@ -27,14 +27,14 @@ Stack is different.
 				</div>
 				<div class="relative">
 					<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
-					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">NVMe storage, 20 Gbps network, and built for speed, not marketing.</p>
+					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">Fast storage, fast compute, fast networking, <br/> fast everything.</p>
 				</div>
 			</div>
 
 			<!-- Linux Native -->
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold leading-snug text-fyra-gray-50">Linux native</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">Run Ultramarine, Debian, CachyOS, or whatever your stack needs.</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">Run Ultramarine, Debian, Alma, or whatever your stack needs.</p>
 			</div>
 
 			<!-- Independent -->

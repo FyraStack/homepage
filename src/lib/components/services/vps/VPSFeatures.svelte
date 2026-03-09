@@ -5,13 +5,18 @@
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
 			<h2 class="text-4xl font-semibold leading-tight tracking-tight text-fyra-gray-50 ">
 			<!-- Made for engineers, not your boss. -->
-			VPS that just works.
+			Stack is different.
 			</h2>
 
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
-			Stack is provided by Fyra Labs, an open-source community that develops Terra and Ultramarine Linux.
+			Most budget providers cut corners on hardware to hit their price points, we don't.
 			</p>
-
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
+			Powered by AMD EPYC 9004 series CPUs, OCP-compliant servers, and enterprise drives, we buy good hardware, run it efficiently, run a small focused team, don't oversell, and charge a fair price.
+			</p>
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">
+			 It's boring and it works.
+			</p>
 
 		</div>
 
@@ -21,7 +26,7 @@
 			<!-- Fast by default — full width, with decoration -->
 			<div class="relative col-span-2 overflow-hidden bg-fyra-gray-900 p-8">
 				<div class="pointer-events-none absolute right-0 top-0 h-full w-2/5 select-none">
-          <img src="/homepage-mockup.png" alt="" class="w-full object-top object-left" aria-hidden="true" />
+          <img src="/homepage-mockup.png" alt="" class="w-full object-top " aria-hidden="true" />
          					<div class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"></div>
 				</div>
 				<div class="relative">
@@ -33,13 +38,13 @@
 			<!-- Linux Native -->
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold leading-snug text-fyra-gray-50">Linux native</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">Run Ultramarine, Debian, CachyOS, or whatever your stack needs.</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">Run Ultramarine, Debian, Alma, or whatever your stack needs.</p>
 			</div>
 
 			<!-- Independent -->
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">NVMe storage, 20 Gbps network, on enterprise hardware.</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">Powered by AMD EPYC 9004 CPUs that are fast, real fast.</p>
 			</div>
 
 			<!-- Real support -->

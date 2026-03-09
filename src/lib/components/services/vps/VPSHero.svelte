@@ -11,11 +11,10 @@
 
 	<div class="mx-auto max-w-4xl py-32 sm:py-40">
 		<div class="text-center">
-			<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
+			<h1 class="text-4xl font-semibold mb-20 tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
    We run the servers, you run your stack.
 			</h1>
-			<p class="mt-8 mb-16 sm:px-16 lg:px-32 text-base font-base text-pretty text-fyra-gray-400 sm:text-xl/7">
-			Providing hosting you can trust, without breaking the bank, or your mind.</p>
+
 		</div>
 	</div>
 

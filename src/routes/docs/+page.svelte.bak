@@ -148,69 +148,61 @@
 	<title>Documentation — Fyra Stack</title>
 </svelte:head>
 
-<!-- Hero -->
-<div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
-
-	<!-- Top blob -->
-	<div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-		<div
-			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
-		></div>
+<!-- ─── Header ──────────────────────────────────────────────────────── -->
+<main class="relative overflow-hidden border-b border-fyra-gray-800">
+	<div class="pointer-events-none absolute inset-0 opacity-[0.07]">
+		<img src="/stack-pattern.svg" alt="" class="h-full w-full object-cover object-center" aria-hidden="true" />
 	</div>
-
-	<div class="mx-auto max-w-4xl py-24 sm:py-32 text-center">
-		<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl mb-8">
-			Documentation.<br /><span class="text-fyra-red-400">No garbage.</span>
+	<div class="relative px-6 pb-12 pt-14 md:px-10 md:pb-16 md:pt-20">
+		<h1 class="text-5xl font-semibold leading-[1.1] tracking-tight text-fyra-gray-50 md:text-6xl">
+			Documentation.<br />
+			<span class="text-fyra-red-400">No fluff.</span>
 		</h1>
-		<p class="text-base text-fyra-gray-400 sm:text-lg/7 max-w-lg mx-auto">
+		<p class="mt-6 max-w-md text-base leading-relaxed text-fyra-gray-400">
 			Guides, references, and answers for getting your Stack VPS or colocation slot up and running.
 		</p>
-		<div class="mt-8 flex items-center justify-center gap-3 flex-wrap">
+		<div class="mt-8 flex flex-wrap items-center gap-3">
 			<a
 				href="#quick-start"
-				class="border border-fyra-red-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-100 hover:border-fyra-red-500"
+				class="inline-flex items-center gap-2 border border-fyra-red-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
 			>
-				Quick start →
+				Quick start
+				<svg class="h-3.5 w-3.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M7 2v10M3 8l4 4 4-4" />
+				</svg>
 			</a>
 			<a
 				href="#guides"
-				class="border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-300 transition-colors duration-100 hover:border-fyra-gray-500 hover:text-fyra-gray-50"
+				class="inline-flex items-center gap-2 border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
 			>
 				Browse guides
 			</a>
 		</div>
 	</div>
-
-	<!-- Bottom blob -->
-	<div aria-hidden="true" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-		<div
-			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
-		></div>
-	</div>
-
-</div>
-
-<!-- Stat strip -->
-<div class="grid grid-cols-2 gap-px bg-fyra-gray-800 border-b border-fyra-gray-800 md:grid-cols-4">
-	{#each [
-		{ value: '~5 min',     label: 'Time to first login' },
-		{ value: 'Root access', label: 'Full control, no wrappers' },
-		{ value: 'Any distro',  label: 'Bring your own ISO' },
-		{ value: 'Out-of-band', label: 'Serial console included' },
-	] as stat}
-		<div class="bg-fyra-gray-900 flex flex-col gap-0.5 px-6 py-5 md:px-10">
-			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">{stat.value}</span>
-			<span class="text-[12px] text-fyra-gray-500">{stat.label}</span>
+	<div class="relative grid grid-cols-2 divide-x divide-fyra-gray-800 border-t border-fyra-gray-800 md:grid-cols-4">
+		<div class="flex flex-col gap-0.5 px-6 py-4">
+			<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">~5 min</span>
+			<span class="text-[12px] text-fyra-gray-500">Time to first login</span>
 		</div>
-	{/each}
-</div>
+		<div class="flex flex-col gap-0.5 px-6 py-4">
+			<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">Root access</span>
+			<span class="text-[12px] text-fyra-gray-500">Full control, no wrappers</span>
+		</div>
+		<div class="flex flex-col gap-0.5 px-6 py-4">
+			<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">Any distro</span>
+			<span class="text-[12px] text-fyra-gray-500">Bring your own ISO</span>
+		</div>
+		<div class="flex flex-col gap-0.5 px-6 py-4">
+			<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">Out-of-band</span>
+			<span class="text-[12px] text-fyra-gray-500">Serial console included</span>
+		</div>
+	</div>
+</main>
 
-<!-- Quick start -->
+<!-- ─── Quick start ──────────────────────────────────────────────────── -->
 <section id="quick-start" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Quick start.</h2>
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Quick start.</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">From reservation to a running server in four steps.</p>
 	</div>
 
@@ -223,7 +215,7 @@
 						<h3 class="text-base font-semibold text-fyra-gray-50">{step.title}</h3>
 						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">{step.body}</p>
 						{#if step.code}
-							<pre class="mt-4 overflow-x-auto border border-fyra-gray-800 bg-fyra-gray-950 px-4 py-3 text-sm font-mono text-fyra-gray-200"><span class="text-fyra-gray-600 select-none">$ </span>{step.code}</pre>
+							<pre class="mt-4 overflow-x-auto border border-fyra-gray-700 bg-fyra-gray-950 px-4 py-3 text-sm font-mono text-fyra-gray-200"><span class="text-fyra-gray-600 select-none">$ </span>{step.code}</pre>
 						{/if}
 						{#if step.cta}
 							<a href={step.cta.href} class="mt-4 inline-block text-sm font-medium text-fyra-red-400 hover:text-fyra-red-300 transition-colors duration-100">{step.cta.label}</a>
@@ -235,24 +227,24 @@
 	</div>
 </section>
 
-<!-- Guides -->
+<!-- ─── Guides ───────────────────────────────────────────────────────── -->
 <section id="guides" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Guides.</h2>
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">In-depth documentation by topic. More being written as we launch.</p>
 	</div>
 
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
 		{#each guides as guide}
-			<div class="bg-fyra-gray-900 p-6 md:p-8">
-				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">{guide.category}</p>
+			<div class="bg-fyra-gray-900 p-6">
+				<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400">{guide.category}</p>
 				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
-				<ul class="mt-5 flex flex-col divide-y divide-fyra-gray-800">
+				<ul class="mt-5 flex flex-col gap-2">
 					{#each guide.articles as article}
-						<li class="flex items-center justify-between gap-2 py-2">
+						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-600">{article.label}</span>
-								<span class="shrink-0 text-[10px] font-medium uppercase tracking-widest text-fyra-gray-600">Soon</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span class="shrink-0 text-[10px] font-medium uppercase tracking-widest text-fyra-gray-400">Soon</span>
 							{:else}
 								<a href="#" class="text-sm text-fyra-gray-300 hover:text-fyra-gray-50 transition-colors duration-100">{article.label}</a>
 							{/if}
@@ -264,16 +256,16 @@
 	</div>
 </section>
 
-<!-- FAQ -->
+<!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
 <section>
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Common questions.</h2>
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Common questions.</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">Things people ask before signing up. Honest answers only.</p>
 	</div>
 
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-2">
 		{#each faqs as faq}
-			<div class="bg-fyra-gray-900 px-6 py-8 md:px-10 md:py-10">
+			<div class="bg-fyra-gray-900 px-6 py-9 md:px-10 md:py-10">
 				<p class="text-sm font-semibold text-fyra-gray-100">{faq.q}</p>
 				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{faq.a}</p>
 			</div>

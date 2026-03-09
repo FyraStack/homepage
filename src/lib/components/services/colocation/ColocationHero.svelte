@@ -11,12 +11,10 @@
 
 	<div class="mx-auto max-w-4xl py-32 sm:py-40">
 		<div class="text-center">
-			<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
-				Your hardware, our facility.
+			<h1 class="text-4xl mb-20 font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
+				Colocation shouldn't be complicated.
 			</h1>
-			<p class="mt-8 mb-16 sm:px-16 lg:px-32 text-base font-base text-pretty text-fyra-gray-400 sm:text-xl/7">
-				Carrier-neutral rack space in the Midwest. Real uptime, real support, no games.
-			</p>
+
 		</div>
 	</div>
 
