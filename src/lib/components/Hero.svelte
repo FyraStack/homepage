@@ -14,9 +14,9 @@
 		<!-- Announcement badge -->
 		<div class="mb-8 flex justify-center">
 			<div class="relative border border-fyra-gray-700 bg-fyra-gray-800/60 px-3.5 py-2 text-sm text-fyra-gray-400">
-				Catch us at SCALE 23x — come talk infrastructure.
-				<a href="https://www.socallinuxexpo.org/scale/23x" target="_blank" rel="noopener noreferrer" class="ml-1 font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300">
-					<span aria-hidden="true" class="absolute inset-0"></span>Find our booth <span aria-hidden="true">→</span>
+				Pre-reservations are open — VPS and colocation.
+				<a href="https://blog.fyralabs.com/vps-and-colocation-pre-reservation/" target="_blank" rel="noopener noreferrer" class="ml-1 font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300">
+					<span aria-hidden="true" class="absolute inset-0"></span>Read the announcement <span aria-hidden="true">→</span>
 				</a>
 			</div>
 		</div>

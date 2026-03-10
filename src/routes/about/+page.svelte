@@ -10,12 +10,12 @@
 	}
 
 	const values = [
-		{ label: 'Honest pricing',  description: 'No hidden fees, no surprise invoices. What you see is what you pay — always.' },
-		{ label: 'Bare metal',      description: 'Real hardware, not oversold VMs. Your vCPUs are your vCPUs.' },
-		{ label: 'Open source',     description: 'We contribute back to the projects we depend on. Terra, Ultramarine, and everything in between.' },
-		{ label: 'No lock-in',      description: 'Your data and your stack leave when you do. No hostage situations.' },
-		{ label: 'Small team',      description: 'Everyone here can be reached. No ticket queue, no third-party support hand-off.' },
-		{ label: 'Midwest built',   description: 'Not a coastal startup optimizing for press releases. Grounded, practical, and here to stay.' },
+		{ label: 'Honest pricing',  description: 'The price on the page is the price on your invoice. We don\'t add fees after you\'ve already signed up.' },
+		{ label: 'Bare metal',      description: 'We don\'t oversell. If you reserve 2 vCPUs, those 2 vCPUs are yours. That\'s just how it should work.' },
+		{ label: 'Open source',     description: 'We build on open source and we put work back in. Terra and Ultramarine don\'t run themselves.' },
+		{ label: 'No lock-in',      description: 'You can leave whenever you want. We\'ll even help you move. We\'d rather earn your business every month.' },
+		{ label: 'Small team',      description: 'When you email us, a person who works on the servers reads it. That\'s not a selling point, it\'s just how small teams work.' },
+		{ label: 'Midwest built',   description: 'We\'re in Minnesota. Our data center is in Minnesota. We\'re not going to relocate to optimize for press coverage.' },
 	];
 </script>
 
@@ -34,10 +34,10 @@
 
 	<div class="mx-auto max-w-4xl py-24 sm:py-32 text-center">
 		<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl mb-8">
-			Built by people who<br /><span class="text-fyra-red-400">use what they make.</span>
+			We run servers.<br /><span class="text-fyra-red-400">We use them too.</span>
 		</h1>
 		<p class="text-base text-fyra-gray-400 sm:text-lg/7 max-w-lg mx-auto">
-			Fyra Stack is the infrastructure arm of Fyra Labs — a small, independent team building in the open from the Midwest.
+			We're a small team in Minnesota that runs bare metal servers and charges a fair price for them. That's the whole thing.
 		</p>
 	</div>
 
@@ -52,10 +52,10 @@
 <!-- Stat strip -->
 <div class="grid grid-cols-2 gap-px bg-fyra-gray-800 border-b border-fyra-gray-800 md:grid-cols-4">
 	{#each [
-		{ value: 'Midwest',      label: 'Data center location'    },
-		{ value: '100%',         label: 'Independent, no VC'      },
-		{ value: 'Open source',  label: 'Roots in Fyra Labs'      },
-		{ value: '$5/mo',        label: 'VPS starting price'      },
+		{ value: 'Midwest proud',    label: 'Minnesota, USA'   },
+		{ value: 'Independent',        label: 'Self-funded by ourselves'    },
+		{ value: 'Open source',  label: 'Fyra Labs, publicly'     },
+		{ value: '$5/mo',        label: 'starting price ' },
 	] as stat}
 		<div class="bg-fyra-gray-900 flex flex-col gap-0.5 px-6 py-5 md:px-10">
 			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">{stat.value}</span>
@@ -74,19 +74,12 @@
 				Why we exist.
 			</h2>
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
-				Fyra Stack is the commercial arm of Fyra Labs — an open-source community behind Terra and Ultramarine Linux. We needed infrastructure we'd actually want to use, so we built it.
+				Fyra Labs builds Terra and Ultramarine Linux. We needed servers for that. We couldn't find hosting we'd actually recommend to someone without adding a bunch of caveats. So we started running our own.
 			</p>
 			<p class="mt-4 text-base leading-relaxed text-fyra-gray-400">
-				We run bare metal because we believe the best hosting is honest: fast hardware, flat pricing, and no ecosystem lock-in pulling you in twelve directions. That's the bar we hold ourselves to.
+				Stack is what came out of that. Real hardware, flat pricing, no surprise fees. We charge you for what you use. We don't sell your data, we don't lock you in, and we don't have a "retention team."
 			</p>
-			<a
-				href="https://github.com/FyraLabs"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="mt-8 inline-flex text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
-			>
-				Fyra Labs on GitHub <span aria-hidden="true" class="ml-1">→</span>
-			</a>
+
 		</div>
 
 		<!-- Right: fact bento -->
@@ -94,11 +87,11 @@
 			<div class="col-span-2 bg-fyra-gray-900 px-8 py-8">
 				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">Entry price</p>
 				<p class="mt-2 text-5xl font-bold tracking-tight text-fyra-gray-50">$5<span class="text-xl font-medium text-fyra-gray-400">/mo</span></p>
-				<p class="mt-1.5 text-sm text-fyra-gray-500">STACK-XXS VPS · no games, no gotchas.</p>
+				<p class="mt-1.5 text-sm text-fyra-gray-500">STACK-XXS · that's actually what it costs.</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
 				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">Founded</p>
-				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">2024</p>
+				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">2026</p>
 				<p class="mt-1 text-xs text-fyra-gray-500">Minnesota, USA</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
@@ -111,52 +104,6 @@
 	</div>
 </section>
 
-<!-- Values — editorial row list -->
-<section class="border-b border-fyra-gray-800">
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">What we believe.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">The principles we actually operate by.</p>
-	</div>
-
-	<div class="divide-y divide-fyra-gray-800">
-		{#each values as value, i}
-			<div class="grid grid-cols-1 gap-2 px-6 py-5 md:grid-cols-4 md:items-baseline md:gap-8 md:px-10">
-				<div class="flex items-center gap-3 md:col-span-1">
-					<span class="font-mono text-[11px] text-fyra-red-500">{String(i + 1).padStart(2, '0')}</span>
-					<p class="text-sm font-semibold text-fyra-gray-50">{value.label}</p>
-				</div>
-				<p class="text-sm leading-relaxed text-fyra-gray-400 md:col-span-3">{value.description}</p>
-			</div>
-		{/each}
-	</div>
-</section>
-
-<!-- Quote — full width -->
-<section class="border-b border-fyra-gray-800">
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-4">
-		<!-- Avatar / attribution side -->
-		<div class="bg-fyra-gray-900 flex flex-col justify-center gap-4 px-6 py-10 md:px-10 lg:py-12">
-			<img
-				src="/assets/people/kat.webp"
-				alt="Katherine Cole"
-				class="h-12 w-12 rounded-xs object-cover object-center brightness-90"
-			/>
-			<div>
-				<p class="text-sm font-semibold text-fyra-gray-50">Katherine Cole</p>
-				<p class="mt-0.5 text-[11px] font-medium uppercase tracking-widest text-fyra-gray-500">Founder · Infrastructure</p>
-			</div>
-		</div>
-		<!-- Quote -->
-		<div class="bg-fyra-gray-900 px-6 py-10 md:px-10 lg:col-span-3 lg:py-12">
-			<div class="h-px w-8 bg-fyra-red-500 mb-6"></div>
-			<blockquote class="text-xl font-medium leading-relaxed tracking-tight text-fyra-gray-100 md:text-2xl">
-				"We were tired of infrastructure that charges you for the privilege of existing.
-				Good hardware, fair pricing, and engineers who actually pick up the phone — that's
-				what we set out to build. Nothing more complicated than that."
-			</blockquote>
-		</div>
-	</div>
-</section>
 
 <!-- Team -->
 <section class="">

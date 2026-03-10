@@ -20,7 +20,7 @@
 			name: 'Server Colocation',
 			slug: 'colocation',
 			price: '50',
-			description: 'Scales to $200/mo.',
+			description: 'Scales to $300/mo.',
 			features: [
 				'Up to 6U rackspace',
 				'Up to 700W power budget',
