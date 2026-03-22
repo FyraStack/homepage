@@ -22,8 +22,8 @@
 		},
 		{
 			label: 'Storage',
-			stack: '40 GB NVMe',
-			values: ['50 GB NVMe', '40 GB SSD', '40 GB NVMe'],
+			stack: '40 GB SSD',
+			values: ['50 GB SSD', '40 GB SSD', '40 GB SSD'],
 			highlight: true,
 		},
 		{
@@ -34,7 +34,7 @@
 		},
 		{
 			label: 'Location',
-			stack: 'Midwest, USA',
+			stack: 'Chicago, IL',
 			values: ['Various', 'Various', 'Various'],
 			highlight: true,
 		},

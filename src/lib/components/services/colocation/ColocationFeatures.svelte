@@ -10,7 +10,7 @@
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
 			Most colocation providers won't work with you, we will.</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
-Colocate in our Minnesota space with actual redundancy, real network connectivity, and support from people who've actually racked servers before.			</p>
+Colocate in our Illinois space with power redundancy, solid network connectivity, and support from people who've actually racked servers before.			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
 			We charge you for rack space, power, and bandwidth.			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300"> That's it.</p>
@@ -26,7 +26,7 @@ Colocate in our Minnesota space with actual redundancy, real network connectivit
 					<div class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"></div>
 				</div>
 				<div class="relative">
-					<p class="text-lg font-semibold text-fyra-gray-50">Minnesota proud</p>
+					<p class="text-lg font-semibold text-fyra-gray-50">Midwest proud</p>
 					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">Providing low-latency access to the entire US on our blended network.</p>
 				</div>
 			</div>

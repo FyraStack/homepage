@@ -6,7 +6,7 @@
 			price: '5',
 			description: 'Scales to $34/mo.',
 			features: [
-				'AMD EPYC 9004 CPUs',
+				'Cascade Lake vCPUs',
 				'SAS3 SSD storage',
 				'1 Gbps fair-use uplink',
 				'Dedicated IPv4 + /64 IPv6',
@@ -27,7 +27,7 @@
 				'1 Gbps fair-use uplink',
 				'Dedicated IPv4 + IPv6',
 				'IPMI remote management',
-				'Minnesota data center',
+				'Chicago data center',
 				'24/7 physical security',
 				'Cancel anytime',
 			],
@@ -69,7 +69,7 @@
 					</div>
 
 					<!-- Features -->
-					<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2">
+					<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-2">
 						{#each plan.features as feature (feature)}
 							<div class="flex items-center gap-3 bg-fyra-gray-900 px-6 py-3.5 md:px-10">
 								<svg

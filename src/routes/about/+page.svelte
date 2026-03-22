@@ -9,14 +9,7 @@
 		return `${parts[0]} "${m.nickname}" ${parts.slice(1).join(' ')}`;
 	}
 
-	const values = [
-		{ label: 'Honest pricing',  description: 'The price on the page is the price on your invoice. We don\'t add fees after you\'ve already signed up.' },
-		{ label: 'Bare metal',      description: 'We don\'t oversell. If you reserve 2 vCPUs, those 2 vCPUs are yours. That\'s just how it should work.' },
-		{ label: 'Open source',     description: 'We build on open source and we put work back in. Terra and Ultramarine don\'t run themselves.' },
-		{ label: 'No lock-in',      description: 'You can leave whenever you want. We\'ll even help you move. We\'d rather earn your business every month.' },
-		{ label: 'Small team',      description: 'When you email us, a person who works on the servers reads it. That\'s not a selling point, it\'s just how small teams work.' },
-		{ label: 'Midwest built',   description: 'We\'re in Minnesota. Our data center is in Minnesota. We\'re not going to relocate to optimize for press coverage.' },
-	];
+
 </script>
 
 <svelte:head>
@@ -52,12 +45,11 @@
 
 
 <!-- Stat strip -->
-<div class="grid grid-cols-2 gap-px bg-fyra-gray-800 border-b border-fyra-gray-800 md:grid-cols-4">
+<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 border-b border-fyra-gray-800 md:grid-cols-3">
 	{#each [
 		{ value: 'Midwest proud',    label: 'Minnesota, USA'   },
-		{ value: 'Independent',        label: 'Self-funded by ourselves'    },
-		{ value: 'Transparent',  label: 'a subsidiary of Fyra Labs'     },
-		{ value: 'AS402292', label: 'Our AS number'}
+		{ value: 'Independent',        label: 'Backed by Fyra Labs'    },
+		{ value: 'AS402292', label: 'Since 2026'}
 	] as stat}
 		<div class="bg-fyra-gray-900 flex flex-col gap-0.5 px-6 py-6 md:px-10">
 			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">{stat.value}</span>

@@ -43,37 +43,39 @@
 
 <footer class="bg-fyra-gray-900 ">
 	<div class="mx-auto max-w-6xl border-t border-x  border-fyra-gray-800">
-		<div class="flex max-w-5xl mx-auto flex-col px-6 py-6 gap-12 lg:flex-row lg:gap-8">
+		<div class="flex max-w-5xl mx-auto flex-col ] py-6 gap-12 lg:flex-row lg:gap-8">
 
-			<!-- Left: logo + meta -->
-			<div class="shrink-0 lg:w-72">
-				<a href="/" class="inline-flex items-center gap-1.5">
-					<img src="/logo.svg" alt="Fyra Stack" class="h-7 w-7" />
-					<span class="text-xl font-semibold text-fyra-gray-50 tracking-tight">Stack</span>
-				</a>
+		<div class="px-6">
+		<!-- Left: logo + meta -->
+		<div class="shrink-0 lg:w-72">
+			<a href="/" class="inline-flex items-center gap-1.5">
+				<img src="/logo.svg" alt="Fyra Stack" class="h-7 w-7" />
+				<span class="text-xl font-semibold text-fyra-gray-50 tracking-tight">Stack</span>
+			</a>
 
-				<p class="mt-4 text-sm text-fyra-gray-400">Fyra Stack LLC © {year}</p>
-				<p class="mt-1 flex items-center gap-1.5 text-sm text-fyra-gray-400">
-					<img src="/minnesota.png" alt="" class="h-4 w-auto opacity-60" />
-					Based in Minnesota
-				</p>
+			<p class="mt-4 text-sm text-fyra-gray-400">Fyra Stack LLC © {year}</p>
+			<p class="mt-1 flex items-center gap-1.5 text-sm text-fyra-gray-400">
+				<img src="/minnesota.png" alt="" class="h-4 w-auto opacity-60" />
+				Based in Minnesota
+			</p>
 
-				<div class="mt-4 flex flex-col gap-2">
-					<div class="flex items-center gap-2 text-sm text-fyra-gray-400">
-						<a href="#" class="hover:text-fyra-gray-100 transition-colors duration-100">Terms of Service</a>
-						<span class="text-fyra-gray-600">·</span>
-						<a href="#" class="hover:text-fyra-gray-100 transition-colors duration-100">Privacy Statement</a>
-					</div>
+			<div class="mt-4 flex flex-col gap-2">
+				<div class="flex items-center gap-2 text-sm text-fyra-gray-400">
+					<a href="#" class="hover:text-fyra-gray-100 transition-colors duration-100">Terms of Service</a>
+					<span class="text-fyra-gray-600">·</span>
+					<a href="#" class="hover:text-fyra-gray-100 transition-colors duration-100">Privacy Statement</a>
 				</div>
-
-
 			</div>
+
+
+		</div>
+		</div>
 
 			<!-- Divider (mobile) -->
 			<div class="border-t border-fyra-gray-800 lg:hidden"></div>
 
 			<!-- Right: link columns -->
-			<div class="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:flex-1">
+			<div class="grid px-6 grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:flex-1">
 				{#each columns as col}
 					<div>
 						<p class="text-sm font-semibold text-fyra-gray-50">{col.heading}</p>

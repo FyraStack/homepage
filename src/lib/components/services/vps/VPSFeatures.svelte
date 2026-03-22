@@ -12,7 +12,7 @@
 			Most budget providers cut corners on hardware to hit their price points, we don't.
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
-			Powered by Cascade Lake series CPUs, OCP-compliant servers, and enterprise drives, we buy good hardware, run it efficiently, run a small focused team, don't oversell, and charge a fair price.
+			Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and enterprise drives. We buy good hardware, run it efficiently, run a small focused team, don't oversell, and charge a fair price.
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">
 			 It's boring and it works.

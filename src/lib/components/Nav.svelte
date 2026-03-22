@@ -63,7 +63,7 @@
 					{#if openDropdown === 'services'}
 						<div
 							transition:fade={{ duration: 100 }}
-							class="absolute left-0 top-full mt-2.5 w-64 rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80 overflow-hidden"
+							class="absolute right-0 top-full mt-2.5 w-64 rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80 overflow-hidden"
 						>
 							{#each servicesItems as item}
 								<a
@@ -108,7 +108,7 @@
 					{#if openDropdown === 'about'}
 						<div
 							transition:fade={{ duration: 100 }}
-							class="absolute left-0 top-full mt-2.5 w-56 rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80 overflow-hidden"
+							class="absolute right-0 top-full mt-2.5 w-56 rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80 overflow-hidden"
 						>
 							{#each aboutItems as item}
 								<a
