@@ -50,8 +50,7 @@
 				<span class="text-xl font-semibold text-fyra-gray-50 tracking-tight">Stack</span>
 			</a>
 
-			<p class="mt-4 text-sm text-fyra-gray-400 mb-9">Fyra Stack LLC © {year}</p>
-
+			<p class="mt-4 text-sm text-fyra-gray-400 mb-9">Fyra Stack Limited © {year}</p>
 
 			<div class="mt-4 flex flex-col gap-2">
 				<div class="flex items-center gap-2 text-sm text-fyra-gray-400">
