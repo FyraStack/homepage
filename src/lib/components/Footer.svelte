@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
+	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation';
+
 	const year = new Date().getFullYear();
 
 	const columns = [
@@ -19,9 +21,9 @@
 		{
 			heading: 'Company',
 			links: [
-				{ label: 'About', href: '/about' },
-				{ label: 'VPS', href: '/services/vps' },
-				{ label: 'Colocation', href: '/services/colocation' }
+				{ label: 'About', href: '/about' as InternalHref },
+				{ label: 'VPS', href: '/services/vps' as InternalHref },
+				{ label: 'Colocation', href: '/services/colocation' as InternalHref }
 			]
 		},
 		{
@@ -96,7 +98,7 @@
 										</a>
 									{:else}
 										<a
-											href={resolve(link.href)}
+											href={resolve(link.href as InternalHref)}
 											class="inline-flex items-center gap-0.5 text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-100"
 										>
 											{link.label}

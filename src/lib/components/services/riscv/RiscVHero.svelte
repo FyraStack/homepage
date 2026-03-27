@@ -45,7 +45,7 @@
 				View plans
 			</a>
 			<a
-				href={resolve('/prereserve')}
+				href={resolve('/')}
 				class="text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-200"
 			>
 				Pre-reserve <span aria-hidden="true">→</span>

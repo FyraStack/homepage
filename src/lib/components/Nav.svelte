@@ -2,20 +2,30 @@
 	import { resolve } from '$app/paths';
 	import { fade, slide } from 'svelte/transition';
 
+	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation';
+
 	let isMobileMenuOpen = $state(false);
 	let openDropdown = $state<string | null>(null);
 
 	const servicesItems = [
-		{ label: 'VPS', description: 'VPS hosting from $5/mo.', href: '/services/vps' },
+		{
+			label: 'VPS',
+			description: 'VPS hosting from $5/mo.',
+			href: '/services/vps' as InternalHref
+		},
 		{
 			label: 'Colocation',
 			description: 'Rack with us in the Midwest.',
-			href: '/services/colocation'
+			href: '/services/colocation' as InternalHref
 		}
 	];
 
 	const aboutItems = [
-		{ label: 'About us', description: "Why we're building this.", href: '/about' },
+		{
+			label: 'About us',
+			description: "Why we're building this.",
+			href: '/about' as InternalHref
+		},
 		{
 			label: 'Blog',
 			description: 'Updates and engineering notes!',
@@ -94,7 +104,7 @@
 						>
 							{#each servicesItems as item (item.href)}
 								<a
-									href={resolve(item.href)}
+									href={resolve(item.href as InternalHref)}
 									onclick={closeAll}
 									class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
 								>
@@ -151,7 +161,7 @@
 							{#each aboutItems as item (item.href)}
 								{#if item.href.startsWith('/')}
 									<a
-										href={resolve(item.href)}
+										href={resolve(item.href as InternalHref)}
 										onclick={closeAll}
 										class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
 									>
@@ -243,7 +253,7 @@
 			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">Services</p>
 			{#each servicesItems as item (item.href)}
 				<a
-					href={resolve(item.href)}
+					href={resolve(item.href as InternalHref)}
 					onclick={closeAll}
 					class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
 					>{item.label}</a
@@ -262,7 +272,7 @@
 			{#each aboutItems as item (item.href)}
 				{#if item.href.startsWith('/')}
 					<a
-						href={resolve(item.href)}
+						href={resolve(item.href as InternalHref)}
 						onclick={closeAll}
 						class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
 						>{item.label}</a

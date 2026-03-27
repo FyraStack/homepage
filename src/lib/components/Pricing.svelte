@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
+	type ServiceHref = '/services/vps' | '/services/colocation';
+
 	const plans = [
 		{
 			name: 'Virtual Private Servers',
-			slug: 'vps',
+			href: '/services/vps' as ServiceHref,
 			price: '5',
 			description: 'Scales to $34/mo.',
 			features: [
@@ -20,7 +22,7 @@
 		},
 		{
 			name: 'Server Colocation',
-			slug: 'colocation',
+			href: '/services/colocation' as ServiceHref,
 			price: '50',
 			description: 'Scales to $300/mo.',
 			features: [
@@ -48,7 +50,7 @@
 
 	<!-- Plans -->
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 md:grid-cols-2">
-		{#each plans as plan (plan.slug)}
+		{#each plans as plan (plan.href)}
 			<div class="flex flex-col bg-fyra-gray-900">
 				<!-- Price block -->
 				<div
@@ -65,7 +67,7 @@
 						<p class="mt-1 text-sm text-fyra-gray-400">{plan.description}</p>
 					</div>
 					<a
-						href={resolve(`/services/${plan.slug}`)}
+						href={resolve(plan.href)}
 						class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
 					>
 						View plans <span aria-hidden="true">→</span>

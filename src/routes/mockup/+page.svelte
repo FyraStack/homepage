@@ -55,8 +55,9 @@
 		</div>
 		<nav class="flex w-full flex-1 flex-col gap-0.5 p-1.5">
 			{#each [{ icon: 'M3 5h10M3 8h10M3 11h6', active: false }, { icon: 'M2 4h12v8H2zM5 12v2M9 12v2M4 14h8', active: true }, { icon: 'M8 2L2 5v4c0 3.5 2.5 5.5 6 7 3.5-1.5 6-3.5 6-7V5L8 2z', active: false }, { icon: 'M2 10h12v4H2zM2 6h12v4H2zM2 2h12v4H2z', active: false }, { icon: 'M2 4h12v10H2zM2 7h12', active: false }, { icon: 'M8 5a3 3 0 100 6 3 3 0 000-6zM1 8h2M11 8h2M8 1v2M8 11v2', active: false }] as item (item.icon)}
-				<a
-					href="#"
+				<button
+					type="button"
+					aria-label="Open navigation item"
 					class="flex items-center justify-center p-2 transition-colors duration-100
 					{item.active
 						? 'bg-fyra-gray-800 text-fyra-gray-50'
@@ -74,7 +75,7 @@
 					>
 						<path d={item.icon} />
 					</svg>
-				</a>
+				</button>
 			{/each}
 		</nav>
 		<div class="flex w-full justify-center border-t border-fyra-gray-800 py-2.5">
