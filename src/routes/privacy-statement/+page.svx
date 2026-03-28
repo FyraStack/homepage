@@ -1,0 +1,183 @@
+<svelte:head>
+	<title>Privacy Statement — Fyra Stack</title>
+</svelte:head>
+
+<div class="mx-auto max-w-3xl px-6 py-24 lg:px-8">
+<div class="prose prose-invert max-w-none
+	prose-headings:font-semibold prose-headings:tracking-tight
+	prose-h1:mb-2 prose-h1:text-5xl prose-h1:text-fyra-gray-50
+	prose-h2:mb-3 prose-h2:mt-12 prose-h2:text-2xl prose-h2:text-fyra-gray-50
+	prose-h3:mb-1 prose-h3:mt-6 prose-h3:text-base prose-h3:font-semibold prose-h3:text-fyra-gray-200
+	prose-h4:mb-1 prose-h4:mt-4 prose-h4:text-base prose-h4:font-semibold prose-h4:text-fyra-gray-300
+	prose-p:text-base prose-p:leading-relaxed prose-p:text-fyra-gray-400
+	prose-li:text-base prose-li:text-fyra-gray-400
+	prose-a:font-semibold prose-a:text-fyra-gray-200 prose-a:no-underline hover:prose-a:text-fyra-red-400
+	prose-hr:my-10 prose-hr:border-fyra-gray-800
+	prose-strong:text-fyra-gray-200">
+
+# Privacy Statement.
+
+Fyra Stack Limited ("we," "us," or "our") takes your privacy seriously. It's not just a legal obligation, but a commitment to your trust in us. Our Privacy Statement aims to detail our practices regarding the collection, utilization, and disclosure of your personal information.
+
+---
+
+## 1. Collection of Personal Information.
+
+We collect specific types of information for essential business purposes, such as providing and maintaining our services, communicating with you, and ensuring our services' stability and security.
+
+For visitors of our site and contacting us:
+
+### 1. Your browser user agent.
+
+### 2. Date and time of your visit.
+
+### 3. Your computer's IP address.
+
+### 4. Your name, allowing us to personalize our communication.
+
+### 5. Your email address, providing us with a means to contact you.
+
+### 6. The content of your message, helping us understand your inquiries.
+
+---
+
+## 2. Use of Collected Information.
+
+We utilize your personal information strictly for necessary purposes, such as:
+
+### 1. Delivering and maintaining our services.
+
+### 2. Communicating with you about updates or changes in our services.
+
+### 3. Ensuring the security, stability, and continuous improvement of our services.
+
+---
+
+## 3. Disclosure of Information.
+
+There are certain circumstances where we may need to share your information with third parties:
+
+### 1. To comply with legal obligations or to protect our rights and interests.
+
+### 2. In the event of a business transfer, such as a merger, acquisition, or bankruptcy.
+
+---
+
+## 4. Third-Party Payment Processing.
+
+We use Stripe as our trusted partner for handling your financial transactions securely. Your financial information is never stored on our servers.
+
+For further information, refer to Stripe's Privacy Policy at: [https://stripe.com/privacy](https://stripe.com/privacy)
+
+---
+
+## 5. Data Security.
+
+We take data security seriously. Regular reviews and updates of our security practices help keep your data as safe as possible.
+
+Please keep in mind no method of transmission over the internet or method of electronic storage is 100% secure. We cannot guarantee the absolute security of your personal information.
+
+---
+
+## 6. VPS User Data Responsibility.
+
+If you use our VPS service, the data you store on them is solely your responsibility. We respect your privacy and autonomy, and we will not access, monitor, or interfere with your data without your explicit consent, except in legally mandated circumstances.
+
+---
+
+## 7. Colocation and Server Interference.
+
+We will not access or interfere with your servers without your consent, barring legal obligations or emergencies that threaten the safety or integrity of our facilities, other users, or our infrastructure.
+
+If you need assistance, we can provide remote hands support, but we will always ask for your permission before accessing your servers.
+
+---
+
+## 8. CCPA Compliance.
+
+If you are a resident of California, your personal information is protected under the CCPA. We adhere to the following guidelines to comply with the CCPA:
+
+### 1. Providing clear and transparent notice about the collection, use, and disclosure of personal information.
+
+### 2. Offering consumers the choice to opt-out of the sale of their personal information.
+
+### 3. Ensuring that consumers are not discriminated against for exercising their rights under the CCPA.
+
+In accordance with the CCPA, you have the following rights:
+
+### 4. Right to know.
+
+You may request information about the categories and specific pieces of personal information we have collected about you, the sources of the information, and the purposes for which we have used the information.
+
+### 5. Right to delete.
+
+You have the right to request the deletion of your personal information that we have collected or maintain, subject to certain exceptions as outlined in the CCPA.
+
+### 6. Right to opt-out.
+
+You may request that we do not sell your personal information. However, please keep in mind that Fyra Stack Limited does not engage in the sale of personal information.
+
+### 7. Right to correct.
+
+You may request that we correct any information we have on record about you that may be incorrect.
+
+If you wish to exercise your rights under the CCPA, please contact us at the details provided in our "Contact Us" section.
+
+---
+
+## 9. GDPR Compliance.
+
+If you are a resident of the European Union (EU) and the European Economic Area (EEA), you have specific rights regarding your personal data. These rights include:
+
+### 1. Right to access.
+
+You have the right to request a copy of the personal information we hold about you.
+
+### 2. Right to rectification.
+
+If you believe that any personal information we are holding about you is incorrect or incomplete, you have the right to request a correction.
+
+### 3. Right to erasure.
+
+You have the right to request that we erase your personal data under certain conditions.
+
+### 4. Right to restriction.
+
+You have the right to request a restriction on the processing of your personal data under specific conditions.
+
+### 5. Right to transfer.
+
+You have the right to request the transfer of your personal data that we have collected, to another organization, or directly to you.
+
+### 6. Right to objection.
+
+You have the right to object to our processing of your personal data under certain conditions.
+
+If you wish to exercise your rights under the GDPR, please contact us at the details provided in our "Contact Us" section.
+
+---
+
+## 10. Contact Us.
+
+We're committed to providing you with the support you need regarding our Privacy Statement or any other concerns you may have. To reach us:
+
+### 1. By email.
+
+You can send us an email at [legal@fyralabs.com](mailto:legal@fyralabs.com). We aim to respond to all email inquiries within 3 business days.
+
+---
+
+## 11. Retention Periods.
+
+Any data collected above will have a lifespan not to exceed 12 months for non-customer data. Customer data is retained during your time as a customer with us. Should you cancel all of your services, your customer data will be purged within 12 months of cancellation. In any case, it can be deleted upon explicit request via the provisions stated above as well.
+
+---
+
+## 12. Revisions and Updates.
+
+Our Privacy Statement may change from time to time. We'll notify you via the primary billing email on record for your account within 30 days of a change, but it's ultimately your responsibility to stay informed about any changes to our Privacy Statement.
+
+Last updated: March 28th, 2026.
+
+</div>
+</div>

@@ -85,8 +85,8 @@
 		</div>
 
 		<!-- Right: fact bento -->
-		<div class="grid grid-cols-2 gap-px bg-fyra-gray-800">
-			<div class="col-span-2 bg-fyra-gray-900 px-8 py-8">
+		<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 md:grid-cols-2">
+			<div class="bg-fyra-gray-900 px-8 py-8 md:col-span-2">
 				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
 					Entry price
 				</p>

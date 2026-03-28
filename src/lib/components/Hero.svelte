@@ -21,7 +21,8 @@
 			<p
 				class="font-base mt-8 text-base text-pretty text-fyra-gray-400 sm:px-16 sm:text-xl/7 lg:px-32"
 			>
-				Built from the ground up to support the open-source projects we love.
+				Built from the ground up to support the open-source projects we love, and the communities
+				around them.
 			</p>
 		</div>
 	</div>

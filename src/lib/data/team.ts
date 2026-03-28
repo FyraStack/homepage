@@ -25,9 +25,33 @@ export const team: (TeamMember | null)[] = [
 		avatar: '/assets/people/owen.webp'
 	},
 	{
+		name: 'Bill Schouten',
+		nickname: null,
+		role: 'Director / Business Relations',
+		avatar: '/assets/people/bill.png'
+	},
+	{
 		name: 'Matilde Park',
 		nickname: null,
 		role: 'Software Engineer',
 		avatar: '/assets/people/matilde.webp'
+	},
+	{
+		name: 'mia Jetzt',
+		nickname: null,
+		role: 'Software Engineer',
+		avatar: '/assets/people/mia.png'
+	},
+	{
+		name: 'Naomi Vel',
+		nickname: null,
+		role: 'Data Center Engineer',
+		avatar: '/assets/people/naomi.jpg'
+	},
+	{
+		name: 'Addison LeClair',
+		nickname: null,
+		role: 'Developer Relations Lead',
+		avatar: '/assets/people/addison.png'
 	}
 ];

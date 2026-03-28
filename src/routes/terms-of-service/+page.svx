@@ -1,0 +1,123 @@
+<svelte:head>
+	<title>Terms of Service — Fyra Stack</title>
+</svelte:head>
+
+<div class="mx-auto max-w-3xl px-6 py-24 lg:px-8">
+<div class="prose prose-invert max-w-none
+	prose-headings:font-semibold prose-headings:tracking-tight
+	prose-h1:mb-2 prose-h1:text-5xl prose-h1:text-fyra-gray-50
+	prose-h2:mb-3 prose-h2:mt-12 prose-h2:text-2xl prose-h2:text-fyra-gray-50
+	prose-h3:mb-1 prose-h3:mt-6 prose-h3:text-base prose-h3:font-semibold prose-h3:text-fyra-gray-200
+	prose-h4:mb-1 prose-h4:mt-4 prose-h4:text-base prose-h4:font-semibold prose-h4:text-fyra-gray-300
+	prose-p:text-base prose-p:leading-relaxed prose-p:text-fyra-gray-400
+	prose-li:text-base prose-li:text-fyra-gray-400
+	prose-a:font-semibold prose-a:text-fyra-gray-200 prose-a:no-underline hover:prose-a:text-fyra-red-400
+	prose-hr:my-10 prose-hr:border-fyra-gray-800
+	prose-strong:text-fyra-gray-200">
+
+# Terms of Service.
+
+Thank you for being interested in Fyra Stack Limited ("we," "us," or "our"). By using our services, you commit to abide by the rules and regulations laid out in our Terms of Service and Acceptable Use Policy.
+
+---
+
+## 1. Acceptable Use Policy.
+
+By using our services, you agree to adhere to these rules:
+
+### 1. No TOR Exit Nodes, Relays, and Bridges.
+
+These services often draw activities and legal issues that are not in line with our policies. Consequently, we disallow the use of these services on our platforms.
+
+### 2. No Unauthorized Distribution of Copyrighted Material.
+
+Unauthorized sharing of copyrighted material infringes copyright laws and is not permitted under our Acceptable Use Policy. Please refrain from sharing copyrighted content without the required permissions.
+
+### 3. No Spamming and Unsolicited Communications.
+
+Mass emailing and other forms of unwanted communications can tarnish our reputation. Therefore, by default, we block port 25 and other ports commonly used for email. Upon request, we may unblock these for you.
+
+### 4. No Network and System Abuse.
+
+We prioritize maintaining a secure and stable environment for our users. Therefore, any form of network and system abuse is strictly forbidden. This includes, but is not limited to:
+
+#### 1. Cryptocurrency Mining.
+
+Using our resources for cryptocurrency mining may adversely affect our services' performance for other users.
+
+#### 2. Unauthorized Network Scanning or Probing.
+
+Attempting to access, test, or scan the security of other user accounts, our infrastructure, or third-party systems without authorization is forbidden.
+
+#### 3. Excessive Use of Resources.
+
+The unreasonable consumption of system resources or bandwidth, to the detriment of other users, is not permitted.
+
+---
+
+## 2. Suspension and Termination of Services.
+
+Should you violate our Terms of Service or Acceptable Use Policy, we reserve the right to suspend or terminate your access to our services. This is a measure we consider seriously, and is necessary for the protection of our users and the quality of our services.
+
+---
+
+## 3. Backups and Prevention of Data Loss.
+
+We, or anyone else, cannot assure complete protection against data loss. We strongly recommend that you regularly back up your data to safeguard against unexpected loss. You hold the responsibility for protecting your data.
+
+---
+
+## 4. Service Level Agreement.
+
+We strive to maintain an uptime meeting or exceeding 99.9% in any 1 year period.
+
+---
+
+## 5. Privacy and Security.
+
+We value your privacy and take security seriously. However, no system is perfect, and we cannot guarantee complete protection against unauthorized access, data breaches, or other security incidents.
+
+You are encouraged to review our Privacy Statement here: [https://fyrastack.com/privacy-statement](https://fyrastack.com/privacy-statement)
+
+---
+
+## 6. Age Requirements.
+
+You must be at least the age of majority in your jurisdiction to utilize our services. In Illinois, this is 18 years of age.
+
+---
+
+## 7. Governing Law and Jurisdiction.
+
+Our services are governed by the laws of the United States and the State of Illinois. By using our services, you agree to the jurisdiction of these governing bodies in the event of disputes or legal proceedings.
+
+### 1. Subpoenas.
+
+While it is rare, we may receive a subpoena on behalf of a US government agency for your service. Should this occur, you will be notified and given a period to respond with a file-stamped court filing in the form of a motion to quash inside the response period given to us by the requesting authority.
+
+If no notice is provided, the requested information, should we contain it in our records, will be furnished. If we contain no information, publicly available contact details will be furnished for your service. If no public details exist, we may be obligated to furnish non-public contact details.
+
+Fyra Stack Limited encourages you to maintain an abuse reporting email or other contact mechanism as a matter of good operational hygiene.
+
+---
+
+## 8. Limitations of Liability.
+
+By utilizing our services, you acknowledge that Fyra Stack Limited will not be held accountable for any damages, losses, or disruptions that may occur as a result of using our services beyond what is included with our SLA where applicable.
+
+---
+
+## 9. Reporting Violations.
+
+If you come across any violations of our Terms of Service or Acceptable Use Policy, don't hesitate to report them to us. You can do so by emailing us at: [abuse@fyrastack.com](mailto:abuse@fyrastack.com)
+
+---
+
+## 10. Revisions and Updates.
+
+Our Terms of Service may change from time to time. We'll notify you via the primary billing email on file within 30 days of a change, but it's ultimately your responsibility to stay informed about any changes to our Terms of Service, Service Agreement, and Acceptable Use Policy. Should you have a disagreement with a change in the terms, you may cancel your service and request a refund for the current month's bill.
+
+Last updated: March 28th, 2026.
+
+</div>
+</div>

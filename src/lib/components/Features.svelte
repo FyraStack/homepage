@@ -44,9 +44,9 @@
 
 			<!-- Linux Native -->
 			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">Our stack, too</p>
+				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">Midwest proud</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Fyra Labs depends on Stack to serve millions of requests.
+					Operating out of Chicago, Illinois since 2026.
 				</p>
 			</div>
 
