@@ -38,12 +38,12 @@
 			values: ['Various', 'Various', 'Various'],
 			highlight: true
 		},
-		{
-			label: 'Yuri allowed',
-			stack: '✓',
-			values: ['✓', '✓', '✗'],
-			checkmarks: [true, true, true, false]
-		},
+		// {
+		// 	label: 'Yuri allowed',
+		// 	stack: '✓',
+		// 	values: ['✓', '✓', '✗'],
+		// 	checkmarks: [true, true, true, false]
+		// },
 		{
 			label: 'Price',
 			stack: '$5/mo',
