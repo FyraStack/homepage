@@ -39,7 +39,7 @@
 			</div>
 			<div class="flex justify-between">
 				<p class="text-fyra-gray-400">Storage</p>
-				<p class="tracking-tight">{currentPlan.storage}GB NVMe</p>
+				<p class="tracking-tight">{currentPlan.storage}GB SAS3 SSD</p>
 			</div>
 			<div class="flex justify-between">
 				<p class="text-fyra-gray-400">Memory</p>
