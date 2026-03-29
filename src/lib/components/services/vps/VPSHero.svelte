@@ -22,7 +22,7 @@
 			<span class="text-fyra-red-400">You run your stack.</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
-			Our mission is simple: provide hosting you can trust, without breaking the bank, or your mind.
+			Our mission is simple: Provide hosting you can trust, without breaking the bank, or your mind.
 		</p>
 	</div>
 

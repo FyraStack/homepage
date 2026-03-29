@@ -56,7 +56,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Redundant power</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					A+B feeds, UPS, and generator backup keep your server on.
+					A+B feeds, UPS, and generator backup keeps your server on.
 				</p>
 			</div>
 

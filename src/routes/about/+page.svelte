@@ -37,7 +37,7 @@
 			<span class="text-fyra-red-400">for the rest of us.</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
-			An open-source cloud from the folks who make Ultramarine Linux and Terra.
+			An open-source cloud from the folks behind Fyra Labs.
 		</p>
 	</div>
 

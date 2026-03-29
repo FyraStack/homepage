@@ -15,7 +15,7 @@
 		},
 		{
 			label: 'Colocation',
-			description: 'Rack with us in the Midwest.',
+			description: 'Colocation hosting, from $50/mo.',
 			href: '/services/colocation' as InternalHref
 		}
 	];

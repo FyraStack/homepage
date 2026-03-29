@@ -149,7 +149,7 @@
 					{serviceType === 'colocation' ? 'Pre-reserve your colocation.' : 'Pre-reserve your VPS.'}
 				</h2>
 				<p class="mt-2 text-sm text-fyra-gray-400">
-					We're in early access, submit your info and we'll reach out when your plan is ready.
+					We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch by May 1st, 2026.
 				</p>
 			</div>
 

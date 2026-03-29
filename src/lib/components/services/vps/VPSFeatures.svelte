@@ -13,7 +13,7 @@
 				Most budget providers cut corners on hardware to hit their price points, we don't.
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
-				Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and enterprise drives. We buy
+				Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and enterprise SSDs. We buy
 				good hardware, run it efficiently, run a small focused team, don't oversell, and charge a
 				fair price.
 			</p>
