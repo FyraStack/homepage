@@ -34,7 +34,7 @@
 		<span class="text-fyra-red-200">Launching April 13th, ship your servers now.</span>
 		<span class="text-fyra-red-300">→</span>
 	</a>
-	<div class="mx-4">
+	<div class=" mx-4 max-w-6xl">
 		<Nav />
 
 		<div class="flex min-h-[100vh] flex-col">
