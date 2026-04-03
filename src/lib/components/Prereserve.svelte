@@ -149,7 +149,8 @@
 					{serviceType === 'colocation' ? 'Pre-reserve your colocation.' : 'Pre-reserve your VPS.'}
 				</h2>
 				<p class="mt-2 text-sm text-fyra-gray-400">
-					We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch by May 1st, 2026.
+					We're in the early access phase, submit your info and we'll reach out when your plan is
+					ready. Expected to launch by May 1st, 2026.
 				</p>
 			</div>
 
@@ -183,7 +184,8 @@
 									{:else}
 										{#each vpsPlans as p (p.name)}
 											{#if p.name === plan}
-												{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB NVMe
+												{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB SAS3
+												SSD
 											{/if}
 										{/each}
 									{/if}
@@ -242,7 +244,7 @@
 														: 'text-fyra-gray-300 hover:bg-fyra-gray-700/60 hover:text-fyra-gray-100'}"
 												>
 													{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB
-													NVMe
+													SAS3 SSD
 												</button>
 											</li>
 										{/each}
