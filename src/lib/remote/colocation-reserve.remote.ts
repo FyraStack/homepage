@@ -1,7 +1,7 @@
 import { form, getRequestEvent } from '$app/server';
 import { type } from 'arktype';
 import { colocationPlans } from '$lib/data/colocationPlans';
-import { AUTUMN_SECRET_KEY } from '$env/static/private';
+import { AUTUMN_SECRET_KEY, COLOCATION_RESERVATION_DISCORD_WEBHOOK } from '$env/static/private';
 import { Autumn } from 'autumn-js';
 
 const planNames = colocationPlans.map((p) => p.name);
@@ -25,12 +25,14 @@ export type ReserveResult =
 			error: string;
 	  };
 
-// TODO: Integrate with payment provider (Autumn)
 async function createPaymentLink(plan: string, email: string, name: string): Promise<string> {
 	const event = getRequestEvent();
 	if (!event) {
 		throw new Error('No request event found');
 	}
+
+	const url = new URL(event.request.url);
+	const successUrl = `${url.origin}/services/colocation?success=true`;
 
 	const user_id = crypto.randomUUID();
 	const autumn = new Autumn({ secretKey: AUTUMN_SECRET_KEY });
@@ -41,14 +43,41 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 		email: email
 	});
 
-	const url = new URL(event.request.url);
-	const successUrl = `${url.origin}/services/colocation?success=true`;
-
 	const response = await autumn.billing.attach({
 		customerId: user_id,
 		planId: plan,
 		successUrl
 	});
+
+	const webhookBody = {
+		username: 'Fyra Stack',
+		embeds: [
+			{
+				author: { name: 'New Colocation Payment Link Creation' },
+				title: `${plan}`,
+				description: `${email} - ${name}`,
+				color: 0xc6716d,
+				footer: { text: `fyrastack.com` },
+				timestamp: new Date().toISOString()
+			}
+		]
+	};
+
+	if (COLOCATION_RESERVATION_DISCORD_WEBHOOK) {
+		const response = await fetch(COLOCATION_RESERVATION_DISCORD_WEBHOOK, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(webhookBody)
+		});
+		if (!response.ok) {
+			throw new Error(
+				`Response status: ${response.status}, Response content: ${await response.text()}`
+			);
+		}
+	} else {
+		console.log('would have called discord colocation webhook');
+		console.log(webhookBody);
+	}
 
 	return response.paymentUrl as string;
 }
