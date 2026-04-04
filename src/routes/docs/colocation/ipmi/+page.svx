@@ -38,7 +38,7 @@ We set a temporary password during racking and include it in your welcome email.
 
 ### Dell iDRAC.
 
-Navigate to `https://<your-ipmi-ip>` in a browser. Log in with username `root` and the temporary password we provided. Go to **iDRAC Settings → User Authentication** to update your credentials.
+Navigate to `https://<your-ipmi-ip>` in a browser. Log in with username `root` and the temporary password we provide. Go to **iDRAC Settings → User Authentication** to update your credentials.
 
 ### HP iLO.
 
@@ -83,7 +83,7 @@ ipmitool -I lanplus -H <ipmi-ip> -U <user> -P <pass> chassis power reset
 
 ### IPMI web interface not loading.
 
-Confirm your WireGuard tunnel is up (`wg show`). If the tunnel is up but the interface is unreachable, email us — the IPMI port may need to be reconfigured.
+Confirm your WireGuard tunnel is up with `wg show`. If the tunnel is up but the interface is unreachable, email us as the IPMI port may need to be reconfigured.
 
 ### Forgot IPMI password.
 
