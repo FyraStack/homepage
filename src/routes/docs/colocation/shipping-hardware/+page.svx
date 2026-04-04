@@ -10,7 +10,7 @@ Before your server can go live in our Chicago DC, we need to receive it at our o
 
 ## 1. Before You Ship.
 
-Contact us before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
+[Contact us](/services/colocation) before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
 
 To get started, [fill out our colocation intake form](/services/colocation) or email us at [support@fyrastack.com](mailto:support@fyrastack.com).
 
@@ -78,8 +78,8 @@ Keep your tracking number. We'll confirm receipt via email once your shipment is
 Once your server arrives:
 
 1. We inspect it for visible shipping damage.
-2. We power it on briefly on a bench to verify POST.
+2. We power it on briefly to verify POST.
 3. We rack it in your assigned slot, cable it up, and connect it to your assigned PDU outlets.
 4. We email you with your VPN information, IPMI/iDRAC address, assigned IP block, and confirmation that the server is online.
 
-From there, you have full remote access. See [Accessing IPMI Remotely](/docs/colocation/ipmi) for next steps.
+From there, you have full remote access. See [Accessing IPMI Remotely](/docs/colocation/ipmi) for next steps!
