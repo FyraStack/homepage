@@ -1,4 +1,4 @@
-import { form } from '$app/server';
+import { form, getRequestEvent } from '$app/server';
 import { type } from 'arktype';
 import { colocationPlans } from '$lib/data/colocationPlans';
 import { AUTUMN_SECRET_KEY } from '$env/static/private';
@@ -27,6 +27,11 @@ export type ReserveResult =
 
 // TODO: Integrate with payment provider (Autumn)
 async function createPaymentLink(plan: string, email: string, name: string): Promise<string> {
+	const event = getRequestEvent();
+	if (!event) {
+		throw new Error('No request event found');
+	}
+
 	const user_id = crypto.randomUUID();
 	const autumn = new Autumn({ secretKey: AUTUMN_SECRET_KEY });
 
@@ -36,13 +41,15 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 		email: email
 	});
 
+	const url = new URL(event.request.url);
+	const successUrl = `${url.origin}/services/colocation?success=true`;
+
 	const response = await autumn.billing.attach({
 		customerId: user_id,
 		planId: plan,
-		successUrl: "https://fyrastack.com/services/colocation?success=true"
+		successUrl
 	});
 
-	// Stub - will return actual payment link from Autumn
 	return response.paymentUrl as string;
 }
 

@@ -2,6 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import { colocationPlans, type ColocationPlan } from '$lib/data/colocationPlans';
 	import { reserve } from '$lib/remote/colocation-reserve.remote';
+	import { page } from '$app/stores';
 
 	const formId = $props.id();
 	const signupForm = reserve.for(formId);
@@ -14,20 +15,22 @@
 	let planDropdownEl = $state<HTMLDivElement | null>(null);
 
 	let submitting = $derived(signupForm.pending > 0);
-	let paymentLink = $state<string | null>(null);
-	let paymentComplete = $state(false);
+	let showSuccess = $derived($page.url.searchParams.get('success') === 'true');
+
+	// Scroll to bottom when payment succeeds
+	$effect(() => {
+		if (showSuccess) {
+			window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+		}
+	});
 
 	$effect(() => {
 		const result = signupForm.result;
 		if (result?.ok && result.paymentLink) {
-			paymentLink = result.paymentLink;
+			// Redirect to Autumn payment page
+			window.location.href = result.paymentLink;
 		}
 	});
-
-	function handlePayment() {
-		// TODO: Integrate with payment provider (Autumn)
-		paymentComplete = true;
-	}
 
 	const SHIPPING_ADDRESS = `Fyra Stack Limited
 5206 N Damen Ave
@@ -51,8 +54,8 @@ Chicago, IL 60625`;
 />
 
 <section class="relative">
-	<!-- Payment Complete Overlay -->
-	{#if paymentComplete}
+	<!-- Payment Complete Overlay (shown after returning from Autumn) -->
+	{#if showSuccess}
 		<div
 			transition:fly={{ y: 16, duration: 200 }}
 			class="absolute inset-0 z-10 border border-fyra-gray-700 bg-fyra-gray-900 px-6 py-8 md:px-10"
@@ -98,47 +101,6 @@ Chicago, IL 60625`;
 		</div>
 	{/if}
 
-	<!-- Payment Link Overlay -->
-	{#if paymentLink && !paymentComplete}
-		<div
-			transition:fly={{ y: 16, duration: 200 }}
-			class="absolute inset-0 z-10 border border-fyra-gray-700 bg-fyra-gray-900 px-6 py-8 md:px-10"
-		>
-			<div class="flex h-full flex-col justify-center">
-				<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">
-					Ready to complete your order
-				</h2>
-				<p class="mt-2 text-sm text-fyra-gray-400">
-					Click the button below to proceed to payment for your selected plan.
-				</p>
-
-				<div class="mt-6 flex items-center gap-4 rounded-md border border-fyra-gray-800 bg-fyra-gray-800/50 px-4 py-3">
-					<span class="text-sm text-fyra-gray-300">Selected Plan:</span>
-					<span class="text-sm font-medium text-fyra-gray-50">{plan}</span>
-				</div>
-
-				<div class="mt-6 flex flex-col gap-3 sm:flex-row">
-					<button
-						onclick={handlePayment}
-						class="inline-flex items-center justify-center gap-2 rounded-md border border-fyra-red-500 bg-fyra-red-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-fyra-red-600 hover:border-fyra-red-600"
-					>
-						<svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-							<path d="M2.5 5.5 6 9l7.5-7.5M14.5 5.5 11 9l-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-						Pay for Plan
-					</button>
-					<button
-						onclick={() => (paymentLink = null)}
-						class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-fyra-gray-400 transition-colors hover:text-fyra-gray-200"
-					>
-						Go back
-					</button>
-				</div>
-
-			</div>
-		</div>
-	{/if}
-
 	<!-- Form -->
 	<div>
 		<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
@@ -161,9 +123,8 @@ Chicago, IL 60625`;
 						<button
 							type="button"
 							onclick={() => {
-								if (!paymentLink) planDropdownOpen = !planDropdownOpen;
+								planDropdownOpen = !planDropdownOpen;
 							}}
-							disabled={!!paymentLink}
 							class="flex w-full items-center justify-between border border-fyra-gray-700 bg-fyra-gray-800 px-3 py-2.5 text-left text-sm text-fyra-gray-100 transition-colors duration-100 focus:border-fyra-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40 {planDropdownOpen
 								? 'border-fyra-gray-500'
 								: ''}"
@@ -234,7 +195,6 @@ Chicago, IL 60625`;
 						type="text"
 						bind:value={name}
 						required
-						disabled={!!paymentLink}
 						placeholder="Reisen Inaba"
 						class={inputClass}
 					/>
@@ -254,7 +214,6 @@ Chicago, IL 60625`;
 						type="email"
 						bind:value={email}
 						required
-						disabled={!!paymentLink}
 						placeholder="reisen@kaguyas.pet"
 						class={inputClass}
 					/>
@@ -267,7 +226,7 @@ Chicago, IL 60625`;
 				<div>
 					<button
 						type="submit"
-						disabled={submitting || !!paymentLink}
+						disabled={submitting}
 						class="w-fit border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500 disabled:cursor-not-allowed disabled:opacity-50"
 					>
 						{#if submitting}
