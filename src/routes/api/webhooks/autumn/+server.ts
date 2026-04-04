@@ -2,19 +2,11 @@ import { error, type RequestHandler } from '@sveltejs/kit';
 import { Webhook } from "svix";
 
 export const POST: RequestHandler = ({ request }) => {
+	// TODO: implement autumn webhook handler whenever autumn gives us access
 
-	//
+	// TODO: verify the webhook is actually from autumn by using svix for signature verification
+	//  https://docs.useautumn.com/documentation/webhooks#webhook-security
+	//  https://docs.svix.com/receiving/verifying-payloads/how
 
-	https: const min = Number(url.searchParams.get('min') ?? '0');
-	const max = Number(url.searchParams.get('max') ?? '1');
-
-	const d = max - min;
-
-	if (isNaN(d) || d < 0) {
-		error(400, 'min and max must be numbers, and min must be less than max');
-	}
-
-	const random = min + Math.random() * d;
-
-	return new Response(String(random));
+	return new Response(String('Unimplemented'));
 };
