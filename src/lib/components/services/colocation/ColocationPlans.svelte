@@ -21,16 +21,25 @@
 			<h2 class="text-xl font-semibold tracking-wide lg:text-2xl">
 				{currentPlan.name}
 			</h2>
-			<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
+			<div class="flex items-center gap-3">
+				<div class="text-right">
+					<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
+						{#if currentPlan.originalPrice}
+							<span class="font-medium tracking-wide text-fyra-gray-500 line-through mr-1.5"
+								>${currentPlan.originalPrice}</span
+							>
+						{/if}
+						<span class="font-medium tracking-wide">$</span>{currentPlan.price}<span
+							class="text-sm leading-3 font-medium lg:text-base">/mo</span
+						>
+					</h3>
+				</div>
 				{#if currentPlan.originalPrice}
-					<span class="font-medium tracking-wide text-fyra-gray-500 line-through mr-2"
-						>${currentPlan.originalPrice}</span
+					<span class="rounded-full bg-fyra-red-500/10 px-2.5 py-1 text-xs font-medium text-fyra-red-400"
+						>Limited time</span
 					>
 				{/if}
-				<span class="font-medium tracking-wide">$</span>{currentPlan.price}<span
-					class="text-sm leading-3 font-medium lg:text-base">/mo</span
-				>
-			</h3>
+			</div>
 		</div>
 		<!-- middle -->
 		<div
@@ -68,16 +77,18 @@
 		>
 			<div class="flex items-start justify-between gap-4">
 				<h4 class="text-base/5 font-medium md:text-[1.1rem]/6">{plan.name}</h4>
-				<h3 class="text-sm font-medium tracking-tighter lg:text-base">
-					{#if plan.originalPrice}
-						<span class="font-normal tracking-wide text-fyra-gray-500 line-through mr-1"
-							>${plan.originalPrice}</span
+				<div class="text-right">
+					<h3 class="text-sm font-medium tracking-tighter lg:text-base">
+						{#if plan.originalPrice}
+							<span class="font-normal tracking-wide text-fyra-gray-500 line-through mr-1"
+								>${plan.originalPrice}</span
+							>
+						{/if}
+						<span class="font-normal tracking-wide">$</span>{plan.price}<span class="text-sm"
+							>/mo</span
 						>
-					{/if}
-					<span class="font-normal tracking-wide">$</span>{plan.price}<span class="text-sm"
-						>/mo</span
-					>
-				</h3>
+					</h3>
+				</div>
 			</div>
 			<div class="mt-4 text-left md:mt-6">
 				<p class="text-xs text-fyra-gray-400">
