@@ -26,16 +26,6 @@
 </svelte:head>
 
 <div class="">
-	<a
-		href="/services/colocation"
-		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
-	>
-		<span class="font-semibold">Colocation is here.</span>
-		<span class="text-fyra-red-200"
-			>Launching April 13th, get 1U colocation at just $50/mo promo price! Ship your servers now.</span
-		>
-		<span class="text-fyra-red-300">→</span>
-	</a>
 	<Nav />
 	<div class="mx-4 mx-auto max-w-6xl border-x border-fyra-gray-800 bg-fyra-gray-900">
 		<div class="flex min-h-[100vh] flex-col">

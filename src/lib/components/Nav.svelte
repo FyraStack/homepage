@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { fade, slide } from 'svelte/transition';
 
-	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation';
+	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation' | '/docs'; // can we just use sveltekit resolve here
 
 	let isMobileMenuOpen = $state(false);
 	let openDropdown = $state<string | null>(null);
@@ -25,6 +25,11 @@
 			label: 'About us',
 			description: "Why we're building this.",
 			href: '/about' as InternalHref
+		},
+		{
+			label: 'Documentation',
+			description: 'What to expect when using Stack.',
+			href: '/docs' as InternalHref
 		},
 		{
 			label: 'Blog',
@@ -53,6 +58,16 @@
 />
 
 <header class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm">
+	<a
+		href="/services/colocation"
+		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
+	>
+		<span class="font-semibold">Colocation is here.</span>
+		<span class="text-fyra-red-200"
+			>Launching April 13th, get 1U colocation at just $50/mo promo price! Ship your servers now.</span
+		>
+		<span class="text-fyra-red-300">→</span>
+	</a>
 	<div class="mx-auto max-w-6xl">
 		<div
 			class="flex h-12 items-center justify-between gap-4 border-x border-b border-fyra-gray-800 px-4"
