@@ -32,7 +32,7 @@
 	>
 		<span class="font-semibold">Colocation is here.</span>
 		<span class="text-fyra-red-200"
-			>Launching April 13th, get 1U colocation at just $50/mo! Ship your servers now.</span
+			>Launching April 13th, get 1U colocation at just $50/mo promo price! Ship your servers now.</span
 		>
 		<span class="text-fyra-red-300">→</span>
 	</a>

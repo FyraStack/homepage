@@ -24,7 +24,7 @@
 			name: 'Server Colocation',
 			href: '/services/colocation' as ServiceHref,
 			price: '50',
-			description: 'Scales to $300/mo.',
+			description: 'Scales to $280/mo.',
 			features: [
 				'Up to 6U rackspace',
 				'Up to 700W power budget',
