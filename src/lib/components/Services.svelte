@@ -15,7 +15,7 @@
 			>
 				<p class="text-lg font-semibold text-fyra-gray-50">VPS</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Virtual Private Servers from $5/mo. NVMe, 20 Gbps, no games.
+					Virtual Private Servers from $5/mo. SAS3, 20 Gbps, no games.
 				</p>
 				<p
 					class="mt-auto pt-6 text-sm font-medium text-fyra-red-400 transition-colors duration-100 group-hover:text-fyra-red-300"

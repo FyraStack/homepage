@@ -56,7 +56,7 @@ export async function submitPrereserve({
 	if (vpsPlan) {
 		priceNum = Number(vpsPlan.price);
 		priceLabel = `$${vpsPlan.price}/mo`;
-		specs = `${vpsPlan.cpu} vCPU · ${vpsPlan.ram}GB RAM · ${vpsPlan.storage}GB NVMe`;
+		specs = `${vpsPlan.cpu} vCPU · ${vpsPlan.ram}GB RAM · ${vpsPlan.storage}GB SAS3`;
 	} else if (coloPlan) {
 		priceNum = Number(coloPlan.price);
 		priceLabel = `$${coloPlan.price}/mo`;
