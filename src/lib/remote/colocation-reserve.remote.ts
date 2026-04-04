@@ -1,7 +1,7 @@
 import { form, getRequestEvent } from '$app/server';
 import { type } from 'arktype';
 import { colocationPlans } from '$lib/data/colocationPlans';
-import { AUTUMN_SECRET_KEY, COLOCATION_RESERVATION_DISCORD_WEBHOOK } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { Autumn } from 'autumn-js';
 
 const planNames = colocationPlans.map((p) => p.name);
@@ -35,7 +35,7 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 	const successUrl = `${url.origin}/services/colocation?success=true`;
 
 	const user_id = crypto.randomUUID();
-	const autumn = new Autumn({ secretKey: AUTUMN_SECRET_KEY });
+	const autumn = new Autumn({ secretKey: env.AUTUMN_SECRET_KEY });
 
 	await autumn.customers.getOrCreate({
 		customerId: user_id,
@@ -63,8 +63,8 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 		]
 	};
 
-	if (COLOCATION_RESERVATION_DISCORD_WEBHOOK) {
-		const response = await fetch(COLOCATION_RESERVATION_DISCORD_WEBHOOK, {
+	if (env.COLOCATION_RESERVATION_DISCORD_WEBHOOK) {
+		const response = await fetch(env.COLOCATION_RESERVATION_DISCORD_WEBHOOK, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(webhookBody)
