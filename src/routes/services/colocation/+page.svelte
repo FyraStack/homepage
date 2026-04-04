@@ -3,9 +3,7 @@
 	import ColocationFeatures from '$lib/components/services/colocation/ColocationFeatures.svelte';
 	import ColocationComparison from '$lib/components/services/colocation/ColocationComparison.svelte';
 	import ColocationPlans from '$lib/components/services/colocation/ColocationPlans.svelte';
-	import Prereserve from '$lib/components/Prereserve.svelte';
-
-	let selectedPlan = $state('STACK-1U');
+	import ColocationSignup from '$lib/components/services/colocation/ColocationSignup.svelte';
 </script>
 
 <svelte:head>
@@ -20,6 +18,6 @@
 
 <ColocationComparison />
 
-<ColocationPlans bind:selectedPlanName={selectedPlan} />
+<ColocationPlans />
 
-<Prereserve selectedPlanName={selectedPlan} serviceType="colocation" />
+<ColocationSignup />
