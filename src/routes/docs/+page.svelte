@@ -117,7 +117,10 @@
 
 	<!-- Open Graph -->
 	<meta property="og:title" content="Documentation — Fyra Stack" />
-	<meta property="og:description" content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running." />
+	<meta
+		property="og:description"
+		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."
+	/>
 	<meta property="og:image" content="https://fyrastack.com/logo.png" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://fyrastack.com/docs" />
@@ -125,7 +128,10 @@
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:title" content="Documentation — Fyra Stack" />
-	<meta name="twitter:description" content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running." />
+	<meta
+		name="twitter:description"
+		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."
+	/>
 	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
@@ -241,7 +247,7 @@
 </section>
 
 <!-- ─── Guides ───────────────────────────────────────────────────────── -->
-<section id="guides" class="border-b border-fyra-gray-800">
+<section id="guides" class="">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">
@@ -281,7 +287,7 @@
 </section>
 
 <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
-<section>
+<!-- <section>
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Common questions.</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">
@@ -297,4 +303,4 @@
 			</div>
 		{/each}
 	</div>
-</section>
+</section> -->
