@@ -12,6 +12,19 @@
 
 <svelte:head>
 	<title>About — Fyra Stack</title>
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="About — Fyra Stack" />
+	<meta property="og:description" content="Cloud infrastructure for the rest of us. An open-source cloud from the folks behind Fyra Labs." />
+	<meta property="og:image" content="https://fyrastack.com/logo.png" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://fyrastack.com/about" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="About — Fyra Stack" />
+	<meta name="twitter:description" content="Cloud infrastructure for the rest of us. An open-source cloud from the folks behind Fyra Labs." />
+	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 <!-- Hero -->

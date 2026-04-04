@@ -111,6 +111,19 @@
 
 <svelte:head>
 	<title>Documentation — Fyra Stack</title>
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="Documentation — Fyra Stack" />
+	<meta property="og:description" content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running." />
+	<meta property="og:image" content="https://fyrastack.com/logo.png" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://fyrastack.com/docs" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Documentation — Fyra Stack" />
+	<meta name="twitter:description" content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running." />
+	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 <!-- ─── Hero ──────────────────────────────────────────────────────── -->
