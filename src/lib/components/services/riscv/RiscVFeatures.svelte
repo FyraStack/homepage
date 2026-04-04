@@ -1,3 +1,8 @@
+<script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { DataCenter } from '@steeze-ui/carbon-icons';
+</script>
+
 <section class="border-b border-fyra-gray-800">
 	<div
 		class="grid grid-cols-1 divide-y divide-fyra-gray-800 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
@@ -47,19 +52,7 @@
 					<div
 						class="hidden h-12 w-12 shrink-0 items-center justify-center border border-fyra-gray-800 bg-fyra-gray-800 text-fyra-gray-600 sm:flex"
 					>
-						<svg
-							class="h-6 w-6"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							aria-hidden="true"
-						>
-							<rect x="2" y="6" width="20" height="12" rx="1" />
-							<path d="M6 10h.01M6 14h.01M10 10h4M10 14h4" />
-						</svg>
+						<Icon src={DataCenter} class="h-6 w-6" aria-hidden="true" />
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ArrowRight } from '@steeze-ui/carbon-icons';
 	const DOCS_LINK = '/docs';
 </script>
 
@@ -13,15 +15,7 @@
 			class="mt-3 inline-flex items-center gap-2 text-base text-fyra-red-400 transition-colors hover:text-fyra-red-300"
 		>
 			Read the documentation
-			<svg
-				class="h-4 w-4"
-				viewBox="0 0 10 10"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.5"
-			>
-				<path d="M2 8 6 4M6 4 2 0M6 4h8" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
+			<Icon src={ArrowRight} class="h-4 w-4" aria-hidden="true" />
 		</a>
 	</div>
 </section>

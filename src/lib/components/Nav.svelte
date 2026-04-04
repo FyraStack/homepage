@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { fade, slide } from 'svelte/transition';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ChevronDown, Close, Menu } from '@steeze-ui/carbon-icons';
 
 	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation' | '/docs'; // can we just use sveltekit resolve here
 
@@ -95,21 +97,7 @@
 						aria-expanded={openDropdown === 'services'}
 					>
 						Services
-						<svg
-							class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown ===
-							'services'
-								? 'rotate-180'
-								: ''}"
-							viewBox="0 0 10 10"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							aria-hidden="true"
-						>
-							<path d="M2 3.5 5 6.5 8 3.5" />
-						</svg>
+						<Icon src={ChevronDown} class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown === 'services' ? 'rotate-180' : ''}" aria-hidden="true" />
 					</button>
 
 					{#if openDropdown === 'services'}
@@ -151,21 +139,7 @@
 						aria-expanded={openDropdown === 'about'}
 					>
 						About
-						<svg
-							class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown ===
-							'about'
-								? 'rotate-180'
-								: ''}"
-							viewBox="0 0 10 10"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							aria-hidden="true"
-						>
-							<path d="M2 3.5 5 6.5 8 3.5" />
-						</svg>
+						<Icon src={ChevronDown} class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown === 'about' ? 'rotate-180' : ''}" aria-hidden="true" />
 					</button>
 
 					{#if openDropdown === 'about'}
@@ -215,29 +189,9 @@
 					aria-label="Open menu"
 				>
 					{#if isMobileMenuOpen}
-						<svg
-							class="h-4 w-4"
-							viewBox="0 0 16 16"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							aria-hidden="true"
-						>
-							<path d="M3 3 13 13M13 3 3 13" />
-						</svg>
+						<Icon src={Close} class="h-4 w-4" aria-hidden="true" />
 					{:else}
-						<svg
-							class="h-4 w-4"
-							viewBox="0 0 16 16"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							aria-hidden="true"
-						>
-							<path d="M2 4.5h12M2 8h12M2 11.5h12" />
-						</svg>
+						<Icon src={Menu} class="h-4 w-4" aria-hidden="true" />
 					{/if}
 				</button>
 			</div>

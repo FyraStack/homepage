@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ArrowLeft } from '@steeze-ui/carbon-icons';
 
 	const { children } = $props();
 
@@ -45,18 +47,7 @@
 					href="/docs"
 					class="flex items-center gap-1.5 text-xs text-fyra-gray-500 transition-colors hover:text-fyra-gray-300"
 				>
-					<svg
-						class="h-3 w-3"
-						viewBox="0 0 12 12"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.5"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<path d="M8 6H2M5 3L2 6l3 3" />
-					</svg>
+					<Icon src={ArrowLeft} class="h-3 w-3" aria-hidden="true" />
 					All docs
 				</a>
 			</div>

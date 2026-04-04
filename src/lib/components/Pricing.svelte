@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Checkmark } from '@steeze-ui/carbon-icons';
 
 	type ServiceHref = '/services/vps' | '/services/colocation';
 
@@ -78,18 +80,7 @@
 				<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-2">
 					{#each plan.features as feature (feature)}
 						<div class="flex items-center gap-3 bg-fyra-gray-900 px-6 py-3.5 md:px-10">
-							<svg
-								class="h-3 w-3 shrink-0 text-fyra-red-500"
-								viewBox="0 0 12 12"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								aria-hidden="true"
-							>
-								<path d="M10.5 3 5 8.5 1.5 5" />
-							</svg>
+							<Icon src={Checkmark} class="h-3 w-3 shrink-0 text-fyra-red-500" aria-hidden="true" />
 							<span class="text-sm text-fyra-gray-400">{feature}</span>
 						</div>
 					{/each}

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Close, ArrowRight } from '@steeze-ui/carbon-icons';
 
 	let open = $state(false);
 	let thumbs = $state<'up' | 'down' | null>(null);
@@ -31,17 +33,7 @@
 					class="ml-auto rounded-xs p-1 text-fyra-gray-400 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
 					aria-label="Close"
 				>
-					<svg
-						class="h-3.5 w-3.5"
-						viewBox="0 0 14 14"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.5"
-						stroke-linecap="round"
-						aria-hidden="true"
-					>
-						<path d="M2 2 12 12M12 2 2 12" />
-					</svg>
+					<Icon src={Close} class="h-3.5 w-3.5" aria-hidden="true" />
 				</button>
 			</div>
 
@@ -94,18 +86,7 @@
 					class="flex h-6 w-6 shrink-0 items-center justify-center rounded-xs bg-fyra-red-700 text-white transition-colors duration-100 hover:bg-fyra-red-600"
 					aria-label="Send"
 				>
-					<svg
-						class="h-3 w-3"
-						viewBox="0 0 12 12"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.5"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<path d="M10 6H2M6.5 2 10 6l-3.5 4" />
-					</svg>
+					<Icon src={ArrowRight} class="h-3 w-3" aria-hidden="true" />
 				</button>
 			</div>
 
@@ -131,17 +112,7 @@
 		aria-label="Open Stacker Helper AI"
 	>
 		{#if open}
-			<svg
-				class="h-4 w-4"
-				viewBox="0 0 16 16"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				aria-hidden="true"
-			>
-				<path d="M3 3 13 13M13 3 3 13" />
-			</svg>
+			<Icon src={Close} class="h-4 w-4" aria-hidden="true" />
 		{:else}
 			<span class="text-lg leading-none">✨</span>
 		{/if}

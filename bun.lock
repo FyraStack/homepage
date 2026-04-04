@@ -5,6 +5,8 @@
     "": {
       "name": "fyrastack-homepage",
       "dependencies": {
+        "@steeze-ui/carbon-icons": "^1.2.1",
+        "@steeze-ui/svelte-icon": "^1.6.2",
         "@tailwindplus/elements": "^1.0.22",
         "arktype": "^2.2.0",
         "autumn-js": "^1.2.4",
@@ -309,6 +311,10 @@
     "@stablelib/base64": ["@stablelib/base64@1.0.1", "", {}, "sha512-1bnPQqSxSuc3Ii6MhBysoWCg58j97aUjuCSZrGSmDxNqtytIi0k8utUenAwTZN4V5mXXYGsVUI9zeBqy+jBOSQ=="],
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+
+    "@steeze-ui/carbon-icons": ["@steeze-ui/carbon-icons@1.2.1", "", {}, "sha512-PsvdDas44SOvPpJBg7g4Y0YqwJQaKL4gx0sKDIZ6GFpHQpn1nIK8AJE2ofmYJzSNVopExjXtSsZUbHaVuC9xWQ=="],
+
+    "@steeze-ui/svelte-icon": ["@steeze-ui/svelte-icon@1.6.2", "", { "peerDependencies": { "svelte": "^5.0.0" } }, "sha512-Q2WP/RkM1JhMueX0FJogSj4J1bncSHaAiiPCqjcseRcHKqfpjYFPJa8bA50I+4KbyOVJ9fdUvTQ3ww9X0ITRxQ=="],
 
     "@sveltejs/acorn-typescript": ["@sveltejs/acorn-typescript@1.0.9", "", { "peerDependencies": { "acorn": "^8.9.0" } }, "sha512-lVJX6qEgs/4DOcRTpo56tmKzVPtoWAaVbL4hfO7t7NVwl9AAXzQR6cihesW1BmNMPl+bK6dreu2sOKBP2Q9CIA=="],
 

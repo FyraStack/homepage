@@ -1,3 +1,8 @@
+<script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ArrowDown } from '@steeze-ui/carbon-icons';
+</script>
+
 <!-- Hero -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 	<div
@@ -30,18 +35,7 @@
 				class="inline-flex items-center gap-2 border border-fyra-red-500 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
 			>
 				Get started
-				<svg
-					class="h-3.5 w-3.5"
-					viewBox="0 0 14 14"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					aria-hidden="true"
-				>
-					<path d="M7 2v10M3 8l4 4 4-4" />
-				</svg>
+				<Icon src={ArrowDown} class="h-3.5 w-3.5" aria-hidden="true" />
 			</a>
 		</div>
 	</div>

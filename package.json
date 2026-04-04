@@ -44,6 +44,8 @@
 		"wrangler": "^4.77.0"
 	},
 	"dependencies": {
+		"@steeze-ui/carbon-icons": "^1.2.1",
+		"@steeze-ui/svelte-icon": "^1.6.2",
 		"@tailwindplus/elements": "^1.0.22",
 		"arktype": "^2.2.0",
 		"autumn-js": "^1.2.4",

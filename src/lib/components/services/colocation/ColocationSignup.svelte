@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Checkmark, ChevronDown, ArrowRight } from '@steeze-ui/carbon-icons';
 	import { colocationPlans, type ColocationPlan } from '$lib/data/colocationPlans';
 	import { reserve } from '$lib/remote/colocation-reserve.remote';
 	import { page } from '$app/stores';
@@ -65,15 +67,7 @@ Chicago, IL 60625`;
 					<div
 						class="flex h-10 w-10 items-center justify-center rounded-full bg-fyra-red-500/20 text-fyra-red-400"
 					>
-						<svg
-							class="h-5 w-5"
-							viewBox="0 0 16 16"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-						>
-							<path d="M13.5 4.5 6.5 11.5 3 8" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
+						<Icon src={Checkmark} class="h-5 w-5" aria-hidden="true" />
 					</div>
 					<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Payment complete!</h2>
 				</div>
@@ -95,15 +89,7 @@ Chicago, IL 60625`;
 							class="mt-3 inline-flex items-center gap-2 text-sm text-fyra-red-400 transition-colors hover:text-fyra-red-300"
 						>
 							View Colocation Docs
-							<svg
-								class="h-3.5 w-3.5"
-								viewBox="0 0 10 10"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.5"
-							>
-								<path d="M2 8 6 4M6 4 2 0M6 4h8" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
+							<Icon src={ArrowRight} class="h-3.5 w-3.5" aria-hidden="true" />
 						</a>
 					</div>
 				</div>
@@ -148,20 +134,7 @@ Chicago, IL 60625`;
 									{/if}
 								{/each}
 							</span>
-							<svg
-								class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen
-									? 'rotate-180'
-									: ''}"
-								viewBox="0 0 10 10"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								aria-hidden="true"
-							>
-								<path d="M2 3.5 5 6.5 8 3.5" />
-							</svg>
+							<Icon src={ChevronDown} class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen ? 'rotate-180' : ''}" aria-hidden="true" />
 						</button>
 
 						{#if planDropdownOpen}
