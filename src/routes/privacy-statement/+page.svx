@@ -1,5 +1,16 @@
 <svelte:head>
-	<title>Privacy Statement — Fyra Stack</title>
+<title>Privacy Statement | Fyra Stack</title>
+<meta name="description" content="What we collect, how we use it, and what we don't do with your data. Short version: we don't sell it." />
+<link rel="canonical" href="https://fyrastack.com/privacy-statement" />
+<meta property="og:title" content="Privacy Statement | Fyra Stack" />
+<meta property="og:description" content="What we collect, how we use it, and what we don't do with your data." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fyrastack.com/privacy-statement" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Privacy Statement | Fyra Stack" />
+<meta name="twitter:description" content="What we collect, how we use it, and what we don't do with your data." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-6 py-24 lg:px-8">

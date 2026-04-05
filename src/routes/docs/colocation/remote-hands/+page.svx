@@ -1,5 +1,16 @@
 <svelte:head>
-	<title>Requesting Remote Hands — Fyra Stack Docs</title>
+<title>Requesting Remote Hands | Fyra Stack Docs</title>
+<meta name="description" content="Need someone at the DC? Remote hands at $50/hr covers power cycling, drive swaps, cable work, inspections, and hardware replacements." />
+<link rel="canonical" href="https://fyrastack.com/docs/colocation/remote-hands" />
+<meta property="og:title" content="Remote Hands | Fyra Stack Docs" />
+<meta property="og:description" content="Need someone at the DC? Remote hands covers power cycling, drive swaps, cable work, and more." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/colocation/remote-hands" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Remote Hands | Fyra Stack Docs" />
+<meta name="twitter:description" content="Need someone at the DC? Remote hands covers power cycling, drive swaps, cable work, and more." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 # Requesting Remote Hands.

@@ -113,10 +113,15 @@
 </script>
 
 <svelte:head>
-	<title>Documentation — Fyra Stack</title>
+	<title>Docs | Fyra Stack</title>
+	<meta
+		name="description"
+		content="Guides and references for getting your Stack VPS or colocation slot up and running. Shipping hardware, IPMI access, remote hands, power budgets, and more."
+	/>
+	<link rel="canonical" href="https://fyrastack.com/docs" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="Documentation — Fyra Stack" />
+	<meta property="og:title" content="Docs | Fyra Stack" />
 	<meta
 		property="og:description"
 		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."
@@ -127,7 +132,7 @@
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Documentation — Fyra Stack" />
+	<meta name="twitter:title" content="Docs | Fyra Stack" />
 	<meta
 		name="twitter:description"
 		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."

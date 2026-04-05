@@ -1,5 +1,16 @@
 <svelte:head>
-	<title>Accessing IPMI Remotely — Fyra Stack Docs</title>
+<title>Accessing IPMI Remotely | Fyra Stack Docs</title>
+<meta name="description" content="Connect to your server's IPMI, iDRAC, or iLO over our WireGuard VPN. Power cycle, remote console, and out-of-band management even when the OS is down." />
+<link rel="canonical" href="https://fyrastack.com/docs/colocation/ipmi" />
+<meta property="og:title" content="IPMI Access | Fyra Stack Docs" />
+<meta property="og:description" content="Connect to your server's IPMI over our WireGuard VPN. Power cycle, remote console, out-of-band management." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/colocation/ipmi" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="IPMI Access | Fyra Stack Docs" />
+<meta name="twitter:description" content="Connect to your server's IPMI over our WireGuard VPN. Power cycle, remote console, out-of-band management." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 # Accessing IPMI Remotely.

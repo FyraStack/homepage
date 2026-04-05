@@ -7,6 +7,10 @@
 
 <svelte:head>
 	<title>Fyra Stack</title>
+	<meta
+		name="description"
+		content="VPS hosting from $5/mo and colocation in Chicago, IL. Enterprise hardware, flat pricing, no surprise fees. An open-source cloud by Fyra Labs."
+	/>
 
 	<!-- Privacy-friendly analytics by Plausible -->
 	<script async src="https://plausible.fyralabs.com/js/pa-NskcgvpEiDLVGaxFEpNHl.js"></script>

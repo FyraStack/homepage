@@ -1,5 +1,16 @@
 <svelte:head>
-	<title>Terms of Service — Fyra Stack</title>
+<title>Terms of Service | Fyra Stack</title>
+<meta name="description" content="The rules. Acceptable use policy, billing, liability, and cancellation. No long-term contracts, no cancellation fees." />
+<link rel="canonical" href="https://fyrastack.com/terms-of-service" />
+<meta property="og:title" content="Terms of Service | Fyra Stack" />
+<meta property="og:description" content="The rules. Acceptable use, billing, liability, and cancellation." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fyrastack.com/terms-of-service" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Terms of Service | Fyra Stack" />
+<meta name="twitter:description" content="The rules. Acceptable use, billing, liability, and cancellation." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-6 py-24 lg:px-8">
