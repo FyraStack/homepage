@@ -48,7 +48,7 @@
 		"@steeze-ui/svelte-icon": "^1.6.2",
 		"@tailwindplus/elements": "^1.0.22",
 		"arktype": "^2.2.0",
-		"autumn-js": "^1.2.4",
+		"autumn-js": "^1.2.5",
 		"leaflet": "^1.9.4",
 		"svix": "^1.90.0"
 	}
