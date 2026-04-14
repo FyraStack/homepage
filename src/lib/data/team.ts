@@ -60,6 +60,12 @@ export const team: (TeamMember | null)[] = [
 		role: 'Data Center Engineer',
 		avatar: '/assets/people/naomi.jpg'
   },
+ 	{
+		name: 'Jonah',
+		nickname: null,
+		role: 'Operations Advisor',
+		avatar: '/assets/people/jonah.jpg'
+  },
   {
     name: 'Cappy Ishihara',
     nickname: null,
