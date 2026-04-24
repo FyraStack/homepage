@@ -1,26 +1,9 @@
 <script lang="ts">
-	import { vpsPlans, computeOptimizedPlans } from '$lib/data/vpsPlans';
-
-	type Plan = {
-		name: string;
-		price: string;
-		cpu: string;
-		ram: string;
-		storage: string;
-		network: string;
-		yearlyPrice: string;
-	};
+	import { vpsPlans } from '$lib/data/vpsPlans';
 
 	let { selectedPlanName = $bindable('STACK-XXS') }: { selectedPlanName?: string } = $props();
-	let activeTab = $state<'general' | 'compute'>('general');
 
-	let plans = $derived(activeTab === 'general' ? vpsPlans : computeOptimizedPlans);
-	let currentPlan = $derived(plans.find((p) => p.name === selectedPlanName) ?? plans[0]);
-
-	function handleTabChange(tab: 'general' | 'compute') {
-		activeTab = tab;
-		selectedPlanName = tab === 'general' ? 'STACK-XXS' : 'STACK-CO-XS';
-	}
+	let currentPlan = $derived(vpsPlans.find((p) => p.name === selectedPlanName) ?? vpsPlans[0]);
 </script>
 
 <!-- Header -->
@@ -33,28 +16,6 @@
 	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
 </div>
 
-<!-- Tabs -->
-<div class="flex border-b border-fyra-gray-800">
-	<button
-		onclick={() => handleTabChange('general')}
-		class="flex-1 px-6 py-4 text-center text-sm font-medium transition-colors duration-200 {activeTab ===
-		'general'
-			? 'border-b-2 border-fyra-red-500 bg-fyra-gray-800 text-fyra-gray-50'
-			: 'text-fyra-gray-400 hover:bg-fyra-gray-800 hover:text-fyra-gray-50'}"
-	>
-		General Purpose
-	</button>
-	<button
-		onclick={() => handleTabChange('compute')}
-		class="flex-1 px-6 py-4 text-center text-sm font-medium transition-colors duration-200 {activeTab ===
-		'compute'
-			? 'border-b-2 border-fyra-red-500 bg-fyra-gray-800 text-fyra-gray-50'
-			: 'text-fyra-gray-400 hover:bg-fyra-gray-800 hover:text-fyra-gray-50'}"
-	>
-		Compute Optimized
-	</button>
-</div>
-
 <div class="grid grid-cols-7">
 	<div class="col-span-7 flex flex-col justify-between border-b border-fyra-gray-800 p-5">
 		<!-- top -->
@@ -62,20 +23,11 @@
 			<h2 class="text-xl font-semibold tracking-wide lg:text-2xl">
 				{currentPlan.name}
 			</h2>
-			<div class="text-right">
-				<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
-					<span class="font-medium tracking-wide">$</span>{currentPlan.price}<span
-						class="text-sm leading-3 font-medium lg:text-base">/mo</span
-					>
-				</h3>
-				<p class="mt-1 text-xs text-fyra-gray-400">
-					<span class="font-medium tracking-wide">$</span>{currentPlan.yearlyPrice}<span
-						class="text-xs">/mo</span
-					>
-					billed yearly
-					<span class="text-fyra-green-400 ml-1">(Save 2 months)</span>
-				</p>
-			</div>
+			<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
+				<span class="font-medium tracking-wide">$</span>{currentPlan.price}<span
+					class="text-sm leading-3 font-medium lg:text-base">/mo</span
+				>
+			</h3>
 		</div>
 		<!-- middle -->
 		<div
@@ -104,12 +56,12 @@
 </div>
 
 <div class="grid grid-cols-2 divide-x divide-y divide-fyra-gray-800 lg:grid-cols-4">
-	{#each plans as plan, i (plan.name)}
+	{#each vpsPlans as plan, i (plan.name)}
 		<button
 			onclick={() => (selectedPlanName = plan.name)}
 			class="col-span-1 w-full p-4 text-left duration-200 {selectedPlanName === plan.name
 				? 'bg-fyra-gray-800'
-				: 'bg-fyra-gray-900 hover:bg-fyra-gray-800'} {i === plans.length - 1
+				: 'bg-fyra-gray-900 hover:bg-fyra-gray-800'} {i === vpsPlans.length - 1
 				? 'border-b border-fyra-gray-800'
 				: ''}"
 		>

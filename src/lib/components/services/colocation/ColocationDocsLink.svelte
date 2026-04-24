@@ -6,7 +6,9 @@
 
 <section class="border-b border-fyra-gray-800">
 	<div class="flex flex-col items-center justify-center px-8 py-12 text-center lg:py-16">
-		<p class="text-lg text-fyra-gray-300">Need a hand getting started?</p>
+		<p class="text-lg text-fyra-gray-300">
+			Need a hand getting started?
+		</p>
 		<p class="mt-2 text-sm text-fyra-gray-400">Our docs walk you through it.</p>
 		<a
 			href={DOCS_LINK}

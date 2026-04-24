@@ -1,21 +1,17 @@
 import { error, type RequestHandler } from '@sveltejs/kit';
-import { Webhook } from 'svix';
+import { Webhook } from "svix";
 import { env } from '$env/dynamic/private';
+
+
 
 ///// this section was stolen from autumn's repo because they dont export types for it. i really hate this section and it should be removed ASAP when there is a better solution.
 
 type CustomerProductsUpdatedScenario =
-	| 'new'
-	| 'upgrade'
-	| 'downgrade'
-	| 'renew'
-	| 'cancel'
-	| 'expired'
-	| 'past_due'
-	| 'scheduled';
+	| "new" | "upgrade" | "downgrade" | "renew"
+	| "cancel" | "expired" | "past_due" | "scheduled";
 
-type BalancesLimitType = 'included' | 'max_purchase' | 'spend_limit';
-type UsageAlertThresholdType = 'usage' | 'usage_percentage';
+type BalancesLimitType = "included" | "max_purchase" | "spend_limit";
+type UsageAlertThresholdType = "usage" | "usage_percentage";
 
 export type CusProductStatus = 'active' | 'expired' | 'scheduled' | 'trialing' | 'past_due';
 
@@ -35,7 +31,7 @@ type CusProduct = {
 	entity_id?: string | null;
 	items?: ProductItem[] | null;
 	quantity?: number;
-};
+}
 
 export interface ProductItem {
 	type?: string | null;
@@ -81,7 +77,7 @@ interface CustomerProductsUpdatedEvent {
 }
 
 interface BalancesLimitReachedEvent {
-	type: 'balances.limit_reached';
+	type: "balances.limit_reached";
 	data: {
 		customer_id: string;
 		feature_id: string;
@@ -91,7 +87,7 @@ interface BalancesLimitReachedEvent {
 }
 
 interface BalancesUsageAlertTriggeredEvent {
-	type: 'balances.usage_alert_triggered';
+	type: "balances.usage_alert_triggered";
 	data: {
 		customer_id: string;
 		feature_id: string;
@@ -110,6 +106,8 @@ type AutumnWebhookEvent =
 
 ///// end of shit code section
 
+
+
 const get_header_or_throw = (headers: Headers, field: string): string => {
 	const header = headers.get(field);
 
@@ -119,6 +117,7 @@ const get_header_or_throw = (headers: Headers, field: string): string => {
 
 	return header;
 };
+
 
 export const POST: RequestHandler = async ({ request }) => {
 	// TODO: implement autumn webhook handler whenever autumn gives us access
@@ -141,7 +140,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	const content = wh.verify(unverified_contet, headers) as AutumnWebhookEvent;
 
 	switch (content.type) {
-		case 'customer.products.updated': {
+		case 'customer.products.updated':
+		{
 			const webhookBody = {
 				username: 'Fyra Stack',
 				embeds: [
@@ -168,15 +168,16 @@ export const POST: RequestHandler = async ({ request }) => {
 						`Response status: ${response.status}, Response content: ${await response.text()}`
 					);
 				}
+
 			} else {
 				console.log('would have called discord colocation webhook');
 				console.log(webhookBody);
-				console.log(webhookBody.embeds);
+				console.log(webhookBody.embeds)
 			}
 			break;
 		}
 		default:
-			return new Response('Unknown Event Type');
+			return new Response('Unknown Event Type')
 	}
 
 	return new Response(String('Unimplemented'));

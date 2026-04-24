@@ -9,10 +9,8 @@
 			</h2>
 
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
-				Stack is provided by <a
-					href="https://fyralabs.com"
-					class="text-fyra-gray-200 underline hover:text-white">Fyra Labs</a
-				>, an open-source community that develops Terra and Ultramarine Linux.
+				Stack is provided by <a href="https://fyralabs.com" class="underline text-fyra-gray-200 hover:text-white">Fyra Labs</a>, an open-source community that develops Terra and Ultramarine
+				Linux.
 			</p>
 
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">

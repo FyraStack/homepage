@@ -25,7 +25,7 @@
 				<div class="text-right">
 					<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
 						{#if currentPlan.originalPrice}
-							<span class="mr-1.5 font-medium tracking-wide text-fyra-gray-500 line-through"
+							<span class="font-medium tracking-wide text-fyra-gray-500 line-through mr-1.5"
 								>${currentPlan.originalPrice}</span
 							>
 						{/if}
@@ -35,8 +35,7 @@
 					</h3>
 				</div>
 				{#if currentPlan.originalPrice}
-					<span
-						class="rounded-full bg-fyra-red-500/10 px-2.5 py-1 text-xs font-medium text-fyra-red-400"
+					<span class="rounded-full bg-fyra-red-500/10 px-2.5 py-1 text-xs font-medium text-fyra-red-400"
 						>Limited time</span
 					>
 				{/if}
@@ -81,7 +80,7 @@
 				<div class="text-right">
 					<h3 class="text-sm font-medium tracking-tighter lg:text-base">
 						{#if plan.originalPrice}
-							<span class="mr-1 font-normal tracking-wide text-fyra-gray-500 line-through"
+							<span class="font-normal tracking-wide text-fyra-gray-500 line-through mr-1"
 								>${plan.originalPrice}</span
 							>
 						{/if}
@@ -109,7 +108,8 @@
 		Need something custom?
 		<a
 			href="mailto:contact@fyrastack.com"
-			class="text-fyra-red-400 transition-colors hover:text-fyra-red-300">Contact us</a
+			class="text-fyra-red-400 transition-colors hover:text-fyra-red-300"
+			>Contact us</a
 		>
 		for bulk orders and non-profit discounts.
 	</p>
