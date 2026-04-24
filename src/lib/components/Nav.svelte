@@ -4,7 +4,13 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ChevronDown, Close, Menu } from '@steeze-ui/carbon-icons';
 
-	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation' | '/docs'; // can we just use sveltekit resolve here
+	type InternalHref =
+		| '/'
+		| '/about'
+		| '/our-office'
+		| '/services/vps'
+		| '/services/colocation'
+		| '/docs'; // can we just use sveltekit resolve here
 
 	let isMobileMenuOpen = $state(false);
 	let openDropdown = $state<string | null>(null);
@@ -27,6 +33,11 @@
 			label: 'About us',
 			description: "Why we're building this.",
 			href: '/about' as InternalHref
+		},
+		{
+			label: 'Our Office',
+			description: 'Work alongside us in Ravenswood.',
+			href: '/our-office' as InternalHref
 		},
 		{
 			label: 'Documentation',
