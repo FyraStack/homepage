@@ -82,10 +82,7 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 	return response.paymentUrl as string;
 }
 
-export const reserve = form(
-	reserveSchema,
-	async (data): Promise<ReserveResult> => {
-		const paymentLink = await createPaymentLink(data.plan, data.email, data.name);
-		return { ok: true, paymentLink };
-	}
-);
+export const reserve = form(reserveSchema, async (data): Promise<ReserveResult> => {
+	const paymentLink = await createPaymentLink(data.plan, data.email, data.name);
+	return { ok: true, paymentLink };
+});
