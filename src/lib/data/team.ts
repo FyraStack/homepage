@@ -13,8 +13,8 @@ export const team: (TeamMember | null)[] = [
 		avatar: '/assets/people/lleyton.webp'
 	},
 	{
-		name: 'Katherine Cole',
-		nickname: 'Jade',
+		name: 'Jade Cole',
+		nickname: 'Kat',
 		role: 'Chief Operating Officer',
 		avatar: '/assets/people/kat.webp'
 	},
