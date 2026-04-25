@@ -19,7 +19,8 @@ export default {
 					'source',
 					'reference',
 					'plugin',
-					'theme'
+					'theme',
+					'custom-variant'
 				]
 			}
 		],
