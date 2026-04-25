@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { vpsPlans } from '$lib/data/vpsPlans';
 	import Prereserve from '$lib/components/Prereserve.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as Table from '$lib/components/ui/table';
 
 	let selectedPlan = $state('STACK-XXS');
 
@@ -77,29 +79,25 @@
 </svelte:head>
 
 <!-- Hero -->
-<main class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+<main class="relative isolate overflow-hidden border-b border-border px-6 pt-14 lg:px-8">
 	<div
 		aria-hidden="true"
 		class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
+			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
 		></div>
 	</div>
 
 	<div class="mx-auto max-w-4xl py-24 text-center sm:py-32">
-		<h1
-			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
-		>
+		<h1 class="mb-2 text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-6xl">
 			We run the servers.
 		</h1>
-		<h2
-			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
-		>
-			<span class="text-fyra-red-400">You run your stack.</span>
+		<h2 class="mb-8 text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-6xl">
+			<span class="text-primary">You run your stack.</span>
 		</h2>
-		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
+		<p class="mx-auto max-w-lg text-base text-muted-foreground sm:text-lg/7">
 			Our mission is simple: Provide hosting you can trust, without breaking the bank, or your mind.
 		</p>
 	</div>
@@ -110,79 +108,79 @@
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
+			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
 		></div>
 	</div>
 </main>
 
 <!-- Features -->
-<section class="border-b border-fyra-gray-800">
-	<div
-		class="grid grid-cols-1 divide-y divide-fyra-gray-800 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
-	>
+<section class="border-b border-border">
+	<div class="grid grid-cols-1 divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
 		<!-- Left: headline -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
-			<h2 class="text-4xl leading-tight font-semibold tracking-tight text-fyra-gray-50">
+			<h2 class="text-4xl leading-tight font-semibold tracking-tight text-foreground">
 				Stack is different.
 			</h2>
 
-			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
+			<p class="mt-6 text-base leading-relaxed text-muted-foreground">
 				Most budget providers cut corners on hardware to hit their price points, we don't.
 			</p>
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
+			<p class="mt-3 text-base leading-relaxed text-muted-foreground">
 				Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and enterprise SSDs. We buy
 				good hardware, run it efficiently, run a small focused team, don't oversell, and charge a
 				fair price.
 			</p>
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">It's boring and it works.</p>
+			<p class="mt-3 text-base leading-relaxed text-muted-foreground/80">
+				It's boring and it works.
+			</p>
 		</div>
 
 		<!-- Right: bento grid -->
-		<div class="grid grid-cols-2 gap-px bg-fyra-gray-800">
+		<div class="grid grid-cols-2 gap-px bg-muted">
 			<!-- Fast by default -- full width, with decoration -->
-			<div class="relative col-span-2 overflow-hidden bg-fyra-gray-900 p-8">
+			<div class="relative col-span-2 overflow-hidden bg-background p-8">
 				<div class="pointer-events-none absolute top-0 right-0 h-full w-2/5 select-none">
 					<img src="/homepage-mockup.png" alt="" class="w-full object-top" aria-hidden="true" />
 					<div
-						class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"
+						class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"
 					></div>
 				</div>
 				<div class="relative">
-					<p class="text-lg font-semibold text-fyra-gray-50">Simple control panel</p>
-					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">
+					<p class="text-lg font-semibold text-foreground">Simple control panel</p>
+					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
 						Developed with engineers in mind from the beginning.
 					</p>
 				</div>
 			</div>
 
 			<!-- Linux Native -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">Linux native</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-lg leading-snug font-semibold text-foreground">Linux native</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					Run Ultramarine, Debian, Alma, or whatever your stack needs.
 				</p>
 			</div>
 
 			<!-- Independent -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-lg font-semibold text-foreground">Fast by default</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					Powered by Cascade Lake CPUs that are fast, real fast.
 				</p>
 			</div>
 
 			<!-- Real support -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg font-semibold text-fyra-gray-50">Real support</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-lg font-semibold text-foreground">Real support</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					By the system engineers that actually maintain the servers.
 				</p>
 			</div>
 
 			<!-- Simple pricing -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-lg font-semibold text-fyra-gray-50">Honest pricing</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-lg font-semibold text-foreground">Honest pricing</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					No hidden fees, no egress charges, no surprise bills.
 				</p>
 			</div>
@@ -191,61 +189,61 @@
 </section>
 
 <!-- Comparison -->
-<section class="border-b border-fyra-gray-800">
+<section class="border-b border-border">
 	<!-- Header -->
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+	<div class="border-b border-border px-6 py-8 md:px-10">
 		<div class="flex items-center gap-2.5">
-			<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
+			<h2 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
 				Stack, well... stacks up.
 			</h2>
 		</div>
-		<p class="mt-2 text-sm text-fyra-gray-400">Compared at our entry-level plan.</p>
+		<p class="mt-2 text-sm text-muted-foreground">Compared at our entry-level plan.</p>
 	</div>
 
 	<!-- Table -->
 	<div class="overflow-x-auto">
-		<table class="w-full min-w-[600px] border-collapse">
-			<thead>
-				<tr class="border-b border-fyra-gray-800">
-					<th class="w-36 px-6 py-4 text-left md:w-44 md:px-10"></th>
-					<th class="px-5 py-4 text-left">
+		<Table.Root class="min-w-[600px]">
+			<Table.Header>
+				<Table.Row>
+					<Table.Head class="w-36 px-6 md:w-44 md:px-10"></Table.Head>
+					<Table.Head>
 						<div class="flex items-center gap-1.5">
 							<img src="/logo.svg" alt="" class="h-4 w-4" aria-hidden="true" />
-							<span class="text-sm font-semibold text-fyra-gray-50">Stack</span>
+							<span class="text-sm font-semibold text-foreground">Stack</span>
 						</div>
-					</th>
+					</Table.Head>
 					{#each competitors as name (name)}
-						<th class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400">{name}</th>
+						<Table.Head>{name}</Table.Head>
 					{/each}
-				</tr>
-			</thead>
-			<tbody class="divide-y divide-fyra-gray-800">
+				</Table.Row>
+			</Table.Header>
+			<Table.Body>
 				{#each comparisonRows as row (row.label)}
-					<tr>
-						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
-						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{row.stack}</td>
+					<Table.Row>
+						<Table.Cell class="px-6 text-muted-foreground md:px-10">{row.label}</Table.Cell>
+						<Table.Cell class="font-semibold text-primary">{row.stack}</Table.Cell>
 						{#each row.values as val, i (`${row.label}-${competitors[i]}`)}
-							<td class="px-5 py-4 text-sm text-fyra-gray-300">{val}</td>
+							<Table.Cell class="text-muted-foreground/80">{val}</Table.Cell>
 						{/each}
-					</tr>
+					</Table.Row>
 				{/each}
-			</tbody>
-		</table>
+			</Table.Body>
+		</Table.Root>
 	</div>
 </section>
 
 <!-- VPS Plans -->
-<div id="plans" class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+<div id="plans" class="border-b border-border px-6 py-8 md:px-10">
 	<div class="flex items-center gap-2.5">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
+		<h2 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
 			Priced fairly.
 		</h2>
 	</div>
-	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
+	<p class="mt-2 text-sm text-muted-foreground">Simple, flat-rate plans with no surprise fees.</p>
 </div>
 
 <div class="grid grid-cols-7">
-	<div class="col-span-7 flex flex-col justify-between border-b border-fyra-gray-800 p-5">
+	<div class="col-span-7 flex flex-col justify-between border-b border-border p-5">
 		<div class="flex min-w-full items-center justify-between">
 			<h2 class="text-xl font-semibold tracking-wide lg:text-2xl">
 				{currentVpsPlan.name}
@@ -260,19 +258,19 @@
 			class="mt-8 grid grid-cols-1 gap-x-8 gap-y-1.5 text-base md:grid-cols-2 md:gap-y-3.5 lg:mt-16 lg:text-[1.05rem]"
 		>
 			<div class="flex justify-between">
-				<p class="text-fyra-gray-400">CPU</p>
+				<p class="text-muted-foreground">CPU</p>
 				<p class="tracking-tight">{currentVpsPlan.cpu}x vCPU</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="text-fyra-gray-400">Storage</p>
+				<p class="text-muted-foreground">Storage</p>
 				<p class="tracking-tight">{currentVpsPlan.storage}GB SAS3 SSD</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="text-fyra-gray-400">Memory</p>
+				<p class="text-muted-foreground">Memory</p>
 				<p class="tracking-tight">{currentVpsPlan.ram}GB</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="text-fyra-gray-400">Network</p>
+				<p class="text-muted-foreground">Network</p>
 				<p class="tracking-tight">
 					{#if currentVpsPlan.network === '1'}1Gbps{:else}{currentVpsPlan.network}Mbps{/if} Fair-use
 				</p>
@@ -281,14 +279,16 @@
 	</div>
 </div>
 
-<div class="grid grid-cols-2 divide-x divide-y divide-fyra-gray-800 lg:grid-cols-4">
+<div class="grid grid-cols-2 divide-x divide-y divide-border lg:grid-cols-4">
 	{#each vpsPlans as plan, i (plan.name)}
-		<button
+		<Button
 			onclick={() => (selectedPlan = plan.name)}
-			class="col-span-1 w-full p-4 text-left duration-200 {selectedPlan === plan.name
-				? 'bg-fyra-gray-800'
-				: 'bg-fyra-gray-900 hover:bg-fyra-gray-800'} {i === vpsPlans.length - 1
-				? 'border-b border-fyra-gray-800'
+			variant="ghost"
+			class="col-span-1 h-auto w-full rounded-none p-4 text-left duration-200 {selectedPlan ===
+			plan.name
+				? 'bg-muted'
+				: 'bg-background hover:bg-muted'} {i === vpsPlans.length - 1
+				? 'border-b border-border'
 				: ''}"
 		>
 			<div class="flex items-start justify-between gap-4">
@@ -300,17 +300,17 @@
 				</h3>
 			</div>
 			<div class="mt-4 text-left md:mt-6">
-				<p class="text-xs text-fyra-gray-400">
+				<p class="text-xs text-muted-foreground">
 					{plan.cpu} vCPU
-					<span class="px-0.5 text-fyra-red-500">•</span>
+					<span class="px-0.5 text-primary">•</span>
 					{plan.ram}GB RAM
 					<span class="hidden md:inline">
-						<span class="px-0.5 text-fyra-red-500">•</span>
+						<span class="px-0.5 text-primary">•</span>
 						{plan.storage}GB SAS3 SSD
 					</span>
 				</p>
 			</div>
-		</button>
+		</Button>
 	{/each}
 </div>
 

@@ -8,30 +8,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-	/* Legacy tokens */
-	--color-fyra-red-50: #fbf6f5;
-	--color-fyra-red-100: #f8edeb;
-	--color-fyra-red-200: #f2dbd9;
-	--color-fyra-red-300: #e6bfbb;
-	--color-fyra-red-400: #d89894;
-	--color-fyra-red-500: #c6716d;
-	--color-fyra-red-600: #a54a4b;
-	--color-fyra-red-700: #923e40;
-	--color-fyra-red-800: #7b363b;
-	--color-fyra-red-900: #6a3136;
-	--color-fyra-red-950: #3a171a;
-	--color-fyra-gray-50: #fafafa;
-	--color-fyra-gray-100: #f4f4f5;
-	--color-fyra-gray-200: #e4e4e7;
-	--color-fyra-gray-300: #d5d5d7;
-	--color-fyra-gray-400: #a2a2a9;
-	--color-fyra-gray-500: #727279;
-	--color-fyra-gray-600: #53535a;
-	--color-fyra-gray-700: #404045;
-	--color-fyra-gray-800: #27272a;
-	--color-fyra-gray-900: #18181a;
-	--color-fyra-gray-950: #09090b;
-	--font-sans: 'Satoshi-Variable', system-ui, sans-serif;
+	--font-sans: inter, system-ui, sans-serif;
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -125,7 +102,7 @@
 }
 
 html {
-	@apply w-screen overflow-x-clip bg-fyra-gray-900 text-fyra-gray-50;
+	@apply w-screen overflow-x-clip bg-background text-foreground;
 }
 
 body {
@@ -202,7 +179,7 @@ body {
 	--sidebar-border: oklch(87.36% 0.0027 286.3433deg);
 	--sidebar-ring: oklch(74.08% 0.0777 23.1114deg);
 	--destructive-foreground: oklch(97.67% 0.0055 31.0539deg);
-	--font-sans: 'Satoshi-Variable', system-ui, sans-serif;
+	--font-sans: inter, system-ui, sans-serif;
 	--font-serif: georgia, serif;
 	--font-mono: jetbrains mono, monospace;
 	--shadow-color: #000;
@@ -258,7 +235,7 @@ body {
 	--sidebar-ring: oklch(74.08% 0.0777 23.1114deg);
 	--destructive-foreground: oklch(97.67% 0.0055 31.0539deg);
 	--radius: 0.5rem;
-	--font-sans: 'Satoshi-Variable', system-ui, sans-serif;
+	--font-sans: inter, system-ui, sans-serif;
 	--font-serif: georgia, serif;
 	--font-mono: jetbrains mono, monospace;
 	--shadow-color: #000;

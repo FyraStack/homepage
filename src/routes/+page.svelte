@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Checkmark } from '@steeze-ui/carbon-icons';
+	import { Check } from '@lucide/svelte';
 	import Prereserve from '$lib/components/Prereserve.svelte';
+	import * as Card from '$lib/components/ui/card';
+	import * as Table from '$lib/components/ui/table';
 
 	// Hero data inline
 	// Features data inline
@@ -119,7 +120,7 @@
 </svelte:head>
 
 <!-- ─── Hero ──────────────────────────────────────────────────────── -->
-<main class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+<main class="relative isolate overflow-hidden border-b border-border px-6 pt-14 lg:px-8">
 	<!-- Top blob -->
 	<div
 		aria-hidden="true"
@@ -127,20 +128,18 @@
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
+			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
 		></div>
 	</div>
 
 	<div class="mx-auto max-w-4xl py-32 sm:py-40">
 		<div class="text-center">
 			<h1
-				class="mb-2 text-3xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-5xl"
+				class="mb-2 text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl"
 			>
-				Infrastructure without breaking the bank, <span class="text-fyra-red-400"
-					>or your mind.</span
-				>
+				Infrastructure without breaking the bank, <span class="text-primary">or your mind.</span>
 			</h1>
-			<p class="mt-6 text-base text-pretty text-fyra-gray-400 sm:px-16 sm:text-xl/7 lg:px-32">
+			<p class="mt-6 text-base text-pretty text-muted-foreground sm:px-16 sm:text-xl/7 lg:px-32">
 				Built from the ground up to support the open-source projects we love, and the communities
 				around them.
 			</p>
@@ -154,39 +153,37 @@
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
+			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
 		></div>
 	</div>
 </main>
 
 <!-- ─── Features ─────────────────────────────────────────────────── -->
-<section class="border-b border-fyra-gray-800">
-	<div
-		class="grid grid-cols-1 divide-y divide-fyra-gray-800 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
-	>
+<section class="border-b border-border">
+	<div class="grid grid-cols-1 divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
 		<!-- Left: headline -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
-			<h2 class="text-3xl leading-tight font-semibold tracking-tight text-fyra-gray-50">
+			<h2 class="text-3xl leading-tight font-semibold tracking-tight text-foreground">
 				Stack is different.
 			</h2>
 
-			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
+			<p class="mt-6 text-base leading-relaxed text-muted-foreground">
 				Stack is provided by <a
 					href="https://fyralabs.com"
-					class="text-fyra-gray-200 underline hover:text-white">Fyra Labs</a
+					class="text-foreground/80 underline hover:text-foreground">Fyra Labs</a
 				>, an open-source community that develops Terra and Ultramarine Linux.
 			</p>
 
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
+			<p class="mt-3 text-base leading-relaxed text-muted-foreground">
 				We focus on bare-metal that just works, built from the ground up to support the open source
 				projects you love; all without breaking the bank, or your mind.
 			</p>
 		</div>
 
 		<!-- Right: bento grid -->
-		<div class="grid grid-cols-2 gap-px bg-fyra-gray-800">
+		<div class="grid grid-cols-2 gap-px bg-muted">
 			<!-- Fast by default — full width, with decoration -->
-			<div class="relative col-span-2 overflow-hidden bg-fyra-gray-900 p-8">
+			<div class="relative col-span-2 overflow-hidden bg-background p-8">
 				<div class="pointer-events-none absolute top-0 right-0 h-full w-2/5 select-none">
 					<img
 						src="/stack-pattern.svg"
@@ -195,45 +192,45 @@
 						aria-hidden="true"
 					/>
 					<div
-						class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"
+						class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"
 					></div>
 				</div>
 				<div class="relative">
-					<p class="text-base font-semibold text-fyra-gray-50">Fast by default</p>
-					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">
+					<p class="text-base font-semibold text-foreground">Fast by default</p>
+					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
 						Fast storage, fast compute, fast networking, <br /> fast everything.
 					</p>
 				</div>
 			</div>
 
 			<!-- Linux Native -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-base leading-snug font-semibold text-fyra-gray-50">Midwest proud</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-base leading-snug font-semibold text-foreground">Midwest proud</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					Operating out of Chicago, Illinois since 2026.
 				</p>
 			</div>
 
 			<!-- Independent -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-base font-semibold text-fyra-gray-50">Independent</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-base font-semibold text-foreground">Independent</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					Built on infrastructure we own, we don't resell another provider.
 				</p>
 			</div>
 
 			<!-- Real support -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-base font-semibold text-fyra-gray-50">Real support</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-base font-semibold text-foreground">Real support</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					By the system engineers that actually maintain the servers.
 				</p>
 			</div>
 
 			<!-- Simple pricing -->
-			<div class="bg-fyra-gray-900 p-8">
-				<p class="text-base font-semibold text-fyra-gray-50">Honest pricing</p>
-				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
+			<div class="bg-background p-8">
+				<p class="text-base font-semibold text-foreground">Honest pricing</p>
+				<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
 					No hidden fees, no egress charges, no surprise bills.
 				</p>
 			</div>
@@ -242,102 +239,96 @@
 </section>
 
 <!-- ─── Comparison ───────────────────────────────────────────────── -->
-<section class="border-b border-fyra-gray-800">
+<section class="border-b border-border">
 	<!-- Header -->
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+	<div class="border-b border-border px-6 py-8 md:px-10">
 		<div class="flex items-center gap-2.5">
-			<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50 md:text-3xl">
+			<h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
 				Stack, well... stacks up.
 			</h2>
 		</div>
-		<p class="mt-2 text-sm text-fyra-gray-400">Compared at our entry-level plan.</p>
+		<p class="mt-2 text-sm text-muted-foreground">Compared at our entry-level plan.</p>
 	</div>
 
 	<!-- Table — horizontally scrollable on mobile -->
 	<div class="overflow-x-auto">
-		<table class="w-full min-w-[600px] border-collapse">
-			<!-- Column headers -->
-			<thead>
-				<tr class="border-b border-fyra-gray-800">
-					<th class="w-36 px-6 py-4 text-left md:w-44 md:px-10"></th>
+		<Table.Root class="min-w-[600px]">
+			<Table.Header>
+				<Table.Row>
+					<Table.Head class="w-36 px-6 md:w-44 md:px-10"></Table.Head>
 					<!-- Stack -->
-					<th class="px-5 py-4 text-left">
+					<Table.Head>
 						<div class="flex items-center gap-1.5">
 							<img src="/logo.svg" alt="" class="h-4 w-4" aria-hidden="true" />
-							<span class="text-sm font-semibold text-fyra-gray-50">Stack</span>
+							<span class="text-sm font-semibold text-foreground">Stack</span>
 						</div>
-					</th>
+					</Table.Head>
 					{#each competitors as name (name)}
-						<th class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400">{name}</th>
+						<Table.Head>{name}</Table.Head>
 					{/each}
-				</tr>
-			</thead>
-
-			<!-- Rows -->
-			<tbody class="divide-y divide-fyra-gray-800">
+				</Table.Row>
+			</Table.Header>
+			<Table.Body>
 				{#each comparisonRows as row (row.label)}
-					<tr>
-						<!-- Label -->
-						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
-						<!-- Stack value -->
-						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{row.stack}</td>
-						<!-- Competitor values -->
+					<Table.Row>
+						<Table.Cell class="px-6 text-muted-foreground md:px-10">{row.label}</Table.Cell>
+						<Table.Cell class="font-semibold text-primary">{row.stack}</Table.Cell>
 						{#each row.values as val, i (`${row.label}-${competitors[i]}`)}
-							<td class="px-5 py-4 text-sm text-fyra-gray-300">{val}</td>
+							<Table.Cell class="text-muted-foreground/80">{val}</Table.Cell>
 						{/each}
-					</tr>
+					</Table.Row>
 				{/each}
-			</tbody>
-		</table>
+			</Table.Body>
+		</Table.Root>
 	</div>
 </section>
 
 <!-- ─── Pricing ──────────────────────────────────────────────────── -->
-<section class="border-b border-fyra-gray-800">
+<section class="border-b border-border">
 	<!-- Header -->
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50 md:text-3xl">
+	<div class="border-b border-border px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
 			Priced fairly.
 		</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans. No surprise fees.</p>
+		<p class="mt-2 text-sm text-muted-foreground">Simple, flat-rate plans. No surprise fees.</p>
 	</div>
 
 	<!-- Plans -->
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 md:grid-cols-2">
+	<div class="grid grid-cols-1 gap-px bg-muted md:grid-cols-2">
 		{#each plans as plan (plan.href)}
-			<div class="flex flex-col bg-fyra-gray-900">
+			<Card.Root class="rounded-none border-0 bg-background text-foreground">
 				<!-- Price block -->
-				<div
-					class="flex items-end justify-between gap-4 border-b border-fyra-gray-800 px-6 py-8 md:px-10"
+				<Card.Header
+					class="flex flex-row items-end justify-between gap-4 border-b border-border px-6 py-8 md:px-10"
 				>
 					<div>
-						<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
+						<p class="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">
 							{plan.name}
 						</p>
 						<div class="mt-3 flex items-baseline gap-1">
-							<span class="text-3xl font-bold tracking-tight text-fyra-gray-50">${plan.price}</span>
-							<span class="text-sm font-medium text-fyra-gray-400">/mo</span>
+							<span class="text-3xl font-bold tracking-tight text-foreground">${plan.price}</span>
+							<span class="text-sm font-medium text-muted-foreground">/mo</span>
 						</div>
-						<p class="mt-1 text-sm text-fyra-gray-400">{plan.description}</p>
+						<p class="mt-1 text-sm text-muted-foreground">{plan.description}</p>
 					</div>
 					<a
 						href={resolve(plan.href)}
-						class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
+						class="shrink-0 text-sm font-medium text-primary transition-colors duration-100 hover:text-primary/80 hover:underline"
 					>
 						View plans <span aria-hidden="true">→</span>
 					</a>
-				</div>
+				</Card.Header>
 
 				<!-- Features -->
-				<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-2">
+				<Card.Content class="grid grid-cols-1 gap-px bg-muted p-0 lg:grid-cols-2">
 					{#each plan.features as feature (feature)}
-						<div class="flex items-center gap-3 bg-fyra-gray-900 px-6 py-3.5 md:px-10">
-							<Icon src={Checkmark} class="h-3 w-3 shrink-0 text-fyra-red-500" aria-hidden="true" />
-							<span class="text-sm text-fyra-gray-400">{feature}</span>
+						<div class="flex items-center gap-3 bg-background px-6 py-3.5 md:px-10">
+							<Check class="h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
+							<span class="text-sm text-muted-foreground">{feature}</span>
 						</div>
 					{/each}
-				</div>
-			</div>
+				</Card.Content>
+			</Card.Root>
 		{/each}
 	</div>
 </section>
