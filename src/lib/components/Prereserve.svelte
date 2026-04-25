@@ -4,6 +4,11 @@
 	import { vpsPlans } from '$lib/data/vpsPlans';
 	import { prereserve } from '$lib/remote/prereserve.remote';
 	import type { PrereserveResult } from '$lib/server/prereserve';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import * as Select from '$lib/components/ui/select';
+	import { Textarea } from '$lib/components/ui/textarea';
 
 	let {
 		selectedPlanName = 'STACK-XXS',
@@ -29,9 +34,6 @@
 	let toast = $state<{ type: 'success' | 'error'; title: string; message: string } | null>(null);
 	let toastTimer: ReturnType<typeof setTimeout> | null = null;
 	let lastHandledResult = $state<PrereserveResult | null>(null);
-
-	let planDropdownOpen = $state(false);
-	let planDropdownEl = $state<HTMLDivElement | null>(null);
 
 	$effect(() => {
 		const result = reservationForm.result;
@@ -66,30 +68,19 @@
 		toast = null;
 	}
 
-	const inputClass =
-		'w-full bg-fyra-gray-800 border border-fyra-gray-700 text-fyra-gray-100 placeholder:text-fyra-gray-600 text-sm px-3 py-2.5 focus:outline-none focus:border-fyra-gray-500 transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed';
-	const labelClass = 'text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400';
-	const issueClass = 'text-xs text-fyra-red-400';
+	const labelClass = 'text-[11px] font-medium uppercase tracking-widest text-muted-foreground';
+	const issueClass = 'text-xs text-destructive';
 </script>
-
-<svelte:window
-	onclick={(e) => {
-		if (planDropdownEl && !planDropdownEl.contains(e.target as Node)) planDropdownOpen = false;
-	}}
-	onkeydown={(e) => {
-		if (e.key === 'Escape') planDropdownOpen = false;
-	}}
-/>
 
 <!-- Toast -->
 {#if toast}
 	<div
 		transition:fly={{ y: 16, duration: 200 }}
-		class="fixed right-6 bottom-6 z-50 flex w-80 items-start gap-3 border border-fyra-gray-700 bg-fyra-gray-900 px-4 py-4 shadow-xl"
+		class="fixed right-6 bottom-6 z-50 flex w-80 items-start gap-3 border border-border bg-background px-4 py-4 shadow-xl"
 	>
 		{#if toast.type === 'success'}
 			<svg
-				class="mt-0.5 h-4 w-4 shrink-0 text-fyra-red-400"
+				class="mt-0.5 h-4 w-4 shrink-0 text-primary"
 				viewBox="0 0 16 16"
 				fill="none"
 				stroke="currentColor"
@@ -102,7 +93,7 @@
 			</svg>
 		{:else}
 			<svg
-				class="mt-0.5 h-4 w-4 shrink-0 text-fyra-red-500"
+				class="mt-0.5 h-4 w-4 shrink-0 text-primary"
 				viewBox="0 0 16 16"
 				fill="none"
 				stroke="currentColor"
@@ -116,13 +107,13 @@
 			</svg>
 		{/if}
 		<div class="min-w-0 flex-1">
-			<p class="text-sm font-medium text-fyra-gray-50">{toast.title}</p>
-			<p class="mt-0.5 text-sm text-fyra-gray-400">{toast.message}</p>
+			<p class="text-sm font-medium text-foreground">{toast.title}</p>
+			<p class="mt-0.5 text-sm text-muted-foreground">{toast.message}</p>
 		</div>
 		<button
 			type="button"
 			onclick={dismissToast}
-			class="shrink-0 text-fyra-gray-600 transition-colors duration-100 hover:text-fyra-gray-300"
+			class="shrink-0 text-muted-foreground/60 transition-colors duration-100 hover:text-muted-foreground/80"
 			aria-label="Dismiss"
 		>
 			<svg
@@ -144,11 +135,11 @@
 	<div>
 		<!-- Form -->
 		<div>
-			<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-				<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
+			<div class="border-b border-border px-6 py-8 md:px-10">
+				<h2 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
 					{serviceType === 'colocation' ? 'Sign up for colocation.' : 'Pre-reserve your VPS.'}
 				</h2>
-				<p class="mt-2 text-sm text-fyra-gray-400">
+				<p class="mt-2 text-sm text-muted-foreground">
 					{serviceType === 'colocation'
 						? "Contact us below and we'll reach out to help assist with getting your server racked today."
 						: "We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch by May 1st, 2026."}
@@ -162,97 +153,40 @@
 					<!-- Plan -->
 					<div class="flex flex-col gap-2">
 						<span class={labelClass}>Plan</span>
-						<div class="relative" bind:this={planDropdownEl}>
-							<button
-								type="button"
-								onclick={() => {
-									if (!submitted) planDropdownOpen = !planDropdownOpen;
-								}}
-								disabled={submitted}
-								class="flex w-full items-center justify-between border border-fyra-gray-700 bg-fyra-gray-800 px-3 py-2.5 text-left text-sm text-fyra-gray-100 transition-colors duration-100 focus:border-fyra-gray-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40 {planDropdownOpen
-									? 'border-fyra-gray-500'
-									: ''}"
-								aria-haspopup="listbox"
-								aria-expanded={planDropdownOpen}
-							>
-								<span>
-									{#if serviceType === 'colocation'}
-										{#each colocationPlans as p (p.name)}
-											{#if p.name === plan}
-												{p.name} — ${p.price}/mo · {p.units}U · {p.power}W · {p.bandwidth}
-											{/if}
-										{/each}
-									{:else}
-										{#each vpsPlans as p (p.name)}
-											{#if p.name === plan}
-												{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB SAS3
-												SSD
-											{/if}
-										{/each}
-									{/if}
-								</span>
-								<svg
-									class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen
-										? 'rotate-180'
-										: ''}"
-									viewBox="0 0 10 10"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="1.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									aria-hidden="true"
-								>
-									<path d="M2 3.5 5 6.5 8 3.5" />
-								</svg>
-							</button>
-
-							{#if planDropdownOpen}
-								<ul
-									role="listbox"
-									class="absolute top-full right-0 left-0 z-20 mt-px max-h-64 overflow-y-auto border border-fyra-gray-700 bg-fyra-gray-800"
-								>
-									{#if serviceType === 'colocation'}
-										{#each colocationPlans as p (p.name)}
-											<li role="option" aria-selected={plan === p.name}>
-												<button
-													type="button"
-													onclick={() => {
-														plan = p.name;
-														planDropdownOpen = false;
-													}}
-													class="w-full px-3 py-2.5 text-left text-sm transition-colors duration-100 {plan ===
-													p.name
-														? 'bg-fyra-gray-700 text-fyra-gray-50'
-														: 'text-fyra-gray-300 hover:bg-fyra-gray-700/60 hover:text-fyra-gray-100'}"
-												>
-													{p.name} — ${p.price}/mo · {p.units}U · {p.power}W · {p.bandwidth}
-												</button>
-											</li>
-										{/each}
-									{:else}
-										{#each vpsPlans as p (p.name)}
-											<li role="option" aria-selected={plan === p.name}>
-												<button
-													type="button"
-													onclick={() => {
-														plan = p.name;
-														planDropdownOpen = false;
-													}}
-													class="w-full px-3 py-2.5 text-left text-sm transition-colors duration-100 {plan ===
-													p.name
-														? 'bg-fyra-gray-700 text-fyra-gray-50'
-														: 'text-fyra-gray-300 hover:bg-fyra-gray-700/60 hover:text-fyra-gray-100'}"
-												>
-													{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB
-													SAS3 SSD
-												</button>
-											</li>
-										{/each}
-									{/if}
-								</ul>
-							{/if}
-						</div>
+						<Select.Root bind:value={plan} disabled={submitted}>
+							<Select.Trigger class="w-full bg-muted text-foreground">
+								{#if serviceType === 'colocation'}
+									{#each colocationPlans as p (p.name)}
+										{#if p.name === plan}
+											{p.name} — ${p.price}/mo · {p.units}U · {p.power}W · {p.bandwidth}
+										{/if}
+									{/each}
+								{:else}
+									{#each vpsPlans as p (p.name)}
+										{#if p.name === plan}
+											{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB SAS3
+											SSD
+										{/if}
+									{/each}
+								{/if}
+							</Select.Trigger>
+							<Select.Content>
+								{#if serviceType === 'colocation'}
+									{#each colocationPlans as p (p.name)}
+										<Select.Item value={p.name}>
+											{p.name} — ${p.price}/mo · {p.units}U · {p.power}W · {p.bandwidth}
+										</Select.Item>
+									{/each}
+								{:else}
+									{#each vpsPlans as p (p.name)}
+										<Select.Item value={p.name}>
+											{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB SAS3
+											SSD
+										</Select.Item>
+									{/each}
+								{/if}
+							</Select.Content>
+						</Select.Root>
 						{#if reservationForm.fields.plan.issues()?.[0]}
 							<p class={issueClass}>{reservationForm.fields.plan.issues()?.[0]?.message}</p>
 						{/if}
@@ -261,10 +195,10 @@
 					<!-- Name + Email -->
 					<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 						<div class="flex flex-col gap-2">
-							<label for="name" class={labelClass}>
-								Full Name<span class="tracking-normal text-fyra-red-500 normal-case">*</span>
-							</label>
-							<input
+							<Label for="name" class={labelClass}>
+								Full Name<span class="tracking-normal text-primary normal-case">*</span>
+							</Label>
+							<Input
 								id="name"
 								name="name"
 								type="text"
@@ -272,17 +206,17 @@
 								required
 								disabled={submitted}
 								placeholder="Reisen Inaba"
-								class={inputClass}
+								class="bg-muted text-foreground placeholder:text-muted-foreground/60"
 							/>
 							{#if reservationForm.fields.name.issues()?.[0]}
 								<p class={issueClass}>{reservationForm.fields.name.issues()?.[0]?.message}</p>
 							{/if}
 						</div>
 						<div class="flex flex-col gap-2">
-							<label for="email" class={labelClass}>
-								Email Address<span class="tracking-normal text-fyra-red-500 normal-case">*</span>
-							</label>
-							<input
+							<Label for="email" class={labelClass}>
+								Email Address<span class="tracking-normal text-primary normal-case">*</span>
+							</Label>
+							<Input
 								id="email"
 								name="email"
 								type="email"
@@ -290,7 +224,7 @@
 								required
 								disabled={submitted}
 								placeholder="reisen@kaguyas.pet"
-								class={inputClass}
+								class="bg-muted text-foreground placeholder:text-muted-foreground/60"
 							/>
 							{#if reservationForm.fields.email.issues()?.[0]}
 								<p class={issueClass}>{reservationForm.fields.email.issues()?.[0]?.message}</p>
@@ -301,24 +235,24 @@
 					<!-- Company + Current Provider -->
 					<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 						<div class="flex flex-col gap-2">
-							<label for="company" class={labelClass}>Company</label>
-							<input
+							<Label for="company" class={labelClass}>Company</Label>
+							<Input
 								id="company"
 								name="company"
 								type="text"
 								bind:value={company}
 								disabled={submitted}
 								placeholder="Gensokyo Inc."
-								class={inputClass}
+								class="bg-muted text-foreground placeholder:text-muted-foreground/60"
 							/>
 						</div>
 						<div class="flex flex-col gap-2">
-							<label for="provider" class={labelClass}
+							<Label for="provider" class={labelClass}
 								>{serviceType === 'colocation'
 									? 'Current Colo Provider'
-									: 'Current Provider'}</label
+									: 'Current Provider'}</Label
 							>
-							<input
+							<Input
 								id="provider"
 								name="currentProvider"
 								type="text"
@@ -327,31 +261,32 @@
 								placeholder={serviceType === 'colocation'
 									? "Cirno's Perfect Colocation Inc."
 									: 'Digital Ocean, Hetzner, OVH...'}
-								class={inputClass}
+								class="bg-muted text-foreground placeholder:text-muted-foreground/60"
 							/>
 						</div>
 					</div>
 
 					<!-- Use Case -->
 					<div class="flex flex-col gap-2">
-						<label for="usecase" class={labelClass}>Use Case</label>
-						<textarea
+						<Label for="usecase" class={labelClass}>Use Case</Label>
+						<Textarea
 							id="usecase"
 							name="useCase"
 							bind:value={useCase}
 							rows="3"
 							disabled={submitted}
 							placeholder="Tell us what you'll be running…"
-							class="{inputClass} resize-none"
-						></textarea>
+							class="resize-none bg-muted text-foreground placeholder:text-muted-foreground/60"
+						/>
 					</div>
 
 					<!-- Submit -->
 					<div>
-						<button
+						<Button
 							type="submit"
 							disabled={submitting || submitted}
-							class="w-fit border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500 disabled:cursor-not-allowed disabled:opacity-50"
+							variant="outline"
+							class="w-fit bg-muted text-foreground hover:border-primary"
 						>
 							{#if submitted}
 								Reservation submitted
@@ -360,7 +295,7 @@
 							{:else}
 								Reserve Your Stack
 							{/if}
-						</button>
+						</Button>
 					</div>
 				</form>
 			</div>

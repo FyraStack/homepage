@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { fade, slide } from 'svelte/transition';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ChevronDown, Close, Menu } from '@steeze-ui/carbon-icons';
+	import { ChevronDown, Menu } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import * as Sheet from '$lib/components/ui/sheet';
 
 	type InternalHref = '/' | '/about' | '/services/vps' | '/services/colocation' | '/docs'; // can we just use sveltekit resolve here
 
 	let isMobileMenuOpen = $state(false);
-	let openDropdown = $state<string | null>(null);
 
 	const servicesItems = [
 		{
@@ -40,12 +40,7 @@
 		}
 	];
 
-	function toggleDropdown(name: string) {
-		openDropdown = openDropdown === name ? null : name;
-	}
-
 	function closeAll() {
-		openDropdown = null;
 		isMobileMenuOpen = false;
 	}
 </script>
@@ -54,142 +49,110 @@
 	onkeydown={(e) => {
 		if (e.key === 'Escape') closeAll();
 	}}
-	onclick={(e) => {
-		if (!(e.target as Element).closest('header')) openDropdown = null;
-	}}
 />
 
-<header class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm">
+<header class="sticky top-0 z-50 bg-background backdrop-blur-sm">
 	<a
 		href={resolve('/services/colocation')}
-		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
+		class="flex items-center justify-center gap-2 bg-primary px-4 py-2.5 text-center text-sm font-medium text-foreground transition-colors hover:bg-primary"
 	>
 		<span class="font-semibold">Colocation is here.</span>
-		<!-- <span class="text-fyra-red-200"
+		<!-- <span class="text-primary-foreground/80"
 			>Launching April 13th, get 1U colocation at just $50/mo promo price! Ship your servers now.</span
 		> -->
-		<span class="text-fyra-red-200"
+		<span class="text-primary-foreground/80"
 			>$10/mo off all plans, 1U from $50/mo. Sign up and ship your servers whenever you're ready.
 			First servers go online April 13th!</span
 		>
-		<span class="text-fyra-red-300">→</span>
+		<span class="text-primary/80">→</span>
 	</a>
 	<div class="mx-auto max-w-6xl">
-		<div
-			class="flex h-12 items-center justify-between gap-4 border-x border-b border-fyra-gray-800 px-4"
-		>
+		<div class="flex h-12 items-center justify-between gap-4 border-x border-b border-border px-4">
 			<!-- Logo -->
 			<a
 				href={resolve('/')}
-				class="flex shrink-0 items-center gap-1.5 rounded-xs px-1 py-1 transition-colors duration-100 hover:bg-fyra-gray-800"
+				class="flex shrink-0 items-center gap-1.5 rounded-xs px-1 py-1 transition-colors duration-100 hover:bg-muted"
 			>
 				<img src="/logo.svg" alt="Fyra Stack" class="h-5 w-5" />
-				<span class="text-base font-semibold tracking-tight text-fyra-gray-50">Stack</span>
+				<span class="text-base font-semibold tracking-tight text-foreground">Stack</span>
 			</a>
 
 			<!-- Center nav -->
 			<nav class="hidden items-center md:flex" aria-label="Main">
 				<!-- Services dropdown -->
-				<div class="relative">
-					<button
-						type="button"
-						onclick={() => toggleDropdown('services')}
-						class="flex items-center gap-1 rounded-xs px-2.5 py-1.5 text-[13px] transition-colors duration-100
-							{openDropdown === 'services'
-							? 'bg-fyra-gray-800 text-fyra-gray-50'
-							: 'text-fyra-gray-200 hover:bg-fyra-gray-800 hover:text-fyra-gray-100'}"
-						aria-expanded={openDropdown === 'services'}
-					>
-						Services
-						<Icon
-							src={ChevronDown}
-							class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown ===
-							'services'
-								? 'rotate-180'
-								: ''}"
-							aria-hidden="true"
-						/>
-					</button>
-
-					{#if openDropdown === 'services'}
-						<div
-							transition:fade={{ duration: 100 }}
-							class="absolute top-full right-0 mt-2.5 w-64 overflow-hidden rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80"
-						>
-							{#each servicesItems as item (item.href)}
-								<a
-									href={resolve(item.href as InternalHref)}
-									onclick={closeAll}
-									class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
-								>
-									<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
-									<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						{#snippet child({ props })}
+							<Button
+								variant="ghost"
+								size="sm"
+								class="h-auto gap-1 px-2.5 py-1.5 text-[13px] text-foreground/80 hover:bg-muted hover:text-foreground"
+								{...props}
+							>
+								Services
+								<ChevronDown
+									class="mt-px h-2.5 w-2.5 shrink-0 text-muted-foreground"
+									aria-hidden="true"
+								/>
+							</Button>
+						{/snippet}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content align="end" class="w-64 border-border bg-background">
+						{#each servicesItems as item (item.href)}
+							<DropdownMenu.Item class="flex-col items-start gap-0.5 px-3.5 py-3 hover:bg-muted">
+								<a href={resolve(item.href as InternalHref)} class="flex flex-col gap-0.5">
+									<span class="text-[13px] font-medium text-foreground">{item.label}</span>
+									<span class="text-[12px] text-muted-foreground/80">{item.description}</span>
 								</a>
-							{/each}
-						</div>
-					{/if}
-				</div>
+							</DropdownMenu.Item>
+						{/each}
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
 
 				<!-- Static links -->
 				<!-- {#each ["Docs", "Pricing"] as label}
 					<a
 						href="{label === 'Docs' ? '/docs' : '/pricing'}"
-						class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-fyra-gray-200 hover:text-fyra-gray-100 hover:bg-fyra-gray-800 transition-colors duration-100"
+						class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-foreground/80 hover:text-foreground hover:bg-muted transition-colors duration-100"
 					>{label}</a>
 				{/each} -->
 
 				<!-- About dropdown -->
-				<div class="relative">
-					<button
-						type="button"
-						onclick={() => toggleDropdown('about')}
-						class="flex items-center gap-1 rounded-xs px-2.5 py-1.5 text-[13px] transition-colors duration-100
-							{openDropdown === 'about'
-							? 'bg-fyra-gray-800 text-fyra-gray-50'
-							: 'text-fyra-gray-200 hover:bg-fyra-gray-800 hover:text-fyra-gray-100'}"
-						aria-expanded={openDropdown === 'about'}
-					>
-						About
-						<Icon
-							src={ChevronDown}
-							class="mt-px h-2.5 w-2.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {openDropdown ===
-							'about'
-								? 'rotate-180'
-								: ''}"
-							aria-hidden="true"
-						/>
-					</button>
-
-					{#if openDropdown === 'about'}
-						<div
-							transition:fade={{ duration: 100 }}
-							class="absolute top-full right-0 mt-2.5 w-56 overflow-hidden rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80"
-						>
-							{#each aboutItems as item (item.href)}
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						{#snippet child({ props })}
+							<Button
+								variant="ghost"
+								size="sm"
+								class="h-auto gap-1 px-2.5 py-1.5 text-[13px] text-foreground/80 hover:bg-muted hover:text-foreground"
+								{...props}
+							>
+								About
+								<ChevronDown
+									class="mt-px h-2.5 w-2.5 shrink-0 text-muted-foreground"
+									aria-hidden="true"
+								/>
+							</Button>
+						{/snippet}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content align="end" class="w-56 border-border bg-background">
+						{#each aboutItems as item (item.href)}
+							<DropdownMenu.Item class="flex-col items-start gap-0.5 px-3.5 py-3 hover:bg-muted">
 								{#if item.href.startsWith('/')}
-									<a
-										href={resolve(item.href as InternalHref)}
-										onclick={closeAll}
-										class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
-									>
-										<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
-										<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
+									<a href={resolve(item.href as InternalHref)} class="flex flex-col gap-0.5">
+										<span class="text-[13px] font-medium text-foreground">{item.label}</span>
+										<span class="text-[12px] text-muted-foreground/80">{item.description}</span>
 									</a>
 								{:else}
-									<a
-										href={item.href}
-										onclick={closeAll}
-										rel="external"
-										class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
-									>
-										<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
-										<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
+									<a href={item.href} rel="external" class="flex flex-col gap-0.5">
+										<span class="text-[13px] font-medium text-foreground">{item.label}</span>
+										<span class="text-[12px] text-muted-foreground/80">{item.description}</span>
 									</a>
 								{/if}
-							{/each}
-						</div>
-					{/if}
-				</div>
+							</DropdownMenu.Item>
+						{/each}
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
 			</nav>
 
 			<!-- Right side -->
@@ -197,89 +160,63 @@
 				<!-- CTA -->
 
 				<!-- Mobile menu toggle -->
-				<button
-					type="button"
-					onclick={() => {
-						isMobileMenuOpen = !isMobileMenuOpen;
-						openDropdown = null;
-					}}
-					class="flex items-center justify-center rounded-xs p-1.5 text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 md:hidden"
-					aria-label="Open menu"
-				>
-					{#if isMobileMenuOpen}
-						<Icon src={Close} class="h-4 w-4" aria-hidden="true" />
-					{:else}
-						<Icon src={Menu} class="h-4 w-4" aria-hidden="true" />
-					{/if}
-				</button>
+				<Sheet.Root bind:open={isMobileMenuOpen}>
+					<Sheet.Trigger>
+						{#snippet child({ props })}
+							<Button
+								variant="ghost"
+								size="icon-sm"
+								class="text-foreground/80 hover:bg-muted hover:text-foreground md:hidden"
+								aria-label="Open menu"
+								{...props}
+							>
+								<Menu class="h-4 w-4" aria-hidden="true" />
+							</Button>
+						{/snippet}
+					</Sheet.Trigger>
+					<Sheet.Content
+						side="top"
+						class="top-[42px] border-border bg-background px-4 py-3 md:hidden"
+						showCloseButton={false}
+					>
+						<div class="flex flex-col gap-0.5">
+							<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-muted-foreground uppercase">
+								Services
+							</p>
+							{#each servicesItems as item (item.href)}
+								<a
+									href={resolve(item.href as InternalHref)}
+									onclick={closeAll}
+									class="rounded-xs px-3 py-2 text-sm text-foreground/80 transition-colors duration-100 hover:bg-muted hover:text-foreground"
+									>{item.label}</a
+								>
+							{/each}
+							<div class="my-1.5 border-t border-border"></div>
+							<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-muted-foreground uppercase">
+								About
+							</p>
+							{#each aboutItems as item (item.href)}
+								{#if item.href.startsWith('/')}
+									<a
+										href={resolve(item.href as InternalHref)}
+										onclick={closeAll}
+										class="rounded-xs px-3 py-2 text-sm text-foreground/80 transition-colors duration-100 hover:bg-muted hover:text-foreground"
+										>{item.label}</a
+									>
+								{:else}
+									<a
+										href={item.href}
+										onclick={closeAll}
+										rel="external"
+										class="rounded-xs px-3 py-2 text-sm text-foreground/80 transition-colors duration-100 hover:bg-muted hover:text-foreground"
+										>{item.label}</a
+									>
+								{/if}
+							{/each}
+						</div>
+					</Sheet.Content>
+				</Sheet.Root>
 			</div>
 		</div>
 	</div>
 </header>
-
-<!-- Mobile drawer -->
-{#if isMobileMenuOpen}
-	<div
-		transition:fade={{ duration: 120 }}
-		class="fixed inset-0 top-11 z-40 bg-fyra-gray-950/50 md:hidden"
-		role="button"
-		tabindex="0"
-		onclick={() => {
-			isMobileMenuOpen = false;
-		}}
-		onkeydown={(e) => {
-			if (e.key === 'Escape') isMobileMenuOpen = false;
-		}}
-	></div>
-
-	<div
-		transition:slide={{ duration: 300, axis: 'y' }}
-		class="fixed inset-x-0 top-11 z-50 border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
-	>
-		<div class="flex flex-col gap-0.5">
-			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">Services</p>
-			{#each servicesItems as item (item.href)}
-				<a
-					href={resolve(item.href as InternalHref)}
-					onclick={closeAll}
-					class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
-					>{item.label}</a
-				>
-			{/each}
-
-			<!-- <div class="my-1.5 border-t border-fyra-gray-800"></div> -->
-
-			<!-- {#each ["Docs", "Pricing"] as label}
-				<a href={label === 'Pricing' ? '/pricing' : '/docs'} onclick={closeAll} class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 transition-colors duration-100">{label}</a>
-			{/each} -->
-
-			<div class="my-1.5 border-t border-fyra-gray-800"></div>
-
-			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">About</p>
-			{#each aboutItems as item (item.href)}
-				{#if item.href.startsWith('/')}
-					<a
-						href={resolve(item.href as InternalHref)}
-						onclick={closeAll}
-						class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
-						>{item.label}</a
-					>
-				{:else}
-					<a
-						href={item.href}
-						onclick={closeAll}
-						rel="external"
-						class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
-						>{item.label}</a
-					>
-				{/if}
-			{/each}
-		</div>
-	</div>
-
-	<style>
-		html {
-			overflow: hidden;
-		}
-	</style>
-{/if}
