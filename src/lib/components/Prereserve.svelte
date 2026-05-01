@@ -151,7 +151,7 @@
 				<p class="mt-2 text-sm text-fyra-gray-400">
 					{serviceType === 'colocation'
 						? "Contact us below and we'll reach out to help assist with getting your server racked today."
-						: "We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch by May 1st, 2026."}
+						: "We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch the first week of May, 2026."}
 				</p>
 			</div>
 
