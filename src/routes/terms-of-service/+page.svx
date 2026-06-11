@@ -16,15 +16,15 @@
 <div class="mx-auto max-w-3xl px-6 py-24 lg:px-8">
 <div class="prose prose-invert max-w-none
 	prose-headings:font-semibold prose-headings:tracking-tight
-	prose-h1:mb-2 prose-h1:text-5xl prose-h1:text-fyra-gray-50
-	prose-h2:mb-3 prose-h2:mt-12 prose-h2:text-2xl prose-h2:text-fyra-gray-50
-	prose-h3:mb-1 prose-h3:mt-6 prose-h3:text-base prose-h3:font-semibold prose-h3:text-fyra-gray-200
-	prose-h4:mb-1 prose-h4:mt-4 prose-h4:text-base prose-h4:font-semibold prose-h4:text-fyra-gray-300
-	prose-p:text-base prose-p:leading-relaxed prose-p:text-fyra-gray-400
-	prose-li:text-base prose-li:text-fyra-gray-400
-	prose-a:font-semibold prose-a:text-fyra-gray-200 prose-a:no-underline hover:prose-a:text-fyra-red-400
-	prose-hr:my-10 prose-hr:border-fyra-gray-800
-	prose-strong:text-fyra-gray-200">
+	prose-h1:mb-2 prose-h1:text-5xl prose-h1:text-foreground
+	prose-h2:mb-3 prose-h2:mt-12 prose-h2:text-2xl prose-h2:text-foreground
+	prose-h3:mb-1 prose-h3:mt-6 prose-h3:text-base prose-h3:font-semibold prose-h3:text-foreground/80
+	prose-h4:mb-1 prose-h4:mt-4 prose-h4:text-base prose-h4:font-semibold prose-h4:text-muted-foreground/80
+	prose-p:text-base prose-p:leading-relaxed prose-p:text-muted-foreground
+	prose-li:text-base prose-li:text-muted-foreground
+	prose-a:font-semibold prose-a:text-foreground/80 prose-a:no-underline hover:prose-a:text-primary
+	prose-hr:my-10 prose-hr:border-border
+	prose-strong:text-foreground/80">
 
 # Terms of Service.
 

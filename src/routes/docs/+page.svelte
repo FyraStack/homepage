@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ArrowDown } from '@steeze-ui/carbon-icons';
+	import { ArrowDown } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 
 	const steps = [
@@ -142,37 +141,35 @@
 </svelte:head>
 
 <!-- ─── Hero ──────────────────────────────────────────────────────── -->
-<div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+<div class="relative isolate overflow-hidden border-b border-border px-6 pt-14 lg:px-8">
 	<div
 		aria-hidden="true"
 		class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
+			class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%-30rem)] sm:w-288.75"
 		></div>
 	</div>
 
 	<div class="mx-auto max-w-4xl py-24 text-center sm:py-32">
-		<h1
-			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
-		>
+		<h1 class="mb-2 text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-6xl">
 			Documentation.
 		</h1>
-		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
+		<p class="mx-auto max-w-lg text-base text-muted-foreground sm:text-lg/7">
 			Guides, references, and answers for getting your Stack VPS or colocation slot up and running.
 		</p>
 		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 			<a
 				href="#quick-start"
-				class="inline-flex items-center gap-2 border border-fyra-red-500 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
+				class="inline-flex items-center gap-2 border border-primary bg-muted px-5 py-2.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary"
 			>
 				Colocation quick start
-				<Icon src={ArrowDown} class="h-3.5 w-3.5" aria-hidden="true" />
+				<ArrowDown class="h-3.5 w-3.5" aria-hidden="true" />
 			</a>
 			<a
 				href="#guides"
-				class="inline-flex items-center gap-2 border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
+				class="inline-flex items-center gap-2 border border-border bg-muted px-5 py-2.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary"
 			>
 				Browse guides
 			</a>
@@ -185,63 +182,59 @@
 	>
 		<div
 			style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
+			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-primary/20 to-primary/60 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
 		></div>
 	</div>
 
 	<!-- <div
-		class="grid grid-cols-2 divide-x divide-fyra-gray-800 border-t border-fyra-gray-800 md:grid-cols-4"
+		class="grid grid-cols-2 divide-x divide-border border-t border-border md:grid-cols-4"
 	>
 		<div class="flex flex-col gap-0.5 px-6 py-6 md:px-10">
-			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">~5 min</span>
-			<span class="text-[12px] text-fyra-gray-500">Time to first login</span>
+			<span class="text-base font-semibold tracking-tight text-foreground">~5 min</span>
+			<span class="text-[12px] text-foreground0">Time to first login</span>
 		</div>
 		<div class="flex flex-col gap-0.5 px-6 py-6 md:px-10">
-			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">Root access</span>
-			<span class="text-[12px] text-fyra-gray-500">Full control, no wrappers</span>
+			<span class="text-base font-semibold tracking-tight text-foreground">Root access</span>
+			<span class="text-[12px] text-foreground0">Full control, no wrappers</span>
 		</div>
 		<div class="flex flex-col gap-0.5 px-6 py-6 md:px-10">
-			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">Any distro</span>
-			<span class="text-[12px] text-fyra-gray-500">Bring your own ISO</span>
+			<span class="text-base font-semibold tracking-tight text-foreground">Any distro</span>
+			<span class="text-[12px] text-foreground0">Bring your own ISO</span>
 		</div>
 		<div class="flex flex-col gap-0.5 px-6 py-6 md:px-10">
-			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">Out-of-band</span>
-			<span class="text-[12px] text-fyra-gray-500">Serial console included</span>
+			<span class="text-base font-semibold tracking-tight text-foreground">Out-of-band</span>
+			<span class="text-[12px] text-foreground0">Serial console included</span>
 		</div>
 	</div> -->
 </div>
 
 <!-- ─── Quick start ──────────────────────────────────────────────────── -->
-<section id="quick-start" class="border-b border-fyra-gray-800">
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Colocation quick start.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+<section id="quick-start" class="border-b border-border">
+	<div class="border-b border-border px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-foreground">Colocation quick start.</h2>
+		<p class="mt-2 text-sm text-muted-foreground">
 			From shipping a server to a running server in just four steps.
 		</p>
 	</div>
 
-	<div
-		class="grid grid-cols-1 divide-y divide-fyra-gray-800 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
-	>
+	<div class="grid grid-cols-1 divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
 		{#each steps as step, i (step.n)}
-			<div class="px-6 py-8 md:px-10 {i >= 2 ? 'lg:border-t lg:border-fyra-gray-800' : ''}">
+			<div class="px-6 py-8 md:px-10 {i >= 2 ? 'lg:border-t lg:border-border' : ''}">
 				<div class="flex items-start gap-4">
-					<span class="mt-0.5 shrink-0 font-mono text-xs font-medium text-fyra-red-500"
-						>{step.n}</span
-					>
+					<span class="mt-0.5 shrink-0 font-mono text-xs font-medium text-primary">{step.n}</span>
 					<div class="flex-1">
-						<h3 class="text-base font-semibold text-fyra-gray-50">{step.title}</h3>
-						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">{step.body}</p>
+						<h3 class="text-base font-semibold text-foreground">{step.title}</h3>
+						<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
 						{#if step.code}
 							<pre
-								class="mt-4 overflow-x-auto border border-fyra-gray-700 bg-fyra-gray-950 px-4 py-3 font-mono text-sm text-fyra-gray-200"><span
-									class="text-fyra-gray-600 select-none"
+								class="mt-4 overflow-x-auto border border-border bg-card px-4 py-3 font-mono text-sm text-foreground/80"><span
+									class="text-muted-foreground/60 select-none"
 									>$ </span>{step.code}</pre>
 						{/if}
 						{#if step.cta}
 							<a
 								href={resolve(step.cta.href)}
-								class="mt-4 inline-block text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
+								class="mt-4 inline-block text-sm font-medium text-primary transition-colors duration-100 hover:text-primary/80"
 								>{step.cta.label}</a
 							>
 						{/if}
@@ -254,33 +247,33 @@
 
 <!-- ─── Guides ───────────────────────────────────────────────────────── -->
 <section id="guides" class="">
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+	<div class="border-b border-border px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-foreground">Guides.</h2>
+		<p class="mt-2 text-sm text-muted-foreground">
 			In-depth documentation by topic. More being written as we launch.
 		</p>
 	</div>
 
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
+	<div class="grid grid-cols-1 gap-px bg-muted sm:grid-cols-2 lg:grid-cols-4">
 		{#each guides as guide (guide.category)}
-			<div class="bg-fyra-gray-900 p-6">
-				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
+			<div class="bg-background p-6">
+				<p class="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">
 					{guide.category}
 				</p>
-				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
+				<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
 				<ul class="mt-5 flex flex-col gap-2">
 					{#each guide.articles as article (article.label)}
 						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span class="text-sm text-muted-foreground">{article.label}</span>
 								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
+									class="shrink-0 text-[10px] font-medium tracking-widest text-muted-foreground uppercase"
 									>Soon</span
 								>
 							{:else}
 								<a
 									href={article.href ? resolve(article.href) : '#'}
-									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
+									class="text-sm text-muted-foreground/80 transition-colors duration-100 hover:text-foreground"
 									>{article.label}</a
 								>
 							{/if}
@@ -294,18 +287,18 @@
 
 <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
 <!-- <section>
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Common questions.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+	<div class="border-b border-border px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-foreground">Common questions.</h2>
+		<p class="mt-2 text-sm text-muted-foreground">
 			Things people ask before signing up. Honest answers only.
 		</p>
 	</div>
 
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 lg:grid-cols-2">
+	<div class="grid grid-cols-1 gap-px bg-muted lg:grid-cols-2">
 		{#each faqs as faq}
-			<div class="bg-fyra-gray-900 px-6 py-9 md:px-10 md:py-10">
-				<p class="text-sm font-semibold text-fyra-gray-100">{faq.q}</p>
-				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{faq.a}</p>
+			<div class="bg-background px-6 py-9 md:px-10 md:py-10">
+				<p class="text-sm font-semibold text-foreground">{faq.q}</p>
+				<p class="mt-2 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
 			</div>
 		{/each}
 	</div>
