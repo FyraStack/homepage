@@ -61,9 +61,9 @@ export const team: (TeamMember | null)[] = [
 		avatar: 'assets/people/willow.webp'
 	},
 	{
-		name: '',
+		name: 'Morgan Winter',
 		nickname: null,
-		role: '',
-		avatar: ''
+		role: 'Data Center Engineer',
+		avatar: '/assets/people/morgan.webp'
 	}
 ];
