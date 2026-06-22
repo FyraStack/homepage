@@ -1,0 +1,215 @@
+<svelte:head>
+<title>Colocation Networking Configuration | Fyra Stack Docs</title>
+<meta name="description" content="Connect to your server's IPMI, iDRAC, or iLO over our WireGuard VPN. Power cycle, remote console, and out-of-band management even when the OS is down." />
+<link rel="canonical" href="https://fyrastack.com/docs/colocation/ipmi" />
+<meta property="og:title" content="Colocation Networking Configuration | Fyra Stack Docs" />
+<meta property="og:description" content="Connect to your server's IPMI over our WireGuard VPN. Power cycle, remote console, out-of-band management." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/colocation/ipmi" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Colocation Networking Configuration | Fyra Stack Docs" />
+<meta name="twitter:description" content="Connect to your server's IPMI over our WireGuard VPN. Power cycle, remote console, out-of-band management." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# Colocation Networking Configuration
+
+If you need to configure networking for your colocated server, this is where you can find that information.
+
+## Quick tl;dr
+
+We don't expose your public IPv4 or IPv6 address directly to your system. You'll need to statically assign the transit IP addresses for your server, then use your routed public addresses as the preferred source addresses. When your server is racked and ready to use, you'll receive an email with your public IP addresses, IPv6 allocation, and colocation ID allocation. **We do not support DHCP for colocated server IP assignment.** Your static IP configuration for your server should look something like this, where `$ID` is your colocation ID/port, `$PUBLIC_IP` is your routed public IPv4 address, `$PUBLIC_IPV6` is your assigned public IPv6 address, and `$IPV6_DELEGATED_PREFIX` is your delegated IPv6 prefix:
+
+```
+VLAN:                  30$ID
+IPv4 transit address:  10.30.$ID.4/24
+IPv4 transit subnet:   10.30.$ID.0/24
+IPv4 transit gateway:  10.30.$ID.254
+Routed public IPv4:    $PUBLIC_IP
+IPv6 transit address:  2602:f41f:10:11$ID::4
+IPv6 transit subnet:   2602:f41f:10:11$ID::/64
+IPv6 link-local gw:    fe80::$VLAN:ffff
+Public IPv6 address:   $PUBLIC_IPV6/128
+Delegated IPv6 prefix: $IPV6_DELEGATED_PREFIX
+```
+
+See [IPMI](/docs/colocation/ipmi) for more information about IPMI access. Our networking configuration for IPMI is below.
+
+See below for a more detailed description of the setup process according to your networking setup.
+
+## Debian (/etc/network/interfaces)
+Example configuration for Debian systems using `/etc/network/interfaces` for networking configuration. This assumes an interface name of `eno3`.
+
+```sh
+auto lo
+iface lo inet loopback
+    up ip addr add $PUBLIC_IP/32 dev lo || true
+    down ip addr del $PUBLIC_IP/32 dev lo || true
+    up ip -6 addr add $PUBLIC_IPV6/128 dev lo || true
+    down ip -6 addr del $PUBLIC_IPV6/128 dev lo || true
+
+auto eno3
+iface eno3 inet static
+    address 10.30.$ID.4/24
+    gateway 10.30.$ID.254
+    post-up ip route replace default via 10.30.$ID.254 dev eno3 src $PUBLIC_IP
+    post-up sysctl -w net.ipv4.conf.all.rp_filter=0
+    post-up sysctl -w net.ipv4.conf.eno3.rp_filter=0
+    post-up sysctl -w net.ipv4.conf.lo.rp_filter=0
+
+iface eno3 inet6 static
+    address 2602:f41f:10:11$ID::4/64
+    post-up ip -6 route replace default via fe80::$VLAN:ffff dev eno3 src $PUBLIC_IPV6
+    pre-down ip -6 route del default via fe80::$VLAN:ffff dev eno3 || true
+```
+
+Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**.
+
+## systemd-networkd
+Example configuration for systems using `systemd-networkd`. This assumes a network interface name of `eno3`.
+
+Create a file at `/etc/systemd/network/10-eno3.network` (change the interface name accordingly). The following are example contents:
+
+```sh
+[Match]
+Name=eno3
+
+[Network]
+Address=10.30.$ID.4/24
+Address=2602:f41f:10:11$ID::4/64
+IPv6AcceptRA=no
+
+[Route]
+Gateway=10.30.$ID.254
+PreferredSource=$PUBLIC_IP
+
+[Route]
+Gateway=fe80::$VLAN:ffff
+GatewayOnLink=yes
+PreferredSource=$PUBLIC_IPV6
+```
+
+Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**.
+
+Configure your public IP addresses on interface `lo` by creating `/etc/systemd/network/10-lo.network`:
+
+```sh
+[Match]
+Name=lo
+
+[Network]
+Address=$PUBLIC_IP/32
+Address=$PUBLIC_IPV6/128
+```
+
+## Netplan
+For Ubuntu/Debian systems using Netplan with `networkd`, create or edit the file at `/etc/netplan/00-installer-config.yaml`. This example assumes your network interface is named `eno3`.
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno3:
+      addresses:
+        - 10.30.$ID.4/24
+        - 2602:f41f:10:11$ID::4/64
+      accept-ra: false
+      routes:
+        - to: default
+          via: 10.30.$ID.254
+          from: $PUBLIC_IP
+        - to: default
+          via: fe80::$VLAN:ffff
+          from: $PUBLIC_IPV6
+          on-link: true
+```
+
+Not all versions of Netplan support loopback address management, so use `systemd-networkd` if you're not sure what your version supports. Create a file at `/etc/systemd/network/10-lo.network`:
+
+```sh
+[Match]
+Name=lo
+
+[Network]
+Address=$PUBLIC_IP/32
+Address=$PUBLIC_IPV6/128
+```
+
+If you know that your version of Netplan supports loopback management, you can place your public IP addresses directly on your interface in `/etc/netplan/00-installer-config.yaml`:
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno3:
+      addresses:
+        - 10.30.$ID.4/24
+        - $PUBLIC_IP/32
+        - 2602:f41f:10:11$ID::4/64
+        - $PUBLIC_IPV6/128
+      accept-ra: false
+      routes:
+        - to: default
+          via: 10.30.$ID.254
+          from: $PUBLIC_IP
+        - to: default
+          via: fe80::$VLAN:ffff
+          from: $PUBLIC_IPV6
+          on-link: true
+```
+
+## NetworkManager
+If your system is using NetworkManager, follow these instructions:
+
+First, find your connection name:
+```sh
+nmcli connection show
+```
+
+Next, modify that connection:
+```sh
+nmcli connection modify "<connection-name>" \
+  ipv4.method manual \
+  ipv4.ignore-auto-routes yes \
+  ipv4.addresses 10.30.$ID.4/24 \
+  +ipv4.addresses $PUBLIC_IP/32 \
+  +ipv4.routes "0.0.0.0/0 10.30.$ID.254 100 src=$PUBLIC_IP" \
+  ipv6.method manual \
+  ipv6.ignore-auto-routes yes \
+  ipv6.addresses 2602:f41f:10:11$ID::4/64 \
+  +ipv6.addresses $PUBLIC_IPV6/128 \
+  +ipv6.routes "::/0 fe80::$VLAN:ffff 100 src=$PUBLIC_IPV6"
+```
+
+If NetworkManager rejects the `src=` route attribute, use a dispatcher script instead. Create `/etc/NetworkManager/dispatcher.d/90-colo-public-source` (assuming your interface is named `eno3`):
+```sh
+#!/bin/sh
+
+IFACE="$1"
+ACTION="$2"
+
+[ "$IFACE" = "eno3" ] || exit 0
+[ "$ACTION" = "up" ] || exit 0
+
+ip addr replace 10.30.$ID.4/24 dev eno3
+ip addr add $PUBLIC_IP/32 dev lo 2>/dev/null || true
+ip route replace default via 10.30.$ID.254 dev eno3 src $PUBLIC_IP
+ip -6 addr replace 2602:f41f:10:11$ID::4/64 dev eno3
+ip -6 addr add $PUBLIC_IPV6/128 dev lo 2>/dev/null || true
+ip -6 route replace default via fe80::$VLAN:ffff dev eno3 src $PUBLIC_IPV6
+sysctl -w net.ipv4.conf.all.rp_filter=0 >/dev/null
+sysctl -w net.ipv4.conf.eno3.rp_filter=0 >/dev/null
+sysctl -w net.ipv4.conf.lo.rp_filter=0 >/dev/null
+```
+Make that file executable:
+```sh
+chmod 0755 /etc/NetworkManager/dispatcher.d/90-colo-public-source
+```
+Then reconnect:
+```sh
+nmcli connection down "<connection-name>"
+nmcli connection up "<connection-name>"
+```

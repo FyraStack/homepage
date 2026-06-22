@@ -21,7 +21,7 @@ IPMI, also known as iDRAC on Dell hardware, iLO on HP, and IPMI on Supermicro, g
 
 ## 1. Your IPMI Address.
 
-When we rack your server, we'll assign a dedicated IP address to your IPMI interface and include it in your welcome email. IPMI addresses are on our management network and are **only accessible via our IPMI VPN**, they are not publicly routed.
+When we rack your server, we'll assign an IP address to your IPMI interface and include it in your welcome email. IPMI addresses are on our management network and are **only accessible via our IPMI VPN**, they are not publicly routed.
 
 ---
 
