@@ -14,7 +14,7 @@
 			n: '02',
 			title: 'Ship your servers.',
 			body: 'Pack up your server (or buy one on eBay) and ship it to our office, our team will then rack and stack it in our Chicago Data Center.',
-			cta: { label: 'See the docs →', href: '/docs/shipping-hardware'}
+			cta: { label: 'See the docs →', href: '/docs/shipping-hardware' }
 		},
 		{
 			n: '03',
@@ -42,7 +42,8 @@
 				},
 				{ label: 'Accessing IPMI remotely', soon: false, href: '/docs/colocation/ipmi' },
 				{ label: 'Requesting remote hands', soon: false, href: '/docs/colocation/remote-hands' },
-				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' }
+				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' },
+				{ label: 'Colocation Networking', soon: false, href: '/docs/colocation/networking' }
 			]
 		},
 		{
