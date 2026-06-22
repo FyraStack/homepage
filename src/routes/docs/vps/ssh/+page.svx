@@ -1,14 +1,14 @@
 <svelte:head>
-<title>Connecting to your VPS over SSH | Fyra Stack Docs</title>
+<title>Connecting via SSH | Fyra Stack Docs</title>
 <meta name="description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
 <link rel="canonical" href="https://fyrastack.com/docs/vps/ssh" />
-<meta property="og:title" content="Connecting to your VPS over SSH | Fyra Stack Docs" />
+<meta property="og:title" content="Connecting via SSH | Fyra Stack Docs" />
 <meta property="og:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
 <meta property="og:image" content="https://fyrastack.com/logo.png" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://fyrastack.com/docs/vps/ssh" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Connecting to your VPS over SSH | Fyra Stack Docs" />
+<meta name="twitter:title" content="Connecting via SSH | Fyra Stack Docs" />
 <meta name="twitter:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>

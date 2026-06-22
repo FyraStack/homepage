@@ -1,11 +1,11 @@
 <svelte:head>
-<title>VPS Hardening | Fyra Stack Docs</title>
+<title>Initial server hardening | Fyra Stack Docs</title>
 <meta
 	name="description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
 />
 <link rel="canonical" href="https://fyrastack.com/docs/vps/hardening" />
-<meta property="og:title" content="VPS Hardening | Fyra Stack Docs" />
+<meta property="og:title" content="Initial server hardening | Fyra Stack Docs" />
 <meta
 	property="og:description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://fyrastack.com/docs/vps/hardening" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="VPS Hardening | Fyra Stack Docs" />
+<meta name="twitter:title" content="Initial server hardening | Fyra Stack Docs" />
 <meta
 	name="twitter:description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
