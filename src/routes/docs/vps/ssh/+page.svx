@@ -86,3 +86,101 @@ ssh root@your_vps_ip -i $env:USERPROFILE\.ssh\id_ed25519
 2. Open PuTTY and enter the IP address of your VPS in the "Host Name (or IP address)" field.
 3. In the "Connection" category, expand "SSH" and click on "Auth". Click "Browse" and select your private key file (the one without the `.pub` extension).
 4. Click "Open" to start the SSH session.
+
+## Making login easier
+
+You can make logging in easier by adding your key to an SSH agent, configuring an SSH host shortcut, or both.
+
+### Add your key to an SSH agent
+
+An SSH agent keeps your private key unlocked for your current login session, so you do not need to type your key passphrase every time you connect.
+
+#### On Linux or macOS
+
+Start the agent and add your private key:
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+After this, you can connect without passing `-i` each time:
+
+```bash
+ssh root@your_vps_ip
+```
+
+On macOS, you can also store the key passphrase in your keychain:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+#### On Windows
+
+Windows includes an OpenSSH Authentication Agent service. Open PowerShell as Administrator and run:
+
+```powershell
+Set-Service ssh-agent -StartupType Automatic
+Start-Service ssh-agent
+```
+
+Then add your private key:
+
+```powershell
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
+```
+
+After this, you can connect without passing `-i` each time:
+
+```powershell
+ssh root@your_vps_ip
+```
+
+### Create an SSH config shortcut
+
+You can also create a shortcut in your SSH config file so you only need to type a short command like `ssh fyra-vps`.
+
+#### On Linux or macOS
+
+Create or edit `~/.ssh/config` and add:
+
+```sshconfig
+Host fyra-vps
+  HostName your_vps_ip
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+```
+
+Make sure the config file has the right permissions:
+
+```bash
+chmod 600 ~/.ssh/config
+```
+
+Then connect with:
+
+```bash
+ssh fyra-vps
+```
+
+#### On Windows
+
+Create or edit `$env:USERPROFILE\.ssh\config` and add:
+
+```sshconfig
+Host fyra-vps
+  HostName your_vps_ip
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+```
+
+Then connect with:
+
+```powershell
+ssh fyra-vps
+```
+
+Replace `fyra-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.

@@ -12,3 +12,68 @@
 <meta name="twitter:description" content="Learn how to add your own user to your VPS for improved security and access control." />
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
+
+# Adding your own User
+
+Use a personal admin user for day-to-day access instead of logging in as `root`. This gives you a safer default workflow while still allowing administrative commands through `sudo`.
+
+Replace `stackuser` in the examples below with your preferred username.
+
+## 1. Create the user
+
+### Fedora
+
+```bash
+sudo adduser stackuser
+sudo passwd stackuser
+sudo usermod -aG wheel stackuser
+```
+
+### Debian / Ubuntu
+
+```bash
+sudo adduser stackuser
+sudo usermod -aG sudo stackuser
+```
+
+## 2. Add your SSH key
+
+If your root account already has the correct public key in `authorized_keys`, copy it to the new user:
+
+```bash
+sudo mkdir -p /home/stackuser/.ssh
+sudo cp /root/.ssh/authorized_keys /home/stackuser/.ssh/authorized_keys
+sudo chown -R stackuser:stackuser /home/stackuser/.ssh
+sudo chmod 700 /home/stackuser/.ssh
+sudo chmod 600 /home/stackuser/.ssh/authorized_keys
+```
+
+If you want to add a different key, create the file and paste your public key instead:
+
+```bash
+sudo mkdir -p /home/stackuser/.ssh
+sudo nano /home/stackuser/.ssh/authorized_keys
+sudo chown -R stackuser:stackuser /home/stackuser/.ssh
+sudo chmod 700 /home/stackuser/.ssh
+sudo chmod 600 /home/stackuser/.ssh/authorized_keys
+```
+
+## 3. Test the new login
+
+Keep your current session open, then open a new terminal and confirm the new user can log in:
+
+```bash
+ssh stackuser@your_server_ip
+```
+
+Once connected as the new user, confirm `sudo` works:
+
+```bash
+sudo whoami
+```
+
+The command should print `root`.
+
+## 4. Next steps
+
+After you have confirmed the new user can log in and run `sudo`, continue with [VPS Hardening](/docs/vps/hardening) to lock down SSH, configure a firewall, and set up fail2ban.
