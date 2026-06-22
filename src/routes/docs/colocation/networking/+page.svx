@@ -38,6 +38,12 @@ See [IPMI](/docs/colocation/ipmi) for more information about IPMI access. Our ne
 
 See below for a more detailed description of the setup process according to your networking setup.
 
+## Firewall Configuration
+
+Fyra Stack colocation does NOT run your traffic through a NAT. That means **you are responsible for configuring your firewall to protect your server**. We recommend using `ufw` or `iptables` to configure your firewall. We also recommend changing your SSH port as it will be exposed to the public internet, making it susceptible to brute-force attacks. Refer to your distribution's documentation, or [see our documentation for VPS hardening](https://fyrastack.com/docs/vps/hardening). If you are using a firewall, make sure to allow traffic to your public IP addresses and transit IP addresses.
+
+Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**. We recommend [Cloudflare DNS](https://1.1.1.1), [Quad9](https://quad9.net/), or self-hosting Unbound DNS, depending on how concerned you are about privacy.
+
 ## Debian (/etc/network/interfaces)
 Example configuration for Debian systems using `/etc/network/interfaces` for networking configuration. This assumes an interface name of `eno3`.
 
@@ -63,8 +69,6 @@ iface eno3 inet6 static
     post-up ip -6 route replace default via fe80::$VLAN:ffff dev eno3 src $PUBLIC_IPV6
     pre-down ip -6 route del default via fe80::$VLAN:ffff dev eno3 || true
 ```
-
-Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**.
 
 ## systemd-networkd
 Example configuration for systems using `systemd-networkd`. This assumes a network interface name of `eno3`.
