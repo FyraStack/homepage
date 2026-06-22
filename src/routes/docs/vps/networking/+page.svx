@@ -1,0 +1,14 @@
+<svelte:head>
+<title>VPS Networking | Fyra Stack Docs</title>
+<meta name="description" content="Learn about VPS networking configurations and best practices for optimal performance and security." />
+<link rel="canonical" href="https://fyrastack.com/docs/vps/networking" />
+<meta property="og:title" content="VPS Networking | Fyra Stack Docs" />
+<meta property="og:description" content="Learn about VPS networking configurations and best practices for optimal performance and security." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/networking" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="VPS Networking | Fyra Stack Docs" />
+<meta name="twitter:description" content="Learn about VPS networking configurations and best practices for optimal performance and security." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>

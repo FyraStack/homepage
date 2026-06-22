@@ -1,0 +1,14 @@
+<svelte:head>
+<title>Adding your own User | Fyra Stack Docs</title>
+<meta name="description" content="Learn how to add your own user to your VPS for improved security and access control." />
+<link rel="canonical" href="https://fyrastack.com/docs/vps/user-setup" />
+<meta property="og:title" content="Adding your own User | Fyra Stack Docs" />
+<meta property="og:description" content="Learn how to add your own user to your VPS for improved security and access control." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/user-setup" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Adding your own User | Fyra Stack Docs" />
+<meta name="twitter:description" content="Learn how to add your own user to your VPS for improved security and access control." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
