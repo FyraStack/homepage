@@ -1,50 +1,50 @@
 {
-	"format_on_save": "on",
-	"formatter": "language_server",
-	"lsp": {
-		"typescript-language-server": {
-			"settings": {
-				"typescript": {
-					"preferences": {
-						"includePackageJsonAutoImports": "on"
-					}
-				}
-			}
-		}
-	},
-	"languages": {
-		"JavaScript": {
-			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.organizeImports.eslint": true
-			},
-			"formatter": {
-				"language_server": {
-					"name": "eslint"
-				}
-			}
-		},
-		"TSX": {
-			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.organizeImports.eslint": true
-			},
-			"formatter": {
-				"language_server": {
-					"name": "eslint"
-				}
-			}
-		},
-		"TypeScript": {
-			"code_actions_on_format": {
-				"source.fixAll.eslint": true,
-				"source.organizeImports.eslint": true
-			},
-			"formatter": {
-				"language_server": {
-					"name": "eslint"
-				}
-			}
-		}
-	}
+  "format_on_save": "on",
+  "formatter": "language_server",
+  "lsp": {
+    "typescript-language-server": {
+      "settings": {
+        "typescript": {
+          "preferences": {
+            "includePackageJsonAutoImports": "on"
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports.eslint": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "eslint"
+        }
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports.eslint": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "eslint"
+        }
+      }
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports.eslint": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "eslint"
+        }
+      }
+    }
+  }
 }
