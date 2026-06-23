@@ -8,8 +8,8 @@
 
 	const nav = [
 		{ label: 'Connecting via SSH', href: '/docs/vps/ssh' },
-		{ label: 'Initial server hardening', href: '/docs/vps/hardening' },
 		{ label: 'Adding a non-root user', href: '/docs/vps/user-setup' },
+		{ label: 'Initial server hardening', href: '/docs/vps/hardening' },
 		{ label: 'VPS Networking', href: '/docs/vps/networking' }
 	];
 </script>
