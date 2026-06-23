@@ -14,7 +14,7 @@
 			n: '02',
 			title: 'Ship your servers.',
 			body: 'Pack up your server (or buy one on eBay) and ship it to our office, our team will then rack and stack it in our Chicago Data Center.',
-			cta: { label: 'See the docs →', href: '/docs/shipping-hardware' }
+			code: null
 		},
 		{
 			n: '03',
