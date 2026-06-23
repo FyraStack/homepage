@@ -175,16 +175,16 @@ nmcli connection show
 
 Next, modify that connection:
 ```sh
-nmcli connection modify "<connection-name>" \
-  ipv4.method manual \
-  ipv4.ignore-auto-routes yes \
-  ipv4.addresses 10.30.$ID.4/24 \
-  +ipv4.addresses $PUBLIC_IP/32 \
-  +ipv4.routes "0.0.0.0/0 10.30.$ID.254 100 src=$PUBLIC_IP" \
-  ipv6.method manual \
-  ipv6.ignore-auto-routes yes \
-  ipv6.addresses 2602:f41f:10:11$ID::4/64 \
-  +ipv6.addresses $PUBLIC_IPV6/128 \
+nmcli connection modify "<connection-name>" \\
+  ipv4.method manual \\
+  ipv4.ignore-auto-routes yes \\
+  ipv4.addresses 10.30.$ID.4/24 \\
+  +ipv4.addresses $PUBLIC_IP/32 \\
+  +ipv4.routes "0.0.0.0/0 10.30.$ID.254 100 src=$PUBLIC_IP" \\
+  ipv6.method manual \\
+  ipv6.ignore-auto-routes yes \\
+  ipv6.addresses 2602:f41f:10:11$ID::4/64 \\
+  +ipv6.addresses $PUBLIC_IPV6/128 \\
   +ipv6.routes "::/0 fe80::$VLAN:ffff 100 src=$PUBLIC_IPV6"
 ```
 
