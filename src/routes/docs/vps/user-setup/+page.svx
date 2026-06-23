@@ -13,7 +13,7 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Adding your own User
+# Adding a non-root user
 
 Use a personal admin user for day-to-day access instead of logging in as `root`. This gives you a safer default workflow while still allowing administrative commands through `sudo`.
 

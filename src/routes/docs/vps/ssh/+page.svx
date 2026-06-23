@@ -13,7 +13,7 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Connecting to your VPS over SSH
+# Connecting via SSH
 
 Thanks for setting up a VPS with Fyra Stack! If you haven't set up a VPS yet, see the section below on generating an SSH key. To connect to your server for the first time, you'll need a few things. First, you'll need an SSH client. Second, you'll need the public IP address of your VPS. Finally, you'll need the SSH key you set up for your VPS. If you haven't
 

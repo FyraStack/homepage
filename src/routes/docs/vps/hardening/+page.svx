@@ -22,7 +22,7 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# VPS Hardening
+# Initial server hardening
 
 These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, keep SSH predictable, and help you avoid exposing services unintentionally.
 
