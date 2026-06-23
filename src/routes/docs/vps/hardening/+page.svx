@@ -85,6 +85,10 @@ sudo sshd -t
 If the command prints nothing and exits successfully, restart SSH:
 
 ```bash
+# Fedora
+sudo systemctl restart sshd
+
+# Ubuntu/Debian
 sudo systemctl restart ssh
 ```
 
