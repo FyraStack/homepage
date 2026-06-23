@@ -58,6 +58,18 @@ sudo chmod 700 /home/stackuser/.ssh
 sudo chmod 600 /home/stackuser/.ssh/authorized_keys
 ```
 
+## Optional - edit your SSH configuration
+
+If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
+
+```sshconfig
+Host root-vps
+  HostName your_vps_ip
+  User stackuser
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+```
+
 ## 3. Test the new login
 
 Keep your current session open, then open a new terminal and confirm the new user can log in:

@@ -87,7 +87,7 @@ ssh root@your_vps_ip -i $env:USERPROFILE\.ssh\id_ed25519
 3. In the "Connection" category, expand "SSH" and click on "Auth". Click "Browse" and select your private key file (the one without the `.pub` extension).
 4. Click "Open" to start the SSH session.
 
-## Making login easier
+## Optional - Making login easier
 
 You can make logging in easier by adding your key to an SSH agent, configuring an SSH host shortcut, or both.
 
@@ -107,7 +107,7 @@ ssh-add ~/.ssh/id_ed25519
 After this, you can connect without passing `-i` each time:
 
 ```bash
-ssh root@your_vps_ip
+ssh stackuser@your_vps_ip
 ```
 
 On macOS, you can also store the key passphrase in your keychain:
@@ -134,7 +134,7 @@ ssh-add $env:USERPROFILE\.ssh\id_ed25519
 After this, you can connect without passing `-i` each time:
 
 ```powershell
-ssh root@your_vps_ip
+ssh stackuser@your_vps_ip
 ```
 
 ### Create an SSH config shortcut
@@ -148,7 +148,7 @@ Create or edit `~/.ssh/config` and add:
 ```sshconfig
 Host fyra-vps
   HostName your_vps_ip
-  User root
+  User stackuser
   IdentityFile ~/.ssh/id_ed25519
   AddKeysToAgent yes
 ```
@@ -172,7 +172,7 @@ Create or edit `$env:USERPROFILE\.ssh\config` and add:
 ```sshconfig
 Host fyra-vps
   HostName your_vps_ip
-  User root
+  User stackuser
   IdentityFile ~/.ssh/id_ed25519
   AddKeysToAgent yes
 ```
@@ -184,3 +184,6 @@ ssh fyra-vps
 ```
 
 Replace `fyra-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
+
+## Next Steps
+Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).
