@@ -28,7 +28,7 @@ Note that spoofing MAC addresses is considered network/system abuse under our [a
 
 ## How Our VPS Network Works
 
-When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious for an example cloud-init configuration, here's one (with information redacted):
+When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious for an example cloud-init configuration, here's one with information redacted:
 
 ```yaml
 version: 2
