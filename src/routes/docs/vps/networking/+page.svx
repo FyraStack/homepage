@@ -19,9 +19,9 @@ By default, your VPS will be setup using `cloud-init` with the correct networkin
 
 ## Notes
 
-To manage port forwarding, use Fyra Stack dashboard. You can run your own firewall behind Dashboard, but you must allow services through both. See the [VPS hardening guide](https://fyrastack.com/docs/vps/hardening) for more information on setting up a secondary firewall.
+Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring firewall rules on your server. See the [VPS hardening guide](https://fyrastack.com/docs/vps/hardening) for more information on setting up a firewall.
 
-By default, we block SMTP traffic to your VPS (port 25). You cannot add this port to your firewall rules. If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic). 
+By default, we block SMTP traffic to your VPS (port 25). This is the only default traffic block on the Fyra Stack network side. If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic).
 Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic as it's known to cause abuse complaints. For that reason, we may deny a request for SMTP traffic unblocking if we don't have enough history of a user.
 
 Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address.
@@ -60,6 +60,4 @@ ethernets:
         - 2606:4700:4700::1001
 ```
 
-If you ever attempt to change your networking configuration and need to know how to set it back up, contact us via email at [support@fyralabs.com](mailto:support@fyralabs.com), mentioning Stack in the subject line.
-
-On the back end, we use VyOS as our router and Proxmox for VPS firewall rules. In the near future, we plan to move to our own hypervisor solution, [Odorobo](https://github.com/FyraStack/odorobo). At that point, our firewall setup will change.
+If you ever attempt to change your networking configuration, something breaks, and need to know how to set it back up, contact us via email at [support@fyralabs.com](mailto:support@fyralabs.com), mentioning Stack in the subject line.

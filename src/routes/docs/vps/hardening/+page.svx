@@ -24,7 +24,7 @@
 
 # Initial server hardening
 
-These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, keep SSH predictable, and help you avoid exposing services unintentionally.
+These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, keep SSH predictable, and help you avoid exposing services unintentionally. You are responsible for setting up firewall rules for your own VPS so only the services you intend to publish are reachable.
 
 Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
@@ -100,7 +100,7 @@ Choose an unused high port, such as `2222`, `22022`, or another value between `1
 Port 2222
 ```
 
-Allow the new port in your network-level firewall before restarting SSH. On Fyra Stack infrastructure, that usually means the Proxmox or platform firewall outside the VM. If you also run a firewall inside the guest, allow the port there too.
+Allow the new port in your VPS firewall before restarting SSH. If you change the SSH port but forget to allow it in your firewall rules, you may lock yourself out.
 
 If you're using SSH on a non-standard port, you will need to specify the port when connecting:
 
@@ -155,11 +155,13 @@ Host fyrastack-vps
     IdentityFile ~/.ssh/id_ed25519
 ```
 
-## 4. Optional: use a guest firewall
+## 4. Set up your firewall
 
-If your VPS is already protected by a Proxmox or platform-level firewall, a firewall inside the guest is not required for basic exposure control. You may still want one as defense in depth, especially if you manage your own rules inside the VM or plan to move the system elsewhere later.
+Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
 
-The tradeoff is that two firewall layers can make connectivity problems harder to debug. If you enable a guest firewall, make sure SSH and any public services are allowed in both places before closing your current SSH session.
+Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring your own firewall rules. The only traffic we block by default is SMTP (port 25).
+
+The examples below show common guest firewall setups. Adjust the allowed ports for your own services.
 
 ### Fedora with firewalld
 
@@ -228,4 +230,4 @@ sudo fail2ban-client status sshd
 
 ## Recovery notes
 
-If you lock yourself out, use the Fyra Stack console or recovery environment to revert the firewall or SSH configuration. Common fixes are re-allowing the new port in the Proxmox/platform firewall, restoring Port 22, disabling an optional guest firewall rule, or correcting file permissions under `/home/stackuser/.ssh`.
+If you lock yourself out, use the Fyra Stack console or recovery environment to revert the firewall or SSH configuration. Common fixes are re-allowing the new port in your firewall, restoring Port 22, disabling a guest firewall rule, or correcting file permissions under `/home/stackuser/.ssh`.

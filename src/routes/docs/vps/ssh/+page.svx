@@ -15,7 +15,7 @@
 
 # Connecting via SSH
 
-Thanks for setting up a VPS with Fyra Stack! If you haven't set up a VPS yet, see the section below on generating an SSH key. To connect to your server for the first time, you'll need a few things. First, you'll need an SSH client. Second, you'll need the public IP address of your VPS. Finally, you'll need the SSH key you set up for your VPS. If you haven't
+Thanks for setting up a VPS with Fyra Stack! To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
 
 ## Generating an SSH Key
 
@@ -56,16 +56,33 @@ Copy the line beginning in `ssh-ed25519` and ending with your username. This is 
 
 ### Adding your public key to your VPS
 
-On the Fyra Stack Dashboard, click on the settings icon and go to SSH Keys. From here, paste in your public key and give it a name. Do this *before* creating your VPS as it is added during the initialization stage.
+On the Fyra Stack Dashboard, click on the settings icon and go to SSH Keys. From here, paste in your public key and give it a name. Do this *before* creating your VPS when possible, as it is added during the initialization stage.
+
+If your VPS already exists and does not have your key installed, log in with the default root password provided to you and add the key manually:
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+nano ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+Paste your public key into `authorized_keys`, save the file, and keep the root session open while you test key-based login from a new terminal.
 
 ## Setting up a client
 
 ### On Linux or macOS
 
-Open your terminal and use the `ssh` command followed by root and the IP address of your VPS:
+Open your terminal and use the `ssh` command followed by root and the IP address of your VPS. If you already added your SSH key, connect with:
 
 ```bash
 ssh root@your_vps_ip -i ~/.ssh/id_ed25519
+```
+
+If you did not add a key before creating the VPS, connect without `-i` and enter the default root password provided to you when prompted:
+
+```bash
+ssh root@your_vps_ip
 ```
 
 ### On Windows
@@ -74,18 +91,25 @@ You can use a terminal emulator like PowerShell or Command Prompt, or download a
 
 #### Using PowerShell
 
-Open PowerShell and use the `ssh` command followed by root and the IP address of your VPS:
+Open PowerShell and use the `ssh` command followed by root and the IP address of your VPS. If you already added your SSH key, connect with:
 
 ```powershell
 ssh root@your_vps_ip -i $env:USERPROFILE\.ssh\id_ed25519
+```
+
+If you did not add a key before creating the VPS, connect without `-i` and enter the default root password provided to you when prompted:
+
+```powershell
+ssh root@your_vps_ip
 ```
 
 #### Using PuTTY
 
 1. Download and install PuTTY from [the official website](https://www.putty.org/).
 2. Open PuTTY and enter the IP address of your VPS in the "Host Name (or IP address)" field.
-3. In the "Connection" category, expand "SSH" and click on "Auth". Click "Browse" and select your private key file (the one without the `.pub` extension).
-4. Click "Open" to start the SSH session.
+3. If you already added your SSH key, expand "SSH" in the "Connection" category and click "Auth". Click "Browse" and select your private key file (the one without the `.pub` extension).
+4. If you did not add a key before creating the VPS, skip the key selection and enter the default root password provided to you when prompted.
+5. Click "Open" to start the SSH session.
 
 ## Optional - Making login easier
 
@@ -186,4 +210,5 @@ ssh fyra-vps
 Replace `fyra-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
 
 ## Next Steps
-Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).
+
+After you can log in, make sure your SSH key is installed and tested. Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).
