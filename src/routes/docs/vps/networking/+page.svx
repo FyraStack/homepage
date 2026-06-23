@@ -24,7 +24,7 @@ Fyra Stack does not provide a firewall layer for your VPS. You are responsible f
 By default, we block SMTP traffic to your VPS (port 25). This is the only default traffic block on the Fyra Stack network side. If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic).
 Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic, as it is known to cause abuse complaints. For that reason, we may deny a request to unblock SMTP traffic if we don't have enough history for a user.
 
-Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address.
+Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address. In addition, if you try to use a source IP address that isn't assigned to you, your traffic will be blocked.
 
 ## How Our VPS Network Works
 
