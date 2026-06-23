@@ -127,17 +127,13 @@ sudo semanage port -m -t ssh_port_t -p tcp 2222
 
 Now validate and restart SSH again.
 
-### Fedora
-
 ```bash
 sudo sshd -t
+
+# Fedora
 sudo systemctl restart sshd
-```
 
-### Debian / Ubuntu
-
-```bash
-sudo sshd -t
+# Debian / Ubuntu
 sudo systemctl restart ssh
 ```
 
