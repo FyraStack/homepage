@@ -50,9 +50,10 @@
 			category: 'VPS',
 			description: 'First login, initial hardening, and setting up your environment.',
 			articles: [
-				{ label: 'Connecting via SSH', soon: true },
-				{ label: 'Initial server hardening', soon: true },
-				{ label: 'Adding a non-root user', soon: true },
+				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
+				{ label: 'Initial server hardening', soon: false, href: '/docs/vps/hardening' },
+				{ label: 'Adding a non-root user', soon: false, href: '/docs/vps/user-setup' },
+				{ label: 'VPS Networking', soong: false, href: '/docs/vps/networking' },
 				{ label: 'Choosing a Linux distro', soon: true }
 			]
 		},
@@ -60,7 +61,7 @@
 			category: 'Linux & Distros',
 			description: 'Supported operating systems and distro-specific notes.',
 			articles: [
-				{ label: 'Ultramarine Linux', soon: false },
+				{ label: 'Ultramarine Linux', soon: true },
 				{ label: 'Debian / Ubuntu', soon: true },
 				{ label: 'Arch', soon: true },
 				{ label: 'NixOS', soon: true }
