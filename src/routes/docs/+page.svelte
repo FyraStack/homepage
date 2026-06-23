@@ -42,7 +42,7 @@
 				},
 				{ label: 'Accessing IPMI remotely', soon: false, href: '/docs/colocation/ipmi' },
 				{ label: 'Requesting remote hands', soon: false, href: '/docs/colocation/remote-hands' },
-				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' },
+				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' }
 			]
 		},
 		{
