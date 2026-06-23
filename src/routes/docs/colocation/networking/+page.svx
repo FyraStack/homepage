@@ -34,7 +34,7 @@ Public IPv6 address:   $PUBLIC_IPV6/128
 Delegated IPv6 prefix: $IPV6_DELEGATED_PREFIX
 ```
 
-See [IPMI](/docs/colocation/ipmi) for more information about IPMI access. Our networking configuration for IPMI is below.
+See [IPMI](/docs/colocation/ipmi) for more information about IPMI access. More information about our networking configuration for IPMI is at the bottom of this page.
 
 See below for a more detailed description of the setup process according to your networking setup.
 
