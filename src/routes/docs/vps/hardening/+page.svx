@@ -58,10 +58,12 @@ sudo systemctl reboot
 Open your SSH server configuration:
 
 ```bash
-sudo nano /etc/ssh/sshd_config
+sudo nano /etc/ssh/sshd_config.d/10-userssh.conf
 ```
 
-Set or update these options. If a line already exists but is commented with `#`, uncomment it and change the value.
+Because we place ssh configuration in sshd_config.d at priority 50, make sure you use this file path to override our default values as they may conflict.
+
+Set these options in your configuration:
 
 ```sshconfig
 PermitRootLogin no
@@ -96,7 +98,7 @@ sudo systemctl restart ssh
 
 Changing the SSH port does not replace key-based authentication, but it cuts down on noisy automated scans against port `22`.
 
-Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config`, set:
+Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config/10-port.conf`, set:
 
 ```sshconfig
 Port 2222
