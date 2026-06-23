@@ -55,8 +55,6 @@ sudo systemctl reboot
 
 ## 2. Harden SSH
 
-This guide uses `nano` because it is friendlier for first-time Linux users. At the bottom of the editor, `^O` means `Ctrl+O` to save and `^X` means `Ctrl+X` to exit.
-
 Open your SSH server configuration:
 
 ```bash
@@ -159,7 +157,7 @@ Host fyrastack-vps
 
 Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
 
-Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring your own firewall rules. The only traffic we block by default is SMTP (port 25).
+Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring your own firewall rules. The only traffic we block by default is SMTP (port 25). See our [VPS networking documentation](/docs/vps/networking) for more information.
 
 The examples below show common guest firewall setups. Adjust the allowed ports for your own services.
 
