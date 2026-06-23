@@ -26,7 +26,7 @@
 
 These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, keep SSH predictable, and help you avoid exposing services unintentionally.
 
-Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding your own User](/docs/vps/user-setup)**.
+Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
 ## 1. Update the system
 
