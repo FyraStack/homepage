@@ -14,7 +14,7 @@
 			n: '02',
 			title: 'Ship your servers.',
 			body: 'Pack up your server (or buy one on eBay) and ship it to our office, our team will then rack and stack it in our Chicago Data Center.',
-			code: null
+			cta: { label: 'See the docs →', href: '/docs/shipping-hardware' }
 		},
 		{
 			n: '03',
@@ -42,17 +42,17 @@
 				},
 				{ label: 'Accessing IPMI remotely', soon: false, href: '/docs/colocation/ipmi' },
 				{ label: 'Requesting remote hands', soon: false, href: '/docs/colocation/remote-hands' },
-				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' }
+				{ label: 'Power budgets and PDUs', soon: false, href: '/docs/colocation/power-budgets' },
+				{ label: 'Colocation Networking', soon: false, href: '/docs/colocation/networking' }
 			]
 		},
 		{
 			category: 'VPS',
 			description: 'First login, initial hardening, and setting up your environment.',
 			articles: [
-				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
-				{ label: 'Initial server hardening', soon: false, href: '/docs/vps/hardening' },
-				{ label: 'Adding a non-root user', soon: false, href: '/docs/vps/user-setup' },
-				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
+				{ label: 'Connecting via SSH', soon: true },
+				{ label: 'Initial server hardening', soon: true },
+				{ label: 'Adding a non-root user', soon: true },
 				{ label: 'Choosing a Linux distro', soon: true }
 			]
 		},
