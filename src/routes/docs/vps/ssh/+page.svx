@@ -47,10 +47,17 @@ If your VPS already exists and does not have your key installed, log in with the
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 nano ~/.ssh/authorized_keys
+```
+
+Paste your public key into `authorized_keys`, then save the file.
+
+After saving, update the permission on the authorized_keys file:
+
+```bash
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-Paste your public key into `authorized_keys`, save the file, and keep the root session open while you test key-based login from a new terminal.
+After updating the permissions, keep the root session open while you test key-based login from a new terminal.
 
 ## Setting up a client
 
