@@ -221,3 +221,7 @@ nmcli connection up "<connection-name>"
 ## Note on IPMI/DHCP networking
 
 Your IPMI interface will receive its own IP address over DHCP. Typically, we assign it the IP address of `10.30.$ID.5`, but anything on your server that tries to connect over DHCP will connect to something in the IP range of `10.30.$ID.5`-`10.30.$ID.100`. Anything that is *not* on your transit IP address will not be publically accessible. For this reason, make sure your server has its networking statically configured.
+
+## Post-networking setup
+
+We strongly recommend that you harden your system and its configuration after setting up networking. See our [VPS hardening documentation](/docs/vps/hardening) for some recommendations. Specifically, we recommend changing your SSH port, setting up a firewall, and setting up fail2ban for SSH.
