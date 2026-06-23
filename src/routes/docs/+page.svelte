@@ -60,7 +60,7 @@
 			category: 'Linux & Distros',
 			description: 'Supported operating systems and distro-specific notes.',
 			articles: [
-				{ label: 'Ultramarine Linux', soon: false },
+				{ label: 'Ultramarine Linux', soon: true },
 				{ label: 'Debian / Ubuntu', soon: true },
 				{ label: 'Arch', soon: true },
 				{ label: 'NixOS', soon: true }
