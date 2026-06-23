@@ -81,7 +81,8 @@
 			prose-headings:font-semibold prose-headings:tracking-tight
 			prose-h1:mb-4 prose-h1:text-4xl prose-h1:text-fyra-gray-50
 			prose-h2:mt-10 prose-h2:mb-3 prose-h2:text-xl prose-h2:text-fyra-gray-50
-			prose-h3:mt-6 prose-h3:mb-1 prose-h3:text-sm prose-h3:font-semibold prose-h3:text-fyra-gray-200
+			prose-h3:mt-6 prose-h3:mb-1 prose-h3:text-lg prose-h3:font-semibold prose-h3:text-fyra-gray-200
+			prose-h4:mt-4 prose-h4:mb-1 prose-h4:text-base prose-h4:font-semibold prose-h4:text-fyra-gray-300
 			prose-p:text-sm prose-p:leading-relaxed prose-p:text-fyra-gray-400
 			prose-a:font-medium prose-a:text-fyra-red-400
 			prose-a:no-underline hover:prose-a:text-fyra-red-300 prose-strong:text-fyra-gray-200 prose-code:rounded
