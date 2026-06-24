@@ -86,6 +86,6 @@ sudo whoami
 
 The command should print `root`.
 
-## 4. Next steps
+## 4. Next Steps
 
 After you have confirmed the new user can log in and run `sudo`, continue with [Initial server hardening](/docs/vps/hardening) to lock down SSH, configure a firewall, and set up fail2ban.
