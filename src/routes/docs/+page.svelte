@@ -51,7 +51,7 @@
 			articles: [
 				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
-				{ label: 'Initial server hardening', soon: false, href: '/docs/vps/hardening' },
+				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
 				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
 				{ label: 'Choosing a Linux distro', soon: true }
 			]
