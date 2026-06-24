@@ -13,13 +13,13 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Adding a non-root user
+# Adding a Non-Root User
 
 Use a personal admin user for day-to-day access instead of logging in as `root`. This gives you a safer default workflow while still allowing administrative commands through `sudo`.
 
 Replace `stackuser` in the examples below with your preferred username.
 
-## 1. Create the user
+## 1. Create the User
 
 ### Fedora
 
@@ -36,7 +36,7 @@ sudo adduser stackuser
 sudo usermod -aG sudo stackuser
 ```
 
-## 2. Add your SSH key
+## 2. Add your SSH Key
 
 If your root account already has the correct public key in `authorized_keys`, copy it to the new user:
 
@@ -58,7 +58,15 @@ sudo chmod 700 /home/stackuser/.ssh
 sudo chmod 600 /home/stackuser/.ssh/authorized_keys
 ```
 
-## Optional - edit your SSH configuration
+Alternatively, you can also copy the key from your local machine to the VPS:
+
+```bash
+ssh-copy-id stackuser@your_vps_ip
+```
+
+Note that this will not work if you have disabled password-based authentication.
+
+## Optional - Edit your SSH Configuration
 
 If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
 
@@ -70,7 +78,7 @@ Host my-vps
   AddKeysToAgent yes
 ```
 
-## 3. Test the new login
+## 3. Test the New Login
 
 Keep your current session open, then open a new terminal and confirm the new user can log in:
 
@@ -86,6 +94,6 @@ sudo whoami
 
 The command should print `root`.
 
-## 4. Next steps
+## 4. Next Steps
 
 After you have confirmed the new user can log in and run `sudo`, continue with [Initial server hardening](/docs/vps/hardening) to lock down SSH, configure a firewall, and set up fail2ban.

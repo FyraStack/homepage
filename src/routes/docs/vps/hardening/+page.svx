@@ -1,11 +1,11 @@
 <svelte:head>
-<title>Initial server hardening | Fyra Stack Docs</title>
+<title>Initial Server Hardening | Fyra Stack Docs</title>
 <meta
 	name="description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
 />
 <link rel="canonical" href="https://fyrastack.com/docs/vps/hardening" />
-<meta property="og:title" content="Initial server hardening | Fyra Stack Docs" />
+<meta property="og:title" content="Initial Server Hardening | Fyra Stack Docs" />
 <meta
 	property="og:description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://fyrastack.com/docs/vps/hardening" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Initial server hardening | Fyra Stack Docs" />
+<meta name="twitter:title" content="Initial Server Hardening | Fyra Stack Docs" />
 <meta
 	name="twitter:description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
@@ -22,13 +22,13 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Initial server hardening
+# Initial Server Hardening
 
 These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, help you avoid exposing services unintentionally, and prevent unauthorized access. You are responsible for setting up firewall rules for your own VPS so only the services you intend to publish are reachable.
 
 Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
-## 1. Update the system
+## 1. Update the System
 
 Start by installing the latest security updates, along with the `sudo`, `curl`, `nano`, and `fail2ban` packages.
 
@@ -94,7 +94,7 @@ sudo systemctl restart sshd
 sudo systemctl restart ssh
 ```
 
-## 3. Change the SSH port
+## 3. Change the SSH Port
 
 Changing the SSH port does not replace key-based authentication, but it cuts down on noisy automated scans against port `22`.
 
@@ -155,7 +155,7 @@ Host fyrastack-vps
     IdentityFile ~/.ssh/id_ed25519
 ```
 
-## 4. Set up your firewall
+## 4. Set up your Firewall
 
 Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
 
@@ -228,6 +228,6 @@ sudo systemctl restart fail2ban
 sudo fail2ban-client status sshd
 ```
 
-## Recovery notes
+## Recovery Notes
 
 If you lock yourself out, use the Fyra Stack console or recovery environment to revert the firewall or SSH configuration. Common fixes are re-allowing the new port in your firewall, restoring Port 22, disabling a guest firewall rule, or correcting file permissions under `/home/stackuser/.ssh`.
