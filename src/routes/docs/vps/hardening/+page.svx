@@ -61,7 +61,7 @@ Open your SSH server configuration:
 sudo nano /etc/ssh/sshd_config.d/10-userssh.conf
 ```
 
-Because we place ssh configuration in sshd_config.d at priority 50, make sure you use this file path to override our default values as they may conflict.
+Because we place SSH configuration in `sshd_config.d` at priority 50, make sure you use this file path to override our default values, which may otherwise conflict.
 
 Set these options in your configuration:
 
@@ -90,7 +90,7 @@ If the command prints nothing and exits successfully, restart SSH:
 # Fedora
 sudo systemctl restart sshd
 
-# Ubuntu/Debian
+# Debian / Ubuntu
 sudo systemctl restart ssh
 ```
 
@@ -98,7 +98,7 @@ sudo systemctl restart ssh
 
 Changing the SSH port does not replace key-based authentication, but it cuts down on noisy automated scans against port `22`.
 
-Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config/10-port.conf`, set:
+Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config.d/10-port.conf`, set:
 
 ```sshconfig
 Port 2222

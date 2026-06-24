@@ -22,11 +22,11 @@ By default, your VPS will be set up using `cloud-init` with the correct networki
 Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring firewall rules on your server. See the [VPS hardening guide](https://fyrastack.com/docs/vps/hardening) for more information on setting up a firewall.
 
 By default, we block SMTP traffic to your VPS (port 25). This is the only default traffic block on the Fyra Stack network side. If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic).
-Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic, as it is known to cause abuse complaints. For that reason, we may deny a request to unblock SMTP traffic if we don't have enough history for a user.
+Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic, as SMTP is known to cause abuse complaints. For that reason, we may deny a request to unblock SMTP traffic if we don't have enough history on a user.
 
 Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address. In addition, if you try to use a source IP address that isn't assigned to you, your traffic will be blocked.
 
-## How Our VPS Network Works
+## How our VPS network works
 
 When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious about an example cloud-init configuration, here's one with information redacted:
 

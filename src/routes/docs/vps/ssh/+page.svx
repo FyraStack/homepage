@@ -35,7 +35,7 @@ cat ~/.ssh/id_ed25519.pub
 
 If you saved the key in a different location, look there and use `cat` on the file ending in `.pub`.
 
-Copy the line beginning with `ssh-ed25519` and ending with your username. This is your public key, which you'll need to add to your VPS.
+Copy the line beginning with `ssh-ed25519` and ending with `username@hostname`. This is your public key, which you'll need to add to your VPS.
 
 ### Adding your public key to your VPS
 
@@ -51,7 +51,7 @@ nano ~/.ssh/authorized_keys
 
 Paste your public key into `authorized_keys`, then save the file.
 
-After saving, update the permission on the authorized_keys file:
+After saving, update the permissions on the authorized_keys file:
 
 ```bash
 chmod 600 ~/.ssh/authorized_keys
@@ -61,7 +61,7 @@ After updating the permissions, keep the root session open while you test key-ba
 
 ## Setting up a client
 
-Open your terminal and use the `ssh` command followed by root and the IP address of your VPS. If you already added your SSH key, connect with:
+Open your terminal and use the `ssh` command followed by `root` and the IP address of your VPS. If you already added your SSH key, connect with:
 
 ```bash
 ssh root@your_vps_ip -i ~/.ssh/id_ed25519
@@ -73,7 +73,7 @@ If you did not add a key before creating the VPS, connect without `-i` and enter
 ssh root@your_vps_ip
 ```
 
-## Optional - Make login easier
+## Optional - make login easier
 
 You can make logging in easier by adding your key to an SSH agent, configuring an SSH host shortcut, or both.
 
@@ -125,14 +125,14 @@ ssh stackuser@your_vps_ip
 
 ### Create an SSH config shortcut
 
-You can also create a shortcut in your SSH config file so you only need to type a short command like `ssh fyra-vps`.
+You can also create a shortcut in your SSH config file so you only need to type a short command like `ssh fyrastack-vps`.
 
 #### On Linux or macOS
 
 Create or edit `~/.ssh/config` and add:
 
 ```sshconfig
-Host fyra-vps
+Host fyrastack-vps
   HostName your_vps_ip
   User stackuser
   IdentityFile ~/.ssh/id_ed25519
@@ -148,7 +148,7 @@ chmod 600 ~/.ssh/config
 Then connect with:
 
 ```bash
-ssh fyra-vps
+ssh fyrastack-vps
 ```
 
 #### On Windows
@@ -156,7 +156,7 @@ ssh fyra-vps
 Create or edit `~\.ssh\config` and add:
 
 ```sshconfig
-Host fyra-vps
+Host fyrastack-vps
   HostName your_vps_ip
   User stackuser
   IdentityFile ~/.ssh/id_ed25519
@@ -166,10 +166,10 @@ Host fyra-vps
 Then connect with:
 
 ```powershell
-ssh fyra-vps
+ssh fyrastack-vps
 ```
 
-Replace `fyra-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
+Replace `fyrastack-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
 
 ## Next steps
 

@@ -63,7 +63,7 @@ sudo chmod 600 /home/stackuser/.ssh/authorized_keys
 If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
 
 ```sshconfig
-Host root-vps
+Host my-vps
   HostName your_vps_ip
   User stackuser
   IdentityFile ~/.ssh/id_ed25519
@@ -88,4 +88,4 @@ The command should print `root`.
 
 ## 4. Next steps
 
-After you have confirmed the new user can log in and run `sudo`, continue with [VPS Hardening](/docs/vps/hardening) to lock down SSH, configure a firewall, and set up fail2ban.
+After you have confirmed the new user can log in and run `sudo`, continue with [Initial server hardening](/docs/vps/hardening) to lock down SSH, configure a firewall, and set up fail2ban.
