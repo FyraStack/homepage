@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://fyrastack.com/docs/vps/hardening" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Initial server hardening | Fyra Stack Docs" />
+<meta name="twitter:title" content="Initial Server Hardening | Fyra Stack Docs" />
 <meta
 	name="twitter:description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
