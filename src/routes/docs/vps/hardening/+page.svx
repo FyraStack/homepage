@@ -1,5 +1,5 @@
 <svelte:head>
-<title>Initial server hardening | Fyra Stack Docs</title>
+<title>Initial Server Hardening | Fyra Stack Docs</title>
 <meta
 	name="description"
 	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
