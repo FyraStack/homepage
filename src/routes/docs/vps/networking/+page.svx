@@ -26,7 +26,7 @@ Generally, we prefer to have some history of a user's behavior before allowing S
 
 Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address. In addition, if you try to use a source IP address that isn't assigned to you, your traffic will be blocked.
 
-## How our VPS network works
+## How our VPS Network Works
 
 When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious about an example cloud-init configuration, here's one with information redacted:
 
