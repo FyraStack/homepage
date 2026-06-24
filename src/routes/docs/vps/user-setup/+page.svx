@@ -13,13 +13,13 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Adding a non-root user
+# Adding a Non-Root User
 
 Use a personal admin user for day-to-day access instead of logging in as `root`. This gives you a safer default workflow while still allowing administrative commands through `sudo`.
 
 Replace `stackuser` in the examples below with your preferred username.
 
-## 1. Create the user
+## 1. Create the User
 
 ### Fedora
 
@@ -36,7 +36,7 @@ sudo adduser stackuser
 sudo usermod -aG sudo stackuser
 ```
 
-## 2. Add your SSH key
+## 2. Add your SSH Key
 
 If your root account already has the correct public key in `authorized_keys`, copy it to the new user:
 

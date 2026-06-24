@@ -73,7 +73,7 @@ If you did not add a key before creating the VPS, connect without `-i` and enter
 ssh root@your_vps_ip
 ```
 
-## Optional - make login easier
+## Optional - Make Login Easier
 
 You can make logging in easier by adding your key to an SSH agent, configuring an SSH host shortcut, or both.
 
@@ -171,6 +171,6 @@ ssh fyrastack-vps
 
 Replace `fyrastack-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
 
-## Next steps
+## Next Steps
 
 After you can log in, make sure your SSH key is installed and tested. Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).
