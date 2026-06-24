@@ -17,9 +17,21 @@
 
 Thanks for setting up a VPS with Fyra Stack! To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
 
-## Generating an SSH Key
+## Setting up a client
 
-We recommend the Ed25519 algorithm for generating SSH key pairs, as it is more secure and efficient than RSA. If you already have an SSH key pair, you can use that instead of generating a new one.
+Open your terminal and use the `ssh` command followed by `root` and the IP address of your VPS. If you already added your SSH key, connect with:
+
+```bash
+ssh root@your_vps_ip -i ~/.ssh/id_ed25519
+```
+
+If you did not add a key before creating the VPS, connect without `-i` and enter the default root password provided to you when prompted:
+
+```bash
+ssh root@your_vps_ip
+```
+
+## Generating an SSH key
 
 Open your terminal and run the following command to generate a new SSH key pair:
 
@@ -57,20 +69,16 @@ After saving, update the permissions on the authorized_keys file:
 chmod 600 ~/.ssh/authorized_keys
 ```
 
+Alternatively, you can also use the `ssh-copy-id` command to add your key to the VPS:
+
+```bash
+ssh-copy-id root@your_vps_ip
+```
+
 After updating the permissions, keep the root session open while you test key-based login from a new terminal.
-
-## Setting up a client
-
-Open your terminal and use the `ssh` command followed by `root` and the IP address of your VPS. If you already added your SSH key, connect with:
 
 ```bash
 ssh root@your_vps_ip -i ~/.ssh/id_ed25519
-```
-
-If you did not add a key before creating the VPS, connect without `-i` and enter the default root password provided to you when prompted:
-
-```bash
-ssh root@your_vps_ip
 ```
 
 ## Optional - Make Login Easier
