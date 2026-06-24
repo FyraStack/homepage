@@ -228,6 +228,6 @@ sudo systemctl restart fail2ban
 sudo fail2ban-client status sshd
 ```
 
-## Recovery notes
+## Recovery Notes
 
 If you lock yourself out, use the Fyra Stack console or recovery environment to revert the firewall or SSH configuration. Common fixes are re-allowing the new port in your firewall, restoring Port 22, disabling a guest firewall rule, or correcting file permissions under `/home/stackuser/.ssh`.
