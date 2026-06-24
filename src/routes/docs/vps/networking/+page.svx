@@ -13,7 +13,7 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# VPS networking
+# VPS Networking
 
 By default, your VPS will be set up using `cloud-init` with the correct networking configuration. If you need to make changes to your networking configuration, you can do so by editing the appropriate configuration files for your distribution.
 
