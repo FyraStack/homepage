@@ -94,7 +94,7 @@ sudo systemctl restart sshd
 sudo systemctl restart ssh
 ```
 
-## 3. Change the SSH port
+## 3. Change the SSH Port
 
 Changing the SSH port does not replace key-based authentication, but it cuts down on noisy automated scans against port `22`.
 
