@@ -58,7 +58,7 @@ sudo chmod 700 /home/stackuser/.ssh
 sudo chmod 600 /home/stackuser/.ssh/authorized_keys
 ```
 
-## Optional - edit your SSH configuration
+## Optional - Edit your SSH configuration
 
 If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
 
