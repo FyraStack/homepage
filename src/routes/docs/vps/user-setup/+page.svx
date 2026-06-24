@@ -70,7 +70,7 @@ Host my-vps
   AddKeysToAgent yes
 ```
 
-## 3. Test the new login
+## 3. Test the New Login
 
 Keep your current session open, then open a new terminal and confirm the new user can log in:
 
