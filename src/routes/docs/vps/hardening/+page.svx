@@ -155,7 +155,7 @@ Host fyrastack-vps
     IdentityFile ~/.ssh/id_ed25519
 ```
 
-## 4. Set up your firewall
+## 4. Set up your Firewall
 
 Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
 
