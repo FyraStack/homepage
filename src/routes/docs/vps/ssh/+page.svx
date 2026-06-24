@@ -114,7 +114,7 @@ Start-Service ssh-agent
 Then add your private key:
 
 ```powershell
-ssh-add $env:USERPROFILE\.ssh\id_ed25519
+ssh-add ~\.ssh\id_ed25519
 ```
 
 After this, you can connect without passing `-i` each time:

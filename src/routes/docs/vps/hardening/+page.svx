@@ -24,13 +24,13 @@
 
 # Initial server hardening
 
-These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, keep SSH predictable, and help you avoid exposing services unintentionally. You are responsible for setting up firewall rules for your own VPS so only the services you intend to publish are reachable.
+These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, help you avoid exposing services unintentionally, and prevent unauthorized access. You are responsible for setting up firewall rules for your own VPS so only the services you intend to publish are reachable.
 
-Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
+Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
 ## 1. Update the system
 
-Start by installing the latest security updates.
+Start by installing the latest security updates, along with the `sudo`, `curl`, `nano`, and `fail2ban` packages.
 
 ### Fedora
 
@@ -76,7 +76,7 @@ ClientAliveInterval 300
 ClientAliveCountMax 2
 ```
 
-Only disable password authentication after you have confirmed key-based login works for your admin user.
+**Only disable password authentication after you have confirmed key-based login works for your admin user.**
 
 Validate the SSH config before restarting the service:
 
@@ -168,9 +168,9 @@ The examples below show common guest firewall setups. Adjust the allowed ports f
 ```bash
 sudo dnf install -y firewalld
 sudo systemctl enable --now firewalld
-sudo firewall-cmd --permanent --add-port=2222/tcp
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --permanent --add-port=2222/tcp # Change this to match your SSH port
+sudo firewall-cmd --permanent --add-service=http # Example service
+sudo firewall-cmd --permanent --add-service=https # Example service
 sudo firewall-cmd --reload
 sudo firewall-cmd --list-all
 ```
@@ -186,9 +186,9 @@ sudo firewall-cmd --reload
 
 ```bash
 sudo apt install -y ufw
-sudo ufw allow 2222/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+sudo ufw allow 2222/tcp # Change this to match your SSH port
+sudo ufw allow 80/tcp # Example service
+sudo ufw allow 443/tcp # Example service
 sudo ufw enable
 sudo ufw status verbose
 ```
