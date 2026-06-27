@@ -51,7 +51,7 @@ Copy the line beginning with `ssh-ed25519` and ending with `username@hostname`. 
 
 ### Adding your Public Key to your VPS
 
-On the Fyra Stack Dashboard, click the settings icon and go to SSH Keys. From there, paste in your public key and give it a name. Do this *before* creating your VPS when possible, as it is added during the initialization stage.
+On the Fyra Stack Dashboard, click on your profile icon and go to Keys. From there, paste in your public key, give it a name, and click add key. Do this *before* creating your VPS when possible, as it is added during the initialization stage.
 
 If your VPS already exists and does not have your key installed, log in with the default root password provided to you and add the key manually:
 
