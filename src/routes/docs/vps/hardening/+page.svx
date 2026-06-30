@@ -1,0 +1,235 @@
+<svelte:head>
+<title>Initial Server Hardening | Fyra Stack Docs</title>
+<meta
+	name="description"
+	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
+/>
+<link rel="canonical" href="https://fyrastack.com/docs/vps/hardening" />
+<meta property="og:title" content="Initial Server Hardening | Fyra Stack Docs" />
+<meta
+	property="og:description"
+	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
+/>
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/hardening" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Initial Server Hardening | Fyra Stack Docs" />
+<meta
+	name="twitter:description"
+	content="Standard first-login hardening for Fedora and Debian VPS systems, including SSH configuration, firewall setup, and fail2ban."
+/>
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# Initial Server Hardening
+
+These are baseline steps we recommend after your first login to a new VPS. They reduce automated login attempts, help you avoid exposing services unintentionally, and prevent unauthorized access. You are responsible for setting up firewall rules for your own VPS so only the services you intend to publish are reachable.
+
+Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
+
+## 1. Update the System
+
+Start by installing the latest security updates, along with the `sudo`, `curl`, `nano`, and `fail2ban` packages.
+
+### Fedora
+
+```bash
+sudo dnf upgrade --refresh -y
+sudo dnf install -y sudo curl nano fail2ban
+```
+
+### Debian / Ubuntu
+
+```bash
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt install -y sudo curl nano fail2ban
+```
+
+Reboot if the update installed a new kernel or core system libraries:
+
+```bash
+sudo systemctl reboot
+```
+
+## 2. Harden SSH
+
+Open your SSH server configuration:
+
+```bash
+sudo nano /etc/ssh/sshd_config.d/10-userssh.conf
+```
+
+Because we place SSH configuration in `sshd_config.d` at priority 50, make sure you use this file path to override our default values, which may otherwise conflict.
+
+Set these options in your configuration:
+
+```sshconfig
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+X11Forwarding no
+MaxAuthTries 3
+ClientAliveInterval 300
+ClientAliveCountMax 2
+```
+
+To exit nano, press `Ctrl + X`. If you'd like to save, press `Y`, then enter. If you don't want to save, just press `N`.
+
+**Only disable password authentication after you have confirmed key-based login works for your admin user.**
+
+Validate the SSH config before restarting the service:
+
+```bash
+sudo sshd -t
+```
+
+If the command prints nothing and exits successfully, restart SSH:
+
+```bash
+# Fedora
+sudo systemctl restart sshd
+
+# Debian / Ubuntu
+sudo systemctl restart ssh
+```
+
+## 3. Change the SSH Port
+
+Changing the SSH port does not replace key-based authentication, but it cuts down on noisy automated scans against port `22`.
+
+Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config.d/10-port.conf`, set:
+
+```sshconfig
+Port 2222
+```
+
+Allow the new port in your VPS firewall before restarting SSH. If you change the SSH port but forget to allow it in your firewall rules, you may lock yourself out.
+
+If you're using SSH on a non-standard port, you will need to specify the port when connecting:
+
+```bash
+ssh -p 2222 stackuser@your_server_ip
+```
+
+If you're on Windows using PuTTY, set the port in the "Session" section before connecting.
+
+Fedora systems with SELinux enforcing also need the new SSH port labeled before `sshd` can bind to it:
+
+```bash
+sudo dnf install -y policycoreutils-python-utils
+sudo semanage port -a -t ssh_port_t -p tcp 2222
+```
+
+If the port was already registered, modify it instead:
+
+```bash
+sudo semanage port -m -t ssh_port_t -p tcp 2222
+```
+
+Now validate and restart SSH again.
+
+```bash
+sudo sshd -t
+
+# Fedora
+sudo systemctl restart sshd
+
+# Debian / Ubuntu
+sudo systemctl restart ssh
+```
+
+Test from a new terminal while your existing session remains open. Replace `stackuser` with your admin username:
+
+```bash
+ssh -p 2222 stackuser@your_server_ip -i ~/.ssh/id_ed25519
+```
+
+If that works, update your local SSH config for convenience:
+
+```sshconfig
+Host fyrastack-vps
+    HostName your_server_ip
+    User stackuser
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+```
+
+## 4. Set up your Firewall
+
+Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
+
+Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring your own firewall rules. The only traffic we block by default is SMTP (port 25). See our [VPS networking documentation](/docs/vps/networking) for more information.
+
+The examples below show common guest firewall setups. Adjust the allowed ports for your own services.
+
+### Fedora with firewalld
+
+```bash
+sudo dnf install -y firewalld
+sudo systemctl enable --now firewalld
+sudo firewall-cmd --permanent --add-port=2222/tcp # Change this to match your SSH port
+sudo firewall-cmd --permanent --add-service=http # Example service
+sudo firewall-cmd --permanent --add-service=https # Example service
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+```
+
+If you no longer need SSH on port `22`, remove the default SSH service after confirming the new port works:
+
+```bash
+sudo firewall-cmd --permanent --remove-service=ssh
+sudo firewall-cmd --reload
+```
+
+### Debian / Ubuntu with UFW
+
+```bash
+sudo apt install -y ufw
+sudo ufw allow 2222/tcp # Change this to match your SSH port
+sudo ufw allow 80/tcp # Example service
+sudo ufw allow 443/tcp # Example service
+sudo ufw enable
+sudo ufw status verbose
+```
+
+If you are already using UFW and no longer need SSH on port `22`, remove the old rule after confirming the new port works:
+
+```bash
+sudo ufw delete allow 22/tcp
+```
+
+## 5. Set up fail2ban
+
+`fail2ban` watches service logs and temporarily blocks IPs that repeatedly fail authentication. This is especially useful for public SSH services, and we recommend it even if you have already changed the SSH port.
+
+Create a local jail file so package updates do not overwrite your settings:
+
+```bash
+sudo nano /etc/fail2ban/jail.d/sshd.local
+```
+
+Add the following configuration. Match `port` to the SSH port you configured above.
+
+```ini
+[sshd]
+enabled = true
+port = 2222
+maxretry = 5
+findtime = 10m
+bantime = 1h
+```
+
+Enable fail2ban, restart it to load the new jail, and check the jail status:
+
+```bash
+sudo systemctl enable --now fail2ban
+sudo systemctl restart fail2ban
+sudo fail2ban-client status sshd
+```
+
+## Recovery Notes
+
+If you lock yourself out, use the Fyra Stack console or recovery environment to revert the firewall or SSH configuration. Common fixes are re-allowing the new port in your firewall, restoring Port 22, disabling a guest firewall rule, or correcting file permissions under `/home/stackuser/.ssh`.
