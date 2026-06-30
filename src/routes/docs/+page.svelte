@@ -100,7 +100,7 @@
 				{ label: 'Upgrading your plan', soon: true },
 				{ label: 'Reading your invoice', soon: true },
 				{ label: 'Cancelling a plan', soon: true },
-				{ label: 'Contacting support', soon: true }
+				{ label: 'Contacting support', soon: false, href: '/docs/account-billing/support' }
 			]
 		}
 	];

@@ -1,0 +1,20 @@
+<svelte:head>
+<title>Contacting Support | Fyra Stack Docs</title>
+<meta name="description" content="Contact Fyra Stack support for any questions or issues with your account billing." />
+<link rel="canonical" href="https://fyrastack.com/docs/account-billing/support" />
+<meta property="og:title" content="Contacting Support | Fyra Stack Docs" />
+<meta property="og:description" content="Contact Fyra Stack support for any questions or issues with your account billing." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/account-billing/support" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Contacting Support | Fyra Stack Docs" />
+<meta name="twitter:description" content="Contact Fyra Stack support for any questions or issues with your account billing." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# Contacting Support
+
+Thanks for using Fyra Stack!
+
+Currently, you can contact support by emailing [support@fyrastack.com](mailto:support@fyrastack.com).
