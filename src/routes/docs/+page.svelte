@@ -30,7 +30,31 @@
 		}
 	];
 
-	const guides = [
+	type InternalHref =
+		| '/services/colocation'
+		| '/docs/colocation/shipping-hardware'
+		| '/docs/colocation/ipmi'
+		| '/docs/colocation/remote-hands'
+		| '/docs/colocation/power-budgets'
+		| '/docs/vps/ssh'
+		| '/docs/vps/user-setup'
+		| '/docs/vps/hardening'
+		| '/docs/vps/networking';
+
+	type GuideArticle = {
+		label: string;
+		href?: InternalHref;
+		soon?: boolean;
+		placeholder?: boolean;
+	};
+
+	type Guide = {
+		category: string;
+		description: string;
+		articles: GuideArticle[];
+	};
+
+	const guides: Guide[] = [
 		{
 			category: 'Colocation',
 			description: 'IPMI access, power specs, and getting your hardware online.',
@@ -53,17 +77,19 @@
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
 				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
 				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
-				{ label: 'Choosing a Linux distro', soon: true }
+				{ label: 'Choosing a Linux distro', placeholder: true }
 			]
 		},
 		{
 			category: 'Linux & Distros',
 			description: 'Supported operating systems and distro-specific notes.',
 			articles: [
-				{ label: 'Ultramarine Linux', soon: true },
-				{ label: 'Debian / Ubuntu', soon: true },
-				{ label: 'Arch', soon: true },
-				{ label: 'NixOS', soon: true }
+				{ label: 'Ultramarine Server', soon: true },
+				{ label: 'Fedora Server', placeholder: true },
+				{ label: 'Alma Linux', placeholder: true },
+				{ label: 'Debian', placeholder: true },
+				{ label: 'Ubuntu Server', placeholder: true },
+				{ label: 'Alpine', placeholder: true }
 			]
 		},
 		{
@@ -241,7 +267,7 @@
 						{/if}
 						{#if step.cta}
 							<a
-								href={resolve(step.cta.href)}
+								href={resolve(step.cta.href as InternalHref, {})}
 								class="mt-4 inline-block text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
 								>{step.cta.label}</a
 							>
@@ -278,9 +304,11 @@
 									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
 									>Soon</span
 								>
+							{:else if article.placeholder}
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
 							{:else}
 								<a
-									href={article.href ? resolve(article.href) : '#'}
+									href={article.href ? resolve(article.href as InternalHref, {}) : '#'}
 									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
 									>{article.label}</a
 								>
