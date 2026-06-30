@@ -14,7 +14,7 @@
 	<nav class="flex items-center gap-2 text-xs text-fyra-gray-500">
 		<a href={resolve('/docs')} class="transition-colors hover:text-fyra-gray-300">Docs</a>
 		<span>/</span>
-		<span class="text-fyra-gray-400">VPS</span>
+		<span class="text-fyra-gray-400">Account & Billing</span>
 	</nav>
 </div>
 
