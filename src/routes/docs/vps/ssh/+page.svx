@@ -91,6 +91,8 @@ An SSH agent keeps your private key unlocked for your current login session, so 
 
 #### On Linux or macOS
 
+If you don't have a preferred command line editor, first install `nano` or `vim`. If you use `nano`, you can exit by pressing `Ctrl + X`, then `Y` to save, or `N` to discard.
+
 Start the agent and add your private key:
 
 ```bash
