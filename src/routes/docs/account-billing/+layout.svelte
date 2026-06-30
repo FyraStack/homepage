@@ -7,11 +7,7 @@
 
 	const { children } = $props();
 
-	const nav = [
-		{ label: 'Contacting Support', href: '/docs/account-billing/support' }
-	];
-
-
+	const nav = [{ label: 'Contacting Support', href: '/docs/account-billing/support' }];
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-3 lg:px-8">
@@ -26,7 +22,9 @@
 	<!-- Sidebar -->
 	<aside class="hidden w-56 shrink-0 lg:block">
 		<div class="sticky top-0 px-6 py-8">
-			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">VPS</p>
+			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
+				Account & Billing
+			</p>
 			<nav class="flex flex-col gap-0.5">
 				{#each nav as item (item.href)}
 					<a
@@ -57,7 +55,9 @@
 	<main class="min-w-0 flex-1 px-6 py-12 lg:px-12">
 		<!-- Mobile nav -->
 		<div class="mb-8 lg:hidden">
-			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">VPS</p>
+			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
+				Account & Billing
+			</p>
 			<nav class="flex flex-wrap gap-2">
 				{#each nav as item (item.href)}
 					<a
