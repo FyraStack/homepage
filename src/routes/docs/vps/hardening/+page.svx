@@ -76,6 +76,8 @@ ClientAliveInterval 300
 ClientAliveCountMax 2
 ```
 
+To exit nano, press `Ctrl + X`. If you'd like to save, press `Y`, then enter. If you don't want to save, just press `N`.
+
 **Only disable password authentication after you have confirmed key-based login works for your admin user.**
 
 Validate the SSH config before restarting the service:
