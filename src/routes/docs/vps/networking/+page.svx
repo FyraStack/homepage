@@ -60,4 +60,4 @@ ethernets:
         - 2606:4700:4700::1001
 ```
 
-If you ever attempt to change your networking configuration, something breaks, and you need to know how to set it back up, contact us via email at [support@fyralabs.com](mailto:support@fyralabs.com), mentioning Stack in the subject line.
+If you ever attempt to change your networking configuration, something breaks, and you need to know how to set it back up, contact us via email at [support@fyrastack.com](mailto:support@fyrastack.com).
