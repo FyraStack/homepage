@@ -240,6 +240,48 @@
 	</div> -->
 </div>
 
+<!-- ─── Guides ───────────────────────────────────────────────────────── -->
+<section id="guides" class="border-b border-fyra-gray-800">
+	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
+		<p class="mt-2 text-sm text-fyra-gray-400">
+			In-depth documentation by topic. More being written as we launch.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
+		{#each guides as guide (guide.category)}
+			<div class="bg-fyra-gray-900 p-6">
+				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
+					{guide.category}
+				</p>
+				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
+				<ul class="mt-5 flex flex-col gap-2">
+					{#each guide.articles as article (article.label)}
+						<li class="flex items-center justify-between gap-2">
+							{#if article.soon}
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span
+									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
+									>Soon</span
+								>
+							{:else if article.placeholder}
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+							{:else}
+								<a
+									href={article.href ? resolve(article.href as InternalHref, {}) : '#'}
+									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
+									>{article.label}</a
+								>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</div>
+		{/each}
+	</div>
+</section>
+
 <!-- ─── Quick start ──────────────────────────────────────────────────── -->
 <section id="quick-start" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
@@ -276,48 +318,6 @@
 						{/if}
 					</div>
 				</div>
-			</div>
-		{/each}
-	</div>
-</section>
-
-<!-- ─── Guides ───────────────────────────────────────────────────────── -->
-<section id="guides" class="">
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
-			In-depth documentation by topic. More being written as we launch.
-		</p>
-	</div>
-
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
-		{#each guides as guide (guide.category)}
-			<div class="bg-fyra-gray-900 p-6">
-				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
-					{guide.category}
-				</p>
-				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
-				<ul class="mt-5 flex flex-col gap-2">
-					{#each guide.articles as article (article.label)}
-						<li class="flex items-center justify-between gap-2">
-							{#if article.soon}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
-								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
-									>Soon</span
-								>
-							{:else if article.placeholder}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
-							{:else}
-								<a
-									href={article.href ? resolve(article.href as InternalHref, {}) : '#'}
-									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
-									>{article.label}</a
-								>
-							{/if}
-						</li>
-					{/each}
-				</ul>
 			</div>
 		{/each}
 	</div>
