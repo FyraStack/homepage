@@ -10,7 +10,7 @@
 	const formId = $props.id();
 	const signupForm = reserve.for(formId);
 
-	let plan = $state('STACK-1U');
+	let plan = $state('COLO-1U');
 	let name = $state('');
 	let email = $state('');
 

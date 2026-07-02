@@ -5,7 +5,7 @@
 	import VPSComparison from '$lib/components/Comparison.svelte';
 	import VPSFeatures from '$lib/components/services/vps/VPSFeatures.svelte';
 
-	let selectedPlan = $state('STACK-XXS');
+	let selectedPlan = $state('BASE-2G');
 </script>
 
 <svelte:head>

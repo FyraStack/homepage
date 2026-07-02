@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { colocationPlans } from '$lib/data/colocationPlans';
 
-	let { selectedPlanName = $bindable('STACK-1U') }: { selectedPlanName?: string } = $props();
+	let { selectedPlanName = $bindable('COLO-1U') }: { selectedPlanName?: string } = $props();
 
 	let currentPlan = $derived(
 		colocationPlans.find((p) => p.name === selectedPlanName) ?? colocationPlans[0]
