@@ -116,9 +116,9 @@
 					Entry price
 				</p>
 				<p class="mt-2 text-5xl font-bold tracking-tight text-fyra-gray-50">
-					$5<span class="text-xl font-medium text-fyra-gray-400">/mo</span>
+					$7<span class="text-xl font-medium text-fyra-gray-400">/mo</span>
 				</p>
-				<p class="mt-1.5 text-sm text-fyra-gray-500">STACK-XXS · that's actually what it costs.</p>
+				<p class="mt-1.5 text-sm text-fyra-gray-500">BASE-2G · that's actually what it costs.</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
 				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">Partners</p>

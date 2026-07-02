@@ -1,6 +1,6 @@
 export const colocationPlans = [
 	{
-		name: 'STACK-1U',
+		name: 'COLO-1U',
 		price: '50',
 		originalPrice: '60',
 		units: '1',
@@ -9,7 +9,7 @@ export const colocationPlans = [
 		ips: '1'
 	},
 	{
-		name: 'STACK-2U',
+		name: 'COLO-2U',
 		price: '90',
 		originalPrice: '100',
 		units: '2',
@@ -18,7 +18,7 @@ export const colocationPlans = [
 		ips: '1'
 	},
 	{
-		name: 'STACK-3U',
+		name: 'COLO-3U',
 		price: '130',
 		originalPrice: '140',
 		units: '3',
@@ -27,7 +27,7 @@ export const colocationPlans = [
 		ips: '1'
 	},
 	{
-		name: 'STACK-4U',
+		name: 'COLO-4U',
 		price: '170',
 		originalPrice: '180',
 		units: '4',
@@ -36,7 +36,7 @@ export const colocationPlans = [
 		ips: '1'
 	},
 	{
-		name: 'STACK-5U',
+		name: 'COLO-5U',
 		price: '210',
 		originalPrice: '220',
 		units: '5',
@@ -45,7 +45,7 @@ export const colocationPlans = [
 		ips: '1'
 	},
 	{
-		name: 'STACK-6U',
+		name: 'COLO-6U',
 		price: '250',
 		originalPrice: '260',
 		units: '6',

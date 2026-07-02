@@ -22,7 +22,7 @@
 				We started this because we wanted infrastructure we'd actually want to use — something we
 				could recommend to friends without caveat. That's the bar we hold ourselves to.
 			</p>
-			<p class="mt-6 text-2xl font-semibold tracking-tight text-fyra-red-400">$5/mo.</p>
+			<p class="mt-6 text-2xl font-semibold tracking-tight text-fyra-red-400">$7/mo.</p>
 			<p class="mt-1 text-sm text-fyra-gray-500">Our entry-level VPS. No games.</p>
 		</div>
 		<div class="px-6 py-10 md:px-10">

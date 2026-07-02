@@ -9,8 +9,8 @@
 		{
 			name: 'Virtual Private Servers',
 			href: '/services/vps' as ServiceHref,
-			price: '5',
-			description: 'Scales to $34/mo.',
+			price: '7',
+			description: 'Scales to $56/mo.',
 			features: [
 				'Cascade Lake vCPUs',
 				'SAS3 SSD storage',
