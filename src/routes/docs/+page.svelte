@@ -90,6 +90,7 @@
 				{ label: 'Debian', placeholder: true },
 				{ label: 'Ubuntu Server', placeholder: true },
 				{ label: 'Alpine', placeholder: true },
+				{ label: 'openSUSE Leap', placeholder: true },
 				{ label: 'NixOS', soon: true }
 			]
 		},
