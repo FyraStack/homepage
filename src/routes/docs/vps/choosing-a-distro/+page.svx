@@ -19,13 +19,13 @@ New to Linux and need to choose a distribution? This page will help you choose t
 
 ## Fedora Server
 
-Fedora Server is a community-driven, free, open-source operating system. As the upstream distribution of Red Hat Enterprise Linux, Fedora has modern packages, container tooling, and strong security features. It is known for its stability, security, and package management. Fedora is a good baseline for a Linux server you'd like to tinker with and customize.
+Fedora Server is a modern, well-supported distribution. As the upstream distribution of Red Hat Enterprise Linux, Fedora has modern packages, container tooling, and strong security features. It is known for its stability, security, and package management. Fedora is a good baseline for a Linux server you'd like to tinker with and customize.
 
 Fedora has a short support lifecycle. New versions release every six months, with support ending after about one year. If you need a distribution with a longer support lifecycle, consider Alma Linux.
 
 ## Alma Linux
 
-Alma Linux is another community-driven, free, open-source operating system. Unlike Fedora, Alma Linux has a longer support lifecycle. It is based on Red Hat Enterprise Linux and is known for its stability, security, and package management. It has full binary compatibility with RHEL, so anything designed to run on RHEL will run on Alma. As such, Alma Linux is a good choice for a Linux server you need to support for a longer period of time. If you need a VPS to host a web server, or any set-and-forget application, this is probably the best choice for you.
+Alma Linux is our choice of Enterprise Linux distribution. Unlike Fedora, Alma Linux has a longer support lifecycle. It is based on Red Hat Enterprise Linux and is known for its stability, security, and package management. It has full binary compatibility with RHEL, so anything designed to run on RHEL will run on Alma. As such, Alma Linux is a good choice for a Linux server you need to support for a longer period of time. If you need a VPS to host a web server, or any set-and-forget application, this is probably the best choice for you.
 
 Alma Linux's nature as a long-term support distribution makes it slower to adopt new features than Fedora. It also has a smaller package repository, so you may need to install packages from the EPEL repository.
 
