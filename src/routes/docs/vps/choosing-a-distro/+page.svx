@@ -39,7 +39,7 @@ Because Debian is built for stability, it lacks modern features and packages, wh
 
 Ubuntu Server is a popular choice for a scalable Linux server you need to support for a longer period of time. It is based on Debian and has a large software repository, so you can easily install a wide range of software.
 
-## Alpine
+## Alpine (Coming Soon)
 
 Alpine is a lightweight, security-focused Linux distribution. It is known for its small size and fast performance, making it a good choice for service/container hosting. Because Alpine uses `musl libc` instead of `glibc`, some applications may be incompatible. Additionally, Alpine can be harder to configure applications for. If you plan to exclusively use containers for your applications, Alpine is a great choice.
 
