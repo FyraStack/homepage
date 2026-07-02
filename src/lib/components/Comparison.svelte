@@ -46,7 +46,7 @@
 		// },
 		{
 			label: 'Price',
-			stack: '$7/mo',
+			stack: '$5/mo',
 			values: ['$12/mo', '$7/mo', '$6/mo'],
 			highlight: true
 		}

@@ -1,5 +1,5 @@
 export const vpsPlans = [
-	{ name: 'BASE-2G', price: '7', cpu: '2', ram: '2', storage: '40', network: '1' },
+	{ name: 'BASE-2G', price: '5', cpu: '2', ram: '2', storage: '40', network: '1' },
 	{ name: 'BASE-4G', price: '14', cpu: '2', ram: '4', storage: '60', network: '1' },
 	{ name: 'BASE-6G', price: '21', cpu: '3', ram: '6', storage: '80', network: '1' },
 	{ name: 'BASE-8G', price: '28', cpu: '4', ram: '8', storage: '100', network: '1' },

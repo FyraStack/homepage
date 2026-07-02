@@ -116,7 +116,7 @@
 					Entry price
 				</p>
 				<p class="mt-2 text-5xl font-bold tracking-tight text-fyra-gray-50">
-					$7<span class="text-xl font-medium text-fyra-gray-400">/mo</span>
+					$5<span class="text-xl font-medium text-fyra-gray-400">/mo</span>
 				</p>
 				<p class="mt-1.5 text-sm text-fyra-gray-500">BASE-2G · that's actually what it costs.</p>
 			</div>

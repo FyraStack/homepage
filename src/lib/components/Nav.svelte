@@ -12,7 +12,7 @@
 	const servicesItems = [
 		{
 			label: 'VPS',
-			description: 'VPS hosting from $7/mo.',
+			description: 'VPS hosting from $5/mo.',
 			href: '/services/vps' as InternalHref
 		},
 		{
