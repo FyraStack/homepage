@@ -61,16 +61,12 @@
 
 <header class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm">
 	<a
-		href={resolve('/services/colocation')}
+		href="https://blog.fyralabs.com/stack-vps-launch"
 		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
 	>
-		<span class="font-semibold">Colocation is here.</span>
-		<!-- <span class="text-fyra-red-200"
-			>Launching April 13th, get 1U colocation at just $50/mo promo price! Ship your servers now.</span
-		> -->
+		<span class="font-semibold">Stack is here.</span>
 		<span class="text-fyra-red-200"
-			>$10/mo off all plans, 1U from $50/mo. Sign up and ship your servers whenever you're ready.
-			First servers go online April 13th!</span
+			>Run your stack on our servers for as low as $5 per month. Deploy in minutes.</span
 		>
 		<span class="text-fyra-red-300">→</span>
 	</a>
@@ -193,8 +189,15 @@
 			</nav>
 
 			<!-- Right side -->
-			<div class="flex items-center gap-1 md:hidden">
+			<div class="flex items-center gap-1">
 				<!-- CTA -->
+				<a
+					href="https://dash.fyrastack.com"
+					rel="external"
+					class="hidden rounded-xs bg-fyra-red-600 px-3 py-1.5 text-[13px] font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500 md:inline-flex"
+				>
+					Dashboard
+				</a>
 
 				<!-- Mobile menu toggle -->
 				<button
@@ -237,6 +240,15 @@
 		class="fixed inset-x-0 top-11 z-50 border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
 	>
 		<div class="flex flex-col gap-0.5">
+			<a
+				href="https://dash.fyrastack.com"
+				onclick={closeAll}
+				rel="external"
+				class="mb-2 rounded-xs bg-fyra-red-600 px-3 py-2 text-sm font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500"
+			>
+				Dashboard
+			</a>
+
 			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">Services</p>
 			{#each servicesItems as item (item.href)}
 				<a

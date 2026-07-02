@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
 </script>
 
 <!-- Hero -->
@@ -43,12 +42,6 @@
 				class="bg-fyra-red-500 px-6 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-fyra-red-400"
 			>
 				View plans
-			</a>
-			<a
-				href={resolve('/')}
-				class="text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-200"
-			>
-				Pre-reserve <span aria-hidden="true">→</span>
 			</a>
 		</div>
 	</div>
