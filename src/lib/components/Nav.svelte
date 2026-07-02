@@ -189,8 +189,15 @@
 			</nav>
 
 			<!-- Right side -->
-			<div class="flex items-center gap-1 md:hidden">
+			<div class="flex items-center gap-1">
 				<!-- CTA -->
+				<a
+					href="https://dash.fyrastack.com"
+					rel="external"
+					class="hidden rounded-xs bg-fyra-red-600 px-3 py-1.5 text-[13px] font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500 md:inline-flex"
+				>
+					Dashboard
+				</a>
 
 				<!-- Mobile menu toggle -->
 				<button
@@ -233,6 +240,15 @@
 		class="fixed inset-x-0 top-11 z-50 border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
 	>
 		<div class="flex flex-col gap-0.5">
+			<a
+				href="https://dash.fyrastack.com"
+				onclick={closeAll}
+				rel="external"
+				class="mb-2 rounded-xs bg-fyra-red-600 px-3 py-2 text-sm font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500"
+			>
+				Dashboard
+			</a>
+
 			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">Services</p>
 			{#each servicesItems as item (item.href)}
 				<a
