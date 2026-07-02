@@ -11,10 +11,9 @@
 		{ label: 'Connecting via SSH', href: '/docs/vps/ssh' },
 		{ label: 'Adding a non-root user', href: '/docs/vps/user-setup' },
 		{ label: 'Initial server hardening', href: '/docs/vps/hardening' },
-		{ label: 'VPS Networking', href: '/docs/vps/networking' }
+		{ label: 'VPS Networking', href: '/docs/vps/networking' },
+		{ label: 'Choosing a Linux Distribution', href: '/docs/vps/choosing-a-distro' }
 	];
-
-
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-3 lg:px-8">

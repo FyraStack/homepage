@@ -77,7 +77,7 @@
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
 				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
 				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
-				{ label: 'Choosing a Linux distro', soon: true }
+				{ label: 'Choosing a Linux Distribution', soon: false, href: '/docs/vps/choosing-a-distro' }
 			]
 		},
 		{
