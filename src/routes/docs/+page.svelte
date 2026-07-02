@@ -89,8 +89,8 @@
 				{ label: 'Alma Linux', placeholder: true },
 				{ label: 'Debian', placeholder: true },
 				{ label: 'Ubuntu Server', placeholder: true },
-				{ label: 'Alpine', placeholder: true },
 				{ label: 'openSUSE Leap', placeholder: true },
+				{ label: 'Alpine', soon: true },
 				{ label: 'NixOS', soon: true }
 			]
 		},
