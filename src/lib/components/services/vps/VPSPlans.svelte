@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { vpsPlans } from '$lib/data/vpsPlans';
 
-	let { selectedPlanName = $bindable('STACK-XXS') }: { selectedPlanName?: string } = $props();
+	let { selectedPlanName = $bindable('BASE-2G') }: { selectedPlanName?: string } = $props();
 
 	let currentPlan = $derived(vpsPlans.find((p) => p.name === selectedPlanName) ?? vpsPlans[0]);
 </script>

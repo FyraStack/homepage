@@ -6,7 +6,7 @@
 	import type { PrereserveResult } from '$lib/server/prereserve';
 
 	let {
-		selectedPlanName = 'STACK-XXS',
+		selectedPlanName = 'BASE-2G',
 		serviceType = 'vps' as 'vps' | 'colocation'
 	}: {
 		selectedPlanName?: string;

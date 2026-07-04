@@ -1,0 +1,63 @@
+<svelte:head>
+<title>VPS Networking | Fyra Stack Docs</title>
+<meta name="description" content="Learn about our VPS networking setup." />
+<link rel="canonical" href="https://fyrastack.com/docs/vps/networking" />
+<meta property="og:title" content="VPS Networking | Fyra Stack Docs" />
+<meta property="og:description" content="Learn about our VPS networking setup." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/networking" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="VPS Networking | Fyra Stack Docs" />
+<meta name="twitter:description" content="Learn about our VPS networking setup." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# VPS Networking
+
+By default, your VPS will be set up using `cloud-init` with the correct networking configuration. If you need to make changes to your networking configuration, you can do so by editing the appropriate configuration files for your distribution.
+
+## Notes
+
+Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring firewall rules on your server. See the [VPS hardening guide](https://fyrastack.com/docs/vps/hardening) for more information on setting up a firewall.
+
+By default, we block SMTP traffic to your VPS (port 25). This is the only default traffic block on the Fyra Stack network side. If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic).
+Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic, as SMTP is known to cause abuse complaints. For that reason, we may deny a request to unblock SMTP traffic if we don't have enough history on a user.
+
+Note that spoofing MAC addresses is considered network/system abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address. In addition, if you try to use a source IP address that isn't assigned to you, your traffic will be blocked.
+
+## How our VPS Network Works
+
+When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious about an example cloud-init configuration, here's one with information redacted:
+
+```yaml
+version: 2
+ethernets:
+  public0:
+    match:
+      macaddress: $MAC_ADDRESS
+    set-name: eth0
+    dhcp4: false
+    dhcp6: false
+    addresses:
+      - $PUBLIC_IP_V4/32
+      - $PUBLIC_IP_V6/128
+      - $PUBLIC_IPV6_DELEGATION/64
+    routes:
+      - to: $PUBLIC_GATEWAY_V4/32
+        scope: link
+      - to: 0.0.0.0/0
+        via: $PUBLIC_GATEWAY_V4
+        on-link: true
+      - to: ::/0
+        via: $PUBLIC_GATEWAY_V6
+        on-link: true
+    nameservers:
+      addresses:
+        - 1.1.1.1
+        - 1.0.0.1
+        - 2606:4700:4700::1111
+        - 2606:4700:4700::1001
+```
+
+If you ever attempt to change your networking configuration, something breaks, and you need to know how to set it back up, contact us via email at [support@fyrastack.com](mailto:support@fyrastack.com).

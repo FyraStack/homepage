@@ -1,0 +1,48 @@
+<svelte:head>
+<title>Choosing a Linux Distribution | Fyra Stack Docs</title>
+<meta name="description" content="New to Linux and need to choose a distribution? Here's what we offer." />
+<link rel="canonical" href="https://fyrastack.com/docs/vps/choosing-a-distro" />
+<meta property="og:title" content="Choosing a Linux Distribution | Fyra Stack Docs" />
+<meta property="og:description" content="New to Linux and need to choose a distribution? Here's what we offer." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/choosing-a-distro" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Choosing a Linux Distribution | Fyra Stack Docs" />
+<meta name="twitter:description" content="New to Linux and need to choose a distribution? Here's what we offer." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# Choosing a Linux Distribution
+
+New to Linux and need to choose a distribution? This page will help you choose the right distribution for your needs.
+
+## Fedora Cloud
+
+Fedora Cloud is a modern, well-supported distribution. As the upstream distribution of Red Hat Enterprise Linux, Fedora has modern packages, container tooling, and strong security features. It is known for its stability, security, and flexibility. Fedora is also a great baseline for a Linux server you'd like to tinker with and customize.
+
+Fedora has a short support lifecycle. New versions release every six months, with support ending after about one year. If you need a distribution with a longer support lifecycle, consider Alma Linux.
+
+## Alma Linux
+
+Alma Linux is our choice of Enterprise Linux distribution. Unlike Fedora, Alma Linux has a longer support lifecycle of 10 years. It is based on Red Hat Enterprise Linux and is known for its stability, security, and package management. It has full binary compatibility with RHEL, so anything designed to run on RHEL will run on Alma. As such, Alma Linux is a good choice for a Linux server you need to support for a longer period of time. If you need a VPS to host a web server, or any set-and-forget application, this is probably the best choice for you.
+
+Alma Linux's nature as a long-term support distribution makes it slower to adopt new features than Fedora. It also has a smaller package repository, so you may need to install packages from the EPEL repository.
+
+## Debian
+
+Debian's main advantage is its stability and familiarity. It is known for its long-term support and is a good choice for a Linux server you need to minimally support for a longer period of time. It has a large software repository, so you can easily install a wide range of software.
+
+Because Debian is built for stability, it lacks modern features and packages, which can be a disadvantage for newer applications. However, can be a good choice for a Linux server you need to support for a longer period of time, or anything you need to set-and-forget.
+
+## Ubuntu Server
+
+Ubuntu Server is a popular choice for a scalable Linux server you need to support for a longer period of time. It is based on Debian and has a large software repository, so you can easily install a wide range of software.
+
+## Alpine (Coming Soon)
+
+Alpine is a lightweight, security-focused Linux distribution. It is known for its small size and fast performance, making it a good choice for service/container hosting. Because Alpine uses `musl libc` instead of `glibc`, some applications may be incompatible. Additionally, Alpine can be harder to configure applications for. If you plan to exclusively use containers for your applications, Alpine is a great choice.
+
+## openSUSE Leap
+
+openSUSE Leap is built with sources from the community and SUSE Linux Enterprise (SLE), which creates a stable and secure experience for those familar with the SUSE ecosystem. The latest version of openSUSE Leap has a two year support cycle.

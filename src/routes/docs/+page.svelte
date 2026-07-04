@@ -3,7 +3,32 @@
 	import { ArrowDown } from '@steeze-ui/carbon-icons';
 	import { resolve } from '$app/paths';
 
-	const steps = [
+	type InternalHref =
+		| '/services/colocation'
+		| '/docs/colocation/shipping-hardware'
+		| '/docs/colocation/ipmi'
+		| '/docs/colocation/remote-hands'
+		| '/docs/colocation/power-budgets'
+		| '/docs/colocation/networking'
+		| '/docs/vps/ssh'
+		| '/docs/vps/user-setup'
+		| '/docs/vps/hardening'
+		| '/docs/vps/networking'
+		| '/docs/vps/choosing-a-distro'
+		| '/docs/account-billing/support';
+
+	type Step = {
+		n: string;
+		title: string;
+		body: string;
+		code?: string | null;
+		cta?: {
+			label: string;
+			href: InternalHref;
+		};
+	};
+
+	const steps: Step[] = [
 		{
 			n: '01',
 			title: 'Contact us',
@@ -30,7 +55,20 @@
 		}
 	];
 
-	const guides = [
+	type GuideArticle = {
+		label: string;
+		href?: InternalHref;
+		soon?: boolean;
+		placeholder?: boolean;
+	};
+
+	type Guide = {
+		category: string;
+		description: string;
+		articles: GuideArticle[];
+	};
+
+	const guides: Guide[] = [
 		{
 			category: 'Colocation',
 			description: 'IPMI access, power specs, and getting your hardware online.',
@@ -50,18 +88,24 @@
 			category: 'VPS',
 			description: 'First login, initial hardening, and setting up your environment.',
 			articles: [
-				{ label: 'Connecting via SSH', soon: true },
-				{ label: 'Initial server hardening', soon: true },
-				{ label: 'Adding a non-root user', soon: true },
-				{ label: 'Choosing a Linux distro', soon: true }
+				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
+				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
+				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
+				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
+				{ label: 'Choosing a Linux Distribution', soon: false, href: '/docs/vps/choosing-a-distro' }
 			]
 		},
 		{
 			category: 'Linux & Distros',
 			description: 'Supported operating systems and distro-specific notes.',
 			articles: [
-				{ label: 'Ultramarine Linux', soon: true },
-				{ label: 'Debian / Ubuntu', soon: true },
+				{ label: 'Ultramarine Server', soon: true },
+				{ label: 'Fedora Server', placeholder: true },
+				{ label: 'Alma Linux', placeholder: true },
+				{ label: 'Debian', placeholder: true },
+				{ label: 'Ubuntu Server', placeholder: true },
+				{ label: 'openSUSE Leap', placeholder: true },
+				{ label: 'Alpine', soon: true },
 				{ label: 'Arch', soon: true },
 				{ label: 'NixOS', soon: true }
 			]
@@ -73,7 +117,7 @@
 				{ label: 'Upgrading your plan', soon: true },
 				{ label: 'Reading your invoice', soon: true },
 				{ label: 'Cancelling a plan', soon: true },
-				{ label: 'Contacting support', soon: true }
+				{ label: 'Contacting support', soon: false, href: '/docs/account-billing/support' }
 			]
 		}
 	];
@@ -160,7 +204,7 @@
 		>
 			Documentation.
 		</h1>
-		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
+		<p class="mx-auto max-w-lg text-base text-fyra-gray-300 sm:text-lg/7">
 			Guides, references, and answers for getting your Stack VPS or colocation slot up and running.
 		</p>
 		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -212,11 +256,53 @@
 	</div> -->
 </div>
 
+<!-- ─── Guides ───────────────────────────────────────────────────────── -->
+<section id="guides" class="border-b border-fyra-gray-800">
+	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
+		<p class="mt-2 text-sm text-fyra-gray-300">
+			In-depth documentation by topic. More being written as we launch.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
+		{#each guides as guide (guide.category)}
+			<div class="bg-fyra-gray-900 p-6">
+				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-300 uppercase">
+					{guide.category}
+				</p>
+				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-300">{guide.description}</p>
+				<ul class="mt-5 flex flex-col gap-2">
+					{#each guide.articles as article (article.label)}
+						<li class="flex items-center justify-between gap-2">
+							{#if article.soon}
+								<span class="text-sm text-fyra-gray-300">{article.label}</span>
+								<span
+									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase"
+									>Soon</span
+								>
+							{:else if article.placeholder}
+								<span class="text-sm text-fyra-gray-300">{article.label}</span>
+							{:else}
+								<a
+									href={article.href ? resolve(article.href) : '#'}
+									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
+									>{article.label}</a
+								>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</div>
+		{/each}
+	</div>
+</section>
+
 <!-- ─── Quick start ──────────────────────────────────────────────────── -->
 <section id="quick-start" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Colocation quick start.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+		<p class="mt-2 text-sm text-fyra-gray-300">
 			From shipping a server to a running server in just four steps.
 		</p>
 	</div>
@@ -232,11 +318,11 @@
 					>
 					<div class="flex-1">
 						<h3 class="text-base font-semibold text-fyra-gray-50">{step.title}</h3>
-						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">{step.body}</p>
+						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-300">{step.body}</p>
 						{#if step.code}
 							<pre
 								class="mt-4 overflow-x-auto border border-fyra-gray-700 bg-fyra-gray-950 px-4 py-3 font-mono text-sm text-fyra-gray-200"><span
-									class="text-fyra-gray-600 select-none"
+									class="text-fyra-gray-400 select-none"
 									>$ </span>{step.code}</pre>
 						{/if}
 						{#if step.cta}
@@ -248,46 +334,6 @@
 						{/if}
 					</div>
 				</div>
-			</div>
-		{/each}
-	</div>
-</section>
-
-<!-- ─── Guides ───────────────────────────────────────────────────────── -->
-<section id="guides" class="">
-	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
-			In-depth documentation by topic. More being written as we launch.
-		</p>
-	</div>
-
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
-		{#each guides as guide (guide.category)}
-			<div class="bg-fyra-gray-900 p-6">
-				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
-					{guide.category}
-				</p>
-				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
-				<ul class="mt-5 flex flex-col gap-2">
-					{#each guide.articles as article (article.label)}
-						<li class="flex items-center justify-between gap-2">
-							{#if article.soon}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
-								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
-									>Soon</span
-								>
-							{:else}
-								<a
-									href={article.href ? resolve(article.href) : '#'}
-									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
-									>{article.label}</a
-								>
-							{/if}
-						</li>
-					{/each}
-				</ul>
 			</div>
 		{/each}
 	</div>

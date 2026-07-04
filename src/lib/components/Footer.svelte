@@ -19,9 +19,9 @@
 		{
 			heading: 'Resources',
 			links: [
-				{ label: 'Support', href: 'mailto:support@fyralabs.com' },
+				{ label: 'Support', href: 'mailto:support@fyrastack.com' },
 				{ label: 'Discord', href: 'https://fyralabs.com/discord', external: true },
-				{ label: 'GitHub', href: 'https://github.com/FyraLabs/', external: true }
+				{ label: 'GitHub', href: 'https://github.com/FyraStack/', external: true }
 			]
 		},
 		{

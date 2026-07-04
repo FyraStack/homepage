@@ -1,0 +1,186 @@
+<svelte:head>
+<title>Connecting via SSH | Fyra Stack Docs</title>
+<meta name="description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
+<link rel="canonical" href="https://fyrastack.com/docs/vps/ssh" />
+<meta property="og:title" content="Connecting via SSH | Fyra Stack Docs" />
+<meta property="og:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
+<meta property="og:image" content="https://fyrastack.com/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fyrastack.com/docs/vps/ssh" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Connecting via SSH | Fyra Stack Docs" />
+<meta name="twitter:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
+<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
+</svelte:head>
+
+# Connecting via SSH
+
+Thanks for setting up a VPS with Fyra Stack! To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
+
+## Setting up a client
+
+Open your terminal and use the `ssh` command followed by `root` and the IP address of your VPS. If you already added your SSH key, connect with:
+
+```bash
+ssh root@your_vps_ip -i ~/.ssh/id_ed25519
+```
+
+If you did not add a key before creating the VPS, connect without `-i` and enter the default root password provided to you when prompted:
+
+```bash
+ssh root@your_vps_ip
+```
+
+## Generating an SSH key
+
+Open your terminal and run the following command to generate a new SSH key pair:
+
+```bash
+ssh-keygen -t ed25519 
+```
+
+To get the public key, run the following command:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+If you saved the key in a different location, look there and use `cat` on the file ending in `.pub`.
+
+Copy the line beginning with `ssh-ed25519` and ending with `username@hostname`. This is your public key, which you'll need to add to your VPS.
+
+### Adding your Public Key to your VPS
+
+On the Fyra Stack Dashboard, click on your profile icon and go to Keys. From there, paste in your public key, give it a name, and click add key. Do this *before* creating your VPS when possible, as it is added during the initialization stage.
+
+If your VPS already exists and does not have your key installed, log in with the default root password provided to you and add the key manually:
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+nano ~/.ssh/authorized_keys
+```
+
+Paste your public key into `authorized_keys`, then save the file.
+
+After saving, update the permissions on the authorized_keys file:
+
+```bash
+chmod 600 ~/.ssh/authorized_keys
+```
+
+Alternatively, you can also use the `ssh-copy-id` command to add your key to the VPS:
+
+```bash
+ssh-copy-id root@your_vps_ip
+```
+
+After updating the permissions, keep the root session open while you test key-based login from a new terminal.
+
+```bash
+ssh root@your_vps_ip -i ~/.ssh/id_ed25519
+```
+
+## Optional - Make Login Easier
+
+You can make logging in easier by adding your key to an SSH agent, configuring an SSH host shortcut, or both.
+
+### Add your key to an SSH agent
+
+An SSH agent keeps your private key unlocked for your current login session, so you do not need to type your key passphrase every time you connect.
+
+#### On Linux or macOS
+
+If you don't have a preferred command line editor, first install `nano` or `vim`. If you use `nano`, you can exit by pressing `Ctrl + X`, then `Y` to save, or `N` to discard.
+
+Start the agent and add your private key:
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+After this, you can connect without passing `-i` each time:
+
+```bash
+ssh stackuser@your_vps_ip
+```
+
+On macOS, you can also store the key passphrase in your keychain:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+#### On Windows
+
+Windows includes an OpenSSH Authentication Agent service. Open PowerShell as Administrator and run:
+
+```powershell
+Set-Service ssh-agent -StartupType Automatic
+Start-Service ssh-agent
+```
+
+Then add your private key:
+
+```powershell
+ssh-add ~\.ssh\id_ed25519
+```
+
+After this, you can connect without passing `-i` each time:
+
+```powershell
+ssh stackuser@your_vps_ip
+```
+
+### Create an SSH config shortcut
+
+You can also create a shortcut in your SSH config file so you only need to type a short command like `ssh fyrastack-vps`.
+
+#### On Linux or macOS
+
+Create or edit `~/.ssh/config` and add:
+
+```sshconfig
+Host fyrastack-vps
+  HostName your_vps_ip
+  User stackuser
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+```
+
+Make sure the config file has the right permissions:
+
+```bash
+chmod 600 ~/.ssh/config
+```
+
+Then connect with:
+
+```bash
+ssh fyrastack-vps
+```
+
+#### On Windows
+
+Create or edit `~\.ssh\config` and add:
+
+```sshconfig
+Host fyrastack-vps
+  HostName your_vps_ip
+  User stackuser
+  IdentityFile ~/.ssh/id_ed25519
+  AddKeysToAgent yes
+```
+
+Then connect with:
+
+```powershell
+ssh fyrastack-vps
+```
+
+Replace `fyrastack-vps` with any shortcut name you prefer, and replace `your_vps_ip` with your VPS public IP address.
+
+## Next Steps
+
+After you can log in, make sure your SSH key is installed and tested. Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).

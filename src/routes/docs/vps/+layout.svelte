@@ -8,11 +8,11 @@
 	const { children } = $props();
 
 	const nav = [
-		{ label: 'Shipping hardware to us', href: '/docs/colocation/shipping-hardware' },
-		{ label: 'Accessing IPMI remotely', href: '/docs/colocation/ipmi' },
-		{ label: 'Requesting remote hands', href: '/docs/colocation/remote-hands' },
-		{ label: 'Power budgets and PDUs', href: '/docs/colocation/power-budgets' },
-		{ label: 'Colocation Networking', href: '/docs/colocation/networking' }
+		{ label: 'Connecting via SSH', href: '/docs/vps/ssh' },
+		{ label: 'Adding a non-root user', href: '/docs/vps/user-setup' },
+		{ label: 'Initial server hardening', href: '/docs/vps/hardening' },
+		{ label: 'VPS Networking', href: '/docs/vps/networking' },
+		{ label: 'Choosing a Linux Distribution', href: '/docs/vps/choosing-a-distro' }
 	] as const;
 </script>
 
@@ -20,7 +20,7 @@
 	<nav class="flex items-center gap-2 text-xs text-fyra-gray-300">
 		<a href={resolve('/docs')} class="transition-colors hover:text-fyra-gray-100">Docs</a>
 		<span class="text-fyra-gray-500">/</span>
-		<span class="text-fyra-gray-200">Colocation</span>
+		<span class="text-fyra-gray-200">VPS</span>
 	</nav>
 </div>
 
@@ -28,9 +28,7 @@
 	<!-- Sidebar -->
 	<aside class="hidden w-56 shrink-0 lg:block">
 		<div class="sticky top-0 px-6 py-8">
-			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">
-				Colocation
-			</p>
+			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">VPS</p>
 			<nav class="flex flex-col gap-0.5">
 				{#each nav as item (item.href)}
 					<a
@@ -61,9 +59,7 @@
 	<main class="min-w-0 flex-1 px-6 py-12 lg:px-12">
 		<!-- Mobile nav -->
 		<div class="mb-8 lg:hidden">
-			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">
-				Colocation
-			</p>
+			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">VPS</p>
 			<nav class="flex flex-wrap gap-2">
 				{#each nav as item (item.href)}
 					<a
