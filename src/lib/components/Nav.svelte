@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { onMount } from 'svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ChevronDown, Close, Menu } from '@steeze-ui/carbon-icons';
@@ -8,6 +9,11 @@
 
 	let isMobileMenuOpen = $state(false);
 	let openDropdown = $state<string | null>(null);
+	let headerHeight = $state(0);
+	let hasScrolled = $state(false);
+	let isMobileViewport = $state(false);
+
+	let isBannerCollapsed = $derived(isMobileViewport && hasScrolled);
 
 	const servicesItems = [
 		{
@@ -43,6 +49,25 @@
 		openDropdown = null;
 		isMobileMenuOpen = false;
 	}
+
+	function handleScroll() {
+		hasScrolled = window.scrollY > 8;
+	}
+
+	onMount(() => {
+		const mobileViewportQuery = window.matchMedia('(max-width: 767px)');
+		const syncMobileViewport = () => {
+			isMobileViewport = mobileViewportQuery.matches;
+		};
+
+		syncMobileViewport();
+		handleScroll();
+		mobileViewportQuery.addEventListener('change', syncMobileViewport);
+
+		return () => {
+			mobileViewportQuery.removeEventListener('change', syncMobileViewport);
+		};
+	});
 </script>
 
 <svelte:window
@@ -52,12 +77,20 @@
 	onclick={(e) => {
 		if (!(e.target as Element).closest('header')) openDropdown = null;
 	}}
+	onscroll={handleScroll}
 />
 
-<header class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm">
+<header
+	bind:clientHeight={headerHeight}
+	class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm"
+>
 	<a
 		href="https://blog.fyralabs.com/stack-vps-launch"
-		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
+		aria-hidden={isBannerCollapsed}
+		tabindex={isBannerCollapsed ? -1 : undefined}
+		class="flex items-center justify-center gap-2 overflow-hidden bg-fyra-red-600 px-4 text-center text-sm font-medium text-fyra-gray-50 transition-[max-height,padding,opacity] duration-200 ease-out hover:bg-fyra-red-600 md:max-h-none md:py-2.5 md:opacity-100 {isBannerCollapsed
+			? 'max-h-0 py-0 opacity-0'
+			: 'max-h-32 py-2.5 opacity-100'}"
 	>
 		<span class="font-semibold">Stack is here.</span>
 		<span class="text-fyra-red-200"
@@ -202,7 +235,8 @@
 						openDropdown = null;
 					}}
 					class="flex items-center justify-center rounded-xs p-1.5 text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 md:hidden"
-					aria-label="Open menu"
+					aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={isMobileMenuOpen}
 				>
 					{#if isMobileMenuOpen}
 						<Icon src={Close} class="h-4 w-4" aria-hidden="true" />
@@ -219,7 +253,8 @@
 {#if isMobileMenuOpen}
 	<div
 		transition:fade={{ duration: 120 }}
-		class="fixed inset-0 top-11 z-40 bg-fyra-gray-950/50 md:hidden"
+		style:top={`${headerHeight}px`}
+		class="fixed inset-x-0 bottom-0 z-40 bg-fyra-gray-950/50 md:hidden"
 		role="button"
 		tabindex="0"
 		onclick={() => {
@@ -232,7 +267,9 @@
 
 	<div
 		transition:slide={{ duration: 300, axis: 'y' }}
-		class="fixed inset-x-0 top-11 z-50 border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
+		style:top={`${headerHeight}px`}
+		style:max-height={`calc(100vh - ${headerHeight}px)`}
+		class="fixed inset-x-0 z-50 overflow-y-auto border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
 	>
 		<div class="flex flex-col gap-0.5">
 			<a
