@@ -88,9 +88,9 @@
 		href="https://blog.fyralabs.com/stack-vps-launch"
 		aria-hidden={isBannerCollapsed}
 		tabindex={isBannerCollapsed ? -1 : undefined}
-		class="flex items-center justify-center gap-2 overflow-hidden bg-fyra-red-600 px-4 text-center text-sm font-medium text-fyra-gray-50 transition-[max-height,padding,opacity] duration-200 ease-out hover:bg-fyra-red-600 md:max-h-none md:py-2.5 md:opacity-100 {isBannerCollapsed
-			? 'max-h-0 py-0 opacity-0'
-			: 'max-h-32 py-2.5 opacity-100'}"
+		class="flex items-center justify-center gap-2 overflow-hidden bg-fyra-red-600 px-4 text-center text-sm font-medium text-fyra-gray-50 hover:bg-fyra-red-600 md:max-h-none md:py-2.5 md:opacity-100 {isBannerCollapsed
+			? 'max-h-0 py-0 opacity-0 transition-[max-height,padding,opacity] duration-200 ease-out'
+			: 'max-h-32 py-2.5 opacity-100 transition-none'}"
 	>
 		<span class="font-semibold">Stack is here.</span>
 		<span class="text-fyra-red-200"
