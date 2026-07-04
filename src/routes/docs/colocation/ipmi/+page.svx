@@ -4,22 +4,22 @@
 
 <DocsMeta
 	title="Accessing IPMI Remotely"
-	description="Connect to your server's IPMI, iDRAC, or iLO over our WireGuard VPN. Power cycle, remote console, and out-of-band management even when the OS is down."
+	description="Connect to your server's IPMI, iDRAC, or iLO over WireGuard."
 />
 
-# Accessing IPMI Remotely.
+# Accessing IPMI Remotely
 
 IPMI, also known as iDRAC on Dell hardware, iLO on HP, and IPMI on Supermicro, gives you out-of-band access to your server. You can power cycle, access a remote console, and manage hardware even when the OS is unresponsive.
 
 ---
 
-## 1. Your IPMI Address.
+## Your IPMI Address
 
-When we rack your server, we'll assign a dedicated IP address to your IPMI interface and include it in your welcome email. IPMI addresses are on our management network and are **only accessible via our IPMI VPN**, they are not publicly routed.
+When we rack your server, we'll assign an IP address to your IPMI interface and include it in your welcome email. IPMI addresses are on our management network and are **only accessible via our IPMI VPN**; they are not publicly routed.
 
 ---
 
-## 2. Connecting to the IPMI VPN.
+## Connecting to the IPMI VPN
 
 We use WireGuard for IPMI network access. After your server is racked:
 
@@ -35,27 +35,27 @@ Once connected, your IPMI web interface will be reachable at the IP in your welc
 
 ---
 
-## 3. Logging In.
+## Logging In
 
-### First login.
+### First Login
 
 We set a temporary password during racking and include it in your welcome email. **Change it immediately after first login.**
 
-### Dell iDRAC.
+### Dell iDRAC
 
 Navigate to `https://<your-ipmi-ip>` in a browser. Log in with username `root` and the temporary password we provide. Go to **iDRAC Settings → User Authentication** to update your credentials.
 
-### HP iLO.
+### HP iLO
 
 Navigate to `https://<your-ipmi-ip>`. Default username is `Administrator`. Update via **Administration → User Administration**.
 
-### Supermicro IPMI.
+### Supermicro IPMI
 
 Navigate to `https://<your-ipmi-ip>`. Default username is `ADMIN`. Update via **Configuration → Users**.
 
 ---
 
-## 4. Remote Console.
+## Remote Console
 
 All major IPMI implementations provide a remote KVM console (HTML5 or Java). This gives you full keyboard, video, and mouse access as if you were sitting in front of the server.
 
@@ -67,7 +67,7 @@ Use the remote console to recover from a bad network config, reinstall the OS, o
 
 ---
 
-## 5. Power Management via IPMI CLI.
+## Power Management via IPMI CLI
 
 You can also manage power from the command line using `ipmitool`:
 
@@ -84,12 +84,12 @@ ipmitool -I lanplus -H <ipmi-ip> -U <user> -P <pass> chassis power reset
 
 ---
 
-## 6. Troubleshooting.
+## Troubleshooting
 
-### IPMI web interface not loading.
+### IPMI Web Interface Not Loading
 
 Confirm your WireGuard tunnel is up with `wg show`. If the tunnel is up but the interface is unreachable, email us as the IPMI port may need to be reconfigured.
 
-### Forgot IPMI password.
+### Forgot IPMI Password
 
 If you're locked out, [request remote hands](/docs/colocation/remote-hands) and we can reset the IPMI credentials from the physical console.

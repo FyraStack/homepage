@@ -4,22 +4,22 @@
 
 <DocsMeta
 	title="Shipping Hardware to Us"
-	description="How to pack, label, and ship your server to us. Covers packing guidelines, our shipping address, and the receive authorization process."
+	description="Pack, label, and ship your server for colocation."
 />
 
-# Shipping Hardware to Us.
+# Shipping Hardware to Us
 
 Before your server can go live in our Chicago DC, we need to receive it at our office location. This document covers how to pack, label, and ship your hardware so it arrives safely and gets racked without delays.
 
 ---
 
-## 1. Before You Ship.
+## Before You Ship
 
 [Fill out this form](/services/colocation) before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
 
 ---
 
-## 2. Shipping Address.
+## Shipping Address
 
 Send hardware to:
 
@@ -31,44 +31,44 @@ Include your **RAN** and your **name or company name** on the outside of every b
 
 ---
 
-## 3. Packing Your Server.
+## Packing Your Server
 
-### Use the original packaging if you have it.
+### Use the Original Packaging If You Have It
 
 Original server packaging is designed exactly for this. If you still have the box and foam inserts, use them.
 
-### If you don't have original packaging.
+### If You Don't Have Original Packaging
 
 - Use a double-walled corrugated box sized to fit snugly around the server.
 - Wrap the server in at least 2 inches of foam or bubble wrap on all sides.
 - Fill any empty space with packing peanuts or air pillows — servers should not shift inside the box.
-- Do not ship with loose components (RAM sticks, drives), instead please bag and tape them separately inside the box.
+- Do not ship with loose components, such as RAM sticks or drives. Instead, please bag and tape them separately inside the box.
 
-### Rails and accessories.
+### Rails and Accessories
 
-You must ship OEM rack rails (please don't send us generic rails) and other accessories with your server. Please pack them in a separate box and label it with the same RAN and mark it as a companion shipment.
+You must ship OEM rack rails (please don't send us generic rails) and other accessories with your server. Please pack them in a separate box, label it with the same RAN, and mark it as a companion shipment.
 
 ---
 
-## 4. What to Include.
+## What to Include
 
 Ship the following with your hardware:
 
-### A printed packing slip.
+### A Printed Packing Slip
 
 Include a sheet inside the box with your name, contact email, RAN, and a brief description of the hardware (make, model, number of drives, number of PSUs).
 
-### Power cables.
+### Power Cables
 
 Include at least two IEC NEMA C13 to C14 power distribution cables that are at least 6ft long. If we need to acquire power cables for your server, we can do that, but at an additional charge.
 
-### Any KVM or console adapters.
+### Any KVM or Console Adapters
 
 If your server requires a special adapter for the serial console or VGA, include it. We use standard VGA and USB, but some servers need dongles.
 
 ---
 
-## 5. Carriers and Insurance.
+## Carriers and Insurance
 
 We recommend shipping with **FedEx** or **UPS** with full declared value insurance and signature required on delivery. For high-value hardware (over $2,000), we strongly recommend freight or white-glove shipping.
 
@@ -76,7 +76,7 @@ Keep your tracking number. We'll confirm receipt via email once your shipment is
 
 ---
 
-## 6. After We Receive It.
+## After We Receive It
 
 Once your server arrives:
 

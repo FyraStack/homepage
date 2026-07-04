@@ -2,10 +2,7 @@
 	import DocsMeta from '$lib/components/DocsMeta.svelte';
 </script>
 
-<DocsMeta
-	title="Contacting Support"
-	description="Contact Fyra Stack support for any questions or issues with your account billing."
-/>
+<DocsMeta title="Contacting Support" description="Get help with your account or service." />
 
 # Contacting Support
 
