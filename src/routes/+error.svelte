@@ -2,8 +2,6 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 
-	const notFoundComment =
-		'Oh well... maybe one of these can help?';
 	const isNotFound = page.status === 404;
 </script>
 
@@ -36,10 +34,14 @@
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			{isNotFound ? 'This isn\'t the stack you\'re looking for?' : 'The stack hit an error.'}
+			{isNotFound ? "This isn't the stack you're looking for?" : 'The stack hit an error.'}
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
-			{isNotFound ? notFoundComment : (page.error?.message ?? 'An unexpected error occurred.')}
+			{#if isNotFound}
+				Oh well... maybe one of these can help?
+			{:else}
+				{page.error?.message ?? 'An unexpected error occurred.'}
+			{/if}
 		</p>
 
 		<div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
