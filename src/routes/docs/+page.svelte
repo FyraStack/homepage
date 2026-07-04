@@ -3,7 +3,31 @@
 	import { ArrowDown } from '@steeze-ui/carbon-icons';
 	import { resolve } from '$app/paths';
 
-	const steps = [
+	type InternalHref =
+		| '/services/colocation'
+		| '/docs/colocation/shipping-hardware'
+		| '/docs/colocation/ipmi'
+		| '/docs/colocation/remote-hands'
+		| '/docs/colocation/power-budgets'
+		| '/docs/vps/ssh'
+		| '/docs/vps/user-setup'
+		| '/docs/vps/hardening'
+		| '/docs/vps/networking'
+		| '/docs/vps/choosing-a-distro'
+		| '/docs/account-billing/support';
+
+	type Step = {
+		n: string;
+		title: string;
+		body: string;
+		code?: string | null;
+		cta?: {
+			label: string;
+			href: InternalHref;
+		};
+	};
+
+	const steps: Step[] = [
 		{
 			n: '01',
 			title: 'Contact us',
@@ -29,17 +53,6 @@
 			code: 'ssh user@colo-07712.us-mdw-chi.fyrastack.com'
 		}
 	];
-
-	type InternalHref =
-		| '/services/colocation'
-		| '/docs/colocation/shipping-hardware'
-		| '/docs/colocation/ipmi'
-		| '/docs/colocation/remote-hands'
-		| '/docs/colocation/power-budgets'
-		| '/docs/vps/ssh'
-		| '/docs/vps/user-setup'
-		| '/docs/vps/hardening'
-		| '/docs/vps/networking';
 
 	type GuideArticle = {
 		label: string;
@@ -188,7 +201,7 @@
 		>
 			Documentation.
 		</h1>
-		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
+		<p class="mx-auto max-w-lg text-base text-fyra-gray-300 sm:text-lg/7">
 			Guides, references, and answers for getting your Stack VPS or colocation slot up and running.
 		</p>
 		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -244,7 +257,7 @@
 <section id="guides" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+		<p class="mt-2 text-sm text-fyra-gray-300">
 			In-depth documentation by topic. More being written as we launch.
 		</p>
 	</div>
@@ -252,24 +265,24 @@
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-4">
 		{#each guides as guide (guide.category)}
 			<div class="bg-fyra-gray-900 p-6">
-				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
+				<p class="text-[11px] font-medium tracking-widest text-fyra-gray-300 uppercase">
 					{guide.category}
 				</p>
-				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-400">{guide.description}</p>
+				<p class="mt-2 text-sm leading-relaxed text-fyra-gray-300">{guide.description}</p>
 				<ul class="mt-5 flex flex-col gap-2">
 					{#each guide.articles as article (article.label)}
 						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span class="text-sm text-fyra-gray-300">{article.label}</span>
 								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
+									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase"
 									>Soon</span
 								>
 							{:else if article.placeholder}
-								<span class="text-sm text-fyra-gray-400">{article.label}</span>
+								<span class="text-sm text-fyra-gray-300">{article.label}</span>
 							{:else}
 								<a
-									href={article.href ? resolve(article.href as InternalHref, {}) : '#'}
+									href={article.href ? resolve(article.href) : '#'}
 									class="text-sm text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
 									>{article.label}</a
 								>
@@ -286,7 +299,7 @@
 <section id="quick-start" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Colocation quick start.</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">
+		<p class="mt-2 text-sm text-fyra-gray-300">
 			From shipping a server to a running server in just four steps.
 		</p>
 	</div>
@@ -302,16 +315,16 @@
 					>
 					<div class="flex-1">
 						<h3 class="text-base font-semibold text-fyra-gray-50">{step.title}</h3>
-						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">{step.body}</p>
+						<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-300">{step.body}</p>
 						{#if step.code}
 							<pre
 								class="mt-4 overflow-x-auto border border-fyra-gray-700 bg-fyra-gray-950 px-4 py-3 font-mono text-sm text-fyra-gray-200"><span
-									class="text-fyra-gray-600 select-none"
+									class="text-fyra-gray-400 select-none"
 									>$ </span>{step.code}</pre>
 						{/if}
 						{#if step.cta}
 							<a
-								href={resolve(step.cta.href as InternalHref, {})}
+								href={resolve(step.cta.href)}
 								class="mt-4 inline-block text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
 								>{step.cta.label}</a
 							>
