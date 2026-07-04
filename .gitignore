@@ -10,7 +10,7 @@ package-lock.json
 /build
 
 # OS
-.DS_Store
+**.DS_Store
 Thumbs.db
 
 # Env
@@ -29,3 +29,8 @@ vite.config.ts.timestamp-*
 !.dev.vars.example
 
 .idea
+
+# Playwright test results
+blob-report/
+playwright-report/
+test-results/
