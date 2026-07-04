@@ -76,25 +76,34 @@
 		<table class="w-full min-w-[600px] border-collapse">
 			<thead>
 				<tr class="border-b border-fyra-gray-800">
-					<th class="w-36 px-6 py-4 text-left md:w-44 md:px-10"></th>
-					<th class="px-5 py-4 text-left">
+					<th scope="col" class="w-36 px-6 py-4 text-left md:w-44 md:px-10">
+						<span class="sr-only">Feature</span>
+					</th>
+					<th scope="col" class="px-5 py-4 text-left">
 						<div class="flex items-center gap-1.5">
 							<img src="/logo.svg" alt="" class="h-4 w-4" aria-hidden="true" />
 							<span class="text-sm font-semibold text-fyra-gray-50">Stack</span>
 						</div>
 					</th>
 					{#each competitors as name (name)}
-						<th class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400">{name}</th>
+						<th scope="col" class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400"
+							>{name}</th
+						>
 					{/each}
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-fyra-gray-800">
 				{#each rows as row (row.label)}
 					<tr>
-						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
+						<th
+							scope="row"
+							class="px-6 py-4 text-left text-sm font-normal text-fyra-gray-400 md:px-10"
+						>
+							{row.label}
+						</th>
 						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">
 							{#if row.stack.previousPrice}
-								<span class="mr-1.5 text-fyra-gray-500 line-through">{row.stack.previousPrice}</span
+								<span class="mr-1.5 text-fyra-gray-400 line-through">{row.stack.previousPrice}</span
 								>
 							{/if}
 							{row.stack.text}

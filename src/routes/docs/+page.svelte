@@ -251,13 +251,13 @@
 					{#each guide.articles as article (article.label)}
 						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-500">{article.label}</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
 								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase"
+									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
 									>Soon</span
 								>
 							{:else if article.placeholder}
-								<span class="text-sm text-fyra-gray-500">{article.label}</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
 							{:else}
 								<a
 									href={article.href ? resolve(article.href) : '#'}

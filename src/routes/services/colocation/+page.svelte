@@ -35,9 +35,7 @@
 	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-<main>
-	<ColocationHero />
-</main>
+<ColocationHero />
 
 <ColocationFeatures />
 

@@ -82,7 +82,7 @@
 	{#each [{ value: 'Midwest proud', label: 'Chicago, IL' }, { value: 'Independent', label: 'Backed by Fyra Labs' }, { value: 'ASN AS402292', label: 'Since 2026' }] as stat (stat.label)}
 		<div class="flex flex-col gap-0.5 bg-fyra-gray-900 px-6 py-6 md:px-10">
 			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">{stat.value}</span>
-			<span class="text-[12px] text-fyra-gray-500">{stat.label}</span>
+			<span class="text-[12px] text-fyra-gray-400">{stat.label}</span>
 		</div>
 	{/each}
 </div>
@@ -112,25 +112,25 @@
 		<!-- Right: fact bento -->
 		<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 md:grid-cols-2">
 			<div class="bg-fyra-gray-900 px-8 py-8 md:col-span-2">
-				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
+				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase">
 					Entry price
 				</p>
 				<p class="mt-2 text-5xl font-bold tracking-tight text-fyra-gray-50">
 					$5<span class="text-xl font-medium text-fyra-gray-400">/mo</span>
 				</p>
-				<p class="mt-1.5 text-sm text-fyra-gray-500">BASE-2G · that's actually what it costs.</p>
+				<p class="mt-1.5 text-sm text-fyra-gray-400">BASE-2G · that's actually what it costs.</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
-				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">Partners</p>
+				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase">Partners</p>
 				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">DeepComputing</p>
-				<p class="mt-1 text-xs text-fyra-gray-500">Yuning Liang · CEO</p>
+				<p class="mt-1 text-xs text-fyra-gray-400">Yuning Liang · CEO</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
-				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
+				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase">
 					Team size
 				</p>
 				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">{memberCount} people</p>
-				<p class="mt-1 text-xs text-fyra-gray-500">Small, on purpose.</p>
+				<p class="mt-1 text-xs text-fyra-gray-400">Small, on purpose.</p>
 			</div>
 		</div>
 	</div>
@@ -157,7 +157,7 @@
 				{/if}
 				<div class="min-w-0 flex-1 pt-0.5">
 					<p class="text-sm font-semibold text-fyra-gray-50">{displayName(member)}</p>
-					<p class="mt-0.5 text-[11px] font-medium tracking-widest text-fyra-gray-500 uppercase">
+					<p class="mt-0.5 text-[11px] font-medium tracking-widest text-fyra-gray-400 uppercase">
 						{member.role.replace(' / ', ' · ')}
 					</p>
 				</div>
