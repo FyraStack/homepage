@@ -40,11 +40,11 @@ See below for a more detailed description of the setup process according to your
 
 ## Firewall Configuration
 
-Fyra Stack colocation does NOT run your traffic through a NAT. That means **you are responsible for configuring your firewall to protect your server**. We recommend using `ufw` or `iptables` to configure your firewall. We also recommend changing your SSH port as it will be exposed to the public internet, making it susceptible to brute-force attacks. Refer to your distribution's documentation, or [see our documentation for VPS hardening](https://fyrastack.com/docs/vps/hardening). If you are using a firewall, make sure to allow traffic to your public IP addresses and transit IP addresses.
+Fyra Stack colocation does NOT run your traffic through a NAT. That means **you are responsible for configuring your firewall to protect your server**. We recommend using `ufw` or `iptables` to configure your firewall. We also recommend changing your SSH port as it will be exposed to the public internet, making it susceptible to brute-force attacks. Refer to your distribution's documentation, or [see our documentation for VPS hardening](/docs/vps/hardening). If you are using a firewall, make sure to allow traffic to your public IP addresses and transit IP addresses.
 
 For compatibility, our router configuration will pass through any traffic from your assigned transit IP (ending in .4) to your public IP. This is primarily in case you use something like Podman or Docker that doesn't follow standard routes. Any inbound traffic MUST still listen on the public IPv4 address; this backup NAT only applies to outbound traffic.
 
-Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**. We recommend [Cloudflare DNS](https://1.1.1.1), [Quad9](https://quad9.net/), or self-hosting Unbound DNS, depending on how concerned you are about privacy.
+Because we don't support DHCP, **make sure you configure DNS as it will not be configured by default**. We recommend [Cloudflare DNS](https://1.1.1.1), [Quad9](https://quad9.net/), or self-hosting Unbound DNS, depending on how concerned you are about privacy. We peer directly with Cloudflare, so Cloudflare DNS will likely be fastest.
 
 ## Debian (/etc/network/interfaces)
 Example configuration for Debian systems using `/etc/network/interfaces` for networking configuration. This assumes an interface name of `eno3`.
@@ -166,7 +166,7 @@ network:
 ```
 
 ## NetworkManager
-If your system is using NetworkManager, follow these instructions:
+If your system is using `NetworkManager`, follow these instructions:
 
 First, find your connection name:
 ```sh
@@ -188,7 +188,7 @@ nmcli connection modify "<connection-name>" \\
   +ipv6.routes "::/0 fe80::$VLAN:ffff 100 src=$PUBLIC_IPV6"
 ```
 
-If NetworkManager rejects the `src=` route attribute, use a dispatcher script instead. Create `/etc/NetworkManager/dispatcher.d/90-colo-public-source` (assuming your interface is named `eno3`):
+If `NetworkManager` rejects the `src=` route attribute, use a dispatcher script instead. Create `/etc/NetworkManager/dispatcher.d/90-colo-public-source` (assuming your interface is named `eno3`):
 ```sh
 #!/bin/sh
 
