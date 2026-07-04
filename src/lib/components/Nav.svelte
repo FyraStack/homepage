@@ -12,12 +12,12 @@
 	const servicesItems = [
 		{
 			label: 'VPS',
-			description: 'VPS hosting from $5/mo.',
+			description: 'VPS hosting from $5/mo',
 			href: '/services/vps' as InternalHref
 		},
 		{
 			label: 'Colocation',
-			description: 'Colocation hosting, from $50/mo.',
+			description: 'Colocation hosting, from $50/mo',
 			href: '/services/colocation' as InternalHref
 		}
 	];
@@ -25,7 +25,7 @@
 	const aboutItems = [
 		{
 			label: 'About us',
-			description: "Why we're building this.",
+			description: "Why we're building this",
 			href: '/about' as InternalHref
 		},
 		{
@@ -191,7 +191,7 @@
 					rel="external"
 					class="hidden rounded-xs bg-fyra-red-600 px-3 py-1.5 text-[13px] font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500 md:inline-flex"
 				>
-					Dashboard
+					Dashboard →
 				</a>
 
 				<!-- Mobile menu toggle -->

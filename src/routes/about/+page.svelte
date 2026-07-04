@@ -59,7 +59,7 @@
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			<span class="text-fyra-red-400">for the rest of us.</span>
+			<span class="text-fyra-red-400">for the rest of us</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			An open-source cloud from the folks behind Fyra Labs.
@@ -79,7 +79,7 @@
 
 <!-- Stat strip -->
 <div class="grid grid-cols-1 gap-px border-b border-fyra-gray-800 bg-fyra-gray-800 md:grid-cols-3">
-	{#each [{ value: 'Midwest proud', label: 'Chicago, IL' }, { value: 'Independent', label: 'Backed by Fyra Labs' }, { value: 'AS402292', label: 'Since 2026' }] as stat (stat.label)}
+	{#each [{ value: 'Midwest proud', label: 'Chicago, IL' }, { value: 'Independent', label: 'Backed by Fyra Labs' }, { value: 'ASN AS402292', label: 'Since 2026' }] as stat (stat.label)}
 		<div class="flex flex-col gap-0.5 bg-fyra-gray-900 px-6 py-6 md:px-10">
 			<span class="text-base font-semibold tracking-tight text-fyra-gray-50">{stat.value}</span>
 			<span class="text-[12px] text-fyra-gray-500">{stat.label}</span>
@@ -95,7 +95,7 @@
 		<!-- Left: text -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
 			<h2 class="text-4xl leading-tight font-semibold tracking-tight text-fyra-gray-50">
-				Why we exist.
+				Why we exist
 			</h2>
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
 				Fyra Labs builds Terra and Ultramarine Linux. We needed servers for that. We couldn't find
@@ -139,7 +139,7 @@
 <!-- Team -->
 <section class="">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">The team.</h2>
+		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">The team</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">
 			Small, on purpose. Everyone here ships and everyone here answers the support queue.
 		</p>

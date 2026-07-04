@@ -19,12 +19,12 @@
 		<h1
 			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			Ship your hardware.
+			Ship your hardware
 		</h1>
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			<span class="text-fyra-red-400">We'll handle the rest.</span>
+			<span class="text-fyra-red-400">We'll handle the rest</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			Colocation without the enterprise markup, mandatory contracts, or fees for asking questions.

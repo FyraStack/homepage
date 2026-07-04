@@ -30,7 +30,7 @@
 			The open architecture,
 		</h1>
 		<h2 class="mb-8 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
-			<span class="text-fyra-red-400">now in the cloud.</span>
+			<span class="text-fyra-red-400">now in the cloud</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			RISC-V VPS powered by DeepComputing hardware. Run your workloads on real open-ISA silicon — no
