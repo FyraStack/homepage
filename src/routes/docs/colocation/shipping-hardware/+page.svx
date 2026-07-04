@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Shipping Hardware to Us | Fyra Stack Docs</title>
-<meta name="description" content="How to pack, label, and ship your server to us. Covers packing guidelines, our shipping address, and the receive authorization process." />
-<link rel="canonical" href="https://fyrastack.com/docs/colocation/shipping-hardware" />
-<meta property="og:title" content="Shipping Hardware | Fyra Stack Docs" />
-<meta property="og:description" content="How to pack, label, and ship your server to us for colocation." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/colocation/shipping-hardware" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Shipping Hardware | Fyra Stack Docs" />
-<meta name="twitter:description" content="How to pack, label, and ship your server to us for colocation." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Shipping Hardware to Us"
+	description="How to pack, label, and ship your server to us. Covers packing guidelines, our shipping address, and the receive authorization process."
+/>
 
 # Shipping Hardware to Us
 

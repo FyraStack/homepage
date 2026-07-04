@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Connecting via SSH | Fyra Stack Docs</title>
-<meta name="description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
-<link rel="canonical" href="https://fyrastack.com/docs/vps/ssh" />
-<meta property="og:title" content="Connecting via SSH | Fyra Stack Docs" />
-<meta property="og:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/vps/ssh" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Connecting via SSH | Fyra Stack Docs" />
-<meta name="twitter:description" content="Connect to your VPS over SSH. Secure remote access to your virtual private server." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Connecting via SSH"
+	description="Connect to your VPS over SSH. Secure remote access to your virtual private server."
+/>
 
 # Connecting via SSH
 

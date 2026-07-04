@@ -1,17 +1,8 @@
-<svelte:head>
-<title>VPS Networking | Fyra Stack Docs</title>
-<meta name="description" content="Learn about our VPS networking setup." />
-<link rel="canonical" href="https://fyrastack.com/docs/vps/networking" />
-<meta property="og:title" content="VPS Networking | Fyra Stack Docs" />
-<meta property="og:description" content="Learn about our VPS networking setup." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/vps/networking" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="VPS Networking | Fyra Stack Docs" />
-<meta name="twitter:description" content="Learn about our VPS networking setup." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta title="VPS Networking" description="Learn about our VPS networking setup." />
 
 # VPS Networking
 

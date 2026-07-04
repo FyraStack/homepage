@@ -2,6 +2,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ArrowDown } from '@steeze-ui/carbon-icons';
 	import { resolve } from '$app/paths';
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
 
 	type InternalHref =
 		| '/services/colocation'
@@ -158,33 +159,10 @@
 	]; */
 </script>
 
-<svelte:head>
-	<title>Docs | Fyra Stack</title>
-	<meta
-		name="description"
-		content="Guides and references for getting your Stack VPS or colocation slot up and running. Shipping hardware, IPMI access, remote hands, power budgets, and more."
-	/>
-	<link rel="canonical" href="https://fyrastack.com/docs" />
-
-	<!-- Open Graph -->
-	<meta property="og:title" content="Docs | Fyra Stack" />
-	<meta
-		property="og:description"
-		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."
-	/>
-	<meta property="og:image" content="https://fyrastack.com/logo.png" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://fyrastack.com/docs" />
-
-	<!-- Twitter Card -->
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Docs | Fyra Stack" />
-	<meta
-		name="twitter:description"
-		content="Guides, references, and answers for getting your Stack VPS or colocation slot up and running."
-	/>
-	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<DocsMeta
+	title="Docs"
+	description="Guides and references for getting your Stack VPS or colocation slot up and running. Shipping hardware, IPMI access, remote hands, power budgets, and more."
+/>
 
 <!-- ─── Hero ──────────────────────────────────────────────────────── -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">

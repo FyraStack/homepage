@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Power Budgets and PDUs | Fyra Stack Docs</title>
-<meta name="description" content="How power is provisioned for your colocation slot. What's included per plan, what PDUs we use, and how to get more amps if you need them." />
-<link rel="canonical" href="https://fyrastack.com/docs/colocation/power-budgets" />
-<meta property="og:title" content="Power Budgets and PDUs | Fyra Stack Docs" />
-<meta property="og:description" content="How power is provisioned for your colocation slot. What's included, what PDUs we use, and how to get more." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/colocation/power-budgets" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Power Budgets and PDUs | Fyra Stack Docs" />
-<meta name="twitter:description" content="How power is provisioned for your colocation slot. What's included, what PDUs we use, and how to get more." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Power Budgets and PDUs"
+	description="How power is provisioned for your colocation slot. What's included per plan, what PDUs we use, and how to get more amps if you need them."
+/>
 
 # Power Budgets and PDUs
 
