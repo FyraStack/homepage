@@ -38,19 +38,17 @@
 
 <section>
 	<p class="text-sm font-medium tracking-widest text-fyra-red-400 uppercase">VPS</p>
-	<h1>VPS docs.</h1>
+	<h1>VPS docs</h1>
 	<p>
 		Guides for connecting to your VPS, setting up users, hardening your server, and configuring
 		networking.
 	</p>
 
-	<div
-		class="not-prose mt-8 grid gap-px overflow-hidden border border-fyra-gray-800 bg-fyra-gray-800 sm:grid-cols-2"
-	>
+	<div class="not-prose mt-8 grid border-t border-l border-fyra-gray-800 sm:grid-cols-2">
 		{#each articles as article (article.href)}
 			<a
 				href={resolve(article.href)}
-				class="group bg-fyra-gray-900 p-5 transition-colors duration-100 hover:bg-fyra-gray-800"
+				class="group border-r border-b border-fyra-gray-800 bg-fyra-gray-900 p-5 transition-colors duration-100 hover:bg-fyra-gray-800"
 			>
 				<h2 class="text-base font-semibold text-fyra-gray-50 group-hover:text-fyra-red-300">
 					{article.label}
