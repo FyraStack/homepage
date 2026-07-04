@@ -4,6 +4,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ArrowLeft } from '@steeze-ui/carbon-icons';
 	import { docsProseClass } from '$lib/docs-prose-class';
+	import { enhanceDocsA11y } from '$lib/docs-a11y';
 
 	const { children } = $props();
 
@@ -17,9 +18,9 @@
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-3 lg:px-8">
-	<nav class="flex items-center gap-2 text-xs text-fyra-gray-300">
+	<nav class="flex items-center gap-2 text-xs text-fyra-gray-300" aria-label="Breadcrumb">
 		<a href={resolve('/docs')} class="transition-colors hover:text-fyra-gray-100">Docs</a>
-		<span class="text-fyra-gray-500">/</span>
+		<span class="text-fyra-gray-400">/</span>
 		<span class="text-fyra-gray-200">Colocation</span>
 	</nav>
 </div>
@@ -27,11 +28,11 @@
 <div class="flex min-h-screen divide-x divide-fyra-gray-800">
 	<!-- Sidebar -->
 	<aside class="hidden w-56 shrink-0 lg:block">
-		<div class="sticky top-0 px-6 py-8">
+		<div class="sticky top-[calc(var(--spacing)*22)] px-6 py-8">
 			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">
 				Colocation
 			</p>
-			<nav class="flex flex-col gap-0.5">
+			<nav class="flex flex-col gap-0.5" aria-label="Colocation documentation">
 				{#each nav as item (item.href)}
 					<a
 						href={resolve(item.href)}
@@ -58,13 +59,13 @@
 	</aside>
 
 	<!-- Content -->
-	<main class="min-w-0 flex-1 px-6 py-12 lg:px-12">
+	<div class="min-w-0 flex-1 px-6 py-12 lg:px-12">
 		<!-- Mobile nav -->
 		<div class="mb-8 lg:hidden">
 			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">
 				Colocation
 			</p>
-			<nav class="flex flex-wrap gap-2">
+			<nav class="flex flex-wrap gap-2" aria-label="Colocation documentation">
 				{#each nav as item (item.href)}
 					<a
 						href={resolve(item.href)}
@@ -78,8 +79,8 @@
 			</nav>
 		</div>
 
-		<div class={docsProseClass}>
+		<div use:enhanceDocsA11y class={docsProseClass}>
 			{@render children()}
 		</div>
-	</main>
+	</div>
 </div>

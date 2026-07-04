@@ -34,9 +34,7 @@
 </svelte:head>
 
 <!-- hero -->
-<main>
-	<VPSHero />
-</main>
+<VPSHero />
 
 <!-- Features -->
 <VPSFeatures />

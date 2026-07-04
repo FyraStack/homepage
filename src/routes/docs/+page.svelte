@@ -38,13 +38,13 @@
 		},
 		{
 			n: '02',
-			title: 'Ship your servers.',
+			title: 'Ship your servers',
 			body: 'Pack up your server (or buy one on eBay) and ship it to our office, our team will then rack and stack it in our Chicago Data Center.',
 			cta: { label: 'See the docs →', href: '/docs/colocation/shipping-hardware' }
 		},
 		{
 			n: '03',
-			title: 'Rack and stack.',
+			title: 'Rack and stack',
 			body: "We'll unpack, label, and test your server, then take it to our Data Center in Chicago and rack, cable, and power on your server. ",
 			code: null
 		},
@@ -177,7 +177,7 @@
 		<h1
 			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			Documentation.
+			Documentation
 		</h1>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-300 sm:text-lg/7">
 			Guides, references, and answers for getting your Stack VPS or colocation slot up and running.
@@ -234,7 +234,7 @@
 <!-- ─── Guides ───────────────────────────────────────────────────────── -->
 <section id="guides" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides.</h2>
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Guides</h2>
 		<p class="mt-2 text-sm text-fyra-gray-300">
 			In-depth documentation by topic. More being written as we launch.
 		</p>
@@ -251,13 +251,13 @@
 					{#each guide.articles as article (article.label)}
 						<li class="flex items-center justify-between gap-2">
 							{#if article.soon}
-								<span class="text-sm text-fyra-gray-300">{article.label}</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
 								<span
-									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase"
+									class="shrink-0 text-[10px] font-medium tracking-widest text-fyra-gray-400 uppercase"
 									>Soon</span
 								>
 							{:else if article.placeholder}
-								<span class="text-sm text-fyra-gray-300">{article.label}</span>
+								<span class="text-sm text-fyra-gray-400">{article.label}</span>
 							{:else}
 								<a
 									href={article.href ? resolve(article.href) : '#'}
@@ -276,7 +276,7 @@
 <!-- ─── Quick start ──────────────────────────────────────────────────── -->
 <section id="quick-start" class="border-b border-fyra-gray-800">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Colocation quick start.</h2>
+		<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Colocation quick start</h2>
 		<p class="mt-2 text-sm text-fyra-gray-300">
 			From shipping a server to a running server in just four steps.
 		</p>

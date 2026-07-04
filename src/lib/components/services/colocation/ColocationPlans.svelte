@@ -9,9 +9,7 @@
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-	<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
-		Priced fairly.
-	</h2>
+	<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Priced fairly</h2>
 	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
 </div>
 <div class="grid grid-cols-7">
@@ -25,7 +23,7 @@
 				<div class="text-right">
 					<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
 						{#if currentPlan.originalPrice}
-							<span class="mr-1.5 font-medium tracking-wide text-fyra-gray-500 line-through"
+							<span class="mr-1.5 font-medium tracking-wide text-fyra-gray-400 line-through"
 								>${currentPlan.originalPrice}</span
 							>
 						{/if}
@@ -81,7 +79,7 @@
 				<div class="text-right">
 					<h3 class="text-sm font-medium tracking-tighter lg:text-base">
 						{#if plan.originalPrice}
-							<span class="mr-1 font-normal tracking-wide text-fyra-gray-500 line-through"
+							<span class="mr-1 font-normal tracking-wide text-fyra-gray-400 line-through"
 								>${plan.originalPrice}</span
 							>
 						{/if}
@@ -109,7 +107,8 @@
 		Need something custom?
 		<a
 			href="mailto:contact@fyrastack.com"
-			class="text-fyra-red-400 transition-colors hover:text-fyra-red-300">Contact us</a
+			class="text-fyra-red-400 underline underline-offset-2 transition-colors hover:text-fyra-red-300"
+			>Contact us</a
 		>
 		for bulk orders and non-profit discounts.
 	</p>

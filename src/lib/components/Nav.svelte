@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { onMount } from 'svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ChevronDown, Close, Menu } from '@steeze-ui/carbon-icons';
@@ -8,16 +9,21 @@
 
 	let isMobileMenuOpen = $state(false);
 	let openDropdown = $state<string | null>(null);
+	let headerHeight = $state(0);
+	let hasScrolled = $state(false);
+	let isMobileViewport = $state(false);
+
+	let isBannerCollapsed = $derived(isMobileViewport && hasScrolled);
 
 	const servicesItems = [
 		{
 			label: 'VPS',
-			description: 'VPS hosting from $5/mo.',
+			description: 'VPS hosting from $5/mo',
 			href: '/services/vps' as InternalHref
 		},
 		{
 			label: 'Colocation',
-			description: 'Colocation hosting, from $50/mo.',
+			description: 'Colocation hosting, from $50/mo',
 			href: '/services/colocation' as InternalHref
 		}
 	];
@@ -25,13 +31,8 @@
 	const aboutItems = [
 		{
 			label: 'About us',
-			description: "Why we're building this.",
+			description: "Why we're building this",
 			href: '/about' as InternalHref
-		},
-		{
-			label: 'Documentation',
-			description: 'What to expect when using Stack.',
-			href: '/docs' as InternalHref
 		},
 		{
 			label: 'Blog',
@@ -48,6 +49,25 @@
 		openDropdown = null;
 		isMobileMenuOpen = false;
 	}
+
+	function handleScroll() {
+		hasScrolled = window.scrollY > 8;
+	}
+
+	onMount(() => {
+		const mobileViewportQuery = window.matchMedia('(max-width: 767px)');
+		const syncMobileViewport = () => {
+			isMobileViewport = mobileViewportQuery.matches;
+		};
+
+		syncMobileViewport();
+		handleScroll();
+		mobileViewportQuery.addEventListener('change', syncMobileViewport);
+
+		return () => {
+			mobileViewportQuery.removeEventListener('change', syncMobileViewport);
+		};
+	});
 </script>
 
 <svelte:window
@@ -57,15 +77,23 @@
 	onclick={(e) => {
 		if (!(e.target as Element).closest('header')) openDropdown = null;
 	}}
+	onscroll={handleScroll}
 />
 
-<header class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm">
+<header
+	bind:clientHeight={headerHeight}
+	class="sticky top-0 z-50 bg-fyra-gray-900 backdrop-blur-sm"
+>
 	<a
 		href="https://blog.fyralabs.com/stack-vps-launch"
-		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
+		aria-hidden={isBannerCollapsed}
+		tabindex={isBannerCollapsed ? -1 : undefined}
+		class="flex items-center justify-center gap-2 overflow-hidden bg-fyra-red-600 px-4 text-center text-sm font-medium text-fyra-gray-50 transition-[max-height,padding,opacity] duration-200 ease-out hover:bg-fyra-red-600 motion-reduce:transition-none md:max-h-none md:py-2.5 md:opacity-100 {isBannerCollapsed
+			? 'max-h-0 py-0 opacity-0'
+			: 'max-h-12 py-2.5 opacity-100'}"
 	>
 		<span class="font-semibold">Stack is here.</span>
-		<span class="text-fyra-red-200"
+		<span class="text-fyra-gray-50"
 			>Run your stack on our servers for as low as $5 per month. Deploy in minutes.</span
 		>
 		<span class="text-fyra-red-300">→</span>
@@ -126,14 +154,6 @@
 					{/if}
 				</div>
 
-				<!-- Static links -->
-				<!-- {#each ["Docs", "Pricing"] as label}
-					<a
-						href="{label === 'Docs' ? '/docs' : '/pricing'}"
-						class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-fyra-gray-200 hover:text-fyra-gray-100 hover:bg-fyra-gray-800 transition-colors duration-100"
-					>{label}</a>
-				{/each} -->
-
 				<!-- About dropdown -->
 				<div class="relative">
 					<button
@@ -186,6 +206,14 @@
 						</div>
 					{/if}
 				</div>
+
+				<a
+					href={resolve('/docs')}
+					onclick={closeAll}
+					class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+				>
+					Docs
+				</a>
 			</nav>
 
 			<!-- Right side -->
@@ -196,7 +224,7 @@
 					rel="external"
 					class="hidden rounded-xs bg-fyra-red-600 px-3 py-1.5 text-[13px] font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500 md:inline-flex"
 				>
-					Dashboard
+					Dashboard →
 				</a>
 
 				<!-- Mobile menu toggle -->
@@ -207,7 +235,8 @@
 						openDropdown = null;
 					}}
 					class="flex items-center justify-center rounded-xs p-1.5 text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 md:hidden"
-					aria-label="Open menu"
+					aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={isMobileMenuOpen}
 				>
 					{#if isMobileMenuOpen}
 						<Icon src={Close} class="h-4 w-4" aria-hidden="true" />
@@ -224,7 +253,8 @@
 {#if isMobileMenuOpen}
 	<div
 		transition:fade={{ duration: 120 }}
-		class="fixed inset-0 top-11 z-40 bg-fyra-gray-950/50 md:hidden"
+		style:top={`${headerHeight}px`}
+		class="fixed inset-x-0 bottom-0 z-40 bg-fyra-gray-950/50 md:hidden"
 		role="button"
 		tabindex="0"
 		onclick={() => {
@@ -237,7 +267,9 @@
 
 	<div
 		transition:slide={{ duration: 300, axis: 'y' }}
-		class="fixed inset-x-0 top-11 z-50 border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
+		style:top={`${headerHeight}px`}
+		style:max-height={`calc(100vh - ${headerHeight}px)`}
+		class="fixed inset-x-0 z-50 overflow-y-auto border-y border-fyra-gray-800 bg-fyra-gray-900 px-4 py-3 md:hidden"
 	>
 		<div class="flex flex-col gap-0.5">
 			<a
@@ -259,11 +291,12 @@
 				>
 			{/each}
 
-			<!-- <div class="my-1.5 border-t border-fyra-gray-800"></div> -->
-
-			<!-- {#each ["Docs", "Pricing"] as label}
-				<a href={label === 'Pricing' ? '/pricing' : '/docs'} onclick={closeAll} class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 transition-colors duration-100">{label}</a>
-			{/each} -->
+			<a
+				href={resolve('/docs')}
+				onclick={closeAll}
+				class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+				>Docs</a
+			>
 
 			<div class="my-1.5 border-t border-fyra-gray-800"></div>
 

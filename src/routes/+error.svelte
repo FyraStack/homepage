@@ -1,7 +1,14 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ArrowDown } from '@steeze-ui/carbon-icons';
+	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
+
+	const isNotFound = page.status === 404;
 </script>
+
+<svelte:head>
+	<title>{isNotFound ? '404' : page.status} | Fyra Stack</title>
+	<meta name="robots" content="noindex" />
+</svelte:head>
 
 <!-- Hero -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
@@ -16,26 +23,39 @@
 	</div>
 
 	<div class="mx-auto max-w-4xl py-24 text-center sm:py-32">
+		<p class="mb-6 text-sm font-medium tracking-wide text-fyra-gray-400 uppercase">
+			{isNotFound ? 'Page not found' : 'Something went wrong'}
+		</p>
 		<h1
-			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
+			class="mb-2 text-7xl font-semibold tracking-tight text-balance text-fyra-red-400 sm:text-8xl"
 		>
-			Ship your hardware
+			{isNotFound ? '404' : page.status}
 		</h1>
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			<span class="text-fyra-red-400">We'll handle the rest</span>
+			{isNotFound ? "This isn't what you're looking for?" : 'We hit an error.'}
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
-			Colocation without the enterprise markup, mandatory contracts, or fees for asking questions.
+			{#if isNotFound}
+				Oh well... maybe one of these can help?
+			{:else}
+				{page.error?.message ?? 'An unexpected error occurred.'}
+			{/if}
 		</p>
-		<div class="mt-10 flex items-center justify-center gap-x-6">
+
+		<div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
 			<a
-				href="#signup"
-				class="inline-flex items-center gap-2 border border-fyra-red-500 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
+				href={resolve('/')}
+				class="rounded-xs bg-fyra-red-600 px-4 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500"
 			>
-				Get started
-				<Icon src={ArrowDown} class="h-3.5 w-3.5" aria-hidden="true" />
+				Back to home
+			</a>
+			<a
+				href={resolve('/docs')}
+				class="rounded-xs border border-fyra-gray-700 px-4 py-2.5 text-sm font-medium text-fyra-gray-200 transition-colors duration-100 hover:border-fyra-gray-600 hover:bg-fyra-gray-800 hover:text-fyra-gray-50"
+			>
+				Read the docs
 			</a>
 		</div>
 	</div>

@@ -14,12 +14,12 @@
 		<h1
 			class="mb-2 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			We run the servers.
+			We run the servers
 		</h1>
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			<span class="text-fyra-red-400">You run your stack.</span>
+			<span class="text-fyra-red-400">You run your stack</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			Our mission is simple: Provide hosting you can trust, without breaking the bank, or your mind.

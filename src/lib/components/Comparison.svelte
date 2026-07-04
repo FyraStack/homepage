@@ -58,10 +58,10 @@
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<div class="flex items-center gap-2.5">
 			<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
-				Stack, well... stacks up.
+				Stack, well... stacks up
 			</h2>
 		</div>
-		<p class="mt-2 text-sm text-fyra-gray-400">Compared at our entry-level plan.</p>
+		<p class="mt-2 text-sm text-fyra-gray-400">Compared at our entry-level plan</p>
 	</div>
 
 	<!-- Table — horizontally scrollable on mobile -->
@@ -70,16 +70,20 @@
 			<!-- Column headers -->
 			<thead>
 				<tr class="border-b border-fyra-gray-800">
-					<th class="w-36 px-6 py-4 text-left md:w-44 md:px-10"></th>
+					<th scope="col" class="w-36 px-6 py-4 text-left md:w-44 md:px-10">
+						<span class="sr-only">Feature</span>
+					</th>
 					<!-- Stack -->
-					<th class="px-5 py-4 text-left">
+					<th scope="col" class="px-5 py-4 text-left">
 						<div class="flex items-center gap-1.5">
 							<img src="/logo.svg" alt="" class="h-4 w-4" aria-hidden="true" />
 							<span class="text-sm font-semibold text-fyra-gray-50">Stack</span>
 						</div>
 					</th>
 					{#each competitors as name (name)}
-						<th class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400">{name}</th>
+						<th scope="col" class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400"
+							>{name}</th
+						>
 					{/each}
 				</tr>
 			</thead>
@@ -89,7 +93,12 @@
 				{#each rows as row (row.label)}
 					<tr>
 						<!-- Label -->
-						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
+						<th
+							scope="row"
+							class="px-6 py-4 text-left text-sm font-normal text-fyra-gray-400 md:px-10"
+						>
+							{row.label}
+						</th>
 						<!-- Stack value -->
 						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{row.stack}</td>
 						<!-- Competitor values -->
