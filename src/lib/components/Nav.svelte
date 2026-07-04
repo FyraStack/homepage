@@ -196,7 +196,7 @@
 					rel="external"
 					class="hidden rounded-xs bg-fyra-red-600 px-3 py-1.5 text-[13px] font-medium text-fyra-gray-50 transition-colors duration-100 hover:bg-fyra-red-500 md:inline-flex"
 				>
-					Dashboard
+					Dashboard →
 				</a>
 
 				<!-- Mobile menu toggle -->
