@@ -13,6 +13,8 @@ Use a personal admin user for day-to-day access instead of logging in as `root`.
 
 Replace `stackuser` in the examples below with your preferred username.
 
+---
+
 ## 1. Create the User
 
 ### Fedora
@@ -29,6 +31,8 @@ sudo usermod -aG wheel stackuser
 sudo adduser stackuser
 sudo usermod -aG sudo stackuser
 ```
+
+---
 
 ## 2. Add your SSH Key
 
@@ -60,6 +64,8 @@ ssh-copy-id stackuser@your_vps_ip
 
 Note that this will not work if you have disabled password-based authentication.
 
+---
+
 ## Optional - Edit your SSH Configuration
 
 If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
@@ -71,6 +77,8 @@ Host my-vps
   IdentityFile ~/.ssh/id_ed25519
   AddKeysToAgent yes
 ```
+
+---
 
 ## 3. Test the New Login
 
@@ -87,6 +95,8 @@ sudo whoami
 ```
 
 The command should print `root`.
+
+---
 
 ## 4. Next Steps
 

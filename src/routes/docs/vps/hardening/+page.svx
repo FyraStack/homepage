@@ -13,6 +13,8 @@ These are baseline steps we recommend after your first login to a new VPS. They 
 
 Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
+---
+
 ## 1. Update the System
 
 Start by installing the latest security updates, along with the `sudo`, `curl`, `nano`, and `fail2ban` packages.
@@ -37,6 +39,8 @@ Reboot if the update installed a new kernel or core system libraries:
 ```bash
 sudo systemctl reboot
 ```
+
+---
 
 ## 2. Harden SSH
 
@@ -80,6 +84,8 @@ sudo systemctl restart sshd
 # Debian / Ubuntu
 sudo systemctl restart ssh
 ```
+
+---
 
 ## 3. Change the SSH Port
 
@@ -142,6 +148,8 @@ Host fyrastack-vps
     IdentityFile ~/.ssh/id_ed25519
 ```
 
+---
+
 ## 4. Set up your Firewall
 
 Set up firewall rules for your VPS before exposing services to the internet. At minimum, allow your SSH port and any public services you intentionally run, such as HTTP or HTTPS. Do not assume unused ports are protected unless you have configured firewall rules yourself.
@@ -186,6 +194,8 @@ If you are already using UFW and no longer need SSH on port `22`, remove the old
 sudo ufw delete allow 22/tcp
 ```
 
+---
+
 ## 5. Set up fail2ban
 
 `fail2ban` watches service logs and temporarily blocks IPs that repeatedly fail authentication. This is especially useful for public SSH services, and we recommend it even if you have already changed the SSH port.
@@ -214,6 +224,8 @@ sudo systemctl enable --now fail2ban
 sudo systemctl restart fail2ban
 sudo fail2ban-client status sshd
 ```
+
+---
 
 ## Recovery Notes
 

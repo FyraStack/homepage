@@ -11,11 +11,15 @@
 
 New to Linux and need to choose a distribution? This page will help you choose the right distribution for your needs.
 
+---
+
 ## Fedora Cloud
 
 Fedora Cloud is a modern, well-supported distribution. As the upstream distribution of Red Hat Enterprise Linux, Fedora has modern packages, container tooling, and strong security features. It is known for its stability, security, and flexibility. Fedora is also a great baseline for a Linux server you'd like to tinker with and customize.
 
 Fedora has a short support lifecycle. New versions release every six months, with support ending after about one year. If you need a distribution with a longer support lifecycle, consider Alma Linux.
+
+---
 
 ## Alma Linux
 
@@ -23,19 +27,27 @@ Alma Linux is our choice of Enterprise Linux distribution. Unlike Fedora, Alma L
 
 Alma Linux's nature as a long-term support distribution makes it slower to adopt new features than Fedora. It also has a smaller package repository, so you may need to install packages from the EPEL repository.
 
+---
+
 ## Debian
 
 Debian's main advantage is its stability and familiarity. It is known for its long-term support and is a good choice for a Linux server you need to minimally support for a longer period of time. It has a large software repository, so you can easily install a wide range of software.
 
 Because Debian is built for stability, it lacks modern features and packages, which can be a disadvantage for newer applications. However, can be a good choice for a Linux server you need to support for a longer period of time, or anything you need to set-and-forget.
 
+---
+
 ## Ubuntu Server
 
 Ubuntu Server is a popular choice for a scalable Linux server you need to support for a longer period of time. It is based on Debian and has a large software repository, so you can easily install a wide range of software.
 
+---
+
 ## Alpine (Coming Soon)
 
 Alpine is a lightweight, security-focused Linux distribution. It is known for its small size and fast performance, making it a good choice for service/container hosting. Because Alpine uses `musl libc` instead of `glibc`, some applications may be incompatible. Additionally, Alpine can be harder to configure applications for. If you plan to exclusively use containers for your applications, Alpine is a great choice.
+
+---
 
 ## openSUSE Leap
 
