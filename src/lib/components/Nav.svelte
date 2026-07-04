@@ -93,7 +93,7 @@
 			: 'max-h-12 py-2.5 opacity-100'}"
 	>
 		<span class="font-semibold">Stack is here.</span>
-		<span class="text-fyra-red-200"
+		<span class="text-fyra-gray-50"
 			>Run your stack on our servers for as low as $5 per month. Deploy in minutes.</span
 		>
 		<span class="text-fyra-red-300">→</span>

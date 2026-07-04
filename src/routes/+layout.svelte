@@ -32,9 +32,9 @@
 <div class="">
 	<Nav />
 	<div class="mx-4 mx-auto max-w-6xl border-x border-fyra-gray-800 bg-fyra-gray-900">
-		<div class="flex min-h-[100vh] flex-col">
+		<main class="flex min-h-[100vh] flex-col">
 			{@render children()}
-		</div>
+		</main>
 		<Footer />
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-<main class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
+<section class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 	<!-- Top blob -->
 	<div
 		aria-hidden="true"
@@ -14,8 +14,7 @@
 	<div class="mx-auto max-w-4xl py-32 sm:py-40">
 		<div class="text-center">
 			<h1 class="text-3xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl">
-				Infrastructure without breaking the bank, <span class="text-fyra-red-400"
-					>or your mind</span
+				Infrastructure without breaking the bank, <span class="text-fyra-red-400">or your mind</span
 				>
 			</h1>
 			<p
@@ -37,4 +36,4 @@
 			class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-fyra-red-950 to-fyra-red-700 opacity-25 sm:left-[calc(50%+36rem)] sm:w-288.75"
 		></div>
 	</div>
-</main>
+</section>
