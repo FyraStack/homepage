@@ -4,7 +4,7 @@
 
 <DocsMeta
 	title="Shipping Hardware to Us"
-	description="How to pack, label, and ship your server to us. Covers packing guidelines, our shipping address, and the receive authorization process."
+	description="Pack, label, and ship your server for colocation."
 />
 
 # Shipping Hardware to Us

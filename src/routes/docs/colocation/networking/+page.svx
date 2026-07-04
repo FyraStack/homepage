@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Colocation Networking | Fyra Stack Docs</title>
-<meta name="description" content="Get your server's networking set up for colocation with Fyra Stack." />
-<link rel="canonical" href="https://fyrastack.com/docs/colocation/networking" />
-<meta property="og:title" content="Colocation Networking | Fyra Stack Docs" />
-<meta property="og:description" content="Get your server's networking set up for colocation with Fyra Stack." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/colocation/networking" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Colocation Networking | Fyra Stack Docs" />
-<meta name="twitter:description" content="Get your server's networking set up for colocation with Fyra Stack." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Colocation Networking"
+	description="Get your server's networking set up for colocation."
+/>
 
 # Colocation Networking
 

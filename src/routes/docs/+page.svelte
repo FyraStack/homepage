@@ -159,10 +159,7 @@
 	]; */
 </script>
 
-<DocsMeta
-	title="Docs"
-	description="Guides and references for getting your Stack VPS or colocation slot up and running. Shipping hardware, IPMI access, remote hands, power budgets, and more."
-/>
+<DocsMeta title="Docs" description="Guides for your Fyra Stack VPS or colocation slot." />
 
 <!-- ─── Hero ──────────────────────────────────────────────────────── -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">

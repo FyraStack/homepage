@@ -4,7 +4,7 @@
 
 <DocsMeta
 	title="Requesting Remote Hands"
-	description="Need someone at the DC? Remote hands at $50/hr covers power cycling, drive swaps, cable work, inspections, and hardware replacements."
+	description="Request physical assistance for your colocated server."
 />
 
 # Requesting Remote Hands

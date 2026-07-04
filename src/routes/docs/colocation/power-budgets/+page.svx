@@ -4,7 +4,7 @@
 
 <DocsMeta
 	title="Power Budgets and PDUs"
-	description="How power is provisioned for your colocation slot. What's included per plan, what PDUs we use, and how to get more amps if you need them."
+	description="Learn how power is provisioned for your colocation slot."
 />
 
 # Power Budgets and PDUs

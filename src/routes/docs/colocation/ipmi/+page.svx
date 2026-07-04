@@ -4,7 +4,7 @@
 
 <DocsMeta
 	title="Accessing IPMI Remotely"
-	description="Connect to your server's IPMI, iDRAC, or iLO over our WireGuard VPN. Power cycle, remote console, and out-of-band management even when the OS is down."
+	description="Connect to your server's IPMI, iDRAC, or iLO over WireGuard."
 />
 
 # Accessing IPMI Remotely
