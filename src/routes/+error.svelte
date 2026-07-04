@@ -34,7 +34,7 @@
 		<h2
 			class="mb-8 text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50 sm:text-6xl"
 		>
-			{isNotFound ? "This isn't the stack you're looking for?" : 'The stack hit an error.'}
+			{isNotFound ? "This isn't what you're looking for?" : 'We hit an error.'}
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			{#if isNotFound}
