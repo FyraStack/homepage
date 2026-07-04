@@ -9,7 +9,7 @@ export const docsProseClass = [
 	'prose-a:font-medium prose-a:text-fyra-red-300 prose-a:no-underline prose-a:hover:text-fyra-red-200',
 	'prose-strong:text-fyra-gray-50',
 	'prose-code:rounded prose-code:bg-fyra-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-normal prose-code:text-fyra-red-200 prose-code:before:content-none prose-code:after:content-none',
-	'prose-pre:my-4 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:border prose-pre:border-fyra-gray-700 prose-pre:bg-fyra-gray-950 prose-pre:px-4 prose-pre:py-3 prose-pre:text-fyra-gray-100',
+	'prose-pre:my-4 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:border prose-pre:border-fyra-gray-700 prose-pre:bg-fyra-gray-950 prose-pre:px-4 prose-pre:py-3 prose-pre:text-fyra-gray-100 prose-pre:[scrollbar-color:#727279_#18181a] prose-pre:[scrollbar-width:thin] [&_pre::-webkit-scrollbar]:h-2 [&_pre::-webkit-scrollbar-track]:bg-fyra-gray-900 [&_pre::-webkit-scrollbar-thumb]:bg-fyra-gray-500 [&_pre::-webkit-scrollbar-thumb]:hover:bg-fyra-gray-400',
 	'[&_pre_code]:block [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit [&_pre_code]:before:content-none [&_pre_code]:after:content-none',
 	'[&_.token.comment]:text-fyra-gray-400 [&_.token.prolog]:text-fyra-gray-400 [&_.token.doctype]:text-fyra-gray-400 [&_.token.cdata]:text-fyra-gray-400',
 	'[&_.token.punctuation]:text-fyra-gray-300 [&_.token.operator]:text-fyra-gray-300 [&_.token.entity]:text-fyra-gray-300 [&_.token.url]:text-fyra-gray-300',
