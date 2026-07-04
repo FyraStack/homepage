@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Adding a non-root user | Fyra Stack Docs</title>
-<meta name="description" content="Learn how to add your own user to your VPS for improved security and access control." />
-<link rel="canonical" href="https://fyrastack.com/docs/vps/user-setup" />
-<meta property="og:title" content="Adding a non-root user | Fyra Stack Docs" />
-<meta property="og:description" content="Learn how to add your own user to your VPS for improved security and access control." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/vps/user-setup" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Adding a non-root user | Fyra Stack Docs" />
-<meta name="twitter:description" content="Learn how to add your own user to your VPS for improved security and access control." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Adding a non-root user"
+	description="Learn how to add your own user to your VPS for improved security and access control."
+/>
 
 # Adding a Non-Root User
 
