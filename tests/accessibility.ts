@@ -7,8 +7,6 @@ type AxeFixture = {
 };
 
 export const localURL = "http://localhost:8787";
-
-const liveURL = "https://fyrastack.com";
 const localSitemap = `${localURL}/sitemap.xml`;
 
 export async function getSitemap() {
