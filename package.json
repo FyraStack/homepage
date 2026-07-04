@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@lunariajs/core": "^0.1.1",
     "@steeze-ui/carbon-icons": "^1.2.1",
     "@steeze-ui/svelte-icon": "^1.6.2",
     "@tailwindplus/elements": "^1.0.22",
@@ -77,7 +78,9 @@
     "cf-typegen": "wrangler types",
     "fix": "ultracite fix",
     "test": "bunx playwright install chromium && bunx playwright test",
-    "test:ci": "bunx playwright test"
+    "test:ci": "bunx playwright test",
+    "lunaria:build": "lunaria build",
+    "lunaria:preview": "lunaria preview"
   },
   "type": "module",
   "version": "0.0.1",

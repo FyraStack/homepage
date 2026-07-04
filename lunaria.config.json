@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/@lunariajs/core/config.schema.json",
+  "repository": {
+    "name": "FyraStack/homepage"
+  },
+  "defaultLocale": {
+    "label": "English",
+    "lang": "en"
+  },
+  "locales": [
+    {
+      "label": "Placeholder",
+      "lang": "ph"
+    }
+  ],
+  "files": [
+    {
+      "location": "src/routes/docs/**/*.{svx}",
+      "pattern": "src/routes/docs/@lang/@path",
+      "type": "universal"
+    }
+  ],
+  "dashboard": {
+    "title": "Fyra Stack Docs Translation Status",
+    "description": "Translation progress tracker for the Fyra Stack documentation site. See what we currently have, and feel free to help!",
+    "favicon": {
+      "external": [
+        {
+          "link": "https://fyrastack.com/favicon.svg",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    "ui": {
+      "statusByLocale.heading": "Translation progress by locale",
+      "statusByLocale.incompleteLocalizationLink": "Incomplete",
+      "statusByLocale.outdatedLocalizationLink": "Outdated",
+      "statusByLocale.completeLocalization": "Complete!",
+      "statusByFile.heading": "Translation status by file"
+    }
+  }
+}
