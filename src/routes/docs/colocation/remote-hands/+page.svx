@@ -13,7 +13,7 @@ Remote hands is physical assistance from our team at the data center; plugging i
 
 ---
 
-## 1. What's Included
+## What's Included
 
 Remote hands is available with all colocation plans for routine tasks at a rate of $50/hour, with a minimum of one hour per remote hands task. This covers:
 
@@ -28,7 +28,7 @@ Remote hands is available with all colocation plans for routine tasks at a rate 
 
 ---
 
-## 2. How to Request
+## How to Request
 
 [Email support@fyrastack.com](mailto:support@fyrastack.com?subject=Remote%20Hands%20Request) with the subject line **Remote Hands Request** and include:
 
@@ -43,7 +43,7 @@ The more specific your instructions, the faster and more accurately we will comp
 
 ---
 
-## 3. Response Times
+## Response Times
 
 ### Standard Requests
 
@@ -55,7 +55,7 @@ For hardware failures or situations affecting production, mark your email as urg
 
 ---
 
-## 4. What We Won't Do without Explicit Permission
+## What We Won't Do without Explicit Permission
 
 In line with our [Privacy Statement](/privacy-statement), we will **never**:
 
@@ -67,6 +67,6 @@ If a task requires us to interact with your OS or data, we will confirm the spec
 
 ---
 
-## 5. After the Task
+## After the Task
 
 We'll reply to your request email with a summary of what was done, the outcome, and any observations (e.g. a drive that looked physically damaged, a cable that was loose). If something didn't go as expected, we'll tell you immediately rather than leaving you to figure it out.

@@ -13,13 +13,13 @@ Before your server can go live in our Chicago DC, we need to receive it at our o
 
 ---
 
-## 1. Before You Ship
+## Before You Ship
 
 [Fill out this form](/services/colocation) before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
 
 ---
 
-## 2. Shipping Address
+## Shipping Address
 
 Send hardware to:
 
@@ -31,7 +31,7 @@ Include your **RAN** and your **name or company name** on the outside of every b
 
 ---
 
-## 3. Packing Your Server
+## Packing Your Server
 
 ### Use the Original Packaging If You Have It
 
@@ -50,7 +50,7 @@ You must ship OEM rack rails (please don't send us generic rails) and other acce
 
 ---
 
-## 4. What to Include
+## What to Include
 
 Ship the following with your hardware:
 
@@ -68,7 +68,7 @@ If your server requires a special adapter for the serial console or VGA, include
 
 ---
 
-## 5. Carriers and Insurance
+## Carriers and Insurance
 
 We recommend shipping with **FedEx** or **UPS** with full declared value insurance and signature required on delivery. For high-value hardware (over $2,000), we strongly recommend freight or white-glove shipping.
 
@@ -76,7 +76,7 @@ Keep your tracking number. We'll confirm receipt via email once your shipment is
 
 ---
 
-## 6. After We Receive It
+## After We Receive It
 
 Once your server arrives:
 

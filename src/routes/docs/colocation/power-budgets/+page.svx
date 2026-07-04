@@ -13,7 +13,7 @@ Every colocation slot comes with a power allocation. This guide explains how pow
 
 ---
 
-## 1. Power Included per Plan
+## Power Included per Plan
 
 Each colocation plan includes a base power allocation measured in amps at 208V:
 
@@ -27,7 +27,7 @@ If your server draws more than the included allocation, you can purchase additio
 
 ---
 
-## 2. PDU Details
+## PDU Details
 
 ### What We Use
 
@@ -39,13 +39,13 @@ If your server has dual PSUs, we can connect each to a separate PDU on a separat
 
 ---
 
-## 3. Overages and Enforcement
+## Overages and Enforcement
 
 We monitor per-circuit draw continuously. If your server sustains draw above your allocated amount for more than 15 minutes, we'll email you to discuss an upgrade. Persistent overages without a plan upgrade may result in your server being powered down to protect other customers on the same circuit, in accordance with our [Terms of Service](/terms-of-service).
 
 ---
 
-## 4. Power Cycling Your Server
+## Power Cycling Your Server
 
 If you need your server power-cycled and IPMI isn't responding, you can request a manual power cycle via [remote hands](/docs/colocation/remote-hands). We'll toggle the PDU outlet and confirm when it's back online.
 
