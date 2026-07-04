@@ -29,11 +29,6 @@
 			href: '/about' as InternalHref
 		},
 		{
-			label: 'Documentation',
-			description: 'What to expect when using Stack.',
-			href: '/docs' as InternalHref
-		},
-		{
 			label: 'Blog',
 			description: 'Updates and engineering notes!',
 			href: 'https://blog.fyralabs.com/'
@@ -126,14 +121,6 @@
 					{/if}
 				</div>
 
-				<!-- Static links -->
-				<!-- {#each ["Docs", "Pricing"] as label}
-					<a
-						href="{label === 'Docs' ? '/docs' : '/pricing'}"
-						class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-fyra-gray-200 hover:text-fyra-gray-100 hover:bg-fyra-gray-800 transition-colors duration-100"
-					>{label}</a>
-				{/each} -->
-
 				<!-- About dropdown -->
 				<div class="relative">
 					<button
@@ -186,6 +173,14 @@
 						</div>
 					{/if}
 				</div>
+
+				<a
+					href={resolve('/docs')}
+					onclick={closeAll}
+					class="flex items-center rounded-xs px-2.5 py-1.5 text-[13px] text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+				>
+					Docs
+				</a>
 			</nav>
 
 			<!-- Right side -->
@@ -259,11 +254,12 @@
 				>
 			{/each}
 
-			<!-- <div class="my-1.5 border-t border-fyra-gray-800"></div> -->
-
-			<!-- {#each ["Docs", "Pricing"] as label}
-				<a href={label === 'Pricing' ? '/pricing' : '/docs'} onclick={closeAll} class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 hover:bg-fyra-gray-800 hover:text-fyra-gray-100 transition-colors duration-100">{label}</a>
-			{/each} -->
+			<a
+				href={resolve('/docs')}
+				onclick={closeAll}
+				class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+				>Docs</a
+			>
 
 			<div class="my-1.5 border-t border-fyra-gray-800"></div>
 

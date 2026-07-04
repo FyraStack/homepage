@@ -27,7 +27,7 @@
 <div class="flex min-h-screen divide-x divide-fyra-gray-800">
 	<!-- Sidebar -->
 	<aside class="hidden w-56 shrink-0 lg:block">
-		<div class="sticky top-0 px-6 py-8">
+		<div class="sticky top-[calc(var(--spacing)*22)] px-6 py-8">
 			<p class="mb-3 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">VPS</p>
 			<nav class="flex flex-col gap-0.5">
 				{#each nav as item (item.href)}
