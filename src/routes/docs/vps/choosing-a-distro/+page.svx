@@ -1,17 +1,11 @@
-<svelte:head>
-<title>Choosing a Linux Distribution | Fyra Stack Docs</title>
-<meta name="description" content="New to Linux and need to choose a distribution? Here's what we offer." />
-<link rel="canonical" href="https://fyrastack.com/docs/vps/choosing-a-distro" />
-<meta property="og:title" content="Choosing a Linux Distribution | Fyra Stack Docs" />
-<meta property="og:description" content="New to Linux and need to choose a distribution? Here's what we offer." />
-<meta property="og:image" content="https://fyrastack.com/logo.png" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://fyrastack.com/docs/vps/choosing-a-distro" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Choosing a Linux Distribution | Fyra Stack Docs" />
-<meta name="twitter:description" content="New to Linux and need to choose a distribution? Here's what we offer." />
-<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
-</svelte:head>
+<script lang="ts">
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Choosing a Linux Distribution"
+	description="New to Linux and need to choose a distribution? Here's what we offer."
+/>
 
 # Choosing a Linux Distribution
 
