@@ -95,7 +95,7 @@
 		<!-- Left: text -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
 			<h2 class="text-4xl leading-tight font-semibold tracking-tight text-fyra-gray-50">
-				Why we exist.
+				Why we exist
 			</h2>
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
 				Fyra Labs builds Terra and Ultramarine Linux. We needed servers for that. We couldn't find
@@ -139,7 +139,7 @@
 <!-- Team -->
 <section class="">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
-		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">The team.</h2>
+		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">The team</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">
 			Small, on purpose. Everyone here ships and everyone here answers the support queue.
 		</p>

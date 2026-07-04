@@ -44,7 +44,7 @@
 		<!-- Right: headline -->
 		<div class="flex flex-col justify-center px-8 py-12 lg:px-10 lg:py-16">
 			<h2 class="text-4xl leading-tight font-semibold tracking-tight text-fyra-gray-50 lg:text-4xl">
-				Everything you need to run your stack.
+				Everything you need to run your stack
 			</h2>
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
 				From managed VPS to bare-metal colocation, we've got infrastructure for every scale.
