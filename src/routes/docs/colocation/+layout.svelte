@@ -8,10 +8,10 @@
 	const { children } = $props();
 
 	const nav = [
-		{ label: 'Shipping hardware to us', href: '/docs/colocation/shipping-hardware' },
-		{ label: 'Accessing IPMI remotely', href: '/docs/colocation/ipmi' },
-		{ label: 'Requesting remote hands', href: '/docs/colocation/remote-hands' },
-		{ label: 'Power budgets and PDUs', href: '/docs/colocation/power-budgets' },
+		{ label: 'Shipping Hardware to Us', href: '/docs/colocation/shipping-hardware' },
+		{ label: 'Accessing IPMI Remotely', href: '/docs/colocation/ipmi' },
+		{ label: 'Requesting Remote Hands', href: '/docs/colocation/remote-hands' },
+		{ label: 'Power Budgets and PDUs', href: '/docs/colocation/power-budgets' },
 		{ label: 'Colocation Networking', href: '/docs/colocation/networking' }
 	] as const;
 </script>

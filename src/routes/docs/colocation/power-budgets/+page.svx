@@ -2,57 +2,57 @@
 <title>Power Budgets and PDUs | Fyra Stack Docs</title>
 <meta name="description" content="How power is provisioned for your colocation slot. What's included per plan, what PDUs we use, and how to get more amps if you need them." />
 <link rel="canonical" href="https://fyrastack.com/docs/colocation/power-budgets" />
-<meta property="og:title" content="Power Budgets & PDUs | Fyra Stack Docs" />
+<meta property="og:title" content="Power Budgets and PDUs | Fyra Stack Docs" />
 <meta property="og:description" content="How power is provisioned for your colocation slot. What's included, what PDUs we use, and how to get more." />
 <meta property="og:image" content="https://fyrastack.com/logo.png" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://fyrastack.com/docs/colocation/power-budgets" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Power Budgets & PDUs | Fyra Stack Docs" />
+<meta name="twitter:title" content="Power Budgets and PDUs | Fyra Stack Docs" />
 <meta name="twitter:description" content="How power is provisioned for your colocation slot. What's included, what PDUs we use, and how to get more." />
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Power Budgets and PDUs.
+# Power Budgets and PDUs
 
 Every colocation slot comes with a power allocation. This guide explains how power is provisioned, what PDUs we use, and how to stay within your budget.
 
 ---
 
-## 1. Power Included Per Plan.
+## 1. Power Included per Plan
 
 Each colocation plan includes a base power allocation measured in amps at 208V:
 
-### Standard Colocation (1U).
+### Standard Colocation (1U)
 
 Includes **1A at 208V** (~200W) starting out. This covers the typical idle draw of a 1U server with one or two drives and a single PSU.
 
-### Extended Power Add-on.
+### Extended Power Add-On
 
 If your server draws more than the included allocation, you can purchase additional amps in 1A increments. Contact us before shipping if you expect to exceed the base allocation.
 
 ---
 
-## 2. PDU Details.
+## 2. PDU Details
 
-### What we use.
+### What We Use
 
-We use metered Tripp Lite 208V 30A Single phase PDUs. Each PDU circuit is shared across multiple outlets and monitored at the circuit level.
+We use metered Tripp Lite 208V 30A single-phase PDUs. Each PDU circuit is shared across multiple outlets and monitored at the circuit level.
 
-### Redundant power.
+### Redundant Power
 
 If your server has dual PSUs, we can connect each to a separate PDU on a separate circuit for redundancy. Request this during the intake process and we'll assign outlets accordingly.
 
 ---
 
-## 3. Overages and Enforcement.
+## 3. Overages and Enforcement
 
-We monitor per-circuit draw continuously. If your server sustains draw above your allocated amount for more than 15 minutes, we'll email you to discuss an upgrade. Persistent overages without a plan upgrade may result in your server being powered down to protect other customers on the same circuit; in accordance with our [Terms of Service](/terms-of-service).
+We monitor per-circuit draw continuously. If your server sustains draw above your allocated amount for more than 15 minutes, we'll email you to discuss an upgrade. Persistent overages without a plan upgrade may result in your server being powered down to protect other customers on the same circuit, in accordance with our [Terms of Service](/terms-of-service).
 
 ---
 
-## 4. Power Cycling Your Server.
+## 4. Power Cycling Your Server
 
 If you need your server power-cycled and IPMI isn't responding, you can request a manual power cycle via [remote hands](/docs/colocation/remote-hands). We'll toggle the PDU outlet and confirm when it's back online.
 
-For servers with IPMI configured, you can power cycle yourself at any time, see [Accessing IPMI Remotely](/docs/colocation/ipmi).
+For servers with IPMI configured, you can power cycle the server yourself at any time; see [Accessing IPMI Remotely](/docs/colocation/ipmi).

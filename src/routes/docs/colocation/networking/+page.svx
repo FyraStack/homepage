@@ -17,9 +17,9 @@
 
 If you need to configure networking for your colocated server, this is where you can find that information.
 
-## Quick tl;dr
+## Quick TL;DR
 
-We don't expose your public IPv4 or IPv6 address directly to your system. You'll need to statically assign the transit IP addresses for your server, then use your routed public addresses as the preferred source addresses. When your server is racked and ready to use, you'll receive an email with your public IP addresses, IPv6 allocation, and colocation ID allocation. **We do not support DHCP for colocated server IP assignment.** Your static IP configuration for your server should look something like this, where `$ID` is your colocation ID/port, `$PUBLIC_IP` is your routed public IPv4 address, `$PUBLIC_IPV6` is your assigned public IPv6 address, and `$IPV6_DELEGATED_PREFIX` is your delegated IPv6 prefix:
+We don't expose your public IPv4 or IPv6 address directly to your system. You'll need to statically assign the transit IP addresses for your server, then use your routed public addresses as the preferred source addresses. When your server is racked and ready to use, you'll receive an email with your public IP addresses, IPv6 allocation, and colocation ID allocation. **We do not support DHCP for colocated server IP assignment.** Your static IP configuration for your server should look something like this. In this example, `$ID` is your colocation ID/port, `$PUBLIC_IP` is your routed public IPv4 address, `$PUBLIC_IPV6` is your assigned public IPv6 address, and `$IPV6_DELEGATED_PREFIX` is your delegated IPv6 prefix:
 
 ```
 VLAN:                  30$ID
@@ -40,7 +40,7 @@ See below for a more detailed description of the setup process according to your
 
 ## Firewall Configuration
 
-Fyra Stack colocation does NOT run your traffic through a NAT. That means **you are responsible for configuring your firewall to protect your server**. We recommend using `ufw` or `iptables` to configure your firewall. We also recommend changing your SSH port as it will be exposed to the public internet, making it susceptible to brute-force attacks. Refer to your distribution's documentation, or [see our documentation for VPS hardening](/docs/vps/hardening). If you are using a firewall, make sure to allow traffic to your public IP addresses and transit IP addresses.
+Fyra Stack colocation does **not** run your traffic through a NAT. That means **you are responsible for configuring your firewall to protect your server**. We recommend using `ufw` or `iptables` to configure your firewall. We also recommend changing your SSH port, as it will be exposed to the public internet and susceptible to brute-force attacks. Refer to your distribution's documentation, or [see our documentation for VPS hardening](/docs/vps/hardening). If you are using a firewall, make sure to allow traffic to your public IP addresses and transit IP addresses.
 
 For compatibility, our router configuration will pass through any traffic from your assigned transit IP (ending in .4) to your public IP. This is primarily in case you use something like Podman or Docker that doesn't follow standard routes. Any inbound traffic MUST still listen on the public IPv4 address; this backup NAT only applies to outbound traffic.
 
@@ -218,10 +218,10 @@ nmcli connection down "<connection-name>"
 nmcli connection up "<connection-name>"
 ```
 
-## Note on IPMI/DHCP networking
+## A Note on IPMI and DHCP Networking
 
-Your IPMI interface will receive its own IP address over DHCP. Typically, we assign it the IP address of `10.30.$ID.5`, but anything on your server that tries to connect over DHCP will connect to something in the IP range of `10.30.$ID.5`-`10.30.$ID.100`. Anything that is *not* on your transit IP address will not be publically accessible. For this reason, make sure your server has its networking statically configured.
+Your IPMI interface will receive its own IP address over DHCP. Typically, we assign it the IP address of `10.30.$ID.5`, but anything on your server that tries to connect over DHCP will connect to something in the IP range of `10.30.$ID.5`–`10.30.$ID.100`. Anything that is *not* on your transit IP address will not be publicly accessible. For this reason, make sure your server has its networking statically configured.
 
-## Post-networking setup
+## Post-Networking Setup
 
 We strongly recommend that you harden your system and its configuration after setting up networking. See our [VPS hardening documentation](/docs/vps/hardening) for some recommendations. Specifically, we recommend changing your SSH port, setting up a firewall, and setting up fail2ban for SSH.

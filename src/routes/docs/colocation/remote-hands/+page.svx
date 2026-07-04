@@ -13,32 +13,32 @@
 <meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
 
-# Requesting Remote Hands.
+# Requesting Remote Hands
 
 Remote hands is physical assistance from our team at the data center; plugging in cables, swapping drives, power cycling equipment, or anything else that requires someone to be physically present at your server. We will always ask for your explicit permission before performing hands‑on maintenance.
 
 ---
 
-## 1. What's Included.
+## 1. What's Included
 
-Remote hands is included with all colocation plans for routine tasks at a rate of $50/hour, with a minimum of one hour per remote hands task. This covers:
+Remote hands is available with all colocation plans for routine tasks at a rate of $50/hour, with a minimum of one hour per remote hands task. This covers:
 
 - Power cycling via PDU or physical power button
 - Seating or reseating a drive you've shipped to us
 - Connecting or reconnecting a cable
 - Visual inspection and status report (LED states, cable condition)
-- Confirming a server is POST-ing via KVM
+- Confirming a server reaches POST via KVM
 - OS reinstallation from physical media
 - Hardware swap or upgrade (e.g. replacing a failed PSU you've shipped us a replacement for)
 - Full server removal, repackaging, and return shipping
 
 ---
 
-## 2. How to Request.
+## 2. How to Request
 
 [Email support@fyrastack.com](mailto:support@fyrastack.com?subject=Remote%20Hands%20Request) with the subject line **Remote Hands Request** and include:
 
-### What we need to know.
+### What We Need to Know
 
 - Your name and the server hostname or rack unit assignment
 - A clear description of what you need done, step by step
@@ -49,19 +49,19 @@ The more specific your instructions, the faster and more accurately we will comp
 
 ---
 
-## 3. Response Times.
+## 3. Response Times
 
-### Standard requests.
+### Standard Requests
 
 We aim to complete standard remote hands tasks within **4 business hours** of acknowledgement during business hours (9am–5pm CT, Mon–Fri).
 
-### Urgent requests.
+### Urgent Requests
 
-For hardware failures or situations affecting production, mark your email as urgent or call our NOC at (630) 381-7677. We'll do our best to respond within **1 hour** and prioritize your request. For time-critical issues outside business hours, include a phone number in your email.
+For hardware failures or situations affecting production, mark your email as urgent or call our NOC at 630-381-7677. We'll do our best to respond within **1 hour** and prioritize your request. For time-critical issues outside business hours, include a phone number in your email.
 
 ---
 
-## 4. What We Won't Do Without Explicit Permission.
+## 4. What We Won't Do without Explicit Permission
 
 In line with our [Privacy Statement](/privacy-statement), we will **never**:
 
@@ -73,6 +73,6 @@ If a task requires us to interact with your OS or data, we will confirm the spec
 
 ---
 
-## 5. After the Task.
+## 5. After the Task
 
 We'll reply to your request email with a summary of what was done, the outcome, and any observations (e.g. a drive that looked physically damaged, a cable that was loose). If something didn't go as expected, we'll tell you immediately rather than leaving you to figure it out.
