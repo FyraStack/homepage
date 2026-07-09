@@ -13,7 +13,6 @@ const prereserveSchema = type({
 	useCase: 'string.trim'
 });
 
-export const prereserve = form(
-	prereserveSchema,
-	async (data): Promise<PrereserveResult> => submitPrereserve(data)
+export const prereserve = form(prereserveSchema, async (data): Promise<PrereserveResult> =>
+	submitPrereserve(data)
 );

@@ -59,6 +59,7 @@
 pre[class*='language-'],
 code[class*='language-'] {
 	color: #e4e4e7;
+
 	/* fyra-gray-200 */
 }
 
@@ -67,12 +68,14 @@ code[class*='language-'] {
 .token.doctype,
 .token.cdata {
 	color: #a2a2a9;
+
 	/* fyra-gray-400 */
 	font-style: italic;
 }
 
 .token.punctuation {
 	color: #d5d5d7;
+
 	/* fyra-gray-300 */
 }
 
@@ -105,11 +108,13 @@ code[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
 	color: #d5d5d7;
+
 	/* fyra-gray-300 */
 }
 
 .token.keyword {
 	color: #d89894;
+
 	/* fyra-red-400 */
 }
 
