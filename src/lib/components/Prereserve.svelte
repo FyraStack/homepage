@@ -342,8 +342,7 @@
 							rows="3"
 							disabled={submitted}
 							placeholder="Tell us what you'll be running…"
-							class="{inputClass} resize-none"
-						></textarea>
+							class="{inputClass} resize-none"></textarea>
 					</div>
 
 					<!-- Submit -->

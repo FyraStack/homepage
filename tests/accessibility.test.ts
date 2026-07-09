@@ -1,61 +1,64 @@
-import { styleText } from "node:util";
-import { expect, getSitemap, localURL, test } from "./accessibility";
+import { styleText } from 'node:util';
+import { expect, getSitemap, localURL, test } from './accessibility';
 
 const urls = await getSitemap();
 
 function formatImpact(impact: string | null | undefined) {
-  if (!impact) {
-    return "unknown";
-  }
+	if (!impact) {
+		return 'unknown';
+	}
 
-  const impactKey: Record<string, string> = {
-    minor: styleText("blue", impact),
-    moderate: styleText("yellowBright", impact),
-    serious: styleText("yellow", impact),
-    critical: styleText("red", impact),
-  };
+	const impactKey: Record<string, string> = {
+		minor: styleText('blue', impact),
+		moderate: styleText('yellowBright', impact),
+		serious: styleText('yellow', impact),
+		critical: styleText('red', impact)
+	};
 
-  return impactKey[impact] ?? impact;
+	return impactKey[impact] ?? impact;
 }
 
 for (const url of urls) {
-  const { pathname } = new URL(url);
-  const pageURL = `${localURL}${pathname}`;
-  const pageLabel = pathname === "/" ? "homepage" : pathname;
+	const { pathname } = new URL(url);
+	const pageURL = `${localURL}${pathname}`;
+	const pageLabel = pathname === '/' ? 'homepage' : pathname;
 
-  test(`Testing for accessibility violations on ${pageLabel}.`, async ({ page, makeAxeBuilder }) => {
-    await page.goto(pageURL, { waitUntil: "networkidle" });
+	test(`Testing for accessibility violations on ${pageLabel}.`, async ({
+		page,
+		makeAxeBuilder
+	}) => {
+		await page.goto(pageURL, { waitUntil: 'networkidle' });
 
-    const { violations } = await makeAxeBuilder().analyze();
-    const reportMessage = `Found ${violations.length} accessibility violations on ${pageLabel}.`;
+		const { violations } = await makeAxeBuilder().analyze();
+		const reportMessage = `Found ${violations.length} accessibility violations on ${pageLabel}.`;
 
-    if (violations.length === 0) {
-      expect(violations, reportMessage).toHaveLength(0);
-      return;
-    }
+		if (violations.length === 0) {
+			expect(violations, reportMessage).toHaveLength(0);
+			return;
+		}
 
-    const violationLog = violations
-      .map((violation, violationIndex) => {
-        const nodes = violation.nodes
-          .map(
-            (node, nodeIndex) => `
-${styleText("redBright", `  Node ${nodeIndex + 1} HTML:`)} ${node.html}
-${styleText("redBright", `  Node ${nodeIndex + 1} CSS:`)} ${node.target.join(", ")}
-${styleText("green", "  Suggested fix:")}
-  ${node.failureSummary ?? "No failure summary provided."}`
-          )
-          .join("\n");
+		const violationLog = violations
+			.map((violation, violationIndex) => {
+				const nodes = violation.nodes
+					.map(
+						(node, nodeIndex) => `
+${styleText('redBright', `  Node ${nodeIndex + 1} HTML:`)} ${node.html}
+${styleText('redBright', `  Node ${nodeIndex + 1} CSS:`)} ${node.target.join(', ')}
+${styleText('green', '  Suggested fix:')}
+  ${node.failureSummary ?? 'No failure summary provided.'}`
+					)
+					.join('\n');
 
-        return `
-${styleText(["redBright", "bold"], `Violation ${violationIndex + 1}:`)}
-${styleText("redBright", "  Violation ID:")} ${violation.id}
-${styleText("redBright", "  Violation Impact:")} ${formatImpact(violation.impact)}
-${styleText("redBright", "  Violation Description:")} ${violation.help}
-${styleText("redBright", "  More info:")} ${violation.helpUrl}
+				return `
+${styleText(['redBright', 'bold'], `Violation ${violationIndex + 1}:`)}
+${styleText('redBright', '  Violation ID:')} ${violation.id}
+${styleText('redBright', '  Violation Impact:')} ${formatImpact(violation.impact)}
+${styleText('redBright', '  Violation Description:')} ${violation.help}
+${styleText('redBright', '  More info:')} ${violation.helpUrl}
 ${nodes}`;
-      })
-      .join("\n\n");
+			})
+			.join('\n\n');
 
-    throw new Error(`${violationLog}\n\n${reportMessage}`);
-  });
+		throw new Error(`${violationLog}\n\n${reportMessage}`);
+	});
 }

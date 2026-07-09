@@ -5,14 +5,7 @@ import { env } from '$env/dynamic/private';
 ///// this section was stolen from autumn's repo because they dont export types for it. i really hate this section and it should be removed ASAP when there is a better solution.
 
 type CustomerProductsUpdatedScenario =
-	| 'new'
-	| 'upgrade'
-	| 'downgrade'
-	| 'renew'
-	| 'cancel'
-	| 'expired'
-	| 'past_due'
-	| 'scheduled';
+	'new' | 'upgrade' | 'downgrade' | 'renew' | 'cancel' | 'expired' | 'past_due' | 'scheduled';
 
 type BalancesLimitType = 'included' | 'max_purchase' | 'spend_limit';
 type UsageAlertThresholdType = 'usage' | 'usage_percentage';
@@ -104,9 +97,7 @@ interface BalancesUsageAlertTriggeredEvent {
 }
 
 type AutumnWebhookEvent =
-	| CustomerProductsUpdatedEvent
-	| BalancesLimitReachedEvent
-	| BalancesUsageAlertTriggeredEvent;
+	CustomerProductsUpdatedEvent | BalancesLimitReachedEvent | BalancesUsageAlertTriggeredEvent;
 
 ///// end of shit code section
 
