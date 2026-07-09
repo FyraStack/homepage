@@ -1,5 +1,25 @@
 import type { Action } from 'svelte/action';
 
+async function copyText(text: string) {
+	if (navigator.clipboard && window.isSecureContext) {
+		await navigator.clipboard.writeText(text);
+		return;
+	}
+
+	const textarea = document.createElement('textarea');
+	textarea.value = text;
+	textarea.setAttribute('readonly', '');
+	textarea.style.position = 'fixed';
+	textarea.style.top = '0';
+	textarea.style.left = '0';
+	textarea.style.opacity = '0';
+
+	document.body.append(textarea);
+	textarea.select();
+	document.execCommand('copy');
+	textarea.remove();
+}
+
 function updateCodeBlockFocusability(node: HTMLElement) {
 	for (const pre of node.querySelectorAll('pre')) {
 		if (pre.scrollWidth > pre.clientWidth) {
@@ -11,21 +31,68 @@ function updateCodeBlockFocusability(node: HTMLElement) {
 }
 
 export const enhanceDocsA11y: Action<HTMLElement> = (node) => {
+	const cleanupCallbacks: Array<() => void> = [];
+
+	const bindCodeBlockCopyButtons = () => {
+		for (const button of node.querySelectorAll<HTMLButtonElement>(
+			'.docs-code-copy-button:not([data-docs-copy-bound])'
+		)) {
+			const pre = button.parentElement?.querySelector('pre');
+
+			if (!pre) {
+				continue;
+			}
+
+			let resetLabel: number | undefined;
+
+			const handleClick = async () => {
+				window.clearTimeout(resetLabel);
+
+				try {
+					const code = pre.querySelector('code')?.textContent ?? pre.textContent ?? '';
+					await copyText(code);
+					button.textContent = 'Copied';
+				} catch {
+					button.textContent = 'Failed';
+				}
+
+				resetLabel = window.setTimeout(() => {
+					button.textContent = 'Copy';
+				}, 1500);
+			};
+
+			button.addEventListener('click', handleClick);
+			button.dataset.docsCopyBound = 'true';
+
+			cleanupCallbacks.push(() => {
+				window.clearTimeout(resetLabel);
+				button.removeEventListener('click', handleClick);
+			});
+		}
+	};
+
+	bindCodeBlockCopyButtons();
 	updateCodeBlockFocusability(node);
 
-	const updateFocusability = () => updateCodeBlockFocusability(node);
-	const observer = new MutationObserver(updateFocusability);
+	const updateEnhancements = () => {
+		bindCodeBlockCopyButtons();
+		updateCodeBlockFocusability(node);
+	};
+	const observer = new MutationObserver(updateEnhancements);
 	observer.observe(node, { childList: true, subtree: true });
 
-	window.addEventListener('resize', updateFocusability);
+	window.addEventListener('resize', updateEnhancements);
 
 	return {
 		update() {
-			updateCodeBlockFocusability(node);
+			updateEnhancements();
 		},
 		destroy() {
 			observer.disconnect();
-			window.removeEventListener('resize', updateFocusability);
+			window.removeEventListener('resize', updateEnhancements);
+			for (const cleanup of cleanupCallbacks) {
+				cleanup();
+			}
 		}
 	};
 };

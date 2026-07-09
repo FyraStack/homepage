@@ -143,6 +143,62 @@ code[class*='language-'] {
 	font-style: italic;
 }
 
+.docs-code-block {
+	position: relative;
+	margin: 1rem 0;
+}
+
+.prose pre {
+	position: relative;
+	padding-top: 3rem;
+}
+
+.prose pre::before {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	left: 1px;
+	z-index: 1;
+	height: 2.25rem;
+	border-bottom: 1px solid #404045;
+	background: #18181a;
+	content: '';
+	pointer-events: none;
+}
+
+.docs-code-block pre {
+	margin: 0;
+}
+
+.docs-code-copy-button {
+	position: absolute;
+	top: 0.4375rem;
+	right: 0.625rem;
+	z-index: 2;
+	border: 1px solid #53535a;
+	background: #27272a;
+	padding: 0.25rem 0.625rem;
+	color: #d5d5d7;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	transition:
+		background-color 150ms ease,
+		border-color 150ms ease,
+		color 150ms ease;
+}
+
+.docs-code-copy-button:hover,
+.docs-code-copy-button:focus-visible {
+	border-color: #a2a2a9;
+	background: #27272a;
+	color: #fafafa;
+}
+
+.docs-code-copy-button:focus-visible {
+	outline: 2px solid #d89894;
+	outline-offset: 2px;
+}
+
 html {
 	@apply w-screen overflow-x-clip bg-fyra-gray-900 text-fyra-gray-50;
 }
