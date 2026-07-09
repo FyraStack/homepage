@@ -7,9 +7,10 @@ export default defineConfig({
   fullyParallel: true,
   projects: [
     {
-      name: "Chromium",
+      name: "Chrome",
       use: {
         ...devices["Desktop Chrome"],
+        channel: isCI ? "chrome" : undefined,
         headless: true,
       },
     },
@@ -21,7 +22,7 @@ export default defineConfig({
   timeout: 180 * 1_000,
   webServer: [
     {
-      command: "bun run preview:test",
+      command: "pnpm run preview:test",
       reuseExistingServer: !isCI,
       // The timeout of the single build step ran before the accessibility tests.
       timeout: 120 * 1_000,

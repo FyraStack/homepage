@@ -66,18 +66,18 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "bun run build && wrangler dev",
-    "preview:test": "bun run build && wrangler dev --ip 127.0.0.1 --port 8787 --local",
+    "preview": "vite build && wrangler dev",
+    "preview:test": "vite build && wrangler dev --ip 127.0.0.1 --port 8787 --local",
     "check": "ultracite check",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "gen": "wrangler types",
-    "deploy": "bun run build && wrangler deploy",
+    "deploy": "vite build && wrangler deploy",
     "cf-typegen": "wrangler types",
     "fix": "ultracite fix",
-    "test": "bunx playwright install chromium && bunx playwright test",
-    "test:ci": "bunx playwright test"
+    "test": "playwright install --with-deps chromium && playwright test",
+    "test:ci": "playwright test"
   },
   "type": "module",
   "version": "0.0.1",
