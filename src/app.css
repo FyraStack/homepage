@@ -171,6 +171,7 @@ code[class*='language-'] {
 }
 
 .docs-code-copy-button {
+	display: none;
 	position: absolute;
 	top: 0.4375rem;
 	right: 0.625rem;
@@ -185,6 +186,10 @@ code[class*='language-'] {
 		background-color 150ms ease,
 		border-color 150ms ease,
 		color 150ms ease;
+}
+
+.js .docs-code-copy-button {
+	display: block;
 }
 
 .docs-code-copy-button:hover,
