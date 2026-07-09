@@ -1,3 +1,8 @@
+<script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ArrowRight } from '@steeze-ui/carbon-icons';
+</script>
+
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 <section class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 	<!-- Top blob -->
@@ -23,6 +28,15 @@
 				Built from the ground up to support the open-source projects we love, and the communities
 				around them
 			</p>
+			<div class="mt-10 flex items-center justify-center gap-x-6">
+				<a
+					href="https://dash.fyrastack.com"
+					class="inline-flex items-center gap-2 border border-fyra-red-500 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
+				>
+					Deploy
+					<Icon src={ArrowRight} class="h-3.5 w-3.5" aria-hidden="true" />
+				</a>
+			</div>
 		</div>
 	</div>
 
