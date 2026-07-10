@@ -1,7 +1,12 @@
 name: mirror
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   mirror:
-    uses: FyraStack/actions/.github/workflows/mirror.yml@main
-    secrets: inherit
+    uses: FyraLabs/actions/.github/workflows/mirror.yml@main
+    secrets:
+      GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
