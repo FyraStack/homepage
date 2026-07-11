@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/components/CodeBlock.svelte';
 	import DocsMeta from '$lib/components/DocsMeta.svelte';
 </script>
 
@@ -54,7 +55,7 @@ Because we place SSH configuration in `sshd_config.d` at priority 50, make sure 
 
 Set these options in your configuration:
 
-```sshconfig
+```ssh-config
 PermitRootLogin no
 PasswordAuthentication no
 KbdInteractiveAuthentication no
@@ -93,7 +94,7 @@ Changing the SSH port does not replace key-based authentication, but it cuts dow
 
 Choose an unused high port, such as `2222`, `22022`, or another value between `1024` and `65535`. In `/etc/ssh/sshd_config.d/10-port.conf`, set:
 
-```sshconfig
+```ssh-config
 Port 2222
 ```
 
@@ -140,7 +141,7 @@ ssh -p 2222 stackuser@your_server_ip -i ~/.ssh/id_ed25519
 
 If that works, update your local SSH config for convenience:
 
-```sshconfig
+```ssh-config
 Host fyrastack-vps
     HostName your_server_ip
     User stackuser

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/components/CodeBlock.svelte';
 	import DocsMeta from '$lib/components/DocsMeta.svelte';
 </script>
 
@@ -70,7 +71,7 @@ Note that this will not work if you have disabled password-based authentication.
 
 If you previously created an SSH config shortcut for your root account, you can update it to use the new user by editing `~/.ssh/config`:
 
-```sshconfig
+```ssh-config
 Host my-vps
   HostName your_vps_ip
   User stackuser

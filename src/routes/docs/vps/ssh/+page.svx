@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CodeBlock from '$lib/components/CodeBlock.svelte';
 	import DocsMeta from '$lib/components/DocsMeta.svelte';
 </script>
 
@@ -141,7 +142,7 @@ You can also create a shortcut in your SSH config file so you only need to type 
 
 Create or edit `~/.ssh/config` and add:
 
-```sshconfig
+```ssh-config
 Host fyrastack-vps
   HostName your_vps_ip
   User stackuser
@@ -165,7 +166,7 @@ ssh fyrastack-vps
 
 Create or edit `~\.ssh\config` and add:
 
-```sshconfig
+```ssh-config
 Host fyrastack-vps
   HostName your_vps_ip
   User stackuser

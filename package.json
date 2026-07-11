@@ -46,6 +46,7 @@
 		"prettier": "^3.9.4",
 		"prettier-plugin-svelte": "^4.1.1",
 		"prettier-plugin-tailwindcss": "^0.8.0",
+		"shiki": "^4.3.1",
 		"sitemapper": "^4.1.6",
 		"stylelint": "^17.14.0",
 		"stylelint-config-html": "^1.1.0",

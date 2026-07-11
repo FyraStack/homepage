@@ -4,7 +4,6 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ArrowLeft } from '@steeze-ui/carbon-icons';
 	import { docsProseClass } from '$lib/docs-prose-class';
-	import { enhanceDocsA11y } from '$lib/docs-a11y';
 
 	const { children } = $props();
 
@@ -75,7 +74,7 @@
 			</nav>
 		</div>
 
-		<div use:enhanceDocsA11y class={docsProseClass}>
+		<div class={docsProseClass}>
 			{@render children()}
 		</div>
 	</div>
