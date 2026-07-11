@@ -14,6 +14,8 @@ These are baseline steps we recommend after your first login to a new VPS. They 
 
 Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
+Any sectiosn that are labeled Debian are also applicable to Ubuntu.
+
 ---
 
 ## 1. Update the System
@@ -27,7 +29,7 @@ sudo dnf upgrade --refresh -y
 sudo dnf install -y sudo curl nano fail2ban
 ```
 
-### Debian / Ubuntu
+### Debian
 
 ```bash
 sudo apt update
@@ -82,7 +84,7 @@ If the command prints nothing and exits successfully, restart SSH:
 # Fedora
 sudo systemctl restart sshd
 
-# Debian / Ubuntu
+# Debian
 sudo systemctl restart ssh
 ```
 
@@ -129,7 +131,7 @@ sudo sshd -t
 # Fedora
 sudo systemctl restart sshd
 
-# Debian / Ubuntu
+# Debian
 sudo systemctl restart ssh
 ```
 
@@ -178,7 +180,7 @@ sudo firewall-cmd --permanent --remove-service=ssh
 sudo firewall-cmd --reload
 ```
 
-### Debian / Ubuntu with UFW
+### Debian with UFW
 
 ```bash
 sudo apt install -y ufw

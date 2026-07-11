@@ -14,6 +14,8 @@ Use a personal admin user for day-to-day access instead of logging in as `root`.
 
 Replace `stackuser` in the examples below with your preferred username.
 
+Commands labeled for Debian are also applicable to Ubuntu.
+
 ---
 
 ## 1. Create the User
@@ -26,7 +28,7 @@ sudo passwd stackuser
 sudo usermod -aG wheel stackuser
 ```
 
-### Debian / Ubuntu
+### Debian
 
 ```bash
 sudo adduser stackuser
