@@ -59,7 +59,7 @@
 	<!-- Content -->
 	<div class="min-w-0 flex-1 px-6 pt-6 pb-12 lg:px-12 lg:py-12">
 		<!-- Mobile nav -->
-		<DocsMobileCategoryMenu category="VPS" {nav} ariaLabel="VPS documentation" />
+		<DocsMobileCategoryMenu category="VPS" {nav} />
 
 		<div class={docsProseClass}>
 			{@render children()}

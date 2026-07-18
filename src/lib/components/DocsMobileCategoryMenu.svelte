@@ -10,11 +10,17 @@
 	type Props = {
 		category: string;
 		nav: readonly NavItem[];
-		ariaLabel?: string;
 	};
 
-	let { category, nav, ariaLabel }: Props = $props();
+	let { category, nav }: Props = $props();
 
+	const labelId = $derived(
+		`docs-section-menu-${category
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-|-$/g, '')}`
+	);
 	const selectedHref = $derived(
 		nav.some((item) => item.href === $page.url.pathname) ? $page.url.pathname : ''
 	);
@@ -30,18 +36,17 @@
 
 <div class="mb-8 lg:hidden">
 	<label
-		for="docs-section-menu"
+		for={labelId}
 		class="mb-2 block text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase"
 	>
 		{category}
 	</label>
 	<div class="relative">
 		<select
-			id="docs-section-menu"
+			id={labelId}
 			value={selectedHref}
 			onchange={navigateToSection}
 			class="w-full rounded-sm border border-fyra-gray-700 bg-fyra-gray-900 px-3 py-2.5 pr-10 text-sm font-medium text-fyra-gray-50 transition-colors focus:border-fyra-red-500 focus:ring-fyra-red-500"
-			aria-label={ariaLabel ?? `${category} documentation`}
 		>
 			{#if !selectedHref}
 				<option value="" disabled>Select a guide</option>
