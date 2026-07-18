@@ -1,30 +1,28 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "stack-homepage",
-  "compatibility_date": "2026-03-17",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  "main": ".svelte-kit/cloudflare/_worker.js",
-  "assets": {
-    "binding": "ASSETS",
-    "directory": ".svelte-kit/cloudflare"
-  },
-  "kv_namespaces": [
-    {
-      "binding": "PRERESERVE_COUNTERS",
-      "id": "02f276ebd5624ba5b46aa47459a08eee"
-    }
-  ],
-  "workers_dev": true,
-  "preview_urls": true,
-  "observability": {
-    "logs": {
-      "enabled": true,
-      "invocation_logs": true
-    },
-    "traces": {
-      "enabled": true
-    }
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "stack-homepage",
+	"compatibility_date": "2026-03-17",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "PRERESERVE_COUNTERS",
+			"id": "02f276ebd5624ba5b46aa47459a08eee"
+		}
+	],
+	"workers_dev": true,
+	"preview_urls": true,
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true
+		}
+	}
 }
