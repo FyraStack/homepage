@@ -4,6 +4,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ArrowLeft } from '@steeze-ui/carbon-icons';
 	import { docsProseClass } from '$lib/docs-prose-class';
+	import DocsMobileCategoryMenu from '$lib/components/DocsMobileCategoryMenu.svelte';
 
 	const { children } = $props();
 
@@ -56,23 +57,9 @@
 	</aside>
 
 	<!-- Content -->
-	<div class="min-w-0 flex-1 px-6 py-12 lg:px-12">
+	<div class="min-w-0 flex-1 px-6 pt-6 pb-12 lg:px-12 lg:py-12">
 		<!-- Mobile nav -->
-		<div class="mb-8 lg:hidden">
-			<p class="mb-2 text-[10px] font-medium tracking-widest text-fyra-gray-300 uppercase">VPS</p>
-			<nav class="flex flex-wrap gap-2" aria-label="VPS documentation">
-				{#each nav as item (item.href)}
-					<a
-						href={resolve(item.href)}
-						class="border px-3 py-1 text-xs transition-colors {$page.url.pathname === item.href
-							? 'border-fyra-red-500 text-fyra-gray-50'
-							: 'border-fyra-gray-600 text-fyra-gray-300 hover:border-fyra-gray-400 hover:text-fyra-gray-100'}"
-					>
-						{item.label}
-					</a>
-				{/each}
-			</nav>
-		</div>
+		<DocsMobileCategoryMenu category="VPS" {nav} />
 
 		<div class={docsProseClass}>
 			{@render children()}
