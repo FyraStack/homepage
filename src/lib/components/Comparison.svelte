@@ -1,4 +1,12 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
+	let tableScroller: HTMLElement;
+
+	onMount(() => {
+		tableScroller.setAttribute('tabindex', '0');
+	});
+
 	const competitors = ['DigitalOcean', 'BuyVM', 'Hetzner'];
 
 	const rows: {
@@ -65,9 +73,10 @@
 	</div>
 
 	<!-- Table — horizontally scrollable on mobile -->
-	<section
+	<div
+		bind:this={tableScroller}
 		class="overflow-x-auto focus:outline-2 focus:outline-offset-[-2px] focus:outline-fyra-red-500"
-		tabindex="0"
+		role="region"
 		aria-label="Scrollable VPS comparison table"
 	>
 		<table class="w-full min-w-[600px] border-collapse">
@@ -113,5 +122,5 @@
 				{/each}
 			</tbody>
 		</table>
-	</section>
+	</div>
 </section>
