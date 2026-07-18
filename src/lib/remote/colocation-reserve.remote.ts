@@ -25,6 +25,18 @@ export type ReserveResult =
 			error: string;
 	  };
 
+async function sendDiscordNotification(webhookUrl: string, webhookBody: unknown) {
+	const response = await fetch(webhookUrl, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(webhookBody)
+	});
+
+	if (!response.ok) {
+		throw new Error(`Response status: ${response.status}, Response content: ${await response.text()}`);
+	}
+}
+
 async function createPaymentLink(plan: string, email: string, name: string): Promise<string> {
 	const event = getRequestEvent();
 	if (!event) {
@@ -64,16 +76,14 @@ async function createPaymentLink(plan: string, email: string, name: string): Pro
 	};
 
 	if (env.COLOCATION_RESERVATION_DISCORD_WEBHOOK) {
-		const response = await fetch(env.COLOCATION_RESERVATION_DISCORD_WEBHOOK, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(webhookBody)
+		const notification = sendDiscordNotification(
+			env.COLOCATION_RESERVATION_DISCORD_WEBHOOK,
+			webhookBody
+		).catch((error) => {
+			console.error('Failed to send Discord colocation reservation notification', error);
 		});
-		if (!response.ok) {
-			throw new Error(
-				`Response status: ${response.status}, Response content: ${await response.text()}`
-			);
-		}
+
+		event.platform?.ctx.waitUntil(notification);
 	} else {
 		console.log('would have called discord colocation webhook');
 		console.log(webhookBody);
