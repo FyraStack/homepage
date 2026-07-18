@@ -1,10 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/stores';
+
+	type DocsHref =
+		| '/docs/account-billing/support'
+		| '/docs/colocation/ipmi'
+		| '/docs/colocation/networking'
+		| '/docs/colocation/power-budgets'
+		| '/docs/colocation/remote-hands'
+		| '/docs/colocation/shipping-hardware'
+		| '/docs/vps/choosing-a-distro'
+		| '/docs/vps/hardening'
+		| '/docs/vps/networking'
+		| '/docs/vps/ssh'
+		| '/docs/vps/user-setup';
 
 	type NavItem = {
 		label: string;
-		href: string;
+		href: DocsHref;
 	};
 
 	type Props = {
@@ -28,8 +42,10 @@
 	function navigateToSection(event: Event) {
 		const target = event.currentTarget as HTMLSelectElement;
 
-		if (target.value) {
-			goto(target.value);
+		const href = nav.find((item) => item.href === target.value)?.href;
+
+		if (href) {
+			goto(resolve(href));
 		}
 	}
 </script>

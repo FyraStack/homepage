@@ -65,10 +65,8 @@
 	</div>
 
 	<!-- Table — horizontally scrollable on mobile -->
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex: Horizontal scroll regions need keyboard focus so keyboard users can scroll the full comparison table. -->
-	<div
+	<section
 		class="overflow-x-auto focus:outline-2 focus:outline-offset-[-2px] focus:outline-fyra-red-500"
-		role="region"
 		tabindex="0"
 		aria-label="Scrollable VPS comparison table"
 	>
@@ -115,5 +113,5 @@
 				{/each}
 			</tbody>
 		</table>
-	</div>
+	</section>
 </section>
