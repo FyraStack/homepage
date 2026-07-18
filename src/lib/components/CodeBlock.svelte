@@ -59,6 +59,7 @@
 </script>
 
 <figure class="docs-code-block" bind:this={root}>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- Shiki generates trusted highlighted HTML for code fences at build time. -->
 	{@html html}
 	{#if mounted}
 		<button

@@ -1,4 +1,12 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
+	let tableScroller: HTMLElement;
+
+	onMount(() => {
+		tableScroller.setAttribute('tabindex', '0');
+	});
+
 	const competitors = ['Traditional Colo', 'Dedicated Servers', 'Self-hosting'];
 
 	const rows: {
@@ -72,7 +80,12 @@
 	</div>
 
 	<!-- Table -->
-	<div class="overflow-x-auto">
+	<div
+		bind:this={tableScroller}
+		class="overflow-x-auto focus:outline-2 focus:outline-offset-[-2px] focus:outline-fyra-red-500"
+		role="region"
+		aria-label="Scrollable colocation comparison table"
+	>
 		<table class="w-full min-w-[600px] border-collapse">
 			<thead>
 				<tr class="border-b border-fyra-gray-800">
