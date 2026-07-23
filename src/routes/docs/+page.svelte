@@ -115,10 +115,9 @@
 			category: 'Account & Billing',
 			description: 'Managing your plan, invoices, and cancellation.',
 			articles: [
-				{ label: 'Upgrading your plan', soon: true },
-				{ label: 'Reading your invoice', soon: true },
-				{ label: 'Cancelling a plan', soon: true },
-				{ label: 'Contacting support', soon: false, href: '/docs/account-billing/support' }
+				{ label: 'Contacting Support', soon: false, href: '/docs/account-billing/support' },
+				{ label: 'How We Bill', soon: false, href: '/docs/account-billing/how-we-bill' },
+				{ label: 'Upgrading your plan', soon: true }
 			]
 		}
 	];

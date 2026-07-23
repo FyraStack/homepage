@@ -8,7 +8,10 @@
 
 	const { children } = $props();
 
-	const nav = [{ label: 'Contacting Support', href: '/docs/account-billing/support' }] as const;
+	const nav = [
+		{ label: 'Contacting Support', href: '/docs/account-billing/support' },
+		{ label: 'How We Bill', href: '/docs/account/billing/how-we-bill' }
+	] as const;
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-3 lg:px-8">

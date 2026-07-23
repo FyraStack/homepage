@@ -33,7 +33,9 @@ async function sendDiscordNotification(webhookUrl: string, webhookBody: unknown)
 	});
 
 	if (!response.ok) {
-		throw new Error(`Response status: ${response.status}, Response content: ${await response.text()}`);
+		throw new Error(
+			`Response status: ${response.status}, Response content: ${await response.text()}`
+		);
 	}
 }
 
