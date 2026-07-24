@@ -51,4 +51,9 @@ On the Dashboard, click on your profile icon and go to Keys. From there, paste i
 ---
 ## 4. Create a VPS
 
-Go to the servers tab on the side in project view. Click the plus icon to create a new VPS.
+Go to the servers tab on the side in project view. Click the plus icon to create a new VPS. Name your VPS, select your distribution (for more information, see [Choosing a Linux Distribution](/docs/vps/choosing-a-distro)), select your VPS tier, and add your SSH key. If you're not using an SSH key, **you MUST save your root password here**. Your generated root password **will not** be shown again, and if you lose it, you will not be able to access your VPS.
+
+---
+## Connecting to your VPS
+
+See our dedicated [Connecting via SSH](/docs/vps/ssh) doc.
