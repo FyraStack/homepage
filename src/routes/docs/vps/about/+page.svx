@@ -17,7 +17,7 @@ Here, you can learn more about what powers our stack and networking.
 
 ### Servers
 
-For our compute nodes, we have 8x Dell PowerEdge R640 servers. Each server has 2x Intel Xeon Platinum 8260 CPUs. Each CPU has 24 cores running at 2.4 GHz with a boost clock of 3.9 GHz. In addition, each node has 128 GB of RAM.
+For our compute nodes, we have 8x Dell PowerEdge R640 servers. Each server has 2x Intel Xeon Platinum 8260 CPUs. Each CPU has 24 cores running at 2.4 GHz with a boost clock of 3.9 GHz.
 
 Alongside our compute nodes, we have 3x Dell PowerEdge R740 servers. We combine all of our storage servers in a Ceph cluster, which you can read more about in the software section.
 
