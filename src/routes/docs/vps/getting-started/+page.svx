@@ -1,0 +1,21 @@
+<script lang="ts">
+  import CodeBlock from '$lib/components/CodeBlock.svelte';
+  import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="Getting Started with VPS"
+	description="How to make your first VPS."
+/>
+
+# Getting Started with VPS
+
+Thanks for using Fyra Stack! VPS creation and management is handled through [Dashboard](https://dash.fyrastack.com). This page will walk you through the initial setup of your VPS.
+
+---
+## 1. Create and Account
+
+To get started, create an account on Dashboard at [https://dash.fyrastack.com](https://dash.fyrastack.com/register). Enter your name, email, and a password. You'll then receive a confirmation email. You must confirm your email before you can log in.
+
+---
+## 2. Create a Project

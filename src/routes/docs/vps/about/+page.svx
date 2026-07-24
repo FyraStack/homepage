@@ -1,0 +1,89 @@
+<script lang="ts">
+  import CodeBlock from '$lib/components/CodeBlock.svelte';
+  import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="About Stack VPS"
+	description="Information about our stack and networking."
+/>
+
+# About Stack VPS
+
+Here, you can learn more about what powers our stack and networking.
+
+---
+## Hardware
+
+### Servers
+
+For our compute nodes, we have 8x Dell PowerEdge R640 servers. Each server has 2x Intel Xeon Platinum 8260 CPUs. Each CPU has 24 cores running at 2.4 GHz with a boost clock of 3.9 GHz. In addition, each node has 128 GB of RAM.
+
+Alongside our compute nodes, we have 3x Dell PowerEdge R740 servers. Each server has 2x 120GB Intel SATA SSDs and 2x 1.92TB WaterPanther SAS3 SSDs. We combine all of our servers in a Ceph storage cluster, which you can read more about in the software section.
+
+### Networking
+
+We have 4 switches, 2 of which are SFP and the other 2 of which are Ethernet. Each switch also has QSFP+ ports for high-speed networking. Each Proxmox node has 2 SFP+ connections and 2 Ethernet connections in addition to their IPMI ethernet connections. Our storage nodes have QSFP+ connections for high-speed networking.
+
+---
+## Software
+
+Our software stack currently uses Proxmox for our hypervisor, VyOS for routing, Kea for DHCP, and Grafana for internal monitoring.
+
+### Hypervisor
+
+We use Proxmox as a solid baseline hypervisor with good high-availability support. We use its high availability to automatically provision VMs to balance resource use across our nodes. We also automatically rebalance load across our nodes using Proxmox's built-in Cluster Resource Scheduling feature. If a node needs to shut down, Proxmox will automatically migrate any running VMs to another node before shutting down. This helps us update our nodes without any downtime.
+
+For storage, we use Ceph to provide a scalable and fault-tolerant storage solution. Each storage node acts as a monitor, manager, and metadata server. We also use our first compute node as an additional monitor.
+
+### Networking
+
+Our routers run VyOS because of its reliability and configurability. We originally tried using OPNsense, but had issues with IPv6 subnet delegation. VyOS provides a more stable and flexible solution for our routing needs.
+
+---
+## VPS Networking
+
+By default, your VPS will be set up using `cloud-init` with the correct networking configuration. If you need to make changes to your networking configuration, you can do so by editing the appropriate configuration files for your distribution.
+
+### Notes
+
+Fyra Stack does not currently provide a firewall layer for your VPS, though it is planned in the future. You are responsible for configuring firewall rules on your server. See the [VPS hardening guide](https://fyrastack.com/docs/vps/hardening) for more information on setting up a firewall.
+
+By default, we block SMTP traffic to your VPS (port 25). If you would like to allow SMTP traffic, contact us at [support@fyralabs.com](mailto:support@fyralabs.com?subject=Allow%20SMTP%20traffic).
+Generally, we prefer to have some history of a user's behavior before allowing SMTP traffic, as SMTP is known to cause abuse complaints. For that reason, we may deny a request to unblock SMTP traffic if we don't have enough history on a user.
+
+Spoofing MAC addresses is considered network abuse under our [acceptable use policy](https://fyrastack.com/terms-of-service). Our system also won't allow you to access the internet if you try to spoof your MAC address. All traffic to and from your assigned public IP must come from your assigned MAC address. In addition, if you try to use a source IP address that isn't assigned to you, your traffic will be blocked.
+
+### How our VPS Network Works
+
+When you set up your VPS, we use [cloud-init](https://cloud-init.io/) to configure your networking. This includes assigning your static IP address, MAC address, routes, DNS, interface name, and disabling DHCP. If you're curious about an example cloud-init configuration, here's one with information redacted:
+
+```yaml
+version: 2
+ethernets:
+  public0:
+    match:
+      macaddress: $MAC_ADDRESS
+    set-name: eth0
+    dhcp4: false
+    dhcp6: false
+    addresses:
+      - $PUBLIC_IP_V4/32
+      - $PUBLIC_IP_V6/128
+      - $PUBLIC_IPV6_DELEGATION/64
+    routes:
+      - to: $PUBLIC_GATEWAY_V4/32
+        scope: link
+      - to: 0.0.0.0/0
+        via: $PUBLIC_GATEWAY_V4
+        on-link: true
+      - to: ::/0
+        via: $PUBLIC_GATEWAY_V6
+        on-link: true
+    nameservers:
+      addresses:
+        - 1.1.1.1
+        - 1.0.0.1
+        - 2606:4700:4700::1111
+        - 2606:4700:4700::1001
+```

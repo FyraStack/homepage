@@ -89,10 +89,10 @@
 			category: 'VPS',
 			description: 'First login, initial hardening, and setting up your environment.',
 			articles: [
+				{ label: 'About Stack VPS', soon: false, href: '/docs/vps/about' },
 				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
 				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
-				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
 				{ label: 'Choosing a Linux Distribution', soon: false, href: '/docs/vps/choosing-a-distro' }
 			]
 		},

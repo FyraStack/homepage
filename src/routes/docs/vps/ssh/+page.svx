@@ -10,7 +10,7 @@
 
 # Connecting via SSH
 
-Thanks for setting up a VPS with Fyra Stack! To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
+To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
 
 ---
 
