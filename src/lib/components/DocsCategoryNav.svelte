@@ -93,6 +93,6 @@
 	</div>
 </aside>
 
-<div class="lg:hidden">
+<div class="px-6 pt-6 lg:hidden">
 	<DocsMobileCategoryMenu category={label} {nav} />
 </div>

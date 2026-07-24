@@ -16,11 +16,11 @@
 	</nav>
 </div>
 
-<div class="flex min-h-screen divide-x divide-fyra-gray-800">
+<div class="flex min-h-screen flex-col divide-fyra-gray-800 lg:flex-row lg:divide-x">
 	<DocsCategoryNav category="vps" {order} />
 
 	<!-- Content -->
-	<div class="min-w-0 flex-1 px-6 pt-6 pb-12 lg:px-12 lg:py-12">
+	<div class="min-w-0 flex-1 px-6 pt-0 pb-12 lg:px-12 lg:py-12">
 		<div class={docsProseClass}>
 			{@render children()}
 		</div>
