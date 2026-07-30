@@ -11,12 +11,15 @@
 		| '/docs/colocation/remote-hands'
 		| '/docs/colocation/power-budgets'
 		| '/docs/colocation/networking'
+		| '/docs/vps/getting-started'
+		| '/docs/vps/about'
 		| '/docs/vps/ssh'
 		| '/docs/vps/user-setup'
 		| '/docs/vps/hardening'
 		| '/docs/vps/networking'
 		| '/docs/vps/choosing-a-distro'
-		| '/docs/account-billing/support';
+		| '/docs/account-billing/support'
+		| '/docs/account-billing/how-we-bill';
 
 	type Step = {
 		n: string;
@@ -90,6 +93,7 @@
 			description: 'First login, initial hardening, and setting up your environment.',
 			articles: [
 				{ label: 'About Stack VPS', soon: false, href: '/docs/vps/about' },
+				{ label: 'Getting Started', soon: false, href: '/docs/vps/getting-started' },
 				{ label: 'Connecting via SSH', soon: false, href: '/docs/vps/ssh' },
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
 				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
