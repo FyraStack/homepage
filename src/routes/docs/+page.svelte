@@ -120,7 +120,7 @@
 			description: 'Managing your plan, invoices, and cancellation.',
 			articles: [
 				{ label: 'Contacting Support', soon: false, href: '/docs/account-billing/support' },
-				{ label: 'How We Bill', soon: true},
+				{ label: 'How We Bill', soon: true },
 				{ label: 'Upgrading your plan', soon: true }
 			]
 		}
