@@ -5,7 +5,7 @@
 
 	const { children } = $props();
 
-	const order = ['support', 'how-we-bill'];
+	const order = ['support'];
 </script>
 
 <div class="border-b border-fyra-gray-800 px-6 py-3 lg:px-8">
