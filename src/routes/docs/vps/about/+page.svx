@@ -17,9 +17,9 @@ Here, you can learn more about what powers our stack and networking.
 
 ### Servers
 
-For our compute nodes, we have 8x Dell PowerEdge R640 servers. Each server has 2x Intel Xeon Platinum 8260 CPUs. Each CPU has 24 cores running at 2.4 GHz with a boost clock of 3.9 GHz.
+For our compute nodes, we have 8 Dell PowerEdge R640 servers. Each server has 2 Intel Xeon Platinum 8260 CPUs. Each CPU has 24 cores running at 2.4 GHz with a boost clock of 3.9 GHz.
 
-Alongside our compute nodes, we have 3x Dell PowerEdge R740 servers. We combine all of our storage servers in a Ceph cluster, which you can read more about in the software section.
+Alongside our compute nodes, we have 3 Dell PowerEdge R740 servers. We combine all of our storage servers in a Ceph cluster, which you can read more about in the software section.
 
 ### Networking
 
@@ -36,7 +36,7 @@ We use Proxmox as a solid baseline hypervisor with good high-availability suppor
 
 For storage, we use Ceph to provide a scalable and fault-tolerant storage solution. Each storage node acts as a monitor, manager, and metadata server. We also use our first compute node as an additional monitor.
 
-Note that Proxmox is a temporary solution while we work on our own solution, [Odorobo](https://github.com/FyraStack/odorobo). Odorobo is a hypervisor based on Cloud-Hypervisor, which will allow for quick start times and better resource utilization.
+Note that Proxmox is a temporary solution while we work on our own solution, [Odorobo](https://github.com/FyraStack/odorobo). Odorobo is a hypervisor based on [Cloud-Hypervisor](https://github.com/cloud-hypervisor/cloud-hypervisor), which will allow for quick start times and better resource utilization.
 
 ### Networking
 
