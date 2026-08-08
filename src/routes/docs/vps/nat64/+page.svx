@@ -64,7 +64,6 @@ Add the NAT64 route to the active connection. Replace `CONNECTION` with the conn
 ```sh
 nmcli connection show
 sudo nmcli connection modify "CONNECTION" +ipv6.routes "64:ff9b::/96 fe80::1040:ffff"
-sudo nmcli connection up "CONNECTION"
 ```
 
 Configure the DNS64 resolver without discarding your existing resolvers:
