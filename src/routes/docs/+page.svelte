@@ -16,6 +16,7 @@
 		| '/docs/vps/hardening'
 		| '/docs/vps/networking'
 		| '/docs/vps/choosing-a-distro'
+		| '/docs/vps/nat64'
 		| '/docs/account-billing/support';
 
 	type Step = {
@@ -93,7 +94,12 @@
 				{ label: 'Adding a Non-Root User', soon: false, href: '/docs/vps/user-setup' },
 				{ label: 'Initial Server Hardening', soon: false, href: '/docs/vps/hardening' },
 				{ label: 'VPS Networking', soon: false, href: '/docs/vps/networking' },
-				{ label: 'Choosing a Linux Distribution', soon: false, href: '/docs/vps/choosing-a-distro' }
+				{
+					label: 'Choosing a Linux Distribution',
+					soon: false,
+					href: '/docs/vps/choosing-a-distro'
+				},
+				{ label: 'IPv6-only networking with NAT64', soon: false, href: '/docs/vps/nat64' }
 			]
 		},
 		{
