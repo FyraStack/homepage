@@ -25,7 +25,7 @@ Once you're logged in, hit the button to create a new project. Give it a name an
 ---
 ## 3. Add Billing Information
 
-To add billing information, click on the "Billing" tab in the sidebar. Click "Set up billing," Enter your credit card details, and click "Save". For more information on how we bill, see [How We Bill](/docs/account-billing/how-we-bill).
+To add billing information, click on the "Billing" tab in the sidebar. Click "Set up billing," Enter your credit card details, and click "Save".
 
 ---
 ## (Optional) Add an SSH Key
