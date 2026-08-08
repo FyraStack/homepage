@@ -48,6 +48,7 @@ jobs:
       - name: Set up PNPM
         uses: pnpm/setup@4700d737c3d7a2e7199f3d42a920f0bf7f34e411 # v2.0.1
         with:
+          version: 11
           cache: true
           runtime: node@lts
 
