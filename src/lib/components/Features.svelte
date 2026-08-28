@@ -12,12 +12,17 @@
 				Stack is provided by <a
 					href="https://fyralabs.com"
 					class="text-fyra-gray-200 underline hover:text-white">Fyra Labs</a
-				>, an open-source community that develops Terra and Ultramarine Linux.
+				>, the open source community that develops Terra and Ultramarine Linux.
 			</p>
 
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
-				We focus on bare-metal that just works, built from the ground up to support the open source
-				projects you love; all without breaking the bank, or your mind.
+				Everything we do is open source, and you can view and contribute to the very code that
+				powers your server.
+			</p>
+
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
+				We focus on servers that just work, built to support and use the open source projects you
+				love.
 			</p>
 		</div>
 
@@ -39,16 +44,16 @@
 				<div class="relative">
 					<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
 					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">
-						Fast storage, fast compute, fast networking, <br /> fast everything.
+						Fast storage, fast compute, fast networking, <br /> fast <i>everything</i>
 					</p>
 				</div>
 			</div>
 
-			<!-- Linux Native -->
+			<!-- Location -->
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">Midwest proud</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Operating out of Chicago, Illinois since 2026.
+					Operating out of Chicago, Illinois
 				</p>
 			</div>
 
@@ -56,7 +61,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Independent</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Built on infrastructure we own, we don't resell another provider.
+					Built on infrastructure we own, we don't resell another provider
 				</p>
 			</div>
 
@@ -64,7 +69,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Real support</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					By the system engineers that actually maintain the servers.
+					By the engineers that actually maintain the servers
 				</p>
 			</div>
 
@@ -72,7 +77,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Honest pricing</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					No hidden fees, no egress charges, no surprise bills.
+					No hidden fees, no egress charges, no surprise bills
 				</p>
 			</div>
 		</div>

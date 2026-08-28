@@ -10,7 +10,7 @@
 
 <div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 	<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">Priced fairly</h2>
-	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
+	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees</p>
 </div>
 <div class="grid grid-cols-7">
 	<div class="col-span-7 flex flex-col justify-between border-b border-fyra-gray-800 p-5">
@@ -42,7 +42,7 @@
 		</div>
 		<!-- middle -->
 		<div
-			class="mt-8 grid grid-cols-1 gap-x-8 gap-y-1.5 text-base md:grid-cols-2 md:gap-y-3.5 lg:mt-16 lg:text-[1.05rem]"
+			class="mt-8 grid grid-cols-1 gap-x-8 gap-y-1.5 text-base md:grid-cols-2 md:gap-y-3.5 lg:mt-10 lg:text-[1.05rem]"
 		>
 			<div class="flex justify-between">
 				<p class="text-fyra-gray-400">Rack Units</p>
@@ -89,7 +89,7 @@
 					</h3>
 				</div>
 			</div>
-			<div class="mt-4 text-left md:mt-6">
+			<div class="mt-3 text-left md:mt-4">
 				<p class="text-xs text-fyra-gray-400">
 					{plan.units}U
 					<span class="px-0.5 text-fyra-red-500">•</span>
@@ -110,6 +110,6 @@
 			class="text-fyra-red-400 underline underline-offset-2 transition-colors hover:text-fyra-red-300"
 			>Contact us</a
 		>
-		for bulk orders and non-profit discounts.
+		for bulk orders and non-profit discounts!
 	</p>
 </div>

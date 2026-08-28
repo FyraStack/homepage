@@ -103,7 +103,7 @@ Chicago, IL 60625`;
 				Get started with colocation
 			</h2>
 			<p class="mt-2 text-sm text-fyra-gray-400">
-				Select your plan, provide your details, and we'll get you set up.
+				Select your plan, provide your details, and we'll get you set up
 			</p>
 		</div>
 
