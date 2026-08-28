@@ -33,13 +33,13 @@
 						aria-hidden="true"
 					/>
 					<div
-						class="absolute inset-0 bg-gradient-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"
+						class="absolute inset-0 bg-linear-to-r from-fyra-gray-900 via-fyra-gray-900/60 to-transparent"
 					></div>
 				</div>
 				<div class="relative">
 					<p class="text-lg font-semibold text-fyra-gray-50">Midwest proud</p>
 					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">
-						Providing low-latency access to the entire US on our blended network.
+						Providing low-latency access to the entire US on our blended network
 					</p>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">IPMI remote access</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Full out-of-band management over a simple VPN connection.
+					Full out-of-band management over a simple VPN connection
 				</p>
 			</div>
 
@@ -56,7 +56,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Redundant power</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					A+B feeds, UPS, and generator backup keeps your server on.
+					A+B feeds, UPS, and a generator backup keeps your server on
 				</p>
 			</div>
 
@@ -64,7 +64,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Real support</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					By engineers who have actually racked servers before.
+					By engineers who have actually racked servers before
 				</p>
 			</div>
 
@@ -72,7 +72,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Honest pricing</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					No hidden power fees, no egress charges, no surprise bills.
+					No hidden power fees, no egress charges, no surprise bills
 				</p>
 			</div>
 		</div>
