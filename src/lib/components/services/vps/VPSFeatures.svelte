@@ -18,7 +18,7 @@
 				good hardware, run it efficiently, run a small focused team, don't oversell, and charge a fair
 				price.
 			</p>
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">It's boring, and it works.</p>
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">It's boring, and it works!</p>
 		</div>
 
 		<!-- Right: bento grid -->

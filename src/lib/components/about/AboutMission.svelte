@@ -27,10 +27,10 @@
 		</div>
 		<div class="px-6 py-10 md:px-10">
 			<p class="text-base leading-relaxed text-fyra-gray-300">
-			    <!-- is stack still considered the commercial arm? -->
-				We're proud supporters of open source. Fyra Stack is the commercial arm of Fyra Labs, a
-				small group building tools and systems around Linux, community, and the idea that software
-				should be made by people who care what happens to it.
+				<!-- is stack still considered the commercial arm? -->
+				We're proud supporters of open source. Fyra Stack is the commercial arm of Fyra Labs, a small
+				group building tools and systems around Linux, community, and the idea that software should be
+				made by people who care what happens to it.
 			</p>
 			<p class="mt-4 text-base leading-relaxed text-fyra-gray-300">
 				If that sounds like something you want to be a part of, we're building in the open.

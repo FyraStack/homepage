@@ -10,7 +10,7 @@
 			name: 'Virtual Private Servers',
 			href: '/services/vps' as ServiceHref,
 			price: '5',
-			description: 'Scales to $48/mo.',
+			description: 'Scales to $48/mo',
 			features: [
 				'Cascade Lake vCPUs',
 				'SAS3 SSD storage',
@@ -26,7 +26,7 @@
 			name: 'Server Colocation',
 			href: '/services/colocation' as ServiceHref,
 			price: '50',
-			description: 'Scales to $280/mo.',
+			description: 'Scales to $280/mo',
 			features: [
 				'Up to 6U rackspace',
 				'Up to 700W power budget',
@@ -47,7 +47,7 @@
 		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
 			Priced fairly
 		</h2>
-		<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans. No surprise fees.</p>
+		<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees</p>
 	</div>
 
 	<!-- Plans -->
