@@ -10,7 +10,7 @@
 
 # Connecting via SSH
 
-Thanks for setting up a VPS with Fyra Stack! To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
+To connect to your server for the first time, you'll need an SSH client and the public IP address of your VPS. If you added an SSH key before creating the VPS, you can log in with that key. If you did not add a key during setup, log in as `root` with the default root password provided to you, then add your SSH key before continuing.
 
 ---
 
@@ -28,31 +28,15 @@ If you did not add a key before creating the VPS, connect without `-i` and enter
 ssh root@your_vps_ip
 ```
 
----
+## Adding your Public Key to your VPS
 
-## Generating an SSH key
-
-Open your terminal and run the following command to generate a new SSH key pair:
+If your VPS already exists and does not have your key installed, log in with the default root password provided to you and add the key using `ssh-copy-id`:
 
 ```bash
-ssh-keygen -t ed25519 
+ssh-copy-id root@your_vps_ip
 ```
 
-To get the public key, run the following command:
-
-```bash
-cat ~/.ssh/id_ed25519.pub
-```
-
-If you saved the key in a different location, look there and use `cat` on the file ending in `.pub`.
-
-Copy the line beginning with `ssh-ed25519` and ending with `username@hostname`. This is your public key, which you'll need to add to your VPS.
-
-### Adding your Public Key to your VPS
-
-On the Fyra Stack Dashboard, click on your profile icon and go to Keys. From there, paste in your public key, give it a name, and click add key. Do this *before* creating your VPS when possible, as it is added during the initialization stage.
-
-If your VPS already exists and does not have your key installed, log in with the default root password provided to you and add the key manually:
+Alternatively, you can also add the key manually:
 
 ```bash
 mkdir -p ~/.ssh
@@ -66,12 +50,6 @@ After saving, update the permissions on the authorized_keys file:
 
 ```bash
 chmod 600 ~/.ssh/authorized_keys
-```
-
-Alternatively, you can also use the `ssh-copy-id` command to add your key to the VPS:
-
-```bash
-ssh-copy-id root@your_vps_ip
 ```
 
 After updating the permissions, keep the root session open while you test key-based login from a new terminal.

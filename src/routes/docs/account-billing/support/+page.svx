@@ -9,3 +9,5 @@
 Thanks for using Fyra Stack!
 
 Currently, you can contact support by emailing [support@fyrastack.com](mailto:support@fyrastack.com).
+
+Please note that we are a small team, so we may not be able to respond to all requests immediately, but we will get back as soon as we can.
