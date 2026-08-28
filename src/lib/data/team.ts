@@ -55,9 +55,9 @@ export const team: (TeamMember | null)[] = [
 		avatar: 'assets/people/cappy.webp'
 	},
 	{
-		name: 'Willow Reed',
-		nickname: 'Cypress',
-		role: 'Software Engineer',
+		name: 'Cypress Reed',
+		nickname: null,
+		role: 'Backend and Hardware Engineer',
 		avatar: 'assets/people/willow.webp'
 	},
 	{
