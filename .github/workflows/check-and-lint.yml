@@ -1,0 +1,28 @@
+name: Check & Lint
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: check-and-lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: ${{ matrix.task }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        task: [check, lint]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up PNPM
+        uses: pnpm/setup@4700d737c3d7a2e7199f3d42a920f0bf7f34e411 # v2.0.1
+        with:
+          cache: true
+          runtime: node@lts
+
+      - run: pnpm run ${{ matrix.task }}
