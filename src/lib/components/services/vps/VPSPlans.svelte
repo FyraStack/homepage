@@ -13,7 +13,7 @@
 			Priced fairly
 		</h2>
 	</div>
-	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
+	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees</p>
 </div>
 
 <div class="grid grid-cols-7">

@@ -10,14 +10,15 @@
 			</h2>
 
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
-				Most budget providers cut corners on hardware to hit their price points, we don't.
+				Most budget providers cut corners on hardware to hit their price points. We don't.
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
 				Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and enterprise SSDs. We buy
-				good hardware, run it efficiently, run a small focused team, don't oversell, and charge a
-				fair price.
+				<!-- what the hell does "run it efficiently" mean here -->
+				good hardware, run it efficiently, run a small focused team, don't oversell, and charge a fair
+				price.
 			</p>
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">It's boring and it works.</p>
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">It's boring, and it works.</p>
 		</div>
 
 		<!-- Right: bento grid -->
@@ -33,7 +34,8 @@
 				<div class="relative">
 					<p class="text-lg font-semibold text-fyra-gray-50">Simple control panel</p>
 					<p class="mt-1.5 max-w-xs text-sm leading-relaxed text-fyra-gray-400">
-						Developed with engineers in mind from the beginning.
+						<!-- pretty sure we don't target engineers anymore -->
+						Developed with you in mind, from the beginning
 					</p>
 				</div>
 			</div>
@@ -42,15 +44,15 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg leading-snug font-semibold text-fyra-gray-50">Linux native</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Run Ultramarine, Debian, Alma, or whatever your stack needs.
+					Run Ultramarine, Debian, Alma, or whatever your stack needs
 				</p>
 			</div>
 
-			<!-- Independent -->
+			<!-- CPU -->
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Fast by default</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					Powered by Cascade Lake CPUs that are fast, real fast.
+					Powered by Cascade Lake CPUs that are fast, really fast
 				</p>
 			</div>
 
@@ -58,7 +60,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Real support</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					By the system engineers that actually maintain the servers.
+					By the system engineers that actually maintain the servers
 				</p>
 			</div>
 
@@ -66,7 +68,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Honest pricing</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					No hidden fees, no egress charges, no surprise bills.
+					No hidden fees, no egress charges, no surprise bills
 				</p>
 			</div>
 		</div>
