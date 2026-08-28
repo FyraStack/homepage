@@ -64,7 +64,7 @@
 			<div class="bg-fyra-gray-900 p-8">
 				<p class="text-lg font-semibold text-fyra-gray-50">Real support</p>
 				<p class="mt-1.5 text-sm leading-relaxed text-fyra-gray-400">
-					By the engineers who have actually racked servers before.
+					By engineers who have actually racked servers before.
 				</p>
 			</div>
 
