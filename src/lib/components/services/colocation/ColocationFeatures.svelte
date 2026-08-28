@@ -18,7 +18,7 @@
 			<p class="mt-3 text-base leading-relaxed text-fyra-gray-400">
 				We charge you for rack space, power, and bandwidth.
 			</p>
-			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">That's it.</p>
+			<p class="mt-3 text-base leading-relaxed text-fyra-gray-300">That's it!</p>
 		</div>
 
 		<!-- Right: bento grid -->
