@@ -1,0 +1,145 @@
+<script lang="ts">
+  import CodeBlock from '$lib/components/CodeBlock.svelte';
+	import DocsMeta from '$lib/components/DocsMeta.svelte';
+</script>
+
+<DocsMeta
+	title="IPv6-only VPS networking"
+	description="Configure an IPv6-only VPS to reach IPv4-only services through Fyra Stack NAT64."
+/>
+
+# IPv6-only VPS networking
+
+Fyra Stack supports IPv6-only VPS networking, now with NAT64. NAT64 allows an IPv6-only VPS to reach services that are otherwise available only over IPv4. NAT64 is configured automatically **only for IPv6-only VPSes**.
+
+**Note:** NAT64 does not give the VPS a public IPv4 address, and it does not make an IPv4-only service reachable from the public internet over IPv6.
+
+---
+## How it works
+
+The VPS uses:
+
+- IPv6 for its normal default route.
+- `64:ff9b::/96` for IPv4-embedded IPv6 destinations.
+- Fyra Stack's DNS64 resolver to synthesize IPv6 `AAAA` records for IPv4-only hostnames.
+
+New VPSes receive the NAT64 route and DNS64 resolver through cloud-init. If you have an existing VPS, you'll have to do some configuration manually, as detailed below.
+
+---
+## Check whether NAT64 is working
+
+From an IPv6-only VPS, resolve and connect to a hostname that has an IPv4 address:
+
+```sh
+getent ahosts example.com
+curl -6 https://example.com
+```
+
+On an IPv6-only VPS, `curl -4` is expected to fail because the VM has no IPv4 connectivity.
+
+The `curl -6` request should work when DNS64 and NAT64 are configured. A literal IPv4 address cannot be used directly by an IPv6-only host; use a hostname so DNS64 can synthesize the IPv6 destination.
+
+You can also test the well-known NAT64 prefix by embedding an IPv4 address. Replace `192.0.2.1` with an IPv4 address you are authorized to test:
+
+```sh
+ping -6 64:ff9b::192.0.2.1
+```
+
+---
+## New VPSes
+
+New IPv6-only VPSes receive the NAT64 route automatically. VPSes with IPv4 do not receive this route or the NAT64 DNS resolver. The route is:
+
+```
+64:ff9b::/96 via the IPv6 gateway
+```
+
+The generated configuration also places the Fyra Stack DNS64 resolver before the public fallback resolvers. You normally do not need to edit the network configuration manually.
+
+---
+## Existing IPv6-only VPSes using NetworkManager
+
+Add the NAT64 route to the active connection. Replace `CONNECTION` with the connection name and use the gateway shown in your VPS networking details:
+
+```sh
+nmcli connection show
+sudo nmcli connection modify "CONNECTION" +ipv6.routes "64:ff9b::/96 fe80::1040:ffff"
+```
+
+Configure the DNS64 resolver without discarding your existing resolvers:
+
+```sh
+sudo nmcli connection modify "CONNECTION" ipv6.dns "2602:f41f:10:1040::ffff 2606:4700:4700::1111 2606:4700:4700::1001"
+sudo nmcli connection up "CONNECTION"
+```
+
+Verify the route and DNS configuration:
+
+```sh
+ip -6 route get 64:ff9b::1.1.1.1
+resolvectl status
+curl -6 https://example.com
+```
+
+---
+## Existing IPv6-only Linux VPSes using netplan
+
+Back up the current configuration before editing it:
+
+```sh
+sudo cp -a /etc/netplan /etc/netplan.backup
+```
+
+Add the NAT64 route to the existing interface configuration. Do not remove your assigned addresses, default routes, or existing DNS settings. The exact file name may differ; common locations include `/etc/netplan/50-cloud-init.yaml` and `/etc/netplan/99-custom.yaml`.
+
+Use this route in the existing `routes:` list:
+
+```yaml
+routes:
+  - to: 64:ff9b::/96
+    via: fe80::1040:ffff
+    on-link: true
+```
+
+Configure the Fyra Stack DNS64 resolver in the existing `nameservers.addresses` list. The resolver address is provided in your VPS networking details. The current public VPS network uses:
+
+```yaml
+nameservers:
+  addresses:
+    - 2602:f41f:10:1040::ffff
+    - 1.1.1.1
+    - 1.0.0.1
+    - 2606:4700:4700::1111
+    - 2606:4700:4700::1001
+```
+
+Apply and verify the configuration:
+
+```sh
+sudo netplan try
+sudo netplan apply
+ip -6 route get 64:ff9b::1.1.1.1
+resolvectl status
+curl -6 https://example.com
+```
+
+If your network uses a different IPv6 gateway, use the gateway shown in your VPS networking details instead of `fe80::1040:ffff`.
+
+---
+## Troubleshooting
+
+- If `curl -6` fails for a hostname but direct IPv6 sites work, check that the Fyra Stack DNS64 resolver is configured and reachable.
+- If DNS returns only an IPv4 address, the resolver being used is not synthesizing DNS64 records.
+- If DNS64 works but connections fail, check that `64:ff9b::/96` exists in `ip -6 route`.
+- Do not add a second IPv6 default route just to enable NAT64. NAT64 uses the more specific `64:ff9b::/96` route.
+- Do not replace your VPS's assigned IPv6 address or delegated prefix when adding this route.
+
+If you need help, send us an email at [support@fyrastack.com](mailto:support@fyrastack.com), or [join our Discord](https://fyra.to/discord). Send us the output of:
+
+```sh
+ip -6 addr
+ip -6 route
+resolvectl status
+```
+
+You can remove your public IP addresses from the output if you don't want to share them.
