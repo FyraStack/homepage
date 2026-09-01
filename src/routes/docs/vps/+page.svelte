@@ -27,6 +27,11 @@
 			label: 'Choosing a Linux Distribution',
 			description: 'Pick the operating system that fits your workload.',
 			href: '/docs/vps/choosing-a-distro'
+		},
+		{
+			label: 'IPv6-only networking with NAT64',
+			description: 'Use IPv6-only VPS networking to reach IPv4-only services.',
+			href: '/docs/vps/nat64'
 		}
 	] as const;
 </script>
