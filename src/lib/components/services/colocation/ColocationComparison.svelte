@@ -12,7 +12,6 @@
 	const rows: {
 		label: string;
 		stack: {
-			previousPrice?: string;
 			text: string;
 		};
 		values: string[];
@@ -20,8 +19,7 @@
 		{
 			label: 'Entry price',
 			stack: {
-				previousPrice: '$60',
-				text: '$50/mo'
+				text: '$60/mo'
 			},
 			values: ['$200+/mo', '$80+/mo', '$0+/mo*']
 		},
@@ -115,10 +113,6 @@
 							{row.label}
 						</th>
 						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">
-							{#if row.stack.previousPrice}
-								<span class="mr-1.5 text-fyra-gray-400 line-through">{row.stack.previousPrice}</span
-								>
-							{/if}
 							{row.stack.text}
 						</td>
 						{#each row.values as val, i (`${row.label}-${competitors[i]}`)}
