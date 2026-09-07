@@ -22,22 +22,11 @@
 			<div class="flex items-center gap-3">
 				<div class="text-right">
 					<h3 class="text-xl font-semibold tracking-tight lg:text-2xl">
-						{#if currentPlan.originalPrice}
-							<span class="mr-1.5 font-medium tracking-wide text-fyra-gray-400 line-through"
-								>${currentPlan.originalPrice}</span
-							>
-						{/if}
 						<span class="font-medium tracking-wide">$</span>{currentPlan.price}<span
 							class="text-sm leading-3 font-medium lg:text-base">/mo</span
 						>
 					</h3>
 				</div>
-				{#if currentPlan.originalPrice}
-					<span
-						class="rounded-full bg-fyra-red-500/10 px-2.5 py-1 text-xs font-medium text-fyra-red-400"
-						>Limited time</span
-					>
-				{/if}
 			</div>
 		</div>
 		<!-- middle -->
@@ -78,11 +67,6 @@
 				<h4 class="text-base/5 font-medium md:text-[1.1rem]/6">{plan.name}</h4>
 				<div class="text-right">
 					<h3 class="text-sm font-medium tracking-tighter lg:text-base">
-						{#if plan.originalPrice}
-							<span class="mr-1 font-normal tracking-wide text-fyra-gray-400 line-through"
-								>${plan.originalPrice}</span
-							>
-						{/if}
 						<span class="font-normal tracking-wide">$</span>{plan.price}<span class="text-sm"
 							>/mo</span
 						>
