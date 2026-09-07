@@ -19,7 +19,7 @@
 		{
 			label: 'Entry price',
 			stack: {
-				text: '$60/mo'
+				text: '$70/mo'
 			},
 			values: ['$200+/mo', '$80+/mo', '$0+/mo*']
 		},

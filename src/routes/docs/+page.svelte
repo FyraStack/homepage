@@ -35,7 +35,7 @@
 			n: '01',
 			title: 'Contact us',
 			body: "Pick your colocation plan and use the contact form, we'll then reach out to organize shipping your server.",
-			cta: { label: 'Sign up today →', href: '/services/colocation' }
+			cta: { label: 'Get in touch →', href: '/services/colocation' }
 		},
 		{
 			n: '02',
