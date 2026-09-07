@@ -1,7 +1,7 @@
 export const colocationPlans = [
 	{
 		name: 'COLO-1U',
-		price: '60',
+		price: '70',
 		units: '1',
 		power: '200',
 		bandwidth: '1Gbps',
@@ -9,7 +9,7 @@ export const colocationPlans = [
 	},
 	{
 		name: 'COLO-2U',
-		price: '100',
+		price: '140',
 		units: '2',
 		power: '300',
 		bandwidth: '1Gbps',
@@ -17,7 +17,7 @@ export const colocationPlans = [
 	},
 	{
 		name: 'COLO-3U',
-		price: '140',
+		price: '210',
 		units: '3',
 		power: '400',
 		bandwidth: '1Gbps',
@@ -25,7 +25,7 @@ export const colocationPlans = [
 	},
 	{
 		name: 'COLO-4U',
-		price: '180',
+		price: '280',
 		units: '4',
 		power: '500',
 		bandwidth: '1Gbps',
@@ -33,7 +33,7 @@ export const colocationPlans = [
 	},
 	{
 		name: 'COLO-5U',
-		price: '220',
+		price: '350',
 		units: '5',
 		power: '600',
 		bandwidth: '1Gbps',
@@ -41,7 +41,7 @@ export const colocationPlans = [
 	},
 	{
 		name: 'COLO-6U',
-		price: '260',
+		price: '420',
 		units: '6',
 		power: '700',
 		bandwidth: '1Gbps',

@@ -31,7 +31,7 @@
 		</p>
 		<div class="mt-10 flex items-center justify-center gap-x-6">
 			<a
-				href="#signup"
+				href="#contact"
 				class="inline-flex items-center gap-2 border border-fyra-red-500 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500"
 			>
 				Get started

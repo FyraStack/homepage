@@ -23,7 +23,7 @@
 		},
 		{
 			label: 'Colocation',
-			description: 'Colocation hosting, from $60/mo',
+			description: 'Colocation hosting, from $70/mo',
 			href: '/services/colocation' as InternalHref
 		}
 	];
