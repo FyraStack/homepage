@@ -48,7 +48,7 @@
 			</p>
 		</div>
 		<a
-			href="https://github.com/FyraLabs"
+			href="https://github.com/FyraStack"
 			target="_blank"
 			rel="noopener noreferrer"
 			class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"

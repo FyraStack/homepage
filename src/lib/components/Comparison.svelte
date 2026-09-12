@@ -75,11 +75,11 @@
 	<!-- Table — horizontally scrollable on mobile -->
 	<div
 		bind:this={tableScroller}
-		class="overflow-x-auto focus:outline-2 focus:outline-offset-[-2px] focus:outline-fyra-red-500"
+		class="overflow-x-auto focus:outline-2 focus:outline-offset-2 focus:outline-fyra-red-500"
 		role="region"
 		aria-label="Scrollable VPS comparison table"
 	>
-		<table class="w-full min-w-[600px] border-collapse">
+		<table class="w-full min-w-150 border-collapse">
 			<!-- Column headers -->
 			<thead>
 				<tr class="border-b border-fyra-gray-800">

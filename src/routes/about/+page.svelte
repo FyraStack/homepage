@@ -14,7 +14,7 @@
 	<title>About | Fyra Stack</title>
 	<meta
 		name="description"
-		content="Cloud infrastructure for the rest of us. An open-source cloud from the engineers behind Fyra Labs."
+		content="Cloud infrastructure for the rest of us. An open-source cloud from the folks behind Fyra Labs."
 	/>
 	<link rel="canonical" href="https://fyrastack.com/about" />
 
@@ -22,7 +22,7 @@
 	<meta property="og:title" content="About | Fyra Stack" />
 	<meta
 		property="og:description"
-		content="Cloud infrastructure for the rest of us. An open-source cloud from the engineers behind Fyra Labs."
+		content="Cloud infrastructure for the rest of us. An open-source cloud from the folks behind Fyra Labs."
 	/>
 	<meta property="og:image" content="https://fyrastack.com/logo.png" />
 	<meta property="og:type" content="website" />
@@ -33,7 +33,7 @@
 	<meta name="twitter:title" content="About | Fyra Stack" />
 	<meta
 		name="twitter:description"
-		content="Cloud infrastructure for the rest of us. An open-source cloud from the engineers behind Fyra Labs."
+		content="Cloud infrastructure for the rest of us. An open-source cloud from the folks behind Fyra Labs."
 	/>
 	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
@@ -103,9 +103,9 @@
 				running our own.
 			</p>
 			<p class="mt-4 text-base leading-relaxed text-fyra-gray-400">
-				Stack is what came out of that. Real hardware, flat pricing, no surprise fees. We charge you
-				for what you use. We don't sell your data, we don't lock you in, and we don't have a
-				"retention team."
+				Stack is what came out of that. Open software, transparent pricing, and a team who cares as
+				much as you. We charge you for what you use. We don't sell your data, we don't lock you in,
+				and we don't have a "retention team."
 			</p>
 		</div>
 
@@ -141,7 +141,7 @@
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">The team</h2>
 		<p class="mt-2 text-sm text-fyra-gray-400">
-			Small, on purpose. Everyone here ships and everyone here answers the support queue.
+			Small, on purpose. Everyone here ships, and everyone here answers the support queue.
 		</p>
 	</div>
 

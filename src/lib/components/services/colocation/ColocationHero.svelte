@@ -27,7 +27,7 @@
 			<span class="text-fyra-red-400">We'll handle the rest</span>
 		</h2>
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
-			Colocation without the enterprise markup, mandatory contracts, or fees for asking questions.
+			Colocation without the enterprise markup, mandatory contracts, or fees for asking questions
 		</p>
 		<div class="mt-10 flex items-center justify-center gap-x-6">
 			<a

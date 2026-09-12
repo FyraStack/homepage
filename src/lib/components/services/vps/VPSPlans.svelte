@@ -13,7 +13,7 @@
 			Priced fairly
 		</h2>
 	</div>
-	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees.</p>
+	<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans with no surprise fees</p>
 </div>
 
 <div class="grid grid-cols-7">
@@ -31,7 +31,7 @@
 		</div>
 		<!-- middle -->
 		<div
-			class="mt-8 grid grid-cols-1 gap-x-8 gap-y-1.5 text-base md:grid-cols-2 md:gap-y-3.5 lg:mt-16 lg:text-[1.05rem]"
+			class="mt-8 grid grid-cols-1 gap-x-8 gap-y-1.5 text-base md:grid-cols-2 md:gap-y-3.5 lg:mt-10 lg:text-[1.05rem]"
 		>
 			<div class="flex justify-between">
 				<p class="text-fyra-gray-400">CPU</p>
@@ -73,7 +73,7 @@
 					>
 				</h3>
 			</div>
-			<div class="mt-4 text-left md:mt-6">
+			<div class="mt-3 text-left md:mt-4">
 				<p class="text-xs text-fyra-gray-400">
 					{plan.cpu} vCPU
 					<span class="px-0.5 text-fyra-red-500">•</span>
