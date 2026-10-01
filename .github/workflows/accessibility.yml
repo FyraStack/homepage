@@ -6,31 +6,31 @@ on:
       - main
       - next
     paths:
-      - ".github/workflows/accessibility.yml"
-      - "package.json"
-      - "playwright.config.*"
-      - "svelte.config.*"
-      - "vite.config.*"
-      - "wrangler.jsonc"
-      - "pnpm-lock.yaml"
-      - "src/**"
-      - "static/**"
-      - "tests/**"
+      - '.github/workflows/accessibility.yml'
+      - 'package.json'
+      - 'playwright.config.*'
+      - 'svelte.config.*'
+      - 'vite.config.*'
+      - 'wrangler.jsonc'
+      - 'pnpm-lock.yaml'
+      - 'src/**'
+      - 'static/**'
+      - 'tests/**'
   push:
     branches:
       - main
       - next
     paths:
-      - ".github/workflows/accessibility.yml"
-      - "package.json"
-      - "playwright.config.*"
-      - "svelte.config.*"
-      - "vite.config.*"
-      - "wrangler.jsonc"
-      - "pnpm-lock.yaml"
-      - "src/**"
-      - "static/**"
-      - "tests/**"
+      - '.github/workflows/accessibility.yml'
+      - 'package.json'
+      - 'playwright.config.*'
+      - 'svelte.config.*'
+      - 'vite.config.*'
+      - 'wrangler.jsonc'
+      - 'pnpm-lock.yaml'
+      - 'src/**'
+      - 'static/**'
+      - 'tests/**'
   workflow_dispatch:
 permissions:
   contents: read

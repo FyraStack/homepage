@@ -9,7 +9,7 @@
 	<title>VPS Hosting | Fyra Stack</title>
 	<meta
 		name="description"
-		content="VPS hosting starting at $5/mo. Full root access, 1 Gbps port, any Linux distro you want. Real hardware in Chicago, IL."
+		content="VPS hosting starting at $5/mo. Full root access, 1 Gbps port, up-to-date Linux distros you want. Real hardware in Chicago, IL."
 	/>
 	<link rel="canonical" href="https://fyrastack.com/services/vps" />
 
@@ -17,7 +17,7 @@
 	<meta property="og:title" content="VPS Hosting | Fyra Stack" />
 	<meta
 		property="og:description"
-		content="High-performance VPS hosting starting at $5/mo. Full root access, 1 Gbps port, any Linux distro."
+		content="VPS hosting starting at $5/mo. Full root access, 1 Gbps port, up-to-date Linux distros you want. Real hardware in Chicago, IL."
 	/>
 	<meta property="og:image" content="https://fyrastack.com/logo.png" />
 	<meta property="og:type" content="website" />
@@ -28,7 +28,7 @@
 	<meta name="twitter:title" content="VPS Hosting | Fyra Stack" />
 	<meta
 		name="twitter:description"
-		content="High-performance VPS hosting starting at $5/mo. Full root access, 1 Gbps port, any Linux distro."
+		content="VPS hosting starting at $5/mo. Full root access, 1 Gbps port, up-to-date Linux distros you want. Real hardware in Chicago, IL."
 	/>
 	<meta name="twitter:image" content="https://fyrastack.com/logo.png" />
 </svelte:head>
