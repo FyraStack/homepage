@@ -1,3 +1,5 @@
 allowBuilds:
   workerd: true
   esbuild: true
+autoInstallPeers: false
+dedupePeerDependents: false
