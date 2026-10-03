@@ -28,9 +28,7 @@
     planSpecs,
     plans,
   } from "$lib/components/landing/plans";
-  import StackMark from "$lib/components/landing/stack-mark.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Slider } from "$lib/components/ui/slider";
 
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
@@ -86,9 +84,6 @@
     },
   ];
 
-  let comparisonIndex = $state(3);
-  const comparisonPlan = $derived(plans[comparisonIndex]);
-
   const included = [
     "Cascade Lake vCPUs",
     "Dedicated IPv4 + /64 IPv6",
@@ -100,6 +95,12 @@
   let selectedName = $state(plans[0].name);
   const selected = $derived(
     plans.find((option) => option.name === selectedName) ?? plans[0]
+  );
+  const comparisonOffers = $derived(
+    competitors.map((competitor) => ({
+      offer: competitor.offersByMemoryGb[selected.memoryGb],
+      provider: competitor.provider,
+    }))
   );
 </script>
 
@@ -285,156 +286,6 @@
     </div>
   </section>
 
-  <!-- Calculator: plan-size slider compared against same-size competitor plans -->
-  <section class="border-b border-border py-20 lg:py-30">
-    <div class="page-container flex flex-col gap-14">
-      <div class="flex flex-col gap-5">
-        <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
-          Stack, well... stacks up
-        </h2>
-        <p class="max-w-160 text-[17px]/[27px] text-muted-foreground">
-          Pick a plan size and see what the same machine costs elsewhere.
-        </p>
-      </div>
-
-      <div class="flex flex-col border border-border lg:flex-row">
-        <div class="flex flex-1 flex-col justify-center gap-14 p-6 sm:p-14">
-          <div class="flex flex-col gap-5">
-            <div class="flex items-baseline justify-between">
-              <span
-                class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-                id="plan-size-label"
-              >
-                Plan size
-              </span>
-              <output
-                class="text-[32px]/8 font-semibold tracking-[-0.025em]"
-                for="plan-size"
-              >
-                {comparisonPlan.name}
-              </output>
-            </div>
-            <Slider
-              aria-labelledby="plan-size-label"
-              class="h-6 **:data-[slot=slider-range]:bg-primary **:data-[slot=slider-thumb]:size-6 **:data-[slot=slider-thumb]:border-4 **:data-[slot=slider-thumb]:border-primary **:data-[slot=slider-thumb]:bg-foreground **:data-[slot=slider-thumb]:ring-primary/30 **:data-[slot=slider-track]:bg-gray-700"
-              id="plan-size"
-              max={plans.length - 1}
-              min={0}
-              step={1}
-              type="single"
-              bind:value={comparisonIndex}
-            />
-            <div
-              aria-hidden="true"
-              class="relative h-4 font-mono text-[10px] tracking-[0.04em]"
-            >
-              {#each plans as option, index (option.name)}
-                <button
-                  class={[
-                    "absolute top-0 -translate-x-1/2 transition-colors hover:text-foreground",
-                    index === comparisonIndex
-                      ? "text-foreground"
-                      : "text-muted-foreground",
-                  ]}
-                  onclick={() => {
-                    comparisonIndex = index;
-                  }}
-                  tabindex="-1"
-                  type="button"
-                  style:left="calc(0.75rem + (100% - 1.5rem) * {index /
-                    (plans.length - 1)})"
-                >
-                  {option.memoryGb}G
-                </button>
-              {/each}
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-2.5 rounded-md bg-gray-850 px-4 py-3.5 text-[13px] outline outline-offset-[-0.5px] outline-border"
-          >
-            <Server class="size-4 shrink-0" strokeWidth={1.75} />
-            {planSpecs(comparisonPlan)}
-          </div>
-        </div>
-
-        <div
-          aria-live="polite"
-          class="flex flex-col gap-8 border-t border-border bg-gray-850 p-6 sm:p-14 lg:w-140 lg:border-t-0 lg:border-l"
-        >
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-2">
-              <StackMark class="size-3.5" />
-              <span class="font-mono text-[11px] tracking-[0.11em] uppercase">
-                Stack · {comparisonPlan.name}
-              </span>
-            </div>
-            <div class="flex items-end gap-2">
-              <span
-                class="text-7xl/[0.9] font-semibold tracking-[-0.04em] tabular-nums sm:text-8xl/[86px]"
-              >
-                ${comparisonPlan.price}
-              </span>
-              <span class="text-xl text-muted-foreground">/mo</span>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <span
-              class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
-            >
-              Same size elsewhere
-            </span>
-            <ul>
-              {#each competitors as competitor (competitor.provider)}
-                {@const offer =
-                  competitor.offersByMemoryGb[comparisonPlan.memoryGb]}
-                <li
-                  class="flex items-center gap-4 border-b border-border py-4.5"
-                >
-                  <div class="flex flex-1 flex-col gap-1">
-                    <span class="text-[15px] font-medium"
-                      >{competitor.provider}</span
-                    >
-                    <span
-                      class="font-mono text-[10px] tracking-[0.06em] text-muted-foreground uppercase"
-                    >
-                      {offer
-                        ? offer.spec
-                        : `No ${comparisonPlan.memoryGb} GB plan`}
-                    </span>
-                  </div>
-                  {#if offer}
-                    <span class="text-sm text-muted-foreground tabular-nums"
-                      >{offer.approximate ? "~" : ""}${offer.price}/mo</span
-                    >
-                    <span
-                      class="w-24 text-right font-mono text-base font-semibold tabular-nums"
-                    >
-                      Save ${Math.max(0, offer.price - comparisonPlan.price)}
-                    </span>
-                  {:else}
-                    <span class="text-sm text-muted-foreground"
-                      >Not offered</span
-                    >
-                  {/if}
-                </li>
-              {/each}
-            </ul>
-          </div>
-
-          <Button
-            class="h-auto py-2.5"
-            href={createServerUrl}
-            size="lg"
-            variant="outline"
-          >
-            Deploy {comparisonPlan.name}
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Colocation: rack illustration, features, and how it works -->
   <section class="border-b border-border py-20 lg:py-30" id="colocation">
     <div class="page-container flex flex-col gap-24">
@@ -535,105 +386,125 @@
         </Button>
       </div>
 
-      <div class="flex flex-col gap-8 lg:flex-row lg:items-start">
-        <fieldset class="min-w-0 flex-1 overflow-x-auto border border-border">
+      <div class="flex flex-col gap-8">
+        <fieldset
+          class="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4"
+        >
           <legend class="sr-only">Choose a VPS plan</legend>
-          <div class="min-w-180">
-            <div
-              aria-hidden="true"
-              class="flex items-center gap-4 py-3 pr-5 pl-14 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+          {#each plans as plan (plan.name)}
+            {@const isSelected = plan.name === selectedName}
+            <label
+              class={[
+                "group relative flex cursor-pointer flex-col gap-4 bg-background p-5 transition-colors has-focus-visible:bg-gray-850",
+                isSelected
+                  ? "bg-gray-850 shadow-[inset_0_2px_0_var(--color-primary)]"
+                  : "hover:bg-gray-850/60",
+              ]}
             >
-              <span class="flex-1">Plan</span>
-              <span class="w-24 normal-case">vCPU</span>
-              <span class="w-24">RAM</span>
-              <span class="w-42.5">Storage</span>
-              <span class="w-24 text-right">Price</span>
-            </div>
-            {#each plans as plan (plan.name)}
-              {@const isSelected = plan.name === selectedName}
-              <label
-                class={[
-                  "group relative flex cursor-pointer items-center gap-4 border-t px-5 py-3.5 text-sm transition-colors has-focus-visible:bg-gray-850",
-                  isSelected
-                    ? "border-l-2 border-t-border border-l-primary bg-gray-850 pl-4.5"
-                    : "border-t-border hover:bg-gray-850/60",
-                ]}
+              <input
+                class="peer sr-only"
+                name="plan"
+                type="radio"
+                value={plan.name}
+                bind:group={selectedName}
               >
-                <input
-                  class="peer sr-only"
-                  name="plan"
-                  type="radio"
-                  value={plan.name}
-                  bind:group={selectedName}
-                >
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-sm font-semibold">{plan.name}</span>
                 <span
                   class={[
-                    "grid size-5 place-items-center rounded-full",
-                    "peer-focus-visible:ring-2 peer-focus-visible:ring-ring/60",
+                    "size-3.5 rounded-full group-has-focus-visible:ring-2 group-has-focus-visible:ring-ring/60",
+                    isSelected
+                      ? "border-4 border-primary"
+                      : "border border-gray-600 group-hover:border-gray-500",
                   ]}
+                ></span>
+              </div>
+              <div class="flex items-end gap-1">
+                <span
+                  class="text-3xl font-semibold tracking-[-0.03em] tabular-nums"
+                  >${plan.price}</span
                 >
-                  <span
-                    class={[
-                      "size-3.5 rounded-full",
-                      isSelected
-                        ? "border-4 border-primary"
-                        : "border border-gray-600 group-hover:border-gray-500",
-                    ]}
-                  ></span>
-                </span>
-                <span class="flex-1 font-mono font-semibold whitespace-nowrap"
-                  >{plan.name}</span
-                >
-                <span class={["w-24", !isSelected && "text-gray-300"]}
-                  >{plan.vcpu}
-                  vCPU</span
-                >
-                <span class={["w-24", !isSelected && "text-gray-300"]}
-                  >{plan.memoryGb}
-                  GB</span
-                >
-                <span class={["w-42.5", !isSelected && "text-gray-300"]}>
-                  {plan.storageGb}
-                  GB SAS3 SSD
-                </span>
-                <span class="w-24 text-right font-semibold tabular-nums"
-                  >${plan.price}/mo</span
-                >
-              </label>
-            {/each}
-          </div>
+                <span class="text-sm text-muted-foreground">/mo</span>
+              </div>
+              <span
+                class={[
+                  "text-[13px]",
+                  isSelected ? "text-foreground" : "text-muted-foreground",
+                ]}
+              >
+                {plan.vcpu}
+                vCPU · {plan.memoryGb} GB · {plan.storageGb} GB SSD
+              </span>
+            </label>
+          {/each}
         </fieldset>
 
-        <aside
+        <div
           aria-live="polite"
-          class="flex flex-col gap-6 border border-border p-8 lg:w-100 lg:shrink-0"
+          class="grid grid-cols-1 border border-border lg:grid-cols-3"
         >
-          <span
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-          >
-            Selected plan
-          </span>
-          <div class="flex flex-col gap-2.5">
-            <span class="font-mono text-xl font-semibold">{selected.name}</span>
-            <div class="flex items-end gap-1.5">
-              <span
-                class="text-7xl/[65px] font-semibold tracking-[-0.04em] tabular-nums"
+          <div class="flex flex-col justify-between gap-6 p-8">
+            <div class="flex flex-col gap-2.5">
+              <span class="font-mono text-xl font-semibold"
+                >{selected.name}</span
               >
-                ${selected.price}
-              </span>
-              <span class="text-lg text-muted-foreground">/mo</span>
+              <div class="flex items-end gap-1.5">
+                <span
+                  class="text-7xl/[65px] font-semibold tracking-[-0.04em] tabular-nums"
+                  >${selected.price}</span
+                >
+                <span class="text-lg text-muted-foreground">/mo</span>
+              </div>
+              <p class="text-[13px]/5 text-muted-foreground">
+                {planSpecs(selected)}<br>1 Gbps fair-use uplink
+              </p>
             </div>
-            <p class="text-[13px]/5 text-muted-foreground">
-              {planSpecs(selected)}<br>1 Gbps fair-use uplink
-            </p>
+            <Button
+              class="h-auto py-2.5"
+              href={createServerUrl}
+              size="lg"
+              variant="outline"
+            >
+              Deploy {selected.name}
+            </Button>
           </div>
-          <div class="h-px bg-border"></div>
-          <div class="flex flex-col gap-3">
+          <div
+            class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
+          >
+            <div
+              class="flex items-center justify-between font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+            >
+              <span>Same size elsewhere</span>
+              <span>You save</span>
+            </div>
+            <ul class="flex flex-col">
+              {#each comparisonOffers as { provider, offer } (provider)}
+                <li
+                  class="flex items-center gap-3 border-b border-border py-3 text-sm last:border-b-0"
+                >
+                  <span class="flex-1">{provider}</span>
+                  {#if offer}
+                    <span class="text-muted-foreground tabular-nums"
+                      >{offer.approximate ? "~" : ""}${offer.price}</span
+                    >
+                    <span
+                      class="w-20 text-right font-mono font-semibold tabular-nums"
+                      >${Math.max(0, offer.price - selected.price)}</span
+                    >
+                  {:else}
+                    <span class="text-muted-foreground">Not offered</span>
+                  {/if}
+                </li>
+              {/each}
+            </ul>
+          </div>
+          <div
+            class="flex flex-col gap-3 border-t border-border p-8 lg:border-t-0 lg:border-l"
+          >
             <span
               class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+              >On every plan</span
             >
-              On every plan
-            </span>
             <ul class="flex flex-col gap-3">
               {#each included as item (item)}
                 <li class="flex items-center gap-2.5 text-sm/5">
@@ -643,15 +514,7 @@
               {/each}
             </ul>
           </div>
-          <Button
-            class="h-auto py-2.5"
-            href={createServerUrl}
-            size="lg"
-            variant="outline"
-          >
-            Deploy {selected.name}
-          </Button>
-        </aside>
+        </div>
       </div>
 
       <div class="flex flex-col border border-border lg:flex-row">
