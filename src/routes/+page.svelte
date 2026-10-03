@@ -172,6 +172,7 @@
         <DashboardDemo
           class="h-200 w-360 [zoom:0.8] shadow-[0_24px_64px_#00000099] outline outline-offset-[-0.5px] outline-border"
           {createServerUrl}
+          {dashboardUrl}
         />
       </div>
     </div>

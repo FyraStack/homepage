@@ -107,7 +107,7 @@
           heading: string,
           links: Snippet
         )}
-          <div class="flex flex-col gap-3 md:w-35">
+          <div class="flex flex-col gap-3 md:w-35 md:last:w-auto">
             <h2
               class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
             >
