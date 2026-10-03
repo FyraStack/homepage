@@ -133,11 +133,11 @@
         {/snippet}
         {@render column("Resources", resourcesLinks)}
         {#snippet communityLinks()}
-          <li><a href="#">Discord</a></li>
+          <li><a href="https://fyralabs.com/discord">Discord</a></li>
           <li><a href="https://github.com/FyraLabs">GitHub</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Bluesky</a></li>
-          <li><a href="#">Fediverse</a></li>
+          <li><a href="https://x.com/fyrastack">Twitter</a></li>
+          <li><a href="https://bsky.app/profile/fyrastack.com">Bluesky</a></li>
+          <li><a href="https://fedi.fyralabs.com/@stack">Fediverse</a></li>
         {/snippet}
         {@render column("Community", communityLinks)}
       </nav>
