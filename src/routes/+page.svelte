@@ -170,9 +170,11 @@
         </div>
       </div>
 
-      <div class="h-80 w-full overflow-hidden sm:h-110 lg:h-134 lg:px-16">
+      <div
+        class="h-80 w-full [clip-path:inset(-64px_0_0_0)] sm:h-110 lg:h-134 lg:px-16"
+      >
         <DashboardDemo
-          class="h-200 w-360 zoom-[0.8] shadow-[0_24px_64px_#00000099] outline outline-offset-[-0.5px] outline-border"
+          class="h-200 w-360 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
           {createServerUrl}
           {dashboardUrl}
         />
