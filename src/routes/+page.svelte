@@ -192,26 +192,23 @@
       <CornerRightUp class="size-3.5" />
     </div>
     <div class="page-container">
-      <div class="flex max-w-155 flex-col gap-4 pb-14 lg:pb-18">
+      <div
+        class="flex flex-col justify-between gap-6 pb-12 md:flex-row md:gap-10 lg:pb-14"
+      >
         <h2
-          class="text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
+          class="shrink-0 text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
         >
           Stack is different
         </h2>
-        <div
-          class="flex flex-col gap-3 pt-2 text-base/[26px] text-muted-foreground"
-        >
-          <p>
+        <div class="flex max-w-125 flex-col gap-3.5">
+          <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
             Stack is provided by Fyra Labs, the open source community that
             develops Terra and Ultramarine Linux.
           </p>
-          <p>
+          <p class="text-base/[26px] text-pretty text-muted-foreground">
             Everything we do is open source, and you can view and contribute to
-            the very code that powers your server.
-          </p>
-          <p>
-            We focus on servers that just work, built to support and use the
-            open source projects you love.
+            the very code that powers your server. We focus on servers that just
+            work, built to support and use the open source projects you love.
           </p>
         </div>
       </div>
