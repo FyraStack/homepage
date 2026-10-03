@@ -1,3 +1,3 @@
-export async function handle({ event, resolve }) {
-	return resolve(event);
-}
+import type { Handle } from "@sveltejs/kit";
+
+export const handle: Handle = ({ event, resolve }) => resolve(event);
