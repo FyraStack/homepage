@@ -1,6 +1,8 @@
 <script lang="ts">
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
   import Check from "@lucide/svelte/icons/check";
+  import CornerLeftUp from "@lucide/svelte/icons/corner-left-up";
+  import CornerRightUp from "@lucide/svelte/icons/corner-right-up";
   import Cpu from "@lucide/svelte/icons/cpu";
   import Gauge from "@lucide/svelte/icons/gauge";
   import HardDrive from "@lucide/svelte/icons/hard-drive";
@@ -170,7 +172,7 @@
 
       <div class="h-80 w-full overflow-hidden sm:h-110 lg:h-134 lg:px-16">
         <DashboardDemo
-          class="h-200 w-360 [zoom:0.8] shadow-[0_24px_64px_#00000099] outline outline-offset-[-0.5px] outline-border"
+          class="h-200 w-360 zoom-[0.8] shadow-[0_24px_64px_#00000099] outline outline-offset-[-0.5px] outline-border"
           {createServerUrl}
           {dashboardUrl}
         />
@@ -179,7 +181,14 @@
   </section>
 
   <!-- About: "Stack is different" and the four value props -->
-  <section class="border-b border-border py-20 lg:py-28" id="about">
+  <section class="relative border-b border-border py-20 lg:py-28" id="about">
+    <div
+      class="absolute top-0 left-1/2 flex -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+    >
+      <CornerLeftUp class="size-3.5" />
+      Try me
+      <CornerRightUp class="size-3.5" />
+    </div>
     <div class="page-container">
       <div class="flex max-w-155 flex-col gap-4 pb-14 lg:pb-18">
         <h2
