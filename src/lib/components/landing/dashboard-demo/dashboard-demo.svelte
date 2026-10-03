@@ -20,7 +20,7 @@
 	const demo = new DemoState();
 	setDemo(demo);
 
-	const user = { name: 'Jane Doe', email: 'jane@acme.dev' };
+	const user = { name: 'Addison LeClair', email: 'addi@acme.dev' };
 	const navItems = [
 		{ icon: Server, label: 'Servers', active: true },
 		{ icon: CreditCard, label: 'Billing', active: false },
@@ -56,7 +56,7 @@
 				<span
 					class="flex min-w-0 items-center gap-1 px-1.5 py-0.5 text-sm font-medium text-foreground"
 				>
-					<span class="truncate">acme</span>
+					<span class="truncate">Acme</span>
 					<ChevronDown class="h-3 w-3 shrink-0 text-muted-foreground" />
 				</span>
 				<span class="hidden text-sm text-muted-foreground @min-[64rem]:inline">/</span>
