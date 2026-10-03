@@ -1,0 +1,67 @@
+---
+title: 'Requesting remote hands'
+description: 'Request physical assistance for your colocated server.'
+order: 3
+---
+
+Remote hands is physical assistance from our team at the data center; plugging in cables, swapping drives, power cycling equipment, or anything else that requires someone to be physically present at your server. We will always ask for your explicit permission before performing hands‑on maintenance.
+
+---
+
+## What's Included
+
+Remote hands is available with all colocation plans for routine tasks at a rate of $50/hour, with a minimum of one hour per remote hands task. This covers:
+
+- Power cycling via PDU or physical power button
+- Seating or reseating a drive you've shipped to us
+- Connecting or reconnecting a cable
+- Visual inspection and status report (LED states, cable condition)
+- Confirming a server reaches POST via KVM
+- OS reinstallation from physical media
+- Hardware swap or upgrade (e.g. replacing a failed PSU you've shipped us a replacement for)
+- Full server removal, repackaging, and return shipping
+
+---
+
+## How to Request
+
+[Email support@fyrastack.com](mailto:support@fyrastack.com?subject=Remote%20Hands%20Request) with the subject line **Remote Hands Request** and include:
+
+### What We Need to Know
+
+- Your name and the server hostname or rack unit assignment
+- A clear description of what you need done, step by step
+- Whether timing is urgent or flexible
+- Any credentials or instructions needed to verify success (e.g. "confirm the server responds to ping at 192.0.2.10 after power-on")
+
+The more specific your instructions, the faster and more accurately we will complete your tasks.
+
+---
+
+## Response Times
+
+### Standard Requests
+
+We aim to complete standard remote hands tasks within **4 business hours** of acknowledgement during business hours (9am–5pm CT, Mon–Fri).
+
+### Urgent Requests
+
+For hardware failures or situations affecting production, mark your email as urgent or call our NOC at 630-381-7677. We'll do our best to respond within **1 hour** and prioritize your request. For time-critical issues outside business hours, include a phone number in your email.
+
+---
+
+## What We Won't Do without Explicit Permission
+
+In line with our [Privacy Statement](/privacy-statement), we will **never**:
+
+- Access, read, or copy data on your drives
+- Boot into or interact with your operating system
+- Make any configuration changes not explicitly requested
+
+If a task requires us to interact with your OS or data, we will confirm the specific steps with you in writing before proceeding.
+
+---
+
+## After the Task
+
+We'll reply to your request email with a summary of what was done, the outcome, and any observations (e.g. a drive that looked physically damaged, a cable that was loose). If something didn't go as expected, we'll tell you immediately rather than leaving you to figure it out.

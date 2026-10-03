@@ -1,0 +1,90 @@
+---
+title: 'Accessing IPMI remotely'
+description: "Connect to your server's IPMI, iDRAC, or iLO over WireGuard."
+order: 2
+---
+
+IPMI, also known as iDRAC on Dell hardware, iLO on HP, and IPMI on Supermicro, gives you out-of-band access to your server. You can power cycle, access a remote console, and manage hardware even when the OS is unresponsive.
+
+---
+
+## Your IPMI Address
+
+When we rack your server, we'll assign an IP address to your IPMI interface and include it in your welcome email. IPMI addresses are on our management network and are **only accessible via our IPMI VPN**; they are not publicly routed.
+
+---
+
+## Connecting to the IPMI VPN
+
+We use WireGuard for IPMI network access. After your server is racked:
+
+1. Email [support@fyrastack.com](mailto:support@fyrastack.com) to request your WireGuard config file.
+2. Install WireGuard on your machine: [wireguard.com/install](https://www.wireguard.com/install/)
+3. Import the config and bring the tunnel up:
+
+```
+wg-quick up fyrastack-ipmi
+```
+
+Once connected, your IPMI web interface will be reachable at the IP in your welcome email.
+
+---
+
+## Logging In
+
+### First Login
+
+We set a temporary password during racking and include it in your welcome email. **Change it immediately after first login.**
+
+### Dell iDRAC
+
+Navigate to `https://<your-ipmi-ip>` in a browser. Log in with username `root` and the temporary password we provide. Go to **iDRAC Settings → User Authentication** to update your credentials.
+
+### HP iLO
+
+Navigate to `https://<your-ipmi-ip>`. Default username is `Administrator`. Update via **Administration → User Administration**.
+
+### Supermicro IPMI
+
+Navigate to `https://<your-ipmi-ip>`. Default username is `ADMIN`. Update via **Configuration → Users**.
+
+---
+
+## Remote Console
+
+All major IPMI implementations provide a remote KVM console (HTML5 or Java). This gives you full keyboard, video, and mouse access as if you were sitting in front of the server.
+
+- **Dell iDRAC**: Virtual Console under **Dashboard → Virtual Console**
+- **HP iLO**: Remote Console under **Information → Remote Console**
+- **Supermicro**: Remote Control → iKVM/HTML5
+
+Use the remote console to recover from a bad network config, reinstall the OS, or debug a failed boot.
+
+---
+
+## Power Management via IPMI CLI
+
+You can also manage power from the command line using `ipmitool`:
+
+```
+# Check power status
+ipmitool -I lanplus -H <ipmi-ip> -U <user> -P <pass> chassis power status
+
+# Power cycle
+ipmitool -I lanplus -H <ipmi-ip> -U <user> -P <pass> chassis power cycle
+
+# Hard reset
+ipmitool -I lanplus -H <ipmi-ip> -U <user> -P <pass> chassis power reset
+```
+
+---
+
+## Troubleshooting
+
+### IPMI Web Interface Not Loading
+
+Confirm your WireGuard tunnel is up with `wg show`. If the tunnel is up but the interface is unreachable, email us as the IPMI port may need to be reconfigured.
+
+### Forgot IPMI Password
+
+If you're locked out, [request remote hands](/docs/colocation/remote-hands) and we can reset the IPMI credentials from the physical console.

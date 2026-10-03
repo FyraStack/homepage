@@ -1,0 +1,203 @@
+<script lang="ts">
+	import { Button } from '$lib/components/ui/button';
+	import { Badge } from '$lib/components/ui/badge';
+	import Loader2 from '~icons/lucide/loader-2';
+	import Play from '~icons/nucleo/play';
+	import Power from '~icons/nucleo/power';
+	import PowerOff from '~icons/nucleo/power-off';
+	import RotateCw from '~icons/nucleo/rotate-cw';
+	import { getDemo } from './context';
+	import { serverTabs } from './server-detail';
+	import { toast } from 'svelte-sonner';
+	import { getErrorMessage } from './format';
+	import { confirmDestructive } from './confirm.svelte';
+	import Overview from './tabs/overview.svelte';
+	import Networking from './tabs/networking.svelte';
+	import Resize from './tabs/resize.svelte';
+	import Settings from './tabs/settings.svelte';
+
+	type PowerAction = 'start' | 'shutdown' | 'kill' | 'restart';
+
+	const tabPages = {
+		overview: Overview,
+		networking: Networking,
+		resize: Resize,
+		settings: Settings
+	};
+
+	const demo = getDemo();
+	let powerAction = $state<PowerAction | null>(null);
+	const powerLoading = $derived(powerAction !== null);
+	const visibleServerTabs = $derived(
+		serverTabs.filter((tab) => !tab.featureFlag || demo.featureFlags[tab.featureFlag])
+	);
+	let selectedServer = $derived(demo.selected);
+	let activeTab = $derived(demo.activeTab);
+	const TabPage = $derived(tabPages[activeTab]);
+
+	const powerMessages = {
+		start: { success: 'Server started', error: 'Failed to start server' },
+		shutdown: { success: 'Server is shutting down', error: 'Failed to shut down server' },
+		restart: { success: 'Server is restarting', error: 'Failed to restart server' },
+		kill: { success: 'Server powered off', error: 'Failed to power off server' }
+	} as const;
+
+	async function power(action: PowerAction) {
+		if (!selectedServer || powerLoading) return;
+
+		if (action === 'kill') {
+			const ok = await confirmDestructive({
+				title: 'Force power off',
+				description: `This forces ${selectedServer.name} off like pulling the plug, which can corrupt the filesystem or lose unsaved data. Use Shutdown for a clean stop.`,
+				confirmLabel: 'Force power off'
+			});
+			if (!ok) return;
+		}
+
+		powerAction = action;
+
+		try {
+			if (action === 'start') {
+				await demo.startVm({ vmId: selectedServer.id });
+			} else if (action === 'shutdown') {
+				await demo.stopVm({ vmId: selectedServer.id });
+			} else if (action === 'restart') {
+				await demo.rebootVm({ vmId: selectedServer.id });
+			} else {
+				await demo.killVm({ vmId: selectedServer.id });
+			}
+			toast.success(powerMessages[action].success);
+		} catch (error) {
+			toast.error(getErrorMessage(error, powerMessages[action].error));
+		} finally {
+			powerAction = null;
+		}
+	}
+</script>
+
+<div class="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+	<div class="flex min-w-0 items-center gap-2">
+		<span class="truncate text-sm font-medium text-foreground">{selectedServer.name}</span>
+		<Badge
+			variant="outline"
+			class="text-[10px] {selectedServer.status === 'deleting'
+				? 'border-red-300 bg-red-100 text-red-800 dark:border-red-800 dark:bg-red-950/40 dark:text-red-400'
+				: !selectedServer.liveLoaded
+					? 'border-border bg-background/40 text-muted-foreground'
+					: selectedServer.status === 'running'
+						? 'border-emerald-300 bg-emerald-100 text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400'
+						: selectedServer.status === 'provisioning'
+							? 'border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-400'
+							: selectedServer.status === 'restarting'
+								? 'border-amber-300 bg-amber-100 text-amber-800 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-400'
+								: 'border-red-300 bg-red-100 text-red-800 dark:border-red-800 dark:bg-red-950/40 dark:text-red-400'}"
+		>
+			{selectedServer.status === 'deleting'
+				? 'deleting...'
+				: !selectedServer.liveLoaded
+					? 'unknown'
+					: selectedServer.status === 'provisioning'
+						? 'provisioning...'
+						: selectedServer.status}
+		</Badge>
+	</div>
+	<div class="flex shrink-0 items-center gap-1.5">
+		<Button
+			variant="outline"
+			size="sm"
+			class="h-7 gap-1.5 px-2.5 text-xs @min-[40rem]:px-3"
+			aria-label="Start"
+			disabled={powerLoading ||
+				selectedServer.status === 'running' ||
+				selectedServer.status === 'restarting' ||
+				selectedServer.status === 'provisioning' ||
+				selectedServer.status === 'deleting'}
+			onclick={() => power('start')}
+		>
+			{#if powerAction === 'start'}
+				<Loader2 class="h-3 w-3 animate-spin" />
+			{:else}
+				<Play class="h-3 w-3" />
+			{/if}
+			<span class="hidden @min-[40rem]:inline">Start</span>
+		</Button>
+		<Button
+			variant="outline"
+			size="sm"
+			class="h-7 gap-1.5 px-2.5 text-xs @min-[40rem]:px-3"
+			aria-label="Restart"
+			disabled={powerLoading ||
+				selectedServer.status === 'stopped' ||
+				selectedServer.status === 'restarting' ||
+				selectedServer.status === 'provisioning' ||
+				selectedServer.status === 'deleting'}
+			onclick={() => power('restart')}
+		>
+			{#if powerAction === 'restart'}
+				<Loader2 class="h-3 w-3 animate-spin" />
+			{:else}
+				<RotateCw class="h-3 w-3 {selectedServer.status === 'restarting' ? 'animate-spin' : ''}" />
+			{/if}
+			<span class="hidden @min-[40rem]:inline">Restart</span>
+		</Button>
+		<Button
+			variant="outline"
+			size="sm"
+			class="h-7 gap-1.5 px-2.5 text-xs @min-[40rem]:px-3"
+			aria-label="Shutdown"
+			disabled={powerLoading ||
+				selectedServer.status === 'stopped' ||
+				selectedServer.status === 'provisioning' ||
+				selectedServer.status === 'deleting'}
+			onclick={() => power('shutdown')}
+		>
+			{#if powerAction === 'shutdown'}
+				<Loader2 class="h-3 w-3 animate-spin" />
+			{:else}
+				<Power class="h-3 w-3" />
+			{/if}
+			<span class="hidden @min-[40rem]:inline">Shutdown</span>
+		</Button>
+		<Button
+			variant="outline"
+			size="sm"
+			class="h-7 gap-1.5 border-red-300 px-2.5 text-xs text-red-700 hover:bg-red-100 @min-[40rem]:px-3 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
+			aria-label="Kill"
+			disabled={powerLoading ||
+				selectedServer.status === 'stopped' ||
+				selectedServer.status === 'provisioning' ||
+				selectedServer.status === 'deleting'}
+			onclick={() => power('kill')}
+		>
+			{#if powerAction === 'kill'}
+				<Loader2 class="h-3 w-3 animate-spin" />
+			{:else}
+				<PowerOff class="h-3 w-3" />
+			{/if}
+			<span class="hidden @min-[40rem]:inline">Kill</span>
+		</Button>
+	</div>
+</div>
+
+<div class="flex shrink-0 items-center gap-0 overflow-x-auto border-b border-border px-2">
+	{#each visibleServerTabs as tab (tab.id)}
+		<button
+			type="button"
+			aria-current={activeTab === tab.id ? 'page' : undefined}
+			class="flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium transition-colors duration-100 {activeTab ===
+			tab.id
+				? 'border-b-2 border-red-500 text-foreground'
+				: 'text-muted-foreground hover:text-foreground'}"
+			onclick={() => (demo.activeTab = tab.id)}
+		>
+			<tab.icon class="h-3 w-3" />
+			{tab.label}
+		</button>
+	{/each}
+</div>
+
+<div class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden">
+	{#key selectedServer.id}
+		<TabPage />
+	{/key}
+</div>

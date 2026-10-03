@@ -1,0 +1,47 @@
+---
+title: 'Power budgets and PDUs'
+description: 'Learn how power is provisioned for your colocation slot.'
+order: 4
+---
+
+Every colocation slot comes with a power allocation. This guide explains how power is provisioned, what PDUs we use, and how to stay within your budget.
+
+---
+
+## Power Included per Plan
+
+Each colocation plan includes a base power allocation measured in amps at 208V:
+
+### Standard Colocation (1U)
+
+Includes **1A at 208V** (~200W) starting out. This covers the typical idle draw of a 1U server with one or two drives and a single PSU.
+
+### Extended Power Add-On
+
+If your server draws more than the included allocation, you can purchase additional amps in 1A increments. Contact us before shipping if you expect to exceed the base allocation.
+
+---
+
+## PDU Details
+
+### What We Use
+
+We use metered Tripp Lite 208V 30A single-phase PDUs. Each PDU circuit is shared across multiple outlets and monitored at the circuit level.
+
+### Redundant Power
+
+If your server has dual PSUs, we can connect each to a separate PDU on a separate circuit for redundancy. Request this during the intake process and we'll assign outlets accordingly.
+
+---
+
+## Overages and Enforcement
+
+We monitor per-circuit draw continuously. If your server sustains draw above your allocated amount for more than 15 minutes, we'll email you to discuss an upgrade. Persistent overages without a plan upgrade may result in your server being powered down to protect other customers on the same circuit, in accordance with our [Terms of Service](/terms-of-service).
+
+---
+
+## Power Cycling Your Server
+
+If you need your server power-cycled and IPMI isn't responding, you can request a manual power cycle via [remote hands](/docs/colocation/remote-hands). We'll toggle the PDU outlet and confirm when it's back online.
+
+For servers with IPMI configured, you can power cycle the server yourself at any time; see [Accessing IPMI Remotely](/docs/colocation/ipmi).
