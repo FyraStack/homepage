@@ -20,10 +20,12 @@
     createServerUrl,
     dashboardUrl,
     class: className,
+    style,
   }: {
     createServerUrl: string;
     dashboardUrl: string;
     class?: string;
+    style?: string;
   } = $props();
 
   let tryItOpen = $state(false);
@@ -58,6 +60,7 @@
     className
   )}
   id="dashboard-demo"
+  {style}
 >
   <BitsConfig defaultPortalTo="#dashboard-demo">
     <header

@@ -1,6 +1,8 @@
 <script lang="ts">
   import "./layout.css";
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
+  import Menu from "@lucide/svelte/icons/menu";
+  import X from "@lucide/svelte/icons/x";
   import { onMount, type Snippet } from "svelte";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
@@ -22,6 +24,29 @@
   const isCurrent = (path: string) =>
     page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
 
+  const navLinks = [
+    { href: `${resolve("/")}#pricing`, label: "Pricing", path: null },
+    { href: resolve("/colocation"), label: "Colocation", path: "/colocation" },
+    { href: resolve("/about"), label: "About", path: "/about" },
+    { href: resolve("/docs"), label: "Docs", path: "/docs" },
+  ] as const;
+
+  const isLinkCurrent = (path: string | null) =>
+    path !== null && isCurrent(path);
+
+  let mobileNavOpen = $state(false);
+
+  $effect(() => {
+    page.url.href;
+    mobileNavOpen = false;
+  });
+
+  function closeMobileNavOnEscape(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      mobileNavOpen = false;
+    }
+  }
+
   onMount(() => {
     document.documentElement.dataset.smoothScroll = "";
   });
@@ -42,43 +67,66 @@
         <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
       </a>
       <nav aria-label="Primary" class="hidden items-center gap-1 sm:flex">
-        <a class={navLinkClass()} href="{resolve("/")}#pricing">Pricing</a>
-        <a
-          aria-current={isCurrent("/colocation") ? "page" : undefined}
-          class={navLinkClass(isCurrent("/colocation"))}
-          href={resolve("/colocation")}
-          >Colocation</a
-        >
-        <a
-          aria-current={isCurrent("/about") ? "page" : undefined}
-          class={navLinkClass(isCurrent("/about"))}
-          href={resolve("/about")}
-          >About</a
-        >
-        <a
-          aria-current={isCurrent("/docs") ? "page" : undefined}
-          class={navLinkClass(isCurrent("/docs"))}
-          href={resolve("/docs")}
-          >Docs</a
-        >
+        {#each navLinks as link (link.label)}
+          <a
+            aria-current={isLinkCurrent(link.path) ? "page" : undefined}
+            class={navLinkClass(isLinkCurrent(link.path))}
+            href={link.href}>{link.label}</a
+          >
+        {/each}
       </nav>
     </div>
-    <div class="flex items-center gap-3">
-      <a
-        class="hidden px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
-        href="https://status.fyrastack.com"
-        >Status</a
-      >
+    <div class="flex items-center gap-2">
       <Button
         class="h-8 gap-2 pl-3 text-[13px] has-data-[icon=inline-end]:pr-2"
         href={dashboardUrl}
-        variant="outline"
+        variant="accent"
       >
         Dashboard <ArrowRight data-icon="inline-end" />
       </Button>
+      <button
+        aria-controls="mobile-nav"
+        aria-expanded={mobileNavOpen}
+        aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
+        class="relative -mr-2 flex size-10 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-foreground sm:hidden"
+        onclick={() => (mobileNavOpen = !mobileNavOpen)}
+        type="button"
+      >
+        <span
+          aria-hidden="true"
+          class="absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2 pointer-fine:hidden"
+        ></span>
+        {#if mobileNavOpen}
+          <X class="size-5" />
+        {:else}
+          <Menu class="size-5" />
+        {/if}
+      </button>
     </div>
   </div>
+  <nav
+    aria-label="Primary"
+    class="border-t border-border sm:hidden"
+    hidden={!mobileNavOpen}
+    id="mobile-nav"
+  >
+    <div class="page-container flex flex-col py-2">
+      {#each navLinks as link (link.label)}
+        <a
+          aria-current={isLinkCurrent(link.path) ? "page" : undefined}
+          class={cn(
+            "py-3 text-base transition-colors hover:text-foreground",
+            isLinkCurrent(link.path) ? "text-foreground" : "text-muted-foreground"
+          )}
+          href={link.href}
+          onclick={() => (mobileNavOpen = false)}>{link.label}</a
+        >
+      {/each}
+    </div>
+  </nav>
 </header>
+
+<svelte:window onkeydown={closeMobileNavOnEscape} />
 
 {@render children()}
 

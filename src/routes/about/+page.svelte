@@ -374,10 +374,10 @@
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
         <Button
-          class="h-auto gap-2 bg-background/60 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
+          class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
           href={signUpUrl}
           size="lg"
-          variant="outline"
+          variant="accent"
         >
           Create an account <ArrowRight data-icon="inline-end" />
         </Button>

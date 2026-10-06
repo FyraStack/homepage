@@ -371,7 +371,7 @@
           <Button
             class="h-auto gap-2 py-2 pl-3.5 has-data-[icon=inline-end]:pr-2.5"
             href="mailto:support@fyrastack.com"
-            variant="outline"
+            variant="accent"
           >
             Contact support <ArrowRight data-icon="inline-end" />
           </Button>

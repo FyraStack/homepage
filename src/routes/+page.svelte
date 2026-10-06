@@ -36,6 +36,22 @@
   const salesUrl = "mailto:support@fyrastack.com?subject=Sales%20question";
   const discordUrl = "#";
 
+  const demoMinWidth = 1024;
+  const demoMaxWidth = 1440;
+  const demoMaxZoom = 0.8;
+  let demoFrameWidth = $state(0);
+  const demoFitStyle = $derived.by(() => {
+    if (demoFrameWidth === 0) {
+      return undefined;
+    }
+    const width = Math.min(
+      demoMaxWidth,
+      Math.max(demoMinWidth, demoFrameWidth / demoMaxZoom)
+    );
+    const zoom = Math.min(demoMaxZoom, demoFrameWidth / width);
+    return `width: ${width}px; zoom: ${zoom}`;
+  });
+
   const whyFeatures = [
     {
       description:
@@ -138,9 +154,11 @@
     />
 
     <div
-      class="page-container flex flex-col items-center gap-11 pt-16 sm:pt-18"
+      class="page-container flex flex-col items-center gap-11 pt-16 pb-16 sm:pt-18 md:pb-0"
     >
-      <div class="flex flex-col items-center gap-5 text-center">
+      <div
+        class="relative isolate flex flex-col items-center gap-5 text-center before:absolute before:-inset-x-10 before:-inset-y-12 before:-z-10 before:bg-[radial-gradient(closest-side,var(--color-background)_55%,transparent)] md:before:hidden"
+      >
         <h1
           class="max-w-250 text-[40px]/[1.08] font-semibold tracking-[-0.028em] text-balance sm:text-5xl/[1.06] lg:text-[64px]/[67px]"
         >
@@ -172,13 +190,16 @@
       </div>
 
       <div
-        class="h-80 w-full [clip-path:inset(-64px_0_0_0)] sm:h-110 lg:h-134 lg:px-16"
+        class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
       >
-        <DashboardDemo
-          class="h-200 w-360 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
-          {createServerUrl}
-          {dashboardUrl}
-        />
+        <div bind:clientWidth={demoFrameWidth} class="flex justify-center">
+          <DashboardDemo
+            class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+            {createServerUrl}
+            {dashboardUrl}
+            style={demoFitStyle}
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -186,7 +207,7 @@
   <!-- About: "Stack is different" and the four value props -->
   <section class="relative border-b border-border py-20 lg:py-28" id="about">
     <div
-      class="absolute top-0 left-1/2 flex -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+      class="absolute top-0 left-1/2 hidden -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase md:flex"
     >
       <CornerLeftUp class="size-3.5" />
       Try me
@@ -259,7 +280,7 @@
             class="h-auto self-start px-4 py-2.5"
             href="#pricing"
             size="lg"
-            variant="outline"
+            variant="accent"
           >
             See VPS plans
           </Button>
@@ -325,7 +346,7 @@
               class="h-auto px-4 py-2.5"
               href="{resolve("/colocation")}#inquiry"
               size="lg"
-              variant="outline"
+              variant="accent"
             >
               Start a colocation inquiry
             </Button>
@@ -463,7 +484,7 @@
               class="h-auto py-2.5"
               href={createServerUrl}
               size="lg"
-              variant="outline"
+              variant="accent"
             >
               Deploy {selected.name}
             </Button>
@@ -592,10 +613,10 @@
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
         <Button
-          class="h-auto gap-2 bg-background/60 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
+          class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
           href={signUpUrl}
           size="lg"
-          variant="outline"
+          variant="accent"
         >
           Create an account <ArrowRight data-icon="inline-end" />
         </Button>

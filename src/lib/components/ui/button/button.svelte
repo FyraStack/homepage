@@ -27,6 +27,8 @@
         xs: "h-6 gap-1 in-data-[slot=button-group]:rounded-lg rounded-[min(var(--radius-md),10px)] px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
       },
       variant: {
+        accent:
+          "border-primary/45 bg-primary/12 text-foreground hover:border-primary/70 hover:bg-primary/22 aria-expanded:bg-primary/22",
         default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 dark:hover:bg-destructive/30",

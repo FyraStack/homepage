@@ -121,10 +121,10 @@
         </p>
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <Button
-            class="h-auto gap-2 bg-background/60 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
+            class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
             href="#inquiry"
             size="lg"
-            variant="outline"
+            variant="accent"
           >
             Start a colocation inquiry <ArrowRight data-icon="inline-end" />
           </Button>
@@ -278,7 +278,7 @@
             class="h-auto py-2.5"
             href="#inquiry"
             size="lg"
-            variant="outline"
+            variant="accent"
           >
             Start a colocation inquiry
           </Button>
@@ -410,7 +410,7 @@
           class="h-auto gap-2 justify-self-start py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
           size="lg"
           type="submit"
-          variant="outline"
+          variant="accent"
         >
           Send inquiry <ArrowRight data-icon="inline-end" />
         </Button>
