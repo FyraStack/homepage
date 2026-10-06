@@ -206,55 +206,62 @@
           servers for.
         </p>
       </div>
-      <ul
-        class="grid flex-1 grid-cols-2 gap-px border border-border bg-border md:grid-cols-4 md:grid-rows-2"
-      >
-        <li
-          class="col-span-2 flex h-56 flex-col items-center justify-center gap-5 bg-background pb-1 md:row-span-2 md:h-auto"
+      <div class="@container min-w-0 flex-1">
+        <ul
+          class="grid grid-cols-2 gap-px border border-border bg-border @2xl:grid-cols-4 @2xl:grid-rows-2"
         >
-          <img
-            alt="DeepComputing"
-            class="h-9 w-72 object-contain"
-            src={deepComputingWordmark}
+          <li
+            class="col-span-2 flex h-56 flex-col items-center justify-center gap-5 bg-background px-6 pb-1 @2xl:row-span-2 @2xl:h-auto"
           >
-          <span class="text-sm text-muted-foreground">Partner</span>
-        </li>
-        <li
-          class="col-span-2 flex h-37 flex-col items-center justify-center gap-3.5 bg-background pb-1"
-        >
-          <div class="flex h-13 items-center gap-3.5">
-            <img alt="" class="size-10 object-contain sm:size-13" src={ogcMark}>
-            <span class="text-lg font-semibold tracking-[-0.018em] sm:text-2xl"
-              >Open Gaming Collective</span
+            <img
+              alt="DeepComputing"
+              class="h-9 w-72 max-w-full object-contain"
+              src={deepComputingWordmark}
             >
-          </div>
-          <span class="text-[13px] text-muted-foreground"
-            >Sponsored servers</span
+            <span class="text-sm text-muted-foreground">Partner</span>
+          </li>
+          <li
+            class="col-span-2 flex h-37 flex-col items-center justify-center gap-3.5 bg-background pb-1"
           >
-        </li>
-        <li
-          class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
-        >
-          <div class="flex h-10 items-center gap-2.5">
-            <img alt="" class="size-10 object-contain" src={acmUmnMark}>
-            <span class="text-base font-semibold tracking-[-0.011em]"
-              >ACM UMN</span
+            <div class="flex h-13 items-center gap-3.5">
+              <img
+                alt=""
+                class="size-10 object-contain sm:size-13"
+                src={ogcMark}
+              >
+              <span
+                class="text-lg font-semibold tracking-[-0.018em] sm:text-2xl"
+                >Open Gaming Collective</span
+              >
+            </div>
+            <span class="text-[13px] text-muted-foreground"
+              >Sponsored servers</span
             >
-          </div>
-          <span class="text-xs text-muted-foreground">Sponsored servers</span>
-        </li>
-        <li
-          class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
-        >
-          <div class="flex h-10 items-center gap-2.5">
-            <img alt="" class="size-8 object-contain" src={fossWikiMark}>
-            <span class="text-base font-semibold tracking-[-0.011em]"
-              >FOSS Wiki</span
-            >
-          </div>
-          <span class="text-xs text-muted-foreground">Sponsored servers</span>
-        </li>
-      </ul>
+          </li>
+          <li
+            class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
+          >
+            <div class="flex h-10 items-center gap-2.5">
+              <img alt="" class="size-10 object-contain" src={acmUmnMark}>
+              <span class="text-base font-semibold tracking-[-0.011em]"
+                >ACM UMN</span
+              >
+            </div>
+            <span class="text-xs text-muted-foreground">Sponsored servers</span>
+          </li>
+          <li
+            class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
+          >
+            <div class="flex h-10 items-center gap-2.5">
+              <img alt="" class="size-8 object-contain" src={fossWikiMark}>
+              <span class="text-base font-semibold tracking-[-0.011em]"
+                >FOSS Wiki</span
+              >
+            </div>
+            <span class="text-xs text-muted-foreground">Sponsored servers</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 

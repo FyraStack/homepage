@@ -104,11 +104,6 @@
 
     <div class="page-container flex flex-col gap-20 pt-24 lg:gap-30 lg:pt-32">
       <div class="flex max-w-205 flex-col gap-6">
-        <span
-          class="font-mono text-xs tracking-[0.11em] text-muted-foreground uppercase"
-        >
-          Colocation · Chicago, IL
-        </span>
         <h1
           class="text-5xl/[1.05] font-semibold tracking-[-0.03em] sm:text-7xl/[1.03] lg:text-[80px]/[82px]"
         >
