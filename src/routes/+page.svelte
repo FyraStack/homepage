@@ -11,6 +11,8 @@
   import ReceiptText from "@lucide/svelte/icons/receipt-text";
   import Server from "@lucide/svelte/icons/server";
   import Zap from "@lucide/svelte/icons/zap";
+  import { prefersReducedMotion } from "svelte/motion";
+  import { fly } from "svelte/transition";
   import { resolve } from "$app/paths";
   import ctaDither from "$lib/assets/cta-dither.png";
   import heroDither from "$lib/assets/hero-dither.png";
@@ -28,6 +30,7 @@
     planSpecs,
     plans,
   } from "$lib/components/landing/plans";
+  import RollingPrice from "$lib/components/landing/rolling-price.svelte";
   import { Button } from "$lib/components/ui/button";
 
   const dashboardUrl = "https://dash.fyrastack.com";
@@ -42,7 +45,7 @@
   let demoFrameWidth = $state(0);
   const demoFitStyle = $derived.by(() => {
     if (demoFrameWidth === 0) {
-      return undefined;
+      return;
     }
     const width = Math.min(
       demoMaxWidth,
@@ -109,6 +112,12 @@
   ];
 
   let selectedName = $state(plans[0].name);
+  let hasPickedPlan = $state(false);
+  const swapDuration = $derived(prefersReducedMotion.current ? 0 : 220);
+
+  function markPlanPicked() {
+    hasPickedPlan = true;
+  }
   const selected = $derived(
     plans.find((option) => option.name === selectedName) ?? plans[0]
   );
@@ -192,7 +201,7 @@
       <div
         class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
       >
-        <div bind:clientWidth={demoFrameWidth} class="flex justify-center">
+        <div class="flex justify-center" bind:clientWidth={demoFrameWidth}>
           <DashboardDemo
             class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
             {createServerUrl}
@@ -425,6 +434,7 @@
               <input
                 class="peer sr-only"
                 name="plan"
+                onchange={markPlanPicked}
                 type="radio"
                 value={plan.name}
                 bind:group={selectedName}
@@ -470,10 +480,10 @@
                 >{selected.name}</span
               >
               <div class="flex items-end gap-1.5">
-                <span
+                <RollingPrice
                   class="text-7xl/[65px] font-semibold tracking-[-0.04em] tabular-nums"
-                  >${selected.price}</span
-                >
+                  value={selected.price}
+                />
                 <span class="text-lg text-muted-foreground">/mo</span>
               </div>
               <p class="text-[13px]/5 text-muted-foreground">
@@ -493,28 +503,49 @@
             class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
           >
             <div
-              class="flex items-center justify-between font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+              class="flex items-center gap-3 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
             >
-              <span>Same size elsewhere</span>
-              <span>You save</span>
+              <span class="flex-1">Same size elsewhere</span>
+              <span class="w-20 text-right">Their price</span>
+              <span class="w-20 text-right">You save</span>
             </div>
             <ul class="flex flex-col">
               {#each comparisonOffers as { provider, offer } (provider)}
                 <li
-                  class="flex items-center gap-3 border-b border-border py-3 text-sm last:border-b-0"
+                  class="flex items-center gap-3 overflow-hidden border-b border-border py-3 text-sm last:border-b-0"
                 >
                   <span class="flex-1">{provider}</span>
-                  {#if offer}
-                    <span class="text-muted-foreground tabular-nums"
-                      >{offer.approximate ? "~" : ""}${offer.price}</span
-                    >
-                    <span
-                      class="w-20 text-right font-mono font-semibold tabular-nums"
-                      >${Math.max(0, offer.price - selected.price)}</span
-                    >
-                  {:else}
-                    <span class="text-muted-foreground">Not offered</span>
-                  {/if}
+                  <span class="grid justify-items-end">
+                    {#if offer}
+                      <span
+                        class="col-start-1 row-start-1 flex gap-3"
+                        in:fly={{ duration: swapDuration, y: 12 }}
+                        out:fly={{ duration: swapDuration, y: -12 }}
+                      >
+                        <span
+                          class="w-20 text-right text-muted-foreground tabular-nums"
+                          >{offer.approximate ? "~" : ""}<RollingPrice
+                            animateIn={hasPickedPlan}
+                            value={offer.price}
+                          /></span
+                        >
+                        <span
+                          class="w-20 text-right font-mono font-semibold tabular-nums"
+                          ><RollingPrice
+                            animateIn={hasPickedPlan}
+                            value={Math.max(0, offer.price - selected.price)}
+                          /></span
+                        >
+                      </span>
+                    {:else}
+                      <span
+                        class="col-start-1 row-start-1 text-muted-foreground"
+                        in:fly={{ duration: swapDuration, y: 12 }}
+                        out:fly={{ duration: swapDuration, y: -12 }}
+                        >Not offered</span
+                      >
+                    {/if}
+                  </span>
                 </li>
               {/each}
             </ul>

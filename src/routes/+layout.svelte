@@ -4,6 +4,7 @@
   import Menu from "@lucide/svelte/icons/menu";
   import X from "@lucide/svelte/icons/x";
   import { onMount, type Snippet } from "svelte";
+  import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
   import favicon from "$lib/assets/favicon.svg";
@@ -36,16 +37,21 @@
 
   let mobileNavOpen = $state(false);
 
-  $effect(() => {
-    page.url.href;
+  function toggleMobileNav() {
+    mobileNavOpen = !mobileNavOpen;
+  }
+
+  function closeMobileNav() {
     mobileNavOpen = false;
-  });
+  }
 
   function closeMobileNavOnEscape(event: KeyboardEvent) {
     if (event.key === "Escape") {
-      mobileNavOpen = false;
+      closeMobileNav();
     }
   }
+
+  afterNavigate(closeMobileNav);
 
   onMount(() => {
     document.documentElement.dataset.smoothScroll = "";
@@ -71,7 +77,8 @@
           <a
             aria-current={isLinkCurrent(link.path) ? "page" : undefined}
             class={navLinkClass(isLinkCurrent(link.path))}
-            href={link.href}>{link.label}</a
+            href={link.href}
+            >{link.label}</a
           >
         {/each}
       </nav>
@@ -89,7 +96,7 @@
         aria-expanded={mobileNavOpen}
         aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
         class="relative -mr-2 flex size-10 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-foreground sm:hidden"
-        onclick={() => (mobileNavOpen = !mobileNavOpen)}
+        onclick={toggleMobileNav}
         type="button"
       >
         <span
@@ -116,10 +123,13 @@
           aria-current={isLinkCurrent(link.path) ? "page" : undefined}
           class={cn(
             "py-3 text-base transition-colors hover:text-foreground",
-            isLinkCurrent(link.path) ? "text-foreground" : "text-muted-foreground"
+            isLinkCurrent(link.path)
+              ? "text-foreground"
+              : "text-muted-foreground"
           )}
           href={link.href}
-          onclick={() => (mobileNavOpen = false)}>{link.label}</a
+          onclick={closeMobileNav}
+          >{link.label}</a
         >
       {/each}
     </div>
