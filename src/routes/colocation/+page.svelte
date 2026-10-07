@@ -92,7 +92,6 @@
         fadeBottom: 0.45,
         fadeTop: 0,
         intensity: 0.7,
-        pxSize: 3,
         scale: 2.2,
         seed: 47,
         shape: 2,
