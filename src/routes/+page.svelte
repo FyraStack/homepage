@@ -407,10 +407,10 @@
           </p>
         </div>
         <Button
-          class="h-auto self-start px-4 py-2.5 text-muted-foreground sm:self-auto"
+          class="h-auto self-start px-4 py-2.5 sm:self-auto"
           href={salesUrl}
           size="lg"
-          variant="ghost"
+          variant="accent"
         >
           Talk to sales
         </Button>
