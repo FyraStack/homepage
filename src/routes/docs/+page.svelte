@@ -11,6 +11,9 @@
   import { docSections } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { cn } from "$lib/utils";
+  import type { PageProps } from "./$types";
+
+  let { data }: PageProps = $props();
 
   const discordUrl = "#";
 
@@ -43,13 +46,6 @@
 
   const shippingAddress =
     "Fyra Stack Limited\n5206 N Damen Ave\nChicago, IL 60625";
-
-  const firstCommands = [
-    "ssh root@<your-server-ip>",
-    "dnf upgrade --refresh -y",
-    "useradd -m -G wheel stackuser && passwd stackuser",
-    "sudoedit /etc/ssh/sshd_config",
-  ];
 </script>
 
 <svelte:head>
@@ -329,7 +325,7 @@
               Update the system, add your own user, and lock down SSH before you
               do anything else.
             </p>
-            <figure class="docs-code">
+            <figure class="docs-code docs-code-prompt">
               <figcaption class="docs-code-header">
                 <span>Fedora Server</span>
                 <button
@@ -341,11 +337,7 @@
                   Copy
                 </button>
               </figcaption>
-              <pre data-copy-source={firstCommands.join("\n")}><code
-									>{#each firstCommands as command (command)}<span class="block"
-											><span class="text-muted-foreground select-none">$ </span>{command}</span
-										>{/each}</code
-								></pre>
+              {@html data.firstCommandsHtml}
             </figure>
           </div>
         </li>

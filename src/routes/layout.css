@@ -217,4 +217,10 @@
     scrollbar-width: thin;
     background-color: transparent !important;
   }
+
+  .docs-code-prompt .line::before {
+    color: var(--muted-foreground);
+    user-select: none;
+    content: "$ ";
+  }
 }
