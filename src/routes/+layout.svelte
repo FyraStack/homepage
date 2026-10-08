@@ -1,5 +1,7 @@
 <script lang="ts">
   import "./layout.css";
+  import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+  import jetbrainsMonoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
   import Menu from "@lucide/svelte/icons/menu";
   import X from "@lucide/svelte/icons/x";
@@ -60,6 +62,20 @@
 
 <svelte:head>
   <link href={favicon} rel="icon">
+  <link
+    as="font"
+    crossorigin="anonymous"
+    href={interLatin}
+    rel="preload"
+    type="font/woff2"
+  >
+  <link
+    as="font"
+    crossorigin="anonymous"
+    href={jetbrainsMonoLatin}
+    rel="preload"
+    type="font/woff2"
+  >
 </svelte:head>
 
 <!-- Header: sticky nav shared by every page -->
