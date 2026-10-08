@@ -1,5 +1,6 @@
 <script lang="ts">
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
+  import Globe from "@lucide/svelte/icons/globe";
   import acmUmnMark from "$lib/assets/about/acm-umn.png";
   import addisonPhoto from "$lib/assets/about/addison.jpg";
   import billPhoto from "$lib/assets/about/bill.jpg";
@@ -16,6 +17,7 @@
   import aboutHeroDither from "$lib/assets/about-hero-dither.png";
   import ctaDither from "$lib/assets/cta-dither.png";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
+  import GithubMark from "$lib/components/landing/github-mark.svelte";
   import { Button } from "$lib/components/ui/button";
 
   const signUpUrl = "https://dash.fyrastack.com";
@@ -28,12 +30,28 @@
     { note: "Since 2026", value: "AS402292" },
   ];
 
-  const team = [
-    { name: "Lleyton “Lea” Gray", photo: lleytonPhoto, role: "CEO" },
+  interface TeamMember {
+    github?: string;
+    name: string;
+    photo: string;
+    role: string;
+    website?: string;
+  }
+
+  const team: TeamMember[] = [
     {
+      github: "lleyton",
+      name: "Lleyton “Lea” Gray",
+      photo: lleytonPhoto,
+      role: "CEO",
+      website: "https://ultraviolet.sh/",
+    },
+    {
+      github: "Owen-sz",
       name: "Owen Zimmerman",
       photo: owenPhoto,
       role: "Chief Business Officer",
+      website: "https://owenzimmerman.com/",
     },
     {
       name: "Bill Schouten",
@@ -41,22 +59,44 @@
       role: "Director, Business Relations",
     },
     {
+      github: "addidotlol",
       name: "Addison LeClair",
       photo: addisonPhoto,
       role: "Developer Relations Lead",
+      website: "https://addi.lol/",
     },
     {
+      github: "june-fish",
       name: "June Fish",
       photo: junePhoto,
       role: "Director, Software Engineering",
+      website: "https://june.fish/",
     },
-    { name: "Caleb Jones", photo: calebPhoto, role: "Software Engineer" },
-    { name: "Jonah", photo: jonahPhoto, role: "Operations Advisor" },
-    { name: "Cappy Ishihara", photo: cappyPhoto, role: "Software Engineer" },
     {
+      github: "TheHeroBrine422",
+      name: "Caleb Jones",
+      photo: calebPhoto,
+      role: "Software Engineer",
+    },
+    {
+      github: "Its-J",
+      name: "Jonah",
+      photo: jonahPhoto,
+      role: "Operations Advisor",
+    },
+    {
+      github: "korewaChino",
+      name: "Cappy Ishihara",
+      photo: cappyPhoto,
+      role: "Software Engineer",
+      website: "https://cappuchino.xyz/",
+    },
+    {
+      github: "halfcyan",
       name: "Cypress Reed",
       photo: willowPhoto,
       role: "Backend & Hardware Engineer",
+      website: "https://willowidk.dev/",
     },
   ];
 </script>
@@ -178,9 +218,37 @@
               width="56"
             >
             <div class="flex min-w-0 flex-col gap-1.5">
-              <span class="text-[17px] font-semibold tracking-[-0.012em]"
-                >{member.name}</span
-              >
+              <div class="flex items-center gap-1.5">
+                <span class="text-[17px] font-semibold tracking-[-0.012em]"
+                  >{member.name}</span
+                >
+                {#if member.github || member.website}
+                  <div class="-my-1 flex -translate-y-px items-center">
+                    {#if member.github}
+                      <a
+                        aria-label="{member.name} on GitHub"
+                        class="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
+                        href="https://github.com/{member.github}"
+                        rel="noopener"
+                        target="_blank"
+                      >
+                        <GithubMark class="size-4" />
+                      </a>
+                    {/if}
+                    {#if member.website}
+                      <a
+                        aria-label="{member.name}'s website"
+                        class="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
+                        href={member.website}
+                        rel="noopener"
+                        target="_blank"
+                      >
+                        <Globe class="size-4" />
+                      </a>
+                    {/if}
+                  </div>
+                {/if}
+              </div>
               <span class="text-sm/[21px] text-muted-foreground"
                 >{member.role}</span
               >
@@ -212,17 +280,29 @@
           <li
             class="col-span-2 flex h-56 flex-col items-center justify-center gap-5 bg-background px-6 pb-1 @2xl:row-span-2 @2xl:h-auto"
           >
-            <img
-              alt="DeepComputing"
-              class="h-9 w-72 max-w-full object-contain"
-              src={deepComputingWordmark}
+            <a
+              class="flex max-w-full transition-opacity hover:opacity-80"
+              href="https://deepcomputing.io"
+              rel="noopener"
+              target="_blank"
             >
+              <img
+                alt="DeepComputing"
+                class="h-9 w-72 max-w-full object-contain"
+                src={deepComputingWordmark}
+              >
+            </a>
             <span class="text-sm text-muted-foreground">Partner</span>
           </li>
           <li
             class="col-span-2 flex h-37 flex-col items-center justify-center gap-3.5 bg-background pb-1"
           >
-            <div class="flex h-13 items-center gap-3.5">
+            <a
+              class="flex h-13 items-center gap-3.5 transition-opacity hover:opacity-80"
+              href="https://opengamingcollective.org"
+              rel="noopener"
+              target="_blank"
+            >
               <img
                 alt=""
                 class="size-10 object-contain sm:size-13"
@@ -232,7 +312,7 @@
                 class="text-lg font-semibold tracking-[-0.018em] sm:text-2xl"
                 >Open Gaming Collective</span
               >
-            </div>
+            </a>
             <span class="text-[13px] text-muted-foreground"
               >Sponsored servers</span
             >
@@ -240,23 +320,33 @@
           <li
             class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
           >
-            <div class="flex h-10 items-center gap-2.5">
+            <a
+              class="flex h-10 items-center gap-2.5 transition-opacity hover:opacity-80"
+              href="https://acm.umn.edu"
+              rel="noopener"
+              target="_blank"
+            >
               <img alt="" class="size-10 object-contain" src={acmUmnMark}>
               <span class="text-base font-semibold tracking-[-0.011em]"
                 >ACM UMN</span
               >
-            </div>
+            </a>
             <span class="text-xs text-muted-foreground">Sponsored servers</span>
           </li>
           <li
             class="flex h-37 flex-col items-center justify-center gap-3 bg-background pb-1"
           >
-            <div class="flex h-10 items-center gap-2.5">
+            <a
+              class="flex h-10 items-center gap-2.5 transition-opacity hover:opacity-80"
+              href="https://foss.wiki"
+              rel="noopener"
+              target="_blank"
+            >
               <img alt="" class="size-8 object-contain" src={fossWikiMark}>
               <span class="text-base font-semibold tracking-[-0.011em]"
                 >FOSS Wiki</span
               >
-            </div>
+            </a>
             <span class="text-xs text-muted-foreground">Sponsored servers</span>
           </li>
         </ul>

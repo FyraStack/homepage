@@ -24,12 +24,9 @@
     <div class="absolute top-[178px] left-0 flex items-center">
       <span class="h-px w-10 bg-primary"></span>
       <div
-        class="flex flex-col gap-1.5 rounded-lg bg-gray-850 px-4 py-3.5 outline outline-offset-[-0.5px] outline-border"
+        class="flex flex-col rounded-lg bg-gray-850 px-4 py-3.5 outline outline-offset-[-0.5px] outline-border"
       >
         <span class="text-[15px] font-medium">Your server</span>
-        <span class="font-mono text-[11px] text-muted-foreground"
-          >COLO-2U · 300W · 1 Gbps</span
-        >
       </div>
     </div>
     <div class="absolute top-[427px] left-0">

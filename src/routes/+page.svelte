@@ -138,7 +138,7 @@
 </svelte:head>
 
 <main>
-  <!-- Hero: dithered shader background and server dashboard mockup -->
+  <!-- Hero -->
   <section class="relative isolate overflow-hidden border-b border-border">
     <DitherBackground
       class="-z-10"
@@ -213,7 +213,7 @@
     </div>
   </section>
 
-  <!-- About: "Stack is different" and the four value props -->
+  <!-- About -->
   <section class="relative border-b border-border py-20 lg:py-28" id="about">
     <div
       class="absolute top-0 left-1/2 hidden -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase md:flex"
@@ -260,7 +260,7 @@
     </div>
   </section>
 
-  <!-- VPS: hardware pitch, create-server mockup, spec highlights -->
+  <!-- VPS -->
   <section class="border-b border-border py-20 lg:py-30" id="vps">
     <div class="page-container flex flex-col gap-16">
       <div class="flex flex-col justify-between gap-10 lg:flex-row">
