@@ -128,7 +128,7 @@
   type="button"
 >
   <Search class="size-4 shrink-0" strokeWidth={1.75} />
-  <span class="flex-1 truncate">Search the docs...</span>
+  <span class="flex-1 truncate">Search docs...</span>
   <kbd
     class="hidden border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] sm:inline"
     >⌘K</kbd
@@ -141,7 +141,7 @@
     showCloseButton={false}
   >
     <Dialog.Title class="sr-only">Search the docs</Dialog.Title>
-    <label class="flex items-center gap-3 border-b border-border px-4">
+    <label class="flex items-center gap-3 px-4">
       <Search
         class="size-4 shrink-0 text-muted-foreground"
         strokeWidth={1.75}
@@ -149,53 +149,59 @@
       <input
         aria-label="Search the docs"
         class="h-13 flex-1 bg-transparent text-[15px] outline-none placeholder:text-muted-foreground"
-        placeholder="Search the docs..."
+        placeholder="Search docs..."
         bind:value={query}
       >
     </label>
-    <div class="max-h-[50vh] overflow-y-auto">
-      {#if unavailable}
-        <p class="px-4 py-8 text-center text-sm text-muted-foreground">
-          {#if dev}
-            Search runs on the production build. Use
-            <code class="font-mono text-foreground">pnpm preview</code>
-            to try it.
-          {:else}
-            Search isn't available right now. Try again after the next deploy.
-          {/if}
-        </p>
-      {:else if query.trim() && results.length === 0}
-        <p class="px-4 py-8 text-center text-sm text-muted-foreground">
-          No results for “{query.trim()}”
-        </p>
-      {:else}
-        <ul>
-          {#each results as result (result.url)}
-            <li>
-              <a
-                class="flex flex-col gap-1 border-b border-border/60 px-4 py-3 transition-colors hover:bg-gray-850"
-                href={resolve("/docs/[section]/[slug]", result.route)}
-                onclick={() => {
-                  open = false;
-                }}
-              >
-                <span class="text-sm font-medium">{result.meta.title}</span>
-                <span class="line-clamp-2 text-[13px]/5 text-muted-foreground">
-                  {#each excerptParts(result.excerpt) as part, index (index)}
-                    {#if part.highlighted}
-                      <mark class="bg-transparent text-foreground"
-                        >{part.text}</mark
-                      >
-                    {:else}
-                      {part.text}
-                    {/if}
-                  {/each}
-                </span>
-              </a>
-            </li>
-          {/each}
-        </ul>
-      {/if}
-    </div>
+    {#if query.trim()}
+      <div class="max-h-[50vh] overflow-y-auto border-t border-border">
+        {#if unavailable}
+          <p class="px-4 py-8 text-center text-sm text-muted-foreground">
+            {#if dev}
+              Search runs on the production build. Use
+              <code class="font-mono text-foreground">pnpm preview</code>
+              to try it.
+            {:else}
+              Search isn't available right now. Try again after the next deploy.
+            {/if}
+          </p>
+        {:else if results.length === 0}
+          <p class="px-4 py-8 text-center text-sm text-muted-foreground">
+            No results for “{query.trim()}”
+          </p>
+        {:else}
+          <ul class="flex flex-col gap-1 p-2">
+            {#each results as result (result.url)}
+              <li>
+                <a
+                  class="flex flex-col gap-1.5 px-3 py-3.5 transition-colors outline-none hover:bg-gray-850 focus-visible:bg-gray-850"
+                  href={resolve("/docs/[section]/[slug]", result.route)}
+                  onclick={() => {
+                    open = false;
+                  }}
+                >
+                  <span class="text-[15px] font-medium"
+                    >{result.meta.title}</span
+                  >
+                  <span
+                    class="line-clamp-2 text-[13px]/[22px] text-muted-foreground"
+                  >
+                    {#each excerptParts(result.excerpt) as part, index (index)}
+                      {#if part.highlighted}
+                        <mark class="bg-primary/15 px-0.5 text-brand-coral"
+                          >{part.text}</mark
+                        >
+                      {:else}
+                        {part.text}
+                      {/if}
+                    {/each}
+                  </span>
+                </a>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
+    {/if}
   </Dialog.Content>
 </Dialog.Root>
