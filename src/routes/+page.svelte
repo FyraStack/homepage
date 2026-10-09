@@ -16,6 +16,12 @@
   import { resolve } from "$app/paths";
   import ctaDither from "$lib/assets/cta-dither.png";
   import heroDither from "$lib/assets/hero-dither.png";
+  import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
+  import fyraLabsPreview from "$lib/assets/projects/fyralabs-preview.webp";
+  import terraLogo from "$lib/assets/projects/terra.svg";
+  import terraPreview from "$lib/assets/projects/terra-preview.webp";
+  import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
+  import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
   import {
     colocationFeatures,
     colocationSteps,
@@ -30,6 +36,7 @@
     planSpecs,
     plans,
   } from "$lib/components/landing/plans";
+  import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
   import { Button } from "$lib/components/ui/button";
 
@@ -233,8 +240,29 @@
         </h2>
         <div class="flex max-w-125 flex-col gap-3.5">
           <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
-            Stack is provided by Fyra Labs, the open source community that
-            develops Terra and Ultramarine Linux.
+            Stack is built by
+            <ProjectLink
+              color="var(--primary)"
+              href="https://fyralabs.com"
+              logo={fyraLabsLogo}
+              preview={fyraLabsPreview}
+              >Fyra Labs</ProjectLink
+            >, the team that builds
+            <ProjectLink
+              color="#1f6fe0"
+              href="https://terrapkg.com"
+              logo={terraLogo}
+              preview={terraPreview}
+              >Terra</ProjectLink
+            >
+            and
+            <ProjectLink
+              color="rgb(38, 48, 150)"
+              href="https://ultramarine-linux.org"
+              logo={ultramarineLogo}
+              preview={ultramarinePreview}
+              >Ultramarine</ProjectLink
+            >
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
             Everything we do is open source, and you can view and contribute to
