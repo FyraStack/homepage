@@ -104,7 +104,7 @@
         <span
           class={[
             "grid h-6 place-items-center font-mono text-[9px]",
-            highlightedUnits.has(unit) ? "text-red-500" : "text-gray-600",
+            highlightedUnits.has(unit) ? "text-red-500" : "text-gray-500",
           ]}
         >
           {String(unit).padStart(2, "0")}
