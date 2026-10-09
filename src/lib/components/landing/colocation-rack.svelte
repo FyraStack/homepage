@@ -15,7 +15,10 @@
   </div>
 {/snippet}
 
-<div class="flex w-full max-w-145 shrink-0 justify-center sm:justify-start">
+<div
+  aria-hidden="true"
+  class="flex w-full max-w-145 shrink-0 justify-center sm:justify-start"
+>
   <ServerRack />
   <div class="relative hidden flex-1 sm:block">
     <div class="absolute top-0 left-0">

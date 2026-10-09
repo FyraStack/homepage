@@ -88,7 +88,6 @@
 {/snippet}
 
 <div
-  aria-hidden="true"
   class="w-80 shrink-0 overflow-hidden rounded-lg bg-gray-950 outline outline-offset-[-0.5px] outline-border"
 >
   <div class="flex h-9 items-center justify-end border-b border-border px-3.5">
