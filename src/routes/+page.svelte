@@ -185,7 +185,7 @@
             href={createServerUrl}
             size="lg"
           >
-            Deploy a server <ArrowRight data-icon="inline-end" />
+            Deploy your Server <ArrowRight data-icon="inline-end" />
           </Button>
           <Button
             class="h-auto px-4 py-2.5 text-muted-foreground"
