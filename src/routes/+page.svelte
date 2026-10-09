@@ -39,28 +39,16 @@
   import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
   import { Button } from "$lib/components/ui/button";
+  import * as Tooltip from "$lib/components/ui/tooltip";
 
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
   const signUpUrl = dashboardUrl;
   const salesUrl = "mailto:support@fyrastack.com?subject=Sales%20question";
-  const discordUrl = "#";
+  const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
-  const demoMinWidth = 1024;
-  const demoMaxWidth = 1440;
-  const demoMaxZoom = 0.8;
-  let demoFrameWidth = $state(0);
-  const demoFitStyle = $derived.by(() => {
-    if (demoFrameWidth === 0) {
-      return;
-    }
-    const width = Math.min(
-      demoMaxWidth,
-      Math.max(demoMinWidth, demoFrameWidth / demoMaxZoom)
-    );
-    const zoom = Math.min(demoMaxZoom, demoFrameWidth / width);
-    return `width: ${width}px; zoom: ${zoom}`;
-  });
+  const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
+  const demoFitStyle = `width: ${demoWidth}; zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
 
   const whyFeatures = [
     {
@@ -72,7 +60,7 @@
       description:
         "Built on infrastructure we own, we don't resell another provider's compute",
       icon: Server,
-      title: "Independent",
+      title: "Our metal",
     },
     {
       description: "As easy as running into a coworker",
@@ -80,8 +68,7 @@
       title: "Real support",
     },
     {
-      description:
-        "No hidden fees, no egress charges, no surprise bills. No calc needed",
+      description: predictablePricingDescription,
       icon: ReceiptText,
       title: "Predictable pricing",
     },
@@ -151,6 +138,8 @@
   <a
     class="text-foreground underline decoration-gray-600 underline-offset-4 transition-colors hover:decoration-foreground"
     {href}
+    rel={href.startsWith("http") ? "noopener" : undefined}
+    target={href.startsWith("http") ? "_blank" : undefined}
     >{label}</a
   >
 {/snippet}
@@ -160,6 +149,20 @@
   {@render featureLink("https://discord.gg/YwzKxUBu4U", "community")}, and
   {@render featureLink(resolve("/about"), "team")}
   is open
+{/snippet}
+
+{#snippet predictablePricingDescription()}
+  No hidden fees, no egress charges, no surprise bills. No
+  <Tooltip.Root>
+    <Tooltip.Trigger
+      class="cursor-help underline decoration-gray-600 decoration-dotted underline-offset-4"
+      >calc</Tooltip.Trigger
+    >
+    <Tooltip.Content
+      >calc stands for calculator, we're just using slang.</Tooltip.Content
+    >
+  </Tooltip.Root>
+  needed
 {/snippet}
 
 <main>
@@ -226,7 +229,7 @@
       <div
         class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
       >
-        <div class="flex justify-center" bind:clientWidth={demoFrameWidth}>
+        <div class="@container flex justify-center">
           <DashboardDemo
             class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
             {createServerUrl}
@@ -254,7 +257,7 @@
         <h2
           class="shrink-0 text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
         >
-          Stack is different
+          Why Stack?
         </h2>
         <div class="flex max-w-125 flex-col gap-3.5">
           <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
@@ -265,7 +268,7 @@
               logo={fyraLabsLogo}
               preview={fyraLabsPreview}
               >Fyra Labs</ProjectLink
-            >, the team that builds
+            >, the team that develops
             <ProjectLink
               color="#3388ff"
               href="https://terrapkg.com"
@@ -280,12 +283,13 @@
               logo={ultramarineLogo}
               preview={ultramarinePreview}
               >Ultramarine</ProjectLink
-            >
+            >.
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
-            Everything we do is open source, and you can view and contribute to
-            the very code that powers your server. We focus on servers that just
-            work, built to support and use the open source projects you love.
+            We spent years scaling infrastructure to support open-source,
+            reaching millions of unique clients every month, quickly
+            discovering: hosting sucks. So we're making it better so you don't
+            suffer too.
           </p>
         </div>
       </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { type Component, onMount } from "svelte";
   import { toast } from "svelte-sonner";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
@@ -9,21 +10,35 @@
   import RotateCw from "~icons/nucleo/rotate-cw";
   import { confirmDestructive } from "./confirm.svelte";
   import { getDemo } from "./context";
+  import type { ServerTab } from "./demo-state.svelte";
   import { getErrorMessage } from "./format";
   import { serverTabs } from "./server-detail";
-  import Networking from "./tabs/networking.svelte";
   import Overview from "./tabs/overview.svelte";
-  import Resize from "./tabs/resize.svelte";
-  import Settings from "./tabs/settings.svelte";
 
   type PowerAction = "start" | "shutdown" | "kill" | "restart";
 
-  const tabPages = {
-    networking: Networking,
-    overview: Overview,
-    resize: Resize,
-    settings: Settings,
+  const deferredTabPages = {
+    networking: () => import("./tabs/networking.svelte"),
+    resize: () => import("./tabs/resize.svelte"),
+    settings: () => import("./tabs/settings.svelte"),
   };
+
+  const tabPages = $state<Partial<Record<ServerTab, Component>>>({
+    overview: Overview,
+  });
+
+  function loadDeferredTabPages() {
+    for (const [tab, load] of Object.entries(deferredTabPages)) {
+      load().then((module) => {
+        tabPages[tab as ServerTab] = module.default;
+      });
+    }
+  }
+
+  onMount(() => {
+    const timer = setTimeout(loadDeferredTabPages, 1000);
+    return () => clearTimeout(timer);
+  });
 
   interface StatusSource {
     liveLoaded?: boolean;
@@ -237,6 +252,7 @@
         ? "border-b-2 border-red-500 text-foreground"
         : "text-muted-foreground hover:text-foreground"}"
       onclick={() => {
+        loadDeferredTabPages();
         demo.activeTab = tab.id;
       }}
       type="button"
@@ -251,6 +267,8 @@
   class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden"
 >
   {#key selectedServer.id}
-    <TabPage />
+    {#if TabPage}
+      <TabPage />
+    {/if}
   {/key}
 </div>

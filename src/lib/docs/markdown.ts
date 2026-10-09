@@ -1,6 +1,8 @@
+import { readFile } from "node:fs/promises";
 import GithubSlugger from "github-slugger";
-import { mdsvex } from "mdsvex";
+import { compile, mdsvex } from "mdsvex";
 import { bundledLanguages, createHighlighter } from "shiki";
+import type { Plugin } from "vite";
 
 interface HtmlNode {
   children?: HtmlNode[];
@@ -68,9 +70,40 @@ function collectHeadings() {
   };
 }
 
-export const docsMarkdown = () =>
-  mdsvex({
-    extensions: [".md"],
-    highlight: { highlighter: highlightCode },
-    rehypePlugins: [collectHeadings],
-  });
+const markdownOptions = {
+  extensions: [".md"],
+  highlight: { highlighter: highlightCode },
+  rehypePlugins: [collectHeadings],
+};
+
+export const docsMarkdown = () => mdsvex(markdownOptions);
+
+const metadataQuery = "?metadata";
+const metadataPrefix = "\0docs-metadata:";
+
+export const docsMetadata = (): Plugin => ({
+  enforce: "pre",
+  async load(id) {
+    if (!id.startsWith(metadataPrefix)) {
+      return;
+    }
+    const source = await readFile(
+      id.slice(metadataPrefix.length, -".js".length),
+      "utf8"
+    );
+    const compiled = await compile(source, markdownOptions);
+    return `export const metadata = ${JSON.stringify(compiled?.data?.fm ?? {})};`;
+  },
+  name: "docs-metadata",
+  async resolveId(source, importer) {
+    if (!source.endsWith(`.md${metadataQuery}`)) {
+      return;
+    }
+    const resolved = await this.resolve(
+      source.slice(0, -metadataQuery.length),
+      importer,
+      { skipSelf: true }
+    );
+    return resolved && `${metadataPrefix}${resolved.id}.js`;
+  },
+});

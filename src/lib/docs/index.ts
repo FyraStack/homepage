@@ -67,6 +67,7 @@ const metadataByPath = import.meta.glob<DocMetadata>(
   {
     eager: true,
     import: "metadata",
+    query: "?metadata",
   }
 );
 

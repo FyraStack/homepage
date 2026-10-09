@@ -207,8 +207,8 @@
         {/snippet}
         {@render column("Resources", resourcesLinks)}
         {#snippet communityLinks()}
-          <li><a href="https://fyralabs.com/discord">Discord</a></li>
-          <li><a href="https://github.com/FyraLabs">GitHub</a></li>
+          <li><a href="https://discord.gg/YwzKxUBu4U">Discord</a></li>
+          <li><a href="https://github.com/FyraStack">GitHub</a></li>
           <li><a href="https://x.com/fyrastack">Twitter</a></li>
           <li><a href="https://bsky.app/profile/fyrastack.com">Bluesky</a></li>
           <li><a href="https://fedi.fyralabs.com/@stack">Fediverse</a></li>

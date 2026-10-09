@@ -21,7 +21,7 @@
   import { Button } from "$lib/components/ui/button";
 
   const signUpUrl = "https://dash.fyrastack.com";
-  const discordUrl = "#";
+  const discordUrl = "https://discord.gg/YwzKxUBu4U";
   const fediverseUrl = "#";
 
   const facts = [
@@ -420,7 +420,7 @@
             ·
             <a
               class="transition-colors hover:text-gray-300"
-              href="https://github.com/FyraLabs"
+              href="https://github.com/FyraStack"
               >GitHub</a
             >
             ·

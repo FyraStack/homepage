@@ -15,7 +15,7 @@
 
   let { data }: PageProps = $props();
 
-  const discordUrl = "#";
+  const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
   const startHere = [
     {
