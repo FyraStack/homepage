@@ -4,13 +4,13 @@
   import CornerLeftUp from "@lucide/svelte/icons/corner-left-up";
   import CornerRightUp from "@lucide/svelte/icons/corner-right-up";
   import Cpu from "@lucide/svelte/icons/cpu";
+  import DoorOpen from "@lucide/svelte/icons/door-open";
   import Gauge from "@lucide/svelte/icons/gauge";
   import HardDrive from "@lucide/svelte/icons/hard-drive";
   import LifeBuoy from "@lucide/svelte/icons/life-buoy";
   import Network from "@lucide/svelte/icons/network";
   import ReceiptText from "@lucide/svelte/icons/receipt-text";
   import Server from "@lucide/svelte/icons/server";
-  import Zap from "@lucide/svelte/icons/zap";
   import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
   import { resolve } from "$app/paths";
@@ -64,26 +64,26 @@
 
   const whyFeatures = [
     {
-      description:
-        "Fast storage, fast compute, fast networking, fast everything",
-      icon: Zap,
-      title: "Fast by default",
+      description: actuallyOpenDescription,
+      icon: DoorOpen,
+      title: "Actually open",
     },
     {
       description:
-        "Built on infrastructure we own, we don't resell another provider",
+        "Built on infrastructure we own, we don't resell another provider's compute",
       icon: Server,
       title: "Independent",
     },
     {
-      description: "By the engineers that actually maintain the servers",
+      description: "As easy as running into a coworker",
       icon: LifeBuoy,
       title: "Real support",
     },
     {
-      description: "No hidden fees, no egress charges, no surprise bills",
+      description:
+        "No hidden fees, no egress charges, no surprise bills. No calc needed",
       icon: ReceiptText,
-      title: "Honest pricing",
+      title: "Predictable pricing",
     },
   ];
 
@@ -143,6 +143,24 @@
     name="description"
   >
 </svelte:head>
+
+{#snippet featureLink(
+  href: string,
+  label: string
+)}
+  <a
+    class="text-foreground underline decoration-gray-600 underline-offset-4 transition-colors hover:decoration-foreground"
+    {href}
+    >{label}</a
+  >
+{/snippet}
+
+{#snippet actuallyOpenDescription()}
+  Our {@render featureLink("https://github.com/FyraStack", "code")},
+  {@render featureLink("https://discord.gg/YwzKxUBu4U", "community")}, and
+  {@render featureLink(resolve("/about"), "team")}
+  is open
+{/snippet}
 
 <main>
   <!-- Hero -->
@@ -280,7 +298,11 @@
               {feature.title}
             </h3>
             <p class="text-base/[26px] text-muted-foreground">
-              {feature.description}
+              {#if typeof feature.description === "string"}
+                {feature.description}
+              {:else}
+                {@render feature.description()}
+              {/if}
             </p>
           </div>
         {/each}
