@@ -166,12 +166,8 @@
           <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
         </a>
         <p class="max-w-80 text-sm/[22px] text-muted-foreground">
-          Stack is provided by Fyra Labs, the open-source community that
-          develops Terra and Ultramarine Linux.
+            Built from the ground up to support the open-source projects we love, and the communities around them
         </p>
-        <address class="text-sm text-muted-foreground not-italic">
-          5206 N Damen Ave, Chicago, IL 60625
-        </address>
       </div>
       <nav
         aria-label="Footer"

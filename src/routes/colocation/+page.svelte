@@ -53,8 +53,8 @@
       note: `${startingTier.units}U with ${startingTier.watts}W`,
       value: `From $${startingTier.price}/mo`,
     },
-    { note: "Port included on every tier", value: "1 Gbps" },
-    { note: "Our own network in Chicago", value: "AS402292" },
+    { note: "Port included", value: "1 Gbps" },
+    { note: "Our network", value: "[AS402292]" },
   ];
 
   const included = [
@@ -106,12 +106,12 @@
         <h1
           class="text-5xl/[1.05] font-semibold tracking-[-0.03em] sm:text-7xl/[1.03] lg:text-[80px]/[82px]"
         >
-          Ship your hardware,<br>
-          we'll handle the rest
+          Ship your hardware<br>
+          We handle the rest
         </h1>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          Colocation without the enterprise markup, mandatory contracts, or fees
-          for asking questions.
+          Colocation without the enterprise markup or fees
+          for asking questions
         </p>
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <Button
@@ -120,7 +120,7 @@
             size="lg"
             variant="accent"
           >
-            Start a colocation inquiry <ArrowRight data-icon="inline-end" />
+            Ship us your server <ArrowRight data-icon="inline-end" />
           </Button>
           <Button
             class="h-auto px-4 py-2.5 text-muted-foreground"
@@ -162,11 +162,10 @@
           <h2
             class="text-4xl/[1.15] font-semibold tracking-[-0.02em] lg:text-[40px]/[46px]"
           >
-            A rack you can count on
+            Your server in good hands
           </h2>
           <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-            Your hardware sits in our Chicago facility, on our network, looked
-            after by the same small team that runs Stack.
+              Located in CoreSite CH2, a premier data center, give your server a home you can rely on
           </p>
         </div>
         <ul>
@@ -274,7 +273,7 @@
             size="lg"
             variant="accent"
           >
-            Start a colocation inquiry
+            Ship us your server
           </Button>
         </aside>
       </div>

@@ -32,6 +32,7 @@
   } from "$lib/components/landing/plans";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
   import { Button } from "$lib/components/ui/button";
+    import { DoorOpen } from "@lucide/svelte";
 
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
@@ -58,25 +59,25 @@
   const whyFeatures = [
     {
       description:
-        "Fast storage, fast compute, fast networking, fast everything",
-      icon: Zap,
-      title: "Fast by default",
+        "Our [code], [community], and [team] is open",
+      icon: DoorOpen,
+      title: "Actually open",
     },
     {
       description:
-        "Built on infrastructure we own, we don't resell another provider",
+        "Built on infrastructure we own, we don't resell another provider's compute",
       icon: Server,
-      title: "Independent",
+      title: "Our metal",
     },
     {
-      description: "By the engineers that actually maintain the servers",
+      description: "As easy as running into a coworker",
       icon: LifeBuoy,
       title: "Real support",
     },
     {
-      description: "No hidden fees, no egress charges, no surprise bills",
+      description: "No hidden fees, no egress charges, no surprise bills. No calc needed",
       icon: ReceiptText,
-      title: "Honest pricing",
+      title: "Predictable pricing",
     },
   ];
 
@@ -87,9 +88,9 @@
       title: "Intel Cascade Lake",
     },
     {
-      description: "Rated for datacenter write loads",
+      description: "Rated for data center write loads",
       icon: HardDrive,
-      title: "Enterprise SAS3 SSD",
+      title: "Enterprise SAS3 SSDs",
     },
     {
       description: "On every server",
@@ -107,7 +108,7 @@
     "Cascade Lake vCPUs",
     "Dedicated IPv4 + /64 IPv6",
     "Full root access",
-    "Out-of-band serial console",
+    // "Out-of-band serial console",
     "Cancel anytime",
   ];
 
@@ -229,17 +230,16 @@
         <h2
           class="shrink-0 text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
         >
-          Stack is different
+          Why Stack?
         </h2>
         <div class="flex max-w-125 flex-col gap-3.5">
           <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
-            Stack is provided by Fyra Labs, the open source community that
-            develops Terra and Ultramarine Linux.
+            Stack is built by Fyra Labs, the team that
+            develops Terra and Ultramarine.
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
-            Everything we do is open source, and you can view and contribute to
-            the very code that powers your server. We focus on servers that just
-            work, built to support and use the open source projects you love.
+            We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
+            So we're making it better so you don't suffer too.
           </p>
         </div>
       </div>
@@ -275,14 +275,15 @@
             <p
               class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty"
             >
-              Most budget providers cut corners on hardware to hit their price
+              Other VPS providers cut corners to hit their price
               points. We don't.
             </p>
             <p class="text-base/[26px] text-pretty text-muted-foreground">
-              Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and
-              enterprise SSDs. We buy good hardware, run it efficiently, run a
-              small focused team, don't oversell, and charge a fair price. It's
-              boring, and it works!
+              We run a lean team,
+              buy solid hardware,
+              obsess over developer experience,
+              listen to our community,
+              and build a product we actually (love to) use.
             </p>
           </div>
           <Button
@@ -294,10 +295,6 @@
             See VPS plans
           </Button>
         </div>
-      </div>
-
-      <div class="hidden overflow-x-clip md:block">
-        <CreateServerMockup />
       </div>
 
       <ul class="grid gap-8 sm:grid-cols-2 lg:flex lg:justify-between">
@@ -313,6 +310,10 @@
           </li>
         {/each}
       </ul>
+
+      <div class="hidden overflow-x-clip md:block">
+        <CreateServerMockup />
+      </div>
     </div>
   </section>
 
@@ -327,10 +328,10 @@
             <h2
               class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
             >
-              Ship your hardware<br>We'll handle the rest
+              Ship your hardware<br>We handle the rest
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-              Colocation without the enterprise markup, mandatory contracts, or
+              Colocation without the enterprise markup or
               fees for asking questions
             </p>
           </div>
@@ -357,7 +358,7 @@
               size="lg"
               variant="accent"
             >
-              Start a colocation inquiry
+              Ship us your server
             </Button>
             <Button
               class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
@@ -403,7 +404,7 @@
             Priced fairly
           </h2>
           <p class="text-[17px]/[27px] text-muted-foreground">
-            Simple, flat-rate plans with no surprise fees
+            Simple plans with no surprise fees
           </p>
         </div>
         <Button
@@ -635,7 +636,7 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-          Your first server is five dollars away.
+          Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
           BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
@@ -649,7 +650,7 @@
           size="lg"
           variant="accent"
         >
-          Create an account <ArrowRight data-icon="inline-end" />
+          Deploy your Server <ArrowRight data-icon="inline-end" />
         </Button>
         <Button
           class="h-auto px-4 py-2.5 text-muted-foreground"

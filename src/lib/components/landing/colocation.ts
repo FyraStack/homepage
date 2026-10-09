@@ -20,7 +20,7 @@ export const colocationFeatures = [
   {
     description: "Providing low-latency access to the entire US on our network",
     icon: Globe,
-    title: "Midwest proud",
+    title: "Close to your users",
   },
   {
     description: "No hidden power fees, no egress charges, no surprise bills",
