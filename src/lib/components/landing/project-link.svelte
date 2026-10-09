@@ -21,15 +21,15 @@
 
 <LinkPreview.Root closeDelay={100} openDelay={300}>
   <LinkPreview.Trigger
-    class="inline-flex items-center gap-1.5 px-1.5 whitespace-nowrap text-white transition-[filter] hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+    class="whitespace-nowrap underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     {href}
     rel="noopener"
-    style="background-color: {color}"
+    style="color: {color}"
     target="_blank"
   >
     <img
       alt=""
-      class="size-[0.9em] shrink-0 drop-shadow-[0_1px_1px_rgb(0_0_0/0.25)]"
+      class="inline-block size-[0.9em] -translate-y-px align-middle drop-shadow-[0_1px_1px_rgb(0_0_0/0.25)]"
       height="16"
       src={logo}
       width="16"

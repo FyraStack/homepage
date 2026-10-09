@@ -242,14 +242,14 @@
           <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
             Stack is built by
             <ProjectLink
-              color="var(--primary)"
+              color="var(--accent)"
               href="https://fyralabs.com"
               logo={fyraLabsLogo}
               preview={fyraLabsPreview}
               >Fyra Labs</ProjectLink
             >, the team that builds
             <ProjectLink
-              color="#1f6fe0"
+              color="#3388ff"
               href="https://terrapkg.com"
               logo={terraLogo}
               preview={terraPreview}
@@ -257,7 +257,7 @@
             >
             and
             <ProjectLink
-              color="rgb(38, 48, 150)"
+              color="#7c85ec"
               href="https://ultramarine-linux.org"
               logo={ultramarineLogo}
               preview={ultramarinePreview}
