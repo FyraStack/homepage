@@ -640,7 +640,6 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-            <!-- thoughts on changing "is" to a comma and "just" here? -Cypress -->
           Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
