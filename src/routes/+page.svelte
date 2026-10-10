@@ -284,7 +284,7 @@
               buy solid hardware,
               obsess over developer experience,
               listen to our community,
-              and build a product we actually (love to) use.
+              and build a product we actually love to use.
             </p>
           </div>
           <Button
