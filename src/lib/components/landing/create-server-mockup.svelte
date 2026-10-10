@@ -20,6 +20,7 @@
   import StackMark from "./stack-mark.svelte";
 
   const images = [
+    // is there any chance we can put UM servere here as a placeholder? -Cypress
     {
       description:
         "Community-driven Linux server with the latest packages, upstream of RHEL.",
