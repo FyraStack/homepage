@@ -333,7 +333,7 @@
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
               Colocation without the enterprise markup or
-              fees for asking questions
+              fees just for asking questions
             </p>
           </div>
           <ul>
