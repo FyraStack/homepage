@@ -284,7 +284,6 @@
               buy solid hardware,
               obsess over developer experience,
               listen to our community,
-              <!-- i'm curious why y'all have "love to" in parentheses -Cypress -->
               and build a product we actually (love to) use.
             </p>
           </div>
