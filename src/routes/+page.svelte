@@ -58,8 +58,9 @@
 
   const whyFeatures = [
     {
+      // plural so imo this should be "are" instead of "is" -Cypress
       description:
-        "Our [code], [community], and [team] is open",
+        "Our [code], [community], and [team] are open",
       icon: DoorOpen,
       title: "Actually open",
     },
@@ -239,7 +240,8 @@
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
             We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
-            So we're making it better so you don't suffer too.
+            <!-- this should either not have "So" or should have a comma" -Cypress -->
+            We're making it better so you don't suffer too.
           </p>
         </div>
       </div>
@@ -283,6 +285,7 @@
               buy solid hardware,
               obsess over developer experience,
               listen to our community,
+              <!-- i'm curious why y'all have "love to" in parentheses -Cypress -->
               and build a product we actually (love to) use.
             </p>
           </div>
@@ -331,6 +334,7 @@
               Ship your hardware<br>We handle the rest
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
+            <!-- i think "without" could do with being italicized, or we could add "just" before "for asking questions" -Cypress -->
               Colocation without the enterprise markup or
               fees for asking questions
             </p>
@@ -574,6 +578,7 @@
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
+            <!-- imo this sounds vaguely slop, but i don't know how else to word it -Cypress -->
             Priced per rack unit, with power and a 1 Gbps port included.
           </p>
           <a
@@ -636,11 +641,12 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
+            <!-- thoughts on changing "is" to a comma and "just" here? -Cypress -->
           Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
-          can resize whenever you outgrow it.
+          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD.
+          Resize whenever you outgrow it.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
