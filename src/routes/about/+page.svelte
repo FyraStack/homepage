@@ -180,7 +180,8 @@
             We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
         </p>
         <p>
-          So we built Stack. Open software, transparent pricing,
+          <!-- needs a comma -Cypress -->
+          So, we built Stack. Open software, transparent pricing,
           and a team who cares as much as you. We charge you for what you use.
           We don't sell your data or lock you in.
         </p>
@@ -457,6 +458,7 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
+          <!-- see what i said in the footer for index -Cypress -->
           Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
