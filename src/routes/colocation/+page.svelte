@@ -165,7 +165,6 @@
             Your server in good hands
           </h2>
           <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-              <!-- separate sentence so it needs a semicolon imo -Cypress -->
               Located in CoreSite CH2, a premier data center; give your server a home you can rely on
           </p>
         </div>
