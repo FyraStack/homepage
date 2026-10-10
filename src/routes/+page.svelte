@@ -239,7 +239,7 @@
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
             We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
-            We're making it better so you don't suffer too.
+            We're making it better, so you don't suffer too.
           </p>
         </div>
       </div>
