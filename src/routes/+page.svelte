@@ -332,7 +332,6 @@
               Ship your hardware<br>We handle the rest
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-            <!-- i think "without" could do with being italicized, or we could add "just" before "for asking questions" -Cypress -->
               Colocation without the enterprise markup or
               fees for asking questions
             </p>
