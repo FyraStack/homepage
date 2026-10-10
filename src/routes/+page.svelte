@@ -576,7 +576,7 @@
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
-            Priced per rack unit, with power and a 1 Gbps port included.
+            Priced per unit, with power and a 1 Gbps port included.
           </p>
           <a
             class="mt-1 inline-flex items-center gap-1.5 self-start text-sm font-medium transition-colors hover:text-gray-300"
