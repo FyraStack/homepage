@@ -58,7 +58,6 @@
 
   const whyFeatures = [
     {
-      // plural so imo this should be "are" instead of "is" -Cypress
       description:
         "Our [code], [community], and [team] are open",
       icon: DoorOpen,
