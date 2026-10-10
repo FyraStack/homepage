@@ -180,7 +180,7 @@
             We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
         </p>
         <p>
-          So we built Stack. Open software, transparent pricing,
+          So, we built Stack. Open software, transparent pricing,
           and a team who cares as much as you. We charge you for what you use.
           We don't sell your data or lock you in.
         </p>

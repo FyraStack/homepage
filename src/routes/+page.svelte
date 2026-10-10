@@ -59,7 +59,7 @@
   const whyFeatures = [
     {
       description:
-        "Our [code], [community], and [team] is open",
+        "Our [code], [community], and [team] are open",
       icon: DoorOpen,
       title: "Actually open",
     },
@@ -239,7 +239,7 @@
           </p>
           <p class="text-base/[26px] text-pretty text-muted-foreground">
             We spent years scaling infrastructure to support open-source, reaching millions of unique clients every month, quickly discovering: hosting sucks.
-            So we're making it better so you don't suffer too.
+            We're making it better, so you don't suffer too.
           </p>
         </div>
       </div>
@@ -283,7 +283,7 @@
               buy solid hardware,
               obsess over developer experience,
               listen to our community,
-              and build a product we actually (love to) use.
+              and build a product we actually love to use.
             </p>
           </div>
           <Button
@@ -332,7 +332,7 @@
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
               Colocation without the enterprise markup or
-              fees for asking questions
+              fees just for asking questions
             </p>
           </div>
           <ul>
@@ -574,7 +574,7 @@
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
-            Priced per rack unit, with power and a 1 Gbps port included.
+            Priced per unit, with power and a 1 Gbps port included.
           </p>
           <a
             class="mt-1 inline-flex items-center gap-1.5 self-start text-sm font-medium transition-colors hover:text-gray-300"
@@ -639,8 +639,8 @@
           Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
-          can resize whenever you outgrow it.
+          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD.
+          Resize whenever you outgrow it.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
