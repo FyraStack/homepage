@@ -576,7 +576,6 @@
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
-            <!-- imo this sounds vaguely slop, but i don't know how else to word it -Cypress -->
             Priced per rack unit, with power and a 1 Gbps port included.
           </p>
           <a
