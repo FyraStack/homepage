@@ -10,11 +10,11 @@
   import Search from "@lucide/svelte/icons/search";
   import Server from "@lucide/svelte/icons/server";
   import Settings from "@lucide/svelte/icons/settings";
-  import almalinux from "$lib/assets/os/almalinux.png";
-  import debian from "$lib/assets/os/debian.png";
-  import fedora from "$lib/assets/os/fedora.png";
-  import opensuse from "$lib/assets/os/opensuse.png";
-  import ubuntu from "$lib/assets/os/ubuntu.png";
+  import almalinux from "$lib/assets/os/almalinux.webp";
+  import debian from "$lib/assets/os/debian.webp";
+  import fedora from "$lib/assets/os/fedora.webp";
+  import opensuse from "$lib/assets/os/opensuse.webp";
+  import ubuntu from "$lib/assets/os/ubuntu.webp";
   import { mockServers, serverMeta } from "./mock-servers";
   import { plans } from "./plans";
   import StackMark from "./stack-mark.svelte";

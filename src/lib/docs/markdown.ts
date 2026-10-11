@@ -1,7 +1,12 @@
 import { readFile } from "node:fs/promises";
 import GithubSlugger from "github-slugger";
 import { compile, mdsvex } from "mdsvex";
-import { bundledLanguages, createHighlighter } from "shiki";
+import {
+  type BundledLanguage,
+  bundledLanguages,
+  createHighlighter,
+  type Highlighter,
+} from "shiki";
 import type { Plugin } from "vite";
 
 interface HtmlNode {
@@ -25,16 +30,36 @@ const languageLabels: Record<string, string> = {
   text: "Text",
 };
 
-const highlighter = await createHighlighter({
-  langs: Object.keys(bundledLanguages),
-  themes: [fyraStackCodeTheme],
-});
+let highlighterPromise: Promise<Highlighter> | undefined;
+
+const getHighlighter = () => {
+  highlighterPromise ??= createHighlighter({
+    langs: [],
+    themes: [fyraStackCodeTheme],
+  });
+  return highlighterPromise;
+};
+
+const isBundledLanguage = (lang?: string | null): lang is BundledLanguage =>
+  Boolean(lang && lang in bundledLanguages);
+
+async function highlighterFor(language: BundledLanguage | "text") {
+  const highlighter = await getHighlighter();
+  if (
+    language !== "text" &&
+    !highlighter.getLoadedLanguages().includes(language)
+  ) {
+    await highlighter.loadLanguage(language);
+  }
+  return highlighter;
+}
 
 const escapeSvelte = (html: string) =>
   html.replaceAll("{", "&#123;").replaceAll("}", "&#125;");
 
-function highlightCode(code: string, lang?: string | null) {
-  const language = lang && lang in bundledLanguages ? lang : "text";
+async function highlightCode(code: string, lang?: string | null) {
+  const language = isBundledLanguage(lang) ? lang : "text";
+  const highlighter = await highlighterFor(language);
   const html = highlighter
     .codeToHtml(code, { lang: language, theme: codeThemeName })
     .replace(' tabindex="0"', "");

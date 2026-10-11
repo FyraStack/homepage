@@ -16,8 +16,8 @@
   import { replaceState } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import ctaDither from "$lib/assets/cta-dither.png";
-  import heroDither from "$lib/assets/hero-dither.png";
+  import ctaDither from "$lib/assets/cta-dither.webp";
+  import heroDither from "$lib/assets/hero-dither.webp";
   import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
   import fyraLabsPreview from "$lib/assets/projects/fyralabs-preview.webp";
   import terraLogo from "$lib/assets/projects/terra.svg";
