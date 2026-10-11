@@ -360,8 +360,8 @@
         <h2
           class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
         >
-          We run the servers<br>
-          <span class="text-muted-foreground">You run your stack</span>
+          Easy to deploy<br>
+          <span class="text-muted-foreground">Hard to outgrow</span>
         </h2>
         <div class="flex max-w-125 flex-col gap-6">
           <div class="flex flex-col gap-3.5">
