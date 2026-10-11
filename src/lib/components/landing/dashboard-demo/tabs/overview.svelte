@@ -135,7 +135,7 @@
   }
 </script>
 
-<h1 class="sr-only">Server Overview</h1>
+<h2 class="sr-only">Server Overview</h2>
 
 <div
   class="grid shrink-0 grid-cols-2 gap-px border-b border-border bg-muted @min-[64rem]:grid-cols-4"

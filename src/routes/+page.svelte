@@ -30,6 +30,7 @@
   import { Button } from "$lib/components/ui/button";
   import * as RadioGroup from "$lib/components/ui/radio-group";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import { homeJsonLd } from "$lib/structured-data";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Check from "~icons/nucleo/check";
   import CornerLeftUp from "~icons/nucleo/corner-left-up";
@@ -177,6 +178,7 @@
     content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
     property="og:description"
   >
+  {@html homeJsonLd}
 </svelte:head>
 
 {#snippet actuallyOpenDescription()}

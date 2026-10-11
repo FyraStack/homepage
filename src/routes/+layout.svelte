@@ -8,6 +8,7 @@
   import favicon from "$lib/assets/favicon.svg";
   import StackMark from "$lib/components/landing/stack-mark.svelte";
   import { Button } from "$lib/components/ui/button";
+  import { absoluteUrl, siteName, socialLinks } from "$lib/site";
   import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Menu from "~icons/nucleo/menu";
@@ -32,6 +33,11 @@
     { href: resolve("/about"), label: "About", path: "/about" },
     { href: resolve("/docs"), label: "Docs", path: "/docs" },
   ] as const;
+
+  const canonicalUrl = $derived(absoluteUrl(page.url.pathname));
+  const ogImagePngUrl = absoluteUrl("/og-image.png");
+  const ogImageWebpUrl = absoluteUrl("/og-image.webp");
+  const ogImageAlt = "Fyra Stack: We run the servers, you run your stack";
 
   const isLinkCurrent = (path: string | null) =>
     path !== null && isCurrent(path);
@@ -60,9 +66,23 @@
 </script>
 
 <svelte:head>
-  <link href={favicon} rel="icon">
-  <meta content="Fyra Stack" property="og:site_name">
+  <link href={favicon} rel="icon" type="image/svg+xml">
+  <link href="/favicon.ico" rel="icon" sizes="48x48">
+  <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/manifest.webmanifest" rel="manifest">
+  <link href={canonicalUrl} rel="canonical">
+  <meta content={siteName} property="og:site_name">
   <meta content="website" property="og:type">
+  <meta content={canonicalUrl} property="og:url">
+  <meta content={ogImagePngUrl} property="og:image">
+  <meta content="image/png" property="og:image:type">
+  <meta content="1200" property="og:image:width">
+  <meta content="630" property="og:image:height">
+  <meta content={ogImageAlt} property="og:image:alt">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content={ogImageWebpUrl} name="twitter:image">
+  <meta content={ogImageAlt} name="twitter:image:alt">
+  <meta content="@fyrastack" name="twitter:site">
   <link
     as="font"
     crossorigin="anonymous"
@@ -193,7 +213,6 @@
         {#snippet productLinks()}
           <li><a href="{resolve("/")}#vps">VPS</a></li>
           <li><a href="{resolve("/")}#colocation">Colocation</a></li>
-          <li><a href="https://status.fyrastack.com">Status</a></li>
         {/snippet}
         {@render column("Product", productLinks)}
         {#snippet resourcesLinks()}
@@ -203,11 +222,11 @@
         {/snippet}
         {@render column("Resources", resourcesLinks)}
         {#snippet communityLinks()}
-          <li><a href="https://discord.gg/YwzKxUBu4U">Discord</a></li>
-          <li><a href="https://github.com/FyraStack">GitHub</a></li>
-          <li><a href="https://x.com/fyrastack">Twitter</a></li>
-          <li><a href="https://bsky.app/profile/fyrastack.com">Bluesky</a></li>
-          <li><a href="https://fedi.fyralabs.com/@stack">Fediverse</a></li>
+          <li><a href={socialLinks.discord}>Discord</a></li>
+          <li><a href={socialLinks.github}>GitHub</a></li>
+          <li><a href={socialLinks.x}>Twitter</a></li>
+          <li><a href={socialLinks.bluesky}>Bluesky</a></li>
+          <li><a href={socialLinks.fediverse}>Fediverse</a></li>
         {/snippet}
         {@render column("Community", communityLinks)}
       </nav>
