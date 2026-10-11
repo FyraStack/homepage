@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right";
   import { resolve } from "$app/paths";
+  import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let { data } = $props();
 
@@ -26,7 +26,7 @@
     <span class="text-foreground">{section.title}</span>
   </nav>
   <div class="mt-6 flex max-w-180 flex-col gap-4">
-    <section.icon class="size-6" strokeWidth={1.5} />
+    <section.icon class="size-6" />
     <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
       {section.title}
     </h1>

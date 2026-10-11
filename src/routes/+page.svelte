@@ -1,16 +1,4 @@
 <script lang="ts">
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import Check from "@lucide/svelte/icons/check";
-  import CornerLeftUp from "@lucide/svelte/icons/corner-left-up";
-  import CornerRightUp from "@lucide/svelte/icons/corner-right-up";
-  import Cpu from "@lucide/svelte/icons/cpu";
-  import DoorOpen from "@lucide/svelte/icons/door-open";
-  import Gauge from "@lucide/svelte/icons/gauge";
-  import HardDrive from "@lucide/svelte/icons/hard-drive";
-  import LifeBuoy from "@lucide/svelte/icons/life-buoy";
-  import Network from "@lucide/svelte/icons/network";
-  import ReceiptText from "@lucide/svelte/icons/receipt-text";
-  import Server from "@lucide/svelte/icons/server";
   import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
   import { replaceState } from "$app/navigation";
@@ -26,7 +14,6 @@
   import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
   import { colocationFeatures } from "$lib/components/landing/colocation";
   import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
-  import ColocationRack from "$lib/components/landing/colocation-rack.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
   import DashboardDemo from "$lib/components/landing/dashboard-demo/dashboard-demo.svelte";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
@@ -43,6 +30,18 @@
   import { Button } from "$lib/components/ui/button";
   import * as RadioGroup from "$lib/components/ui/radio-group";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import Check from "~icons/nucleo/check";
+  import CornerLeftUp from "~icons/nucleo/corner-left-up";
+  import CornerRightUp from "~icons/nucleo/corner-right-up";
+  import Cpu from "~icons/nucleo/cpu";
+  import DoorOpen from "~icons/nucleo/door-open";
+  import Gauge from "~icons/nucleo/gauge";
+  import HardDrive from "~icons/nucleo/hard-drive";
+  import LifeBuoy from "~icons/nucleo/life-ring";
+  import Network from "~icons/nucleo/network";
+  import ReceiptText from "~icons/nucleo/receipt";
+  import Server from "~icons/nucleo/server";
 
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
@@ -337,7 +336,7 @@
       <div class="grid gap-x-16 md:grid-cols-2">
         {#each whyFeatures as feature (feature.title)}
           <div class="flex flex-col gap-3 border-t border-border pt-6 pb-10">
-            <feature.icon class="size-5 text-foreground" strokeWidth={1.75} />
+            <feature.icon class="size-5 text-foreground" />
             <h3 class="text-lg font-semibold tracking-[-0.011em]">
               {feature.title}
             </h3>
@@ -392,7 +391,7 @@
       <ul class="grid gap-8 sm:grid-cols-2 lg:flex lg:justify-between">
         {#each vpsSpecs as spec (spec.title)}
           <li class="flex gap-3">
-            <spec.icon class="mt-0.5 size-4.5 shrink-0" strokeWidth={1.75} />
+            <spec.icon class="mt-0.5 size-4.5 shrink-0" />
             <div class="flex flex-col gap-1">
               <span class="text-[15px] font-medium">{spec.title}</span>
               <span class="text-sm text-muted-foreground"
@@ -404,9 +403,9 @@
       </ul>
 
       <div
-        bind:clientWidth={mockupFrameWidth}
         class="relative hidden [clip-path:inset(-64px_0_0_0)] md:block"
         style:height="{mockupFrameHeight * mockupScale}px"
+        bind:clientWidth={mockupFrameWidth}
       >
         <div style:zoom={mockupScale}>
           <CreateServerMockup />
@@ -418,53 +417,46 @@
     </div>
   </section>
 
-  <!-- Colocation: rack illustration and features -->
+  <!-- Colocation: features -->
   <section class="border-b border-border py-20 lg:py-30" id="colocation">
-    <div class="page-container flex flex-col gap-24">
-      <div class="flex flex-col items-center gap-16 lg:flex-row lg:gap-24">
-        <ColocationRack />
-
-        <div class="flex flex-1 flex-col gap-12">
-          <div class="flex flex-col gap-5">
-            <h2
-              class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
-            >
-              Ship your hardware<br>We handle the rest
-            </h2>
-            <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-              Colocation without the enterprise markup or fees just for asking
-              questions
-            </p>
-          </div>
-          <ul>
-            {#each colocationFeatures as feature (feature.title)}
-              <li class="flex gap-4 border-t border-border py-5">
-                <feature.icon
-                  class="mt-0.5 size-4.5 shrink-0"
-                  strokeWidth={1.75}
-                />
-                <div class="flex flex-col gap-1">
-                  <span class="text-[15px] font-semibold">{feature.title}</span>
-                  <span class="text-sm/[21px] text-muted-foreground"
-                    >{feature.description}</span
-                  >
-                </div>
-              </li>
-            {/each}
-          </ul>
-          <div class="flex flex-wrap items-center gap-3">
-            <Button
-              class="h-auto px-4 py-2.5"
-              id="colocation-inquiry"
-              onclick={openColocationInquiry}
-              size="lg"
-              variant="accent"
-            >
-              Ship us your server
-            </Button>
-          </div>
+    <div class="page-container flex flex-col items-center gap-16">
+      <div class="flex flex-col items-center gap-8 text-center">
+        <div class="flex flex-col items-center gap-5">
+          <h2
+            class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
+          >
+            Ship your hardware<br>We handle the rest
+          </h2>
+          <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
+            Colocation without the enterprise markup or fees just for asking
+            questions
+          </p>
         </div>
+        <Button
+          class="h-auto px-4 py-2.5"
+          id="colocation-inquiry"
+          onclick={openColocationInquiry}
+          size="lg"
+          variant="accent"
+        >
+          Ship us your server
+        </Button>
       </div>
+      <ul
+        class="grid w-full gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {#each colocationFeatures as feature (feature.title)}
+          <li class="flex flex-col gap-4 bg-background p-6">
+            <feature.icon class="size-5 text-foreground" />
+            <div class="flex flex-col gap-1.5">
+              <span class="text-[15px] font-semibold">{feature.title}</span>
+              <span class="text-sm/[21px] text-pretty text-muted-foreground"
+                >{feature.description}</span
+              >
+            </div>
+          </li>
+        {/each}
+      </ul>
     </div>
   </section>
 
@@ -623,7 +615,7 @@
             <ul class="flex flex-col gap-3">
               {#each included as item (item)}
                 <li class="flex items-center gap-2.5 text-sm/5">
-                  <Check class="size-4 shrink-0" strokeWidth={1.75} />
+                  <Check class="size-4 shrink-0" />
                   {item}
                 </li>
               {/each}

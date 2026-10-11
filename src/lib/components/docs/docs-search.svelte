@@ -56,13 +56,13 @@
 </script>
 
 <script lang="ts">
-  import Search from "@lucide/svelte/icons/search";
   import { Command as CommandPrimitive } from "bits-ui";
   import { resolve } from "$app/paths";
   import * as Command from "$lib/components/ui/command";
   import * as Dialog from "$lib/components/ui/dialog";
   import * as InputGroup from "$lib/components/ui/input-group";
   import { cn } from "$lib/utils";
+  import Search from "~icons/nucleo/search";
 
   let {
     shortcut = true,
@@ -130,7 +130,7 @@
   }}
   type="button"
 >
-  <Search class="size-4 shrink-0" strokeWidth={1.75} />
+  <Search class="size-4 shrink-0" />
   <span class="flex-1 truncate">Search docs...</span>
   <kbd
     class="hidden border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] sm:inline"
@@ -149,7 +149,7 @@
         class="h-13 rounded-none border-0 bg-transparent px-1.5 has-[[data-slot=input-group-control]:focus-visible]:ring-0 dark:bg-transparent"
       >
         <InputGroup.Addon>
-          <Search class="size-4" strokeWidth={1.75} />
+          <Search class="size-4" />
         </InputGroup.Addon>
         <CommandPrimitive.Input bind:value={query}>
           {#snippet child({

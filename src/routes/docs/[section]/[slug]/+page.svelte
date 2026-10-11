@@ -1,7 +1,4 @@
 <script lang="ts">
-  import ArrowLeft from "@lucide/svelte/icons/arrow-left";
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import ChevronDown from "@lucide/svelte/icons/chevron-down";
   import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
@@ -10,6 +7,9 @@
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { proseClass } from "$lib/docs/prose";
   import { cn } from "$lib/utils";
+  import ArrowLeft from "~icons/nucleo/arrow-left";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import ChevronDown from "~icons/nucleo/chevron-down";
 
   let { data } = $props();
 

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right";
-  import Copy from "@lucide/svelte/icons/copy";
-  import LifeBuoy from "@lucide/svelte/icons/life-buoy";
-  import Package from "@lucide/svelte/icons/package";
-  import Server from "@lucide/svelte/icons/server";
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
   import { Button } from "$lib/components/ui/button";
   import { docSections } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { cn } from "$lib/utils";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import ArrowUpRight from "~icons/nucleo/arrow-up-right";
+  import Package from "~icons/nucleo/box";
+  import Copy from "~icons/nucleo/copy";
+  import LifeBuoy from "~icons/nucleo/life-ring";
+  import Server from "~icons/nucleo/server";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
@@ -107,7 +107,7 @@
                 <span
                   class="grid size-9 shrink-0 place-items-center border border-border"
                 >
-                  <item.icon class="size-4" strokeWidth={1.75} />
+                  <item.icon class="size-4" />
                 </span>
                 <span class="flex flex-1 flex-col gap-0.5">
                   <span class="text-[15px] font-medium">{item.title}</span>
@@ -146,7 +146,7 @@
               class="group flex flex-col gap-3"
               href={resolve("/docs/[section]", { section: section.id })}
             >
-              <section.icon class="size-5" strokeWidth={1.5} />
+              <section.icon class="size-5" />
               <h3
                 class="text-xl font-semibold tracking-[-0.015em] group-hover:text-gray-300"
               >
@@ -276,11 +276,7 @@
               data-copy-source={shippingAddress}
             >
               <div class="flex flex-col gap-3">
-                <span
-                  class="text-sm text-muted-foreground"
-                >
-                  Ship to
-                </span>
+                <span class="text-sm text-muted-foreground"> Ship to </span>
                 <address
                   class="font-mono text-sm/[21px] whitespace-pre-line not-italic"
                 >

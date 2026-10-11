@@ -1,9 +1,6 @@
 <script lang="ts">
   import "./layout.css";
   import jetbrainsMonoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import Menu from "@lucide/svelte/icons/menu";
-  import X from "@lucide/svelte/icons/x";
   import { onMount, type Snippet } from "svelte";
   import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
@@ -12,6 +9,9 @@
   import StackMark from "$lib/components/landing/stack-mark.svelte";
   import { Button } from "$lib/components/ui/button";
   import { cn } from "$lib/utils";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import Menu from "~icons/nucleo/menu";
+  import X from "~icons/nucleo/xmark";
 
   let { children } = $props();
 

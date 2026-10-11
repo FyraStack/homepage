@@ -1,7 +1,7 @@
-import Cpu from "@lucide/svelte/icons/cpu";
-import Globe from "@lucide/svelte/icons/globe";
-import PlugZap from "@lucide/svelte/icons/plug-zap";
-import ReceiptText from "@lucide/svelte/icons/receipt-text";
+import Cpu from "~icons/nucleo/cpu";
+import Globe from "~icons/nucleo/globe";
+import PlugZap from "~icons/nucleo/plug";
+import ReceiptText from "~icons/nucleo/receipt";
 
 export const colocationFeatures = [
   {

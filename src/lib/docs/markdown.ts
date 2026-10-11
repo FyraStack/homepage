@@ -21,7 +21,7 @@ interface MarkdownFile {
   data: { fm?: Record<string, unknown> };
 }
 
-import { codeThemeName, fyraStackCodeTheme } from "./shiki-theme";
+import { codeThemeName, fyraStackCodeTheme } from "./shiki-theme.ts";
 
 const languageLabels: Record<string, string> = {
   bash: "Shell",

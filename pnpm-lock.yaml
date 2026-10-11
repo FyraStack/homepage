@@ -14,9 +14,6 @@ importers:
       '@kitlangton/rolling-number':
         specifier: ^0.4.1
         version: 0.4.1
-      '@lucide/svelte':
-        specifier: ^1.55.0
-        version: 1.55.0(svelte@5.57.1)
       bits-ui:
         specifier: ^2.19.3
         version: 2.19.3(@internationalized/date@3.12.4)(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@24.19.0)))(svelte@5.57.1)(typescript@6.0.3)(vite@8.3.1(@types/node@24.19.0)))(svelte@5.57.1)
@@ -46,8 +43,8 @@ importers:
         specifier: 2.5.15
         version: 2.5.15
       '@iconify-json/lucide':
-        specifier: ^1.2.137
-        version: 1.2.137
+        specifier: ^1.2.142
+        version: 1.2.142
       '@internationalized/date':
         specifier: ^3.12.4
         version: 3.12.4
@@ -417,8 +414,8 @@ packages:
   '@fontsource-variable/jetbrains-mono@5.3.0':
     resolution: {integrity: sha512-F32xpS2NsGYoQi2ADSkKTgpJj7ozajsGgDJ8woTnqjmIB+dxDIqImjl4pXZVEExu8UFZ2ndhmX18EBS/hdz3Lw==}
 
-  '@iconify-json/lucide@1.2.137':
-    resolution: {integrity: sha512-uKz1+tFbv1RFX/mJQNksdnyKJijNfRGSNnxfiyKtr+dLNfA3ERph+IgpXClKGOlV/5GsZwLv2jgJXQ/bjF/JAg==}
+  '@iconify-json/lucide@1.2.142':
+    resolution: {integrity: sha512-vEGX5X52/l77jRMcmxXk3PiEebldDUs8WFdM8X3Evq1S9p5F+o0VZhx8sqaQsmFEB9Ukp5ND5Q/0g2kQ/LF+rQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -620,11 +617,6 @@ packages:
         optional: true
       solid-js:
         optional: true
-
-  '@lucide/svelte@1.55.0':
-    resolution: {integrity: sha512-CTxJ3qbkDK2oCW1VJYKhqAUfOongRJqc9YWmJZn8E06QpCU7i5yAnUny4h/zMNy/iYpMtGiJDRSb6AVIornuXg==}
-    peerDependencies:
-      svelte: ^5
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2237,7 +2229,7 @@ snapshots:
 
   '@fontsource-variable/jetbrains-mono@5.3.0': {}
 
-  '@iconify-json/lucide@1.2.137':
+  '@iconify-json/lucide@1.2.142':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -2384,10 +2376,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.6.0
 
   '@kitlangton/rolling-number@0.4.1': {}
-
-  '@lucide/svelte@1.55.0(svelte@5.57.1)':
-    dependencies:
-      svelte: 5.57.1
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

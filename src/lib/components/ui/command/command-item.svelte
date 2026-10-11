@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Command as CommandPrimitive } from "bits-ui";
-	import CheckIcon from '@lucide/svelte/icons/check';
+	import CheckIcon from '~icons/nucleo/check';
 	import { cn } from "$lib/utils.js";
 
 	let {

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
   import { colocationTiers } from "$lib/components/landing/plans";
   import { Button } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog";
@@ -12,6 +11,7 @@
     contactLimits,
     submitContactMessage,
   } from "$lib/contact";
+  import ArrowRight from "~icons/nucleo/arrow-right";
 
   let {
     open = $bindable(false),

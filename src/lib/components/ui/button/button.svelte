@@ -55,7 +55,7 @@
 </script>
 
 <script lang="ts">
-  import Loader2 from "~icons/lucide/loader-2";
+  import Loader2 from "~icons/nucleo/loader";
 
   let {
     class: className,
