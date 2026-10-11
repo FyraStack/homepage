@@ -27,7 +27,7 @@
     if (ok && !canConfirm) {
       return;
     }
-    confirmController.resolve(ok);
+    confirmController.settleOnce(ok);
     confirmController.open = false;
   }
 
@@ -45,7 +45,6 @@
 <svelte:window onkeydown={onKeydown} />
 
 {#if confirmController.open}
-  <!-- z above bits-ui dialogs (z-50) so a confirm opened from another dialog sits on top -->
   <div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
     <button
       aria-label="Cancel"

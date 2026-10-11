@@ -25,9 +25,7 @@
       <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
         {metadata.title}
       </h1>
-      <p
-        class="text-sm text-muted-foreground"
-      >
+      <p class="text-sm text-muted-foreground">
         Last updated {metadata.updated}
       </p>
     </header>
