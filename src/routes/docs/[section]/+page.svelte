@@ -9,7 +9,9 @@
 
 <svelte:head>
   <title>{section.title} · Fyra Stack Docs</title>
+  <meta content={`${section.title} · Fyra Stack Docs`} property="og:title">
   <meta content={section.description} name="description">
+  <meta content={section.description} property="og:description">
 </svelte:head>
 
 <main class="page-container py-16 lg:py-24">

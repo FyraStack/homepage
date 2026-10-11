@@ -41,8 +41,10 @@
 
 <svelte:head>
   <title>{doc.title} · Fyra Stack Docs</title>
+  <meta content={`${doc.title} · Fyra Stack Docs`} property="og:title">
   {#if doc.description}
     <meta content={doc.description} name="description">
+    <meta content={doc.description} property="og:description">
   {/if}
 </svelte:head>
 

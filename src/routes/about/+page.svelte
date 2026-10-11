@@ -106,9 +106,14 @@
 
 <svelte:head>
   <title>About · Fyra Stack</title>
+  <meta content="About · Fyra Stack" property="og:title">
   <meta
     content="Fyra Stack is an open-source cloud in Chicago from the folks behind Fyra Labs. Meet the team that builds and runs it."
     name="description"
+  >
+  <meta
+    content="Fyra Stack is an open-source cloud in Chicago from the folks behind Fyra Labs. Meet the team that builds and runs it."
+    property="og:description"
   >
 </svelte:head>
 

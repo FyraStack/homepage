@@ -50,9 +50,14 @@
 
 <svelte:head>
   <title>Docs · Fyra Stack</title>
+  <meta content="Docs · Fyra Stack" property="og:title">
   <meta
     content="Guides, references, and answers for getting your Fyra Stack VPS or colocation slot up and running."
     name="description"
+  >
+  <meta
+    content="Guides, references, and answers for getting your Fyra Stack VPS or colocation slot up and running."
+    property="og:description"
   >
 </svelte:head>
 

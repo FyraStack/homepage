@@ -157,10 +157,15 @@
 </script>
 
 <svelte:head>
-  <title>Fyra Stack · Infrastructure without breaking the bank</title>
+  <title>Fyra Stack · We run the servers, you run your stack</title>
+  <meta content="Fyra Stack · We run the servers, you run your stack" property="og:title">
   <meta
     content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
     name="description"
+  >
+  <meta
+    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
+    property="og:description"
   >
 </svelte:head>
 

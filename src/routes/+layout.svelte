@@ -61,6 +61,8 @@
 
 <svelte:head>
   <link href={favicon} rel="icon">
+  <meta content="Fyra Stack" property="og:site_name">
+  <meta content="website" property="og:type">
   <link
     as="font"
     crossorigin="anonymous"
