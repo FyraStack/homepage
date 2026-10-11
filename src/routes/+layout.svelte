@@ -180,9 +180,7 @@
           links: Snippet
         )}
           <div class="flex flex-col gap-3 md:w-35 md:last:w-auto">
-            <h2
-              class="text-sm font-medium text-foreground"
-            >
+            <h2 class="text-sm font-medium text-foreground">
               {heading}
             </h2>
             <ul
@@ -200,7 +198,7 @@
         {@render column("Product", productLinks)}
         {#snippet resourcesLinks()}
           <li><a href={resolve("/docs")}>Docs</a></li>
-          <li><a href="mailto:support@fyrastack.com">Support</a></li>
+          <li><a href="{resolve("/about")}#contact">Support</a></li>
           <li><a href={resolve("/about")}>About</a></li>
         {/snippet}
         {@render column("Resources", resourcesLinks)}

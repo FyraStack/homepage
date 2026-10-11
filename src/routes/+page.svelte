@@ -24,9 +24,7 @@
   import terraPreview from "$lib/assets/projects/terra-preview.webp";
   import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
   import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
-  import {
-    colocationFeatures,
-  } from "$lib/components/landing/colocation";
+  import { colocationFeatures } from "$lib/components/landing/colocation";
   import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import ColocationRack from "$lib/components/landing/colocation-rack.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
@@ -43,6 +41,7 @@
   import RotatingWord from "$lib/components/landing/rotating-word.svelte";
   import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
+  import * as RadioGroup from "$lib/components/ui/radio-group";
   import * as Tooltip from "$lib/components/ui/tooltip";
 
   const dashboardUrl = "https://dash.fyrastack.com";
@@ -153,11 +152,21 @@
       provider: competitor.provider,
     }))
   );
+
+  const mockupNaturalWidth = 1280;
+  const mockupFrameHeight = 824;
+  let mockupFrameWidth = $state(mockupNaturalWidth);
+  const mockupScale = $derived(
+    Math.min(1, mockupFrameWidth / mockupNaturalWidth)
+  );
 </script>
 
 <svelte:head>
   <title>Fyra Stack · We run the servers, you run your stack</title>
-  <meta content="Fyra Stack · We run the servers, you run your stack" property="og:title">
+  <meta
+    content="Fyra Stack · We run the servers, you run your stack"
+    property="og:title"
+  >
   <meta
     content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
     name="description"
@@ -225,10 +234,10 @@
         >
           <span class="sr-only">We run the servers, you run your stack</span>
           <span aria-hidden="true"
-            >We run the servers,<br /><span class="sm:whitespace-nowrap"
-              >you run your <br class="sm:hidden" /><RotatingWord
-                words={heroWords}
-              /></span
+            >We run the servers,<br>
+            <span class="sm:whitespace-nowrap"
+              >you run your <br class="sm:hidden">
+              <RotatingWord words={heroWords} /></span
             ></span
           >
         </h1>
@@ -395,9 +404,13 @@
       </ul>
 
       <div
-        class="relative hidden h-206 [clip-path:inset(-64px_0_0_0)] md:block"
+        bind:clientWidth={mockupFrameWidth}
+        class="relative hidden [clip-path:inset(-64px_0_0_0)] md:block"
+        style:height="{mockupFrameHeight * mockupScale}px"
       >
-        <CreateServerMockup />
+        <div style:zoom={mockupScale}>
+          <CreateServerMockup />
+        </div>
         <div
           class="absolute inset-x-0 bottom-0 h-14 bg-linear-to-b from-background/0 to-background"
         ></div>
@@ -478,10 +491,12 @@
       </div>
 
       <div class="flex flex-col gap-8">
-        <fieldset
+        <RadioGroup.Root
+          aria-label="Choose a VPS plan"
           class="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4"
+          onValueChange={markPlanPicked}
+          bind:value={selectedName}
         >
-          <legend class="sr-only">Choose a VPS plan</legend>
           {#each plans as plan (plan.name)}
             {@const isSelected = plan.name === selectedName}
             <label
@@ -491,25 +506,15 @@
                   ? "bg-gray-850 shadow-[inset_0_2px_0_var(--color-primary)]"
                   : "hover:bg-gray-850/60",
               ]}
+              for="plan-{plan.name}"
             >
-              <input
-                class="peer sr-only"
-                name="plan"
-                onchange={markPlanPicked}
-                type="radio"
-                value={plan.name}
-                bind:group={selectedName}
-              >
               <div class="flex items-center justify-between">
                 <span class="font-mono text-sm font-semibold">{plan.name}</span>
-                <span
-                  class={[
-                    "size-3.5 rounded-full group-has-focus-visible:ring-2 group-has-focus-visible:ring-ring/60",
-                    isSelected
-                      ? "border-4 border-primary"
-                      : "border border-gray-600 group-hover:border-gray-500",
-                  ]}
-                ></span>
+                <RadioGroup.Item
+                  class="border-gray-600 group-hover:border-gray-500"
+                  id="plan-{plan.name}"
+                  value={plan.name}
+                />
               </div>
               <div class="flex items-end gap-1">
                 <span
@@ -529,7 +534,7 @@
               </span>
             </label>
           {/each}
-        </fieldset>
+        </RadioGroup.Root>
 
         <div
           aria-live="polite"
@@ -563,9 +568,7 @@
           <div
             class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
           >
-            <div
-              class="flex items-center gap-3 text-xs text-muted-foreground"
-            >
+            <div class="flex items-center gap-3 text-xs text-muted-foreground">
               <span class="flex-1">Same size elsewhere</span>
               <span class="w-20 text-right">Their price</span>
               <span class="w-20 text-right">You save</span>
@@ -614,8 +617,7 @@
           <div
             class="flex flex-col gap-3 border-t border-border p-8 lg:border-t-0 lg:border-l"
           >
-            <span
-              class="text-sm font-medium text-foreground"
+            <span class="text-sm font-medium text-foreground"
               >On every plan</span
             >
             <ul class="flex flex-col gap-3">
@@ -653,9 +655,7 @@
                 <span class="text-2xl font-semibold tracking-[-0.025em]"
                   >{tier.units}U</span
                 >
-                <span
-                  class="text-sm text-muted-foreground"
-                >
+                <span class="text-sm text-muted-foreground">
                   {tier.watts}W · 1 Gbps
                 </span>
               </div>

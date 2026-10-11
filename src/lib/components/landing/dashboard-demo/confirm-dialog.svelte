@@ -2,6 +2,7 @@
   import { tick } from "svelte";
   import { Button } from "$lib/components/ui/button";
   import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
   import { confirmController } from "./confirm.svelte";
 
   let typed = $state("");
@@ -67,14 +68,14 @@
       </p>
       {#if needsWord}
         <div class="mt-4 space-y-1.5">
-          <label
-            class="block text-xs text-muted-foreground"
+          <Label
+            class="block text-xs/4 font-normal text-muted-foreground"
             for="confirm-name-input"
           >
             Type
             <span class="font-mono text-foreground">{req?.confirmWord}</span>
             to confirm
-          </label>
+          </Label>
           <Input
             autocapitalize="off"
             autocomplete="off"

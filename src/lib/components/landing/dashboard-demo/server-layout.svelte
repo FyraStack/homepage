@@ -3,6 +3,7 @@
   import { toast } from "svelte-sonner";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
+  import * as Tabs from "$lib/components/ui/tabs";
   import Loader2 from "~icons/lucide/loader-2";
   import Play from "~icons/nucleo/play";
   import Power from "~icons/nucleo/power";
@@ -241,34 +242,41 @@
   </div>
 </div>
 
-<div
-  class="flex shrink-0 items-center gap-0 overflow-x-auto border-b border-border px-2"
+<Tabs.Root
+  class="min-h-0 flex-1 gap-0"
+  onValueChange={(tab) => {
+    loadDeferredTabPages();
+    demo.activeTab = tab as ServerTab;
+  }}
+  value={activeTab}
 >
-  {#each visibleServerTabs as tab (tab.id)}
-    <button
-      aria-current={activeTab === tab.id ? "page" : undefined}
-      class="flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium transition-colors duration-100 {activeTab ===
-      tab.id
-        ? "border-b-2 border-red-500 text-foreground"
-        : "text-muted-foreground hover:text-foreground"}"
-      onclick={() => {
-        loadDeferredTabPages();
-        demo.activeTab = tab.id;
-      }}
-      type="button"
-    >
-      <tab.icon class="h-3 w-3" />
-      {tab.label}
-    </button>
-  {/each}
-</div>
+  <Tabs.List
+    class="h-auto! w-full shrink-0 justify-start gap-0 overflow-x-auto border-b border-border p-0 px-2"
+    variant="line"
+  >
+    {#each visibleServerTabs as tab (tab.id)}
+      <Tabs.Trigger
+        class="h-auto flex-none gap-1.5 rounded-none border-0 px-3 py-2.5 text-xs group-data-horizontal/tabs:after:bottom-0 after:bg-red-500"
+        value={tab.id}
+      >
+        <tab.icon class="h-3 w-3" />
+        {tab.label}
+      </Tabs.Trigger>
+    {/each}
+  </Tabs.List>
 
-<div
-  class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden"
->
-  {#key selectedServer.id}
-    {#if TabPage}
-      <TabPage />
-    {/if}
-  {/key}
-</div>
+  {#each visibleServerTabs as tab (tab.id)}
+    <Tabs.Content
+      class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden"
+      value={tab.id}
+    >
+      {#if tab.id === activeTab}
+        {#key selectedServer.id}
+          {#if TabPage}
+            <TabPage />
+          {/if}
+        {/key}
+      {/if}
+    </Tabs.Content>
+  {/each}
+</Tabs.Root>

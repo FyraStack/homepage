@@ -123,7 +123,7 @@
           </span>
           <Avatar.Root class="h-8 w-8 shrink-0 border border-border">
             <Avatar.Fallback class="bg-muted text-xs text-muted-foreground"
-              >JD</Avatar.Fallback
+              >AL</Avatar.Fallback
             >
           </Avatar.Root>
         </button>

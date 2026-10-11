@@ -22,6 +22,17 @@
   import GithubMark from "$lib/components/landing/github-mark.svelte";
   import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
+  import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
+  import * as Select from "$lib/components/ui/select";
+  import { Textarea } from "$lib/components/ui/textarea";
+  import {
+    type ContactStatus,
+    contactHoneypotField,
+    contactLimits,
+    contactTopics,
+    submitContactMessage,
+  } from "$lib/contact";
 
   const signUpUrl = "https://dash.fyrastack.com";
   const discordUrl = "https://discord.gg/YwzKxUBu4U";
@@ -102,6 +113,22 @@
       website: "https://willowidk.dev/",
     },
   ];
+
+  let contactStatus = $state<ContactStatus>({ kind: "idle" });
+
+  const [defaultContactTopic] = contactTopics;
+  let contactTopic = $state<string>(defaultContactTopic);
+
+  async function sendContactMessage(event: SubmitEvent) {
+    event.preventDefault();
+    const form = event.currentTarget as HTMLFormElement;
+    contactStatus = { kind: "sending" };
+    contactStatus = await submitContactMessage(new FormData(form));
+    if (contactStatus.kind === "sent") {
+      form.reset();
+      contactTopic = defaultContactTopic;
+    }
+  }
 </script>
 
 <svelte:head>
@@ -396,19 +423,11 @@
       </div>
       <dl class="flex flex-col border-b border-border lg:w-160">
         <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt
-            class="text-sm text-muted-foreground"
-          >
-            Company
-          </dt>
+          <dt class="text-sm text-muted-foreground">Company</dt>
           <dd class="text-right text-base/6">Fyra Stack Limited</dd>
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt
-            class="text-sm text-muted-foreground"
-          >
-            Support
-          </dt>
+          <dt class="text-sm text-muted-foreground">Support</dt>
           <dd class="text-right text-base/6">
             <a
               class="transition-colors hover:text-gray-300"
@@ -418,11 +437,7 @@
           </dd>
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt
-            class="text-sm text-muted-foreground"
-          >
-            Community
-          </dt>
+          <dt class="text-sm text-muted-foreground">Community</dt>
           <dd class="text-right text-base/6">
             <a class="transition-colors hover:text-gray-300" href={discordUrl}
               >Discord</a
@@ -436,11 +451,7 @@
           </dd>
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt
-            class="text-sm text-muted-foreground"
-          >
-            Socials
-          </dt>
+          <dt class="text-sm text-muted-foreground">Socials</dt>
           <dd class="text-right text-base/6">
             <a
               class="transition-colors hover:text-gray-300"
@@ -460,6 +471,108 @@
           </dd>
         </div>
       </dl>
+    </div>
+  </section>
+
+  <!-- Contact: form that posts to /api/contact, which forwards to our Discord -->
+  <section class="border-b border-border py-20 lg:py-28" id="contact">
+    <div
+      class="page-container flex flex-col justify-between gap-12 lg:flex-row"
+    >
+      <div class="flex flex-col gap-4 lg:w-110">
+        <h2
+          class="text-4xl/[1.15] font-semibold tracking-[-0.02em] lg:text-[40px]/[46px]"
+        >
+          Get in touch
+        </h2>
+        <p class="text-base/[26px] text-pretty text-muted-foreground">
+          Questions about sales, colocation, partnerships, or anything else?
+          Send us a note and a real person on the team will reply by email.
+        </p>
+      </div>
+
+      <form
+        class="grid gap-5 sm:grid-cols-2 lg:w-160"
+        onsubmit={sendContactMessage}
+      >
+        <div class="flex flex-col gap-2">
+          <Label for="contact-name">Name</Label>
+          <Input
+            autocomplete="name"
+            class="h-9 rounded-none"
+            id="contact-name"
+            maxlength={contactLimits.name}
+            name="name"
+            required
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <Label for="contact-email">Email</Label>
+          <Input
+            autocomplete="email"
+            class="h-9 rounded-none"
+            id="contact-email"
+            maxlength={contactLimits.email}
+            name="email"
+            required
+            type="email"
+          />
+        </div>
+        <div class="flex flex-col gap-2 sm:col-span-2">
+          <Label for="contact-topic">Topic</Label>
+          <Select.Root name="topic" type="single" bind:value={contactTopic}>
+            <Select.Trigger class="h-9 w-full rounded-none" id="contact-topic">
+              {contactTopic}
+            </Select.Trigger>
+            <Select.Content class="rounded-none">
+              {#each contactTopics as topic (topic)}
+                <Select.Item class="rounded-none" label={topic} value={topic} />
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </div>
+        <div class="flex flex-col gap-2 sm:col-span-2">
+          <Label for="contact-message">Message</Label>
+          <Textarea
+            class="rounded-none"
+            id="contact-message"
+            maxlength={contactLimits.message}
+            name="message"
+            required
+            rows={5}
+          />
+        </div>
+        <div aria-hidden="true" class="hidden">
+          <Label for="contact-website">Leave this empty</Label>
+          <Input
+            autocomplete="off"
+            id="contact-website"
+            name={contactHoneypotField}
+            tabindex={-1}
+          />
+        </div>
+        <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
+          <Button
+            class="h-auto gap-2 py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
+            disabled={contactStatus.kind === "sending"}
+            size="lg"
+            type="submit"
+            variant="accent"
+          >
+            {contactStatus.kind === "sending" ? "Sending…" : "Send message"}
+            <ArrowRight data-icon="inline-end" />
+          </Button>
+          <p aria-live="polite" class="text-sm text-pretty" role="status">
+            {#if contactStatus.kind === "sent"}
+              <span class="text-muted-foreground"
+                >Thanks, we got it. We'll reply to the email you gave us.</span
+              >
+            {:else if contactStatus.kind === "failed"}
+              <span class="text-destructive">{contactStatus.message}</span>
+            {/if}
+          </p>
+        </div>
+      </form>
     </div>
   </section>
 
