@@ -47,7 +47,7 @@
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
   const signUpUrl = dashboardUrl;
-  const salesUrl = "mailto:support@fyrastack.com?subject=Sales%20question";
+  const salesUrl = `${resolve("/about")}#contact`;
   const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
   const heroWords = [
