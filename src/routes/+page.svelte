@@ -26,7 +26,6 @@
   import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
   import {
     colocationFeatures,
-    colocationSteps,
   } from "$lib/components/landing/colocation";
   import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import ColocationRack from "$lib/components/landing/colocation-rack.svelte";
@@ -406,7 +405,7 @@
     </div>
   </section>
 
-  <!-- Colocation: rack illustration, features, and how it works -->
+  <!-- Colocation: rack illustration and features -->
   <section class="border-b border-border py-20 lg:py-30" id="colocation">
     <div class="page-container flex flex-col gap-24">
       <div class="flex flex-col items-center gap-16 lg:flex-row lg:gap-24">
@@ -452,27 +451,6 @@
             </Button>
           </div>
         </div>
-      </div>
-
-      <div class="flex flex-col gap-6">
-        <h3 class="text-xl font-semibold tracking-[-0.02em]">How it works</h3>
-        <ol class="grid gap-10 md:grid-cols-3">
-          {#each colocationSteps as step, index (step.title)}
-            <li class="flex flex-col gap-2.5 border-t border-border pt-6">
-              <span
-                class="text-sm font-medium text-brand-yellow tabular-nums"
-              >
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span class="text-lg font-semibold tracking-[-0.011em]"
-                >{step.title}</span
-              >
-              <span class="text-sm/[21px] text-muted-foreground"
-                >{step.description}</span
-              >
-            </li>
-          {/each}
-        </ol>
       </div>
     </div>
   </section>

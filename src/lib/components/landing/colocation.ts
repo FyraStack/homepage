@@ -28,18 +28,3 @@ export const colocationFeatures = [
     title: "Honest pricing",
   },
 ];
-
-export const colocationSteps = [
-  {
-    description: "Send us your plan, hardware details, and power needs.",
-    title: "Tell us what you're racking",
-  },
-  {
-    description: "We'll confirm availability and share shipping instructions.",
-    title: "Ship it to Chicago",
-  },
-  {
-    description: "We'll send an invoice once your server is racked.",
-    title: "We rack it",
-  },
-];
