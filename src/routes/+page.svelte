@@ -12,6 +12,7 @@
   import terraPreview from "$lib/assets/projects/terra-preview.webp";
   import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
   import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
+  import BlurTypeWord from "$lib/components/landing/blur-type-word.svelte";
   import { colocationFeatures } from "$lib/components/landing/colocation";
   import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
@@ -25,7 +26,6 @@
   } from "$lib/components/landing/plans";
   import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
-  import RotatingWord from "$lib/components/landing/rotating-word.svelte";
   import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
   import * as RadioGroup from "$lib/components/ui/radio-group";
@@ -56,7 +56,10 @@
     "website",
     "API",
     "CI runners",
-    "homelab",
+    "game server",
+    "Git forge",
+    "Discord bot",
+    "Mastodon",
   ];
 
   const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
@@ -236,7 +239,7 @@
             >We run the servers,<br>
             <span class="sm:whitespace-nowrap"
               >you run your <br class="sm:hidden">
-              <RotatingWord words={heroWords} /></span
+              <BlurTypeWord words={heroWords} /></span
             ></span
           >
         </h1>
