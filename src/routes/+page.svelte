@@ -41,6 +41,7 @@
   } from "$lib/components/landing/plans";
   import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
+  import RotatingWord from "$lib/components/landing/rotating-word.svelte";
   import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
   import * as Tooltip from "$lib/components/ui/tooltip";
@@ -50,6 +51,16 @@
   const signUpUrl = dashboardUrl;
   const salesUrl = "mailto:support@fyrastack.com?subject=Sales%20question";
   const discordUrl = "https://discord.gg/YwzKxUBu4U";
+
+  const heroWords = [
+    "stack",
+    "database",
+    "app",
+    "website",
+    "API",
+    "CI runners",
+    "homelab",
+  ];
 
   const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
   const demoFitStyle = `width: ${demoWidth}; zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
@@ -208,7 +219,14 @@
         <h1
           class="max-w-250 text-[40px]/[1.08] font-semibold tracking-[-0.028em] text-balance sm:text-5xl/[1.06] lg:text-[64px]/[67px]"
         >
-          Infrastructure without breaking the bank, or your mind
+          <span class="sr-only">We run the servers, you run your stack</span>
+          <span aria-hidden="true"
+            >We run the servers,<br /><span class="sm:whitespace-nowrap"
+              >you run your <br class="sm:hidden" /><RotatingWord
+                words={heroWords}
+              /></span
+            ></span
+          >
         </h1>
         <p
           class="max-w-155 text-base/7 text-pretty text-muted-foreground sm:text-lg/[29px]"
