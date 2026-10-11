@@ -324,7 +324,7 @@
   </section>
 
   <!-- VPS -->
-  <section class="border-b border-border py-20 lg:py-30" id="vps">
+  <section class="border-b border-border py-20 md:pb-0 lg:pt-30" id="vps">
     <div class="page-container flex flex-col gap-16">
       <div class="flex flex-col justify-between gap-10 lg:flex-row">
         <h2
@@ -372,8 +372,13 @@
         {/each}
       </ul>
 
-      <div class="hidden overflow-x-clip md:block">
+      <div
+        class="relative hidden h-206 [clip-path:inset(-64px_0_0_0)] md:block"
+      >
         <CreateServerMockup />
+        <div
+          class="absolute inset-x-0 bottom-0 h-14 bg-linear-to-b from-background/0 to-background"
+        ></div>
       </div>
     </div>
   </section>
