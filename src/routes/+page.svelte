@@ -148,7 +148,7 @@
 <svelte:head>
   <title>Fyra Stack · Infrastructure without breaking the bank</title>
   <meta
-    content="Fast, independent VPS hosting and colocation in Chicago from Fyra Labs. Plans start at $5/mo."
+    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
     name="description"
   >
 </svelte:head>
