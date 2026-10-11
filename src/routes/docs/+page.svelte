@@ -34,7 +34,7 @@
       title: "I'm shipping hardware",
     },
     {
-      description: "Tickets go straight to the engineers who run the racks.",
+      description: "Tickets go straight to the team.",
       href: resolve("/docs/[section]/[slug]", {
         section: "account-billing",
         slug: "support",
@@ -234,7 +234,7 @@
             </p>
             <a
               class="flex items-center gap-1.5 self-start text-[15px] font-medium hover:text-gray-300"
-              href="{resolve("/colocation")}#inquiry"
+              href="{resolve("/")}#colocation-inquiry"
             >
               Get in touch <ArrowRight class="size-3.5" />
             </a>
@@ -356,7 +356,7 @@
             Can't find what you need?
           </h2>
           <p class="text-[15px] text-muted-foreground">
-            Open a ticket and the people who run the racks will answer it.
+            Open a ticket and the team will answer it.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
@@ -372,7 +372,7 @@
             href={discordUrl}
             variant="ghost"
           >
-            Ask on Discord <ArrowRight data-icon="inline-end" />
+            Ask on Discord
           </Button>
         </div>
       </div>

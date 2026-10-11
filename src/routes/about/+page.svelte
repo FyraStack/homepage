@@ -1,6 +1,8 @@
 <script lang="ts">
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
   import Globe from "@lucide/svelte/icons/globe";
+  import type { Snippet } from "svelte";
+  import { resolve } from "$app/paths";
   import acmUmnMark from "$lib/assets/about/acm-umn.png";
   import addisonPhoto from "$lib/assets/about/addison.jpg";
   import billPhoto from "$lib/assets/about/bill.jpg";
@@ -18,16 +20,17 @@
   import ctaDither from "$lib/assets/cta-dither.png";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
   import GithubMark from "$lib/components/landing/github-mark.svelte";
+  import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
 
   const signUpUrl = "https://dash.fyrastack.com";
   const discordUrl = "https://discord.gg/YwzKxUBu4U";
-  const fediverseUrl = "#";
+  const fediverseUrl = "https://fedi.fyralabs.com/@stack";
 
-  const facts = [
-    { note: "Chicago, IL", value: "Midwest proud" },
-    { note: "Backed by Fyra Labs", value: "Independent" },
-    { note: "Since 2026", value: "AS402292" },
+  const facts: { note: string | Snippet; value: string | Snippet }[] = [
+    { note: "An open-source community", value: "Backed by Fyra Labs" },
+    { note: openNote, value: "Truly open cloud" },
+    { note: "Our network", value: networkValue },
   ];
 
   interface TeamMember {
@@ -43,7 +46,7 @@
       github: "lleyton",
       name: "Lleyton “Lea” Gray",
       photo: lleytonPhoto,
-      role: "CEO",
+      role: "Chief Executive Officer",
       website: "https://ultraviolet.sh/",
     },
     {
@@ -109,6 +112,27 @@
   >
 </svelte:head>
 
+{#snippet textOrSnippet(
+  content: string | Snippet
+)}
+  {#if typeof content === "string"}
+    {content}
+  {:else}
+    {@render content()}
+  {/if}
+{/snippet}
+
+{#snippet openNote()}
+  Our <TextLink href="https://github.com/FyraStack">code</TextLink>,
+  <TextLink href={discordUrl}>community</TextLink>, and
+  <TextLink href={resolve("/about")}>team</TextLink>
+  are open
+{/snippet}
+
+{#snippet networkValue()}
+  <TextLink href="https://fyra.network">AS402292</TextLink>
+{/snippet}
+
 <main>
   <!-- Hero: headline over a dithered shader, with three quick facts -->
   <section class="relative isolate overflow-hidden border-b border-border">
@@ -141,11 +165,10 @@
         <h1
           class="text-5xl/[1.05] font-semibold tracking-[-0.03em] sm:text-7xl/[1.03] lg:text-[80px]/[82px]"
         >
-          Cloud Infrastructure,<br>
-          for the rest of us
+          Infrastructure<br>for everyone
         </h1>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          An open-source cloud from the folks behind Fyra Labs.
+          An open-source cloud from the team behind Fyra Labs.
         </p>
       </div>
 
@@ -156,9 +179,11 @@
               ? "border-t border-border sm:border-t-0 sm:border-l sm:pl-7"
               : ""}"
           >
-            <dt class="text-sm text-muted-foreground">{fact.note}</dt>
+            <dt class="text-sm text-muted-foreground">
+              {@render textOrSnippet(fact.note)}
+            </dt>
             <dd class="text-2xl font-semibold tracking-[-0.017em]">
-              {fact.value}
+              {@render textOrSnippet(fact.value)}
             </dd>
           </div>
         {/each}
@@ -178,15 +203,14 @@
         class="flex flex-col gap-6 text-lg/[31px] text-pretty text-muted-foreground lg:w-160"
       >
         <p>
-          Fyra Labs builds Terra and Ultramarine Linux. We needed servers for
-          that. We couldn't find hosting we'd actually recommend to someone
-          without adding a bunch of caveats, so we started running our own.
+          We spent years scaling infrastructure to support open-source, reaching
+          millions of unique clients every month, quickly discovering: hosting
+          sucks.
         </p>
         <p>
-          Stack is what came out of that. Open software, transparent pricing,
-          and a team who cares as much as you. We charge you for what you use.
-          We don't sell your data, we don't lock you in, and we don't have a
-          “retention team.”
+          So, we built Stack. Open software, transparent pricing, and a team who
+          cares as much as you. We charge you for what you use. We don't sell
+          your data or lock you in.
         </p>
       </div>
     </div>
@@ -197,12 +221,8 @@
     <div class="page-container flex flex-col gap-14">
       <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <h2 class="text-4xl font-semibold tracking-[-0.02em] lg:text-[40px]">
-          The team
+          Meet the team
         </h2>
-        <p class="max-w-105 text-base/[26px] text-pretty text-muted-foreground">
-          Small, on purpose. Everyone here ships, and everyone here answers the
-          support queue.
-        </p>
       </div>
       <ul
         class="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
@@ -266,11 +286,10 @@
     >
       <div class="flex flex-col gap-3 lg:w-90 lg:shrink-0">
         <h2 class="text-[28px] font-semibold tracking-[-0.018em]">
-          In good company
+          Part of the community
         </h2>
         <p class="text-base/[26px] text-pretty text-muted-foreground">
-          Our partners, and the open-source and student communities we sponsor
-          servers for.
+          Our partners, and the open-source communities we sponsor.
         </p>
       </div>
       <div class="@container min-w-0 flex-1">
@@ -363,28 +382,14 @@
         <h2
           class="text-4xl/[1.15] font-semibold tracking-[-0.02em] lg:text-[40px]/[46px]"
         >
-          One team,<br>
-          all over the map.
+          Around the world
         </h2>
         <p class="text-base/[26px] text-pretty text-muted-foreground">
-          Our hardware lives in Chicago, but the people who run it are spread
-          across time zones. Wherever you write in from, you'll reach the same
-          small team that built it.
+          Our hardware lives in Chicago, but the people who run it and our
+          community are spread around the world.
         </p>
       </div>
       <dl class="flex flex-col border-b border-border lg:w-160">
-        <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-          >
-            Office
-          </dt>
-          <dd class="text-right">
-            <address class="text-base/6 not-italic">
-              5206 N Damen Ave<br>Chicago, IL 60625
-            </address>
-          </dd>
-        </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt
             class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
@@ -422,6 +427,26 @@
               class="transition-colors hover:text-gray-300"
               href="https://github.com/FyraStack"
               >GitHub</a
+            >
+          </dd>
+        </div>
+        <div class="flex justify-between gap-6 border-t border-border py-5">
+          <dt
+            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+          >
+            Socials
+          </dt>
+          <dd class="text-right text-base/6">
+            <a
+              class="transition-colors hover:text-gray-300"
+              href="https://x.com/fyrastack"
+              >Twitter</a
+            >
+            ·
+            <a
+              class="transition-colors hover:text-gray-300"
+              href="https://bsky.app/profile/fyrastack.com"
+              >Bluesky</a
             >
             ·
             <a class="transition-colors hover:text-gray-300" href={fediverseUrl}
@@ -461,11 +486,11 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-          Your first server is five dollars away.
+          Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          Pick a plan, choose your distro, and SSH in. If anything breaks, the
-          person who answers your ticket built the rack.
+          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
+          can resize whenever you outgrow it.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
@@ -475,7 +500,7 @@
           size="lg"
           variant="accent"
         >
-          Create an account <ArrowRight data-icon="inline-end" />
+          Deploy your Server <ArrowRight data-icon="inline-end" />
         </Button>
         <Button
           class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
@@ -483,7 +508,7 @@
           size="lg"
           variant="ghost"
         >
-          Join our Discord <ArrowRight data-icon="inline-end" />
+          Join our Discord
         </Button>
       </div>
     </div>

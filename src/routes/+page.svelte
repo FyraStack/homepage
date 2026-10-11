@@ -13,7 +13,9 @@
   import Server from "@lucide/svelte/icons/server";
   import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
+  import { replaceState } from "$app/navigation";
   import { resolve } from "$app/paths";
+  import { page } from "$app/state";
   import ctaDither from "$lib/assets/cta-dither.png";
   import heroDither from "$lib/assets/hero-dither.png";
   import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
@@ -26,6 +28,7 @@
     colocationFeatures,
     colocationSteps,
   } from "$lib/components/landing/colocation";
+  import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import ColocationRack from "$lib/components/landing/colocation-rack.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
   import DashboardDemo from "$lib/components/landing/dashboard-demo/dashboard-demo.svelte";
@@ -38,6 +41,7 @@
   } from "$lib/components/landing/plans";
   import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
+  import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
   import * as Tooltip from "$lib/components/ui/tooltip";
 
@@ -81,9 +85,9 @@
       title: "Intel Cascade Lake",
     },
     {
-      description: "Rated for datacenter write loads",
+      description: "Rated for data center write loads",
       icon: HardDrive,
-      title: "Enterprise SAS3 SSD",
+      title: "Enterprise SAS3 SSDs",
     },
     {
       description: "On every server",
@@ -101,9 +105,27 @@
     "Cascade Lake vCPUs",
     "Dedicated IPv4 + /64 IPv6",
     "Full root access",
-    "Out-of-band serial console",
     "Cancel anytime",
   ];
+
+  const colocationInquiryHash = "#colocation-inquiry";
+  let colocationInquiryOpen = $state(false);
+
+  $effect(() => {
+    if (page.url.hash === colocationInquiryHash) {
+      colocationInquiryOpen = true;
+    }
+  });
+
+  function openColocationInquiry() {
+    colocationInquiryOpen = true;
+  }
+
+  function clearColocationInquiryHash(open: boolean) {
+    if (!open && page.url.hash === colocationInquiryHash) {
+      replaceState(resolve("/"), page.state);
+    }
+  }
 
   let selectedName = $state(plans[0].name);
   let hasPickedPlan = $state(false);
@@ -131,24 +153,11 @@
   >
 </svelte:head>
 
-{#snippet featureLink(
-  href: string,
-  label: string
-)}
-  <a
-    class="text-foreground underline decoration-gray-600 underline-offset-4 transition-colors hover:decoration-foreground"
-    {href}
-    rel={href.startsWith("http") ? "noopener" : undefined}
-    target={href.startsWith("http") ? "_blank" : undefined}
-    >{label}</a
-  >
-{/snippet}
-
 {#snippet actuallyOpenDescription()}
-  Our {@render featureLink("https://github.com/FyraStack", "code")},
-  {@render featureLink("https://discord.gg/YwzKxUBu4U", "community")}, and
-  {@render featureLink(resolve("/about"), "team")}
-  is open
+  Our <TextLink href="https://github.com/FyraStack">code</TextLink>,
+  <TextLink href={discordUrl}>community</TextLink>, and
+  <TextLink href={resolve("/about")}>team</TextLink>
+  are open
 {/snippet}
 
 {#snippet predictablePricingDescription()}
@@ -288,7 +297,7 @@
           <p class="text-base/[26px] text-pretty text-muted-foreground">
             We spent years scaling infrastructure to support open-source,
             reaching millions of unique clients every month, quickly
-            discovering: hosting sucks. So we're making it better so you don't
+            discovering: hosting sucks. We're making it better, so you don't
             suffer too.
           </p>
         </div>
@@ -329,14 +338,13 @@
             <p
               class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty"
             >
-              Most budget providers cut corners on hardware to hit their price
-              points. We don't.
+              Other VPS providers cut corners to hit their price points. We
+              don't.
             </p>
             <p class="text-base/[26px] text-pretty text-muted-foreground">
-              Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and
-              enterprise SSDs. We buy good hardware, run it efficiently, run a
-              small focused team, don't oversell, and charge a fair price. It's
-              boring, and it works!
+              We run a lean team, buy solid hardware, obsess over developer
+              experience, listen to our community, and build a product we
+              actually love to use.
             </p>
           </div>
           <Button
@@ -348,10 +356,6 @@
             See VPS plans
           </Button>
         </div>
-      </div>
-
-      <div class="hidden overflow-x-clip md:block">
-        <CreateServerMockup />
       </div>
 
       <ul class="grid gap-8 sm:grid-cols-2 lg:flex lg:justify-between">
@@ -367,6 +371,10 @@
           </li>
         {/each}
       </ul>
+
+      <div class="hidden overflow-x-clip md:block">
+        <CreateServerMockup />
+      </div>
     </div>
   </section>
 
@@ -381,11 +389,11 @@
             <h2
               class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
             >
-              Ship your hardware<br>We'll handle the rest
+              Ship your hardware<br>We handle the rest
             </h2>
             <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-              Colocation without the enterprise markup, mandatory contracts, or
-              fees for asking questions
+              Colocation without the enterprise markup or fees just for asking
+              questions
             </p>
           </div>
           <ul>
@@ -407,19 +415,12 @@
           <div class="flex flex-wrap items-center gap-3">
             <Button
               class="h-auto px-4 py-2.5"
-              href="{resolve("/colocation")}#inquiry"
+              id="colocation-inquiry"
+              onclick={openColocationInquiry}
               size="lg"
               variant="accent"
             >
-              Start a colocation inquiry
-            </Button>
-            <Button
-              class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
-              href={resolve("/colocation")}
-              size="lg"
-              variant="ghost"
-            >
-              Colocation details <ArrowRight data-icon="inline-end" />
+              Ship us your server
             </Button>
           </div>
         </div>
@@ -457,7 +458,7 @@
             Priced fairly
           </h2>
           <p class="text-[17px]/[27px] text-muted-foreground">
-            Simple, flat-rate plans with no surprise fees
+            Simple plans with no surprise fees
           </p>
         </div>
         <Button
@@ -627,14 +628,15 @@
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
-            Priced per rack unit, with power and a 1 Gbps port included.
+            Priced per unit, with power and a 1 Gbps port included.
           </p>
-          <a
+          <button
             class="mt-1 inline-flex items-center gap-1.5 self-start text-sm font-medium transition-colors hover:text-gray-300"
-            href={resolve("/colocation")}
+            onclick={openColocationInquiry}
+            type="button"
           >
-            Colocation details <ArrowRight class="size-3.5" />
-          </a>
+            Get in touch <ArrowRight class="size-3.5" />
+          </button>
         </div>
         <ul class="grid flex-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           {#each colocationTiers as tier (tier.units)}
@@ -689,11 +691,11 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-          Your first server is five dollars away.
+          Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
-          can resize whenever you outgrow it.
+          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD. Resize
+          whenever you outgrow it.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
@@ -703,7 +705,7 @@
           size="lg"
           variant="accent"
         >
-          Create an account <ArrowRight data-icon="inline-end" />
+          Deploy your Server <ArrowRight data-icon="inline-end" />
         </Button>
         <Button
           class="h-auto px-4 py-2.5 text-muted-foreground"
@@ -717,3 +719,8 @@
     </div>
   </section>
 </main>
+
+<ColocationInquiryDialog
+  onOpenChange={clearColocationInquiryHash}
+  bind:open={colocationInquiryOpen}
+/>

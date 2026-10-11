@@ -29,7 +29,7 @@
 
   const navLinks = [
     { href: `${resolve("/")}#pricing`, label: "Pricing", path: null },
-    { href: resolve("/colocation"), label: "Colocation", path: "/colocation" },
+    { href: `${resolve("/")}#colocation`, label: "Colocation", path: null },
     { href: resolve("/about"), label: "About", path: "/about" },
     { href: resolve("/docs"), label: "Docs", path: "/docs" },
   ] as const;
@@ -166,12 +166,9 @@
           <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
         </a>
         <p class="max-w-80 text-sm/[22px] text-muted-foreground">
-          Stack is provided by Fyra Labs, the open-source community that
-          develops Terra and Ultramarine Linux.
+          Built from the ground up to support the open-source projects we love,
+          and the communities around them
         </p>
-        <address class="text-sm text-muted-foreground not-italic">
-          5206 N Damen Ave, Chicago, IL 60625
-        </address>
       </div>
       <nav
         aria-label="Footer"
@@ -196,7 +193,7 @@
         {/snippet}
         {#snippet productLinks()}
           <li><a href="{resolve("/")}#vps">VPS</a></li>
-          <li><a href={resolve("/colocation")}>Colocation</a></li>
+          <li><a href="{resolve("/")}#colocation">Colocation</a></li>
           <li><a href="https://status.fyrastack.com">Status</a></li>
         {/snippet}
         {@render column("Product", productLinks)}

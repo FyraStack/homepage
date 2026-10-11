@@ -22,7 +22,7 @@
   <ServerRack />
   <div class="relative hidden flex-1 sm:block">
     <div class="absolute top-0 left-0">
-      {@render callout("Chicago, IL", "24/7 physical security")}
+      {@render callout("A premier data center", "CoreSite CH2, Chicago")}
     </div>
     <div class="absolute top-[178px] left-0 flex items-center">
       <span class="h-px w-10 bg-primary"></span>
