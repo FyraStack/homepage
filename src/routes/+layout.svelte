@@ -83,6 +83,11 @@
   <meta content={ogImageWebpUrl} name="twitter:image">
   <meta content={ogImageAlt} name="twitter:image:alt">
   <meta content="@fyrastack" name="twitter:site">
+  <script
+    data-domain="fyrastack.com"
+    defer
+    src="https://plausible.fyralabs.com/js/script.js"
+  ></script>
   <link
     as="font"
     crossorigin="anonymous"
