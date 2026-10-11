@@ -48,10 +48,10 @@ export const competitors: Competitor[] = [
   },
   {
     offersByMemoryGb: {
-      2: fromEur("CPX11 · 2 vCPU / 2 GB", 17.49),
-      4: fromEur("CPX21 · 3 vCPU / 4 GB", 31.99),
-      8: fromEur("CPX31 · 4 vCPU / 8 GB", 62.49),
-      16: fromEur("CPX41 · 8 vCPU / 16 GB", 120.49),
+      2: fromEur("CPX12 · 1 vCPU / 2 GB", 11.49),
+      4: fromEur("CPX22 · 2 vCPU / 4 GB", 19.49),
+      8: fromEur("CPX32 · 4 vCPU / 8 GB", 35.49),
+      16: fromEur("CPX42 · 8 vCPU / 16 GB", 69.49),
     },
     provider: "Hetzner",
   },
