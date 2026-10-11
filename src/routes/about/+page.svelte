@@ -487,7 +487,7 @@
         </h2>
         <p class="text-base/[26px] text-pretty text-muted-foreground">
           Questions about sales, colocation, partnerships, or anything else?
-          Send us a note and a real person on the team will reply by email.
+          Contact us and someone on the team will reply by email.
         </p>
       </div>
 
