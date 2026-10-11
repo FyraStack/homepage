@@ -14,7 +14,9 @@
 
 <svelte:head>
   <title>{metadata.title} · Fyra Stack</title>
+  <meta content={`${metadata.title} · Fyra Stack`} property="og:title">
   <meta content={metadata.description} name="description">
+  <meta content={metadata.description} property="og:description">
 </svelte:head>
 
 <main class="page-container py-20 lg:py-28">
@@ -23,9 +25,7 @@
       <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
         {metadata.title}
       </h1>
-      <p
-        class="font-mono text-xs tracking-[0.08em] text-muted-foreground uppercase"
-      >
+      <p class="text-sm text-muted-foreground">
         Last updated {metadata.updated}
       </p>
     </header>

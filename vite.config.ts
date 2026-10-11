@@ -5,12 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 import { FileSystemIconLoader } from "unplugin-icons/loaders";
 import Icons from "unplugin-icons/vite";
 import { defineConfig } from "vite";
-import { docsMarkdown } from "./src/lib/docs/markdown";
+import { docsMarkdown, docsMetadata } from "./src/lib/docs/markdown.ts";
 
 const pathSeparator = /[/\\]/;
 
 export default defineConfig({
   plugins: [
+    docsMetadata(),
     tailwindcss(),
     sveltekit({
       adapter: adapter(),

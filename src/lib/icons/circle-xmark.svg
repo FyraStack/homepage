@@ -1,0 +1,40 @@
+<svg
+  height="18px"
+  viewBox="0 0 18 18"
+  width="18px"
+  x="0px"
+  xmlns="http://www.w3.org/2000/svg"
+  y="0px"
+>
+  <path
+    d="M9 16.25C13.0041 16.25 16.25 13.0041 16.25 9C16.25 4.99594 13.0041 1.75 9 1.75C4.99594 1.75 1.75 4.99594 1.75 9C1.75 13.0041 4.99594 16.25 9 16.25Z"
+    data-color="color-2"
+    data-stroke="none"
+    fill="currentColor"
+    fill-opacity="0.3"
+  ></path>
+  <path
+    d="M9 16.25C13.0041 16.25 16.25 13.0041 16.25 9C16.25 4.99594 13.0041 1.75 9 1.75C4.99594 1.75 1.75 4.99594 1.75 9C1.75 13.0041 4.99594 16.25 9 16.25Z"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="var(--nucleo-stroke-width, 1.5)"
+  ></path>
+  <path
+    d="M6.25 6.25L11.75 11.75"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="var(--nucleo-stroke-width, 1.5)"
+  ></path>
+  <path
+    d="M11.75 6.25L6.25 11.75"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="var(--nucleo-stroke-width, 1.5)"
+  ></path>
+</svg>

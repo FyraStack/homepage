@@ -1,13 +1,15 @@
 <script lang="ts">
-  import ArrowLeft from "@lucide/svelte/icons/arrow-left";
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import ChevronDown from "@lucide/svelte/icons/chevron-down";
+  import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
+  import * as Collapsible from "$lib/components/ui/collapsible";
   import { docSections, publishedPages } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { proseClass } from "$lib/docs/prose";
   import { cn } from "$lib/utils";
+  import ArrowLeft from "~icons/nucleo/arrow-left";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import ChevronDown from "~icons/nucleo/chevron-down";
 
   let { data } = $props();
 
@@ -35,14 +37,22 @@
   }
 
   $effect(updateActiveHeading);
+
+  let sectionNavOpen = $state(false);
+
+  afterNavigate(() => {
+    sectionNavOpen = false;
+  });
 </script>
 
 <svelte:window onscroll={updateActiveHeading} />
 
 <svelte:head>
   <title>{doc.title} · Fyra Stack Docs</title>
+  <meta content={`${doc.title} · Fyra Stack Docs`} property="og:title">
   {#if doc.description}
     <meta content={doc.description} name="description">
+    <meta content={doc.description} property="og:description">
   {/if}
 </svelte:head>
 
@@ -51,7 +61,7 @@
     {#each docSections as navSection (navSection.id)}
       <div class="flex flex-col">
         <a
-          class="mb-2 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+          class="mb-2 text-sm font-medium text-foreground transition-colors hover:text-gray-300"
           href={resolve("/docs/[section]", { section: navSection.id })}
         >
           {navSection.title}
@@ -97,21 +107,26 @@
   </aside>
 
   <div class="min-w-0 flex-1 border-border py-10 lg:border-l lg:pl-12 xl:pl-16">
-    <details class="group mb-8 border border-border lg:hidden">
-      <summary
-        class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium"
+    <Collapsible.Root
+      class="group mb-8 border border-border lg:hidden"
+      bind:open={sectionNavOpen}
+    >
+      <Collapsible.Trigger
+        class="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-sm font-medium"
       >
         {section.title}
         docs
         <ChevronDown
-          class="size-4 transition-transform group-open:rotate-180"
+          class="size-4 transition-transform group-data-[state=open]:rotate-180"
         />
-      </summary>
-      <div class="flex flex-col gap-6 border-t border-border p-4">
+      </Collapsible.Trigger>
+      <Collapsible.Content
+        class="flex flex-col gap-6 border-t border-border p-4"
+      >
         <DocsSearch class="h-10 text-sm" shortcut={false} />
         {@render sectionNav()}
-      </div>
-    </details>
+      </Collapsible.Content>
+    </Collapsible.Root>
 
     <article class="max-w-180" data-pagefind-body>
       <nav
@@ -192,9 +207,7 @@
         aria-label="On this page"
         class="sticky top-16 flex flex-col gap-3 py-10"
       >
-        <span
-          class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
-        >
+        <span class="text-[13px]/5 font-medium text-foreground">
           On this page
         </span>
         <ul class="flex flex-col gap-2 text-[13px]/5">

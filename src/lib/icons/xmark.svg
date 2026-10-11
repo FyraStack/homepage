@@ -1,0 +1,25 @@
+<svg
+  height="18px"
+  viewBox="0 0 18 18"
+  width="18px"
+  x="0px"
+  xmlns="http://www.w3.org/2000/svg"
+  y="0px"
+>
+  <path
+    d="M14 4L4 14"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="var(--nucleo-stroke-width, 1.5)"
+  ></path>
+  <path
+    d="M4 4L14 14"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="var(--nucleo-stroke-width, 1.5)"
+  ></path>
+</svg>

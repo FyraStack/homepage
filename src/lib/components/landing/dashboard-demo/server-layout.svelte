@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { type Component, onMount } from "svelte";
   import { toast } from "svelte-sonner";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
+  import * as Tabs from "$lib/components/ui/tabs";
   import Loader2 from "~icons/lucide/loader-2";
   import Play from "~icons/nucleo/play";
   import Power from "~icons/nucleo/power";
@@ -9,21 +11,35 @@
   import RotateCw from "~icons/nucleo/rotate-cw";
   import { confirmDestructive } from "./confirm.svelte";
   import { getDemo } from "./context";
+  import type { ServerTab } from "./demo-state.svelte";
   import { getErrorMessage } from "./format";
   import { serverTabs } from "./server-detail";
-  import Networking from "./tabs/networking.svelte";
   import Overview from "./tabs/overview.svelte";
-  import Resize from "./tabs/resize.svelte";
-  import Settings from "./tabs/settings.svelte";
 
   type PowerAction = "start" | "shutdown" | "kill" | "restart";
 
-  const tabPages = {
-    networking: Networking,
-    overview: Overview,
-    resize: Resize,
-    settings: Settings,
+  const deferredTabPages = {
+    networking: () => import("./tabs/networking.svelte"),
+    resize: () => import("./tabs/resize.svelte"),
+    settings: () => import("./tabs/settings.svelte"),
   };
+
+  const tabPages = $state<Partial<Record<ServerTab, Component>>>({
+    overview: Overview,
+  });
+
+  function loadDeferredTabPages() {
+    for (const [tab, load] of Object.entries(deferredTabPages)) {
+      load().then((module) => {
+        tabPages[tab as ServerTab] = module.default;
+      });
+    }
+  }
+
+  onMount(() => {
+    const timer = setTimeout(loadDeferredTabPages, 1000);
+    return () => clearTimeout(timer);
+  });
 
   interface StatusSource {
     liveLoaded?: boolean;
@@ -226,31 +242,41 @@
   </div>
 </div>
 
-<div
-  class="flex shrink-0 items-center gap-0 overflow-x-auto border-b border-border px-2"
+<Tabs.Root
+  class="min-h-0 flex-1 gap-0"
+  onValueChange={(tab) => {
+    loadDeferredTabPages();
+    demo.activeTab = tab as ServerTab;
+  }}
+  value={activeTab}
 >
-  {#each visibleServerTabs as tab (tab.id)}
-    <button
-      aria-current={activeTab === tab.id ? "page" : undefined}
-      class="flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium transition-colors duration-100 {activeTab ===
-      tab.id
-        ? "border-b-2 border-red-500 text-foreground"
-        : "text-muted-foreground hover:text-foreground"}"
-      onclick={() => {
-        demo.activeTab = tab.id;
-      }}
-      type="button"
-    >
-      <tab.icon class="h-3 w-3" />
-      {tab.label}
-    </button>
-  {/each}
-</div>
+  <Tabs.List
+    class="h-auto! w-full shrink-0 justify-start gap-0 overflow-x-auto border-b border-border p-0 px-2"
+    variant="line"
+  >
+    {#each visibleServerTabs as tab (tab.id)}
+      <Tabs.Trigger
+        class="h-auto flex-none gap-1.5 rounded-none border-0 px-3 py-2.5 text-xs group-data-horizontal/tabs:after:bottom-0 after:bg-red-500"
+        value={tab.id}
+      >
+        <tab.icon class="h-3 w-3" />
+        {tab.label}
+      </Tabs.Trigger>
+    {/each}
+  </Tabs.List>
 
-<div
-  class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden"
->
-  {#key selectedServer.id}
-    <TabPage />
-  {/key}
-</div>
+  {#each visibleServerTabs as tab (tab.id)}
+    <Tabs.Content
+      class="flex min-h-0 flex-1 flex-col overflow-y-auto @min-[64rem]:overflow-hidden"
+      value={tab.id}
+    >
+      {#if tab.id === activeTab}
+        {#key selectedServer.id}
+          {#if TabPage}
+            <TabPage />
+          {/if}
+        {/key}
+      {/if}
+    </Tabs.Content>
+  {/each}
+</Tabs.Root>

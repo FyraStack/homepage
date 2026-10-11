@@ -1,8 +1,8 @@
-import Cpu from "@lucide/svelte/icons/cpu";
-import HardDrive from "@lucide/svelte/icons/hard-drive";
-import ReceiptText from "@lucide/svelte/icons/receipt-text";
-import SquareTerminal from "@lucide/svelte/icons/square-terminal";
 import type { Component } from "svelte";
+import Cpu from "~icons/nucleo/cpu";
+import HardDrive from "~icons/nucleo/hard-drive";
+import ReceiptText from "~icons/nucleo/receipt";
+import SquareTerminal from "~icons/nucleo/square-terminal";
 
 export interface DocHeading {
   depth: number;
@@ -28,7 +28,7 @@ export type DocPage = DocMetadata & {
 
 export interface DocSection {
   description: string;
-  icon: Component<{ class?: string; strokeWidth?: number }>;
+  icon: Component<{ class?: string }>;
   id: string;
   pages: DocPage[];
   title: string;
@@ -67,6 +67,7 @@ const metadataByPath = import.meta.glob<DocMetadata>(
   {
     eager: true,
     import: "metadata",
+    query: "?metadata",
   }
 );
 

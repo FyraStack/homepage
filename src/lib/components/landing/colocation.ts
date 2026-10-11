@@ -1,10 +1,7 @@
-import Cpu from "@lucide/svelte/icons/cpu";
-import Globe from "@lucide/svelte/icons/globe";
-import PlugZap from "@lucide/svelte/icons/plug-zap";
-import ReceiptText from "@lucide/svelte/icons/receipt-text";
-
-export const colocationInquiryUrl =
-  "mailto:support@fyrastack.com?subject=Colocation%20inquiry";
+import Cpu from "~icons/nucleo/cpu";
+import Globe from "~icons/nucleo/globe";
+import PlugZap from "~icons/nucleo/plug";
+import ReceiptText from "~icons/nucleo/receipt";
 
 export const colocationFeatures = [
   {
@@ -20,26 +17,11 @@ export const colocationFeatures = [
   {
     description: "Providing low-latency access to the entire US on our network",
     icon: Globe,
-    title: "Midwest proud",
+    title: "Close to your users",
   },
   {
     description: "No hidden power fees, no egress charges, no surprise bills",
     icon: ReceiptText,
     title: "Honest pricing",
-  },
-];
-
-export const colocationSteps = [
-  {
-    description: "Send us your plan, hardware details, and power needs.",
-    title: "Tell us what you're racking",
-  },
-  {
-    description: "We'll confirm availability and share shipping instructions.",
-    title: "Ship it to Chicago",
-  },
-  {
-    description: "We'll send an invoice once your server is racked.",
-    title: "We rack it",
   },
 ];

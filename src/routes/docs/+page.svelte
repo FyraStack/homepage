@@ -1,18 +1,21 @@
 <script lang="ts">
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right";
-  import Copy from "@lucide/svelte/icons/copy";
-  import LifeBuoy from "@lucide/svelte/icons/life-buoy";
-  import Package from "@lucide/svelte/icons/package";
-  import Server from "@lucide/svelte/icons/server";
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
   import { Button } from "$lib/components/ui/button";
   import { docSections } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { cn } from "$lib/utils";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import ArrowUpRight from "~icons/nucleo/arrow-up-right";
+  import Package from "~icons/nucleo/box";
+  import Copy from "~icons/nucleo/copy";
+  import LifeBuoy from "~icons/nucleo/life-ring";
+  import Server from "~icons/nucleo/server";
+  import type { PageProps } from "./$types";
 
-  const discordUrl = "#";
+  let { data }: PageProps = $props();
+
+  const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
   const startHere = [
     {
@@ -31,7 +34,7 @@
       title: "I'm shipping hardware",
     },
     {
-      description: "Tickets go straight to the engineers who run the racks.",
+      description: "Tickets go straight to the team.",
       href: resolve("/docs/[section]/[slug]", {
         section: "account-billing",
         slug: "support",
@@ -43,20 +46,18 @@
 
   const shippingAddress =
     "Fyra Stack Limited\n5206 N Damen Ave\nChicago, IL 60625";
-
-  const firstCommands = [
-    "ssh root@<your-server-ip>",
-    "dnf upgrade --refresh -y",
-    "useradd -m -G wheel stackuser && passwd stackuser",
-    "sudoedit /etc/ssh/sshd_config",
-  ];
 </script>
 
 <svelte:head>
   <title>Docs · Fyra Stack</title>
+  <meta content="Docs · Fyra Stack" property="og:title">
   <meta
     content="Guides, references, and answers for getting your Fyra Stack VPS or colocation slot up and running."
     name="description"
+  >
+  <meta
+    content="Guides, references, and answers for getting your Fyra Stack VPS or colocation slot up and running."
+    property="og:description"
   >
 </svelte:head>
 
@@ -65,7 +66,7 @@
 )}
   <span
     class={cn(
-      "border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em]",
+      "border px-1.5 py-0.5 text-xs",
       who === "Us"
         ? "border-brand-yellow text-brand-yellow"
         : "border-border text-muted-foreground"
@@ -106,7 +107,7 @@
                 <span
                   class="grid size-9 shrink-0 place-items-center border border-border"
                 >
-                  <item.icon class="size-4" strokeWidth={1.75} />
+                  <item.icon class="size-4" />
                 </span>
                 <span class="flex flex-1 flex-col gap-0.5">
                   <span class="text-[15px] font-medium">{item.title}</span>
@@ -145,7 +146,7 @@
               class="group flex flex-col gap-3"
               href={resolve("/docs/[section]", { section: section.id })}
             >
-              <section.icon class="size-5" strokeWidth={1.5} />
+              <section.icon class="size-5" />
               <h3
                 class="text-xl font-semibold tracking-[-0.015em] group-hover:text-gray-300"
               >
@@ -178,7 +179,7 @@
                       {page.title}
                       {#if !page.supported}
                         <span
-                          class="border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
+                          class="border border-border px-1.5 py-0.5 text-xs text-muted-foreground"
                         >
                           Soon
                         </span>
@@ -238,7 +239,7 @@
             </p>
             <a
               class="flex items-center gap-1.5 self-start text-[15px] font-medium hover:text-gray-300"
-              href="{resolve("/colocation")}#inquiry"
+              href="{resolve("/")}#colocation-inquiry"
             >
               Get in touch <ArrowRight class="size-3.5" />
             </a>
@@ -275,11 +276,7 @@
               data-copy-source={shippingAddress}
             >
               <div class="flex flex-col gap-3">
-                <span
-                  class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-                >
-                  Ship to
-                </span>
+                <span class="text-sm text-muted-foreground"> Ship to </span>
                 <address
                   class="font-mono text-sm/[21px] whitespace-pre-line not-italic"
                 >
@@ -329,7 +326,7 @@
               Update the system, add your own user, and lock down SSH before you
               do anything else.
             </p>
-            <figure class="docs-code">
+            <figure class="docs-code docs-code-prompt">
               <figcaption class="docs-code-header">
                 <span>Fedora Server</span>
                 <button
@@ -341,11 +338,7 @@
                   Copy
                 </button>
               </figcaption>
-              <pre data-copy-source={firstCommands.join("\n")}><code
-									>{#each firstCommands as command (command)}<span class="block"
-											><span class="text-muted-foreground select-none">$ </span>{command}</span
-										>{/each}</code
-								></pre>
+              {@html data.firstCommandsHtml}
             </figure>
           </div>
         </li>
@@ -364,14 +357,14 @@
             Can't find what you need?
           </h2>
           <p class="text-[15px] text-muted-foreground">
-            Open a ticket and the people who run the racks will answer it.
+            Open a ticket and the team will answer it.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
           <Button
             class="h-auto gap-2 py-2 pl-3.5 has-data-[icon=inline-end]:pr-2.5"
             href="mailto:support@fyrastack.com"
-            variant="outline"
+            variant="accent"
           >
             Contact support <ArrowRight data-icon="inline-end" />
           </Button>
@@ -380,7 +373,7 @@
             href={discordUrl}
             variant="ghost"
           >
-            Ask on Discord <ArrowRight data-icon="inline-end" />
+            Ask on Discord
           </Button>
         </div>
       </div>

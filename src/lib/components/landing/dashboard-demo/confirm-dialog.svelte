@@ -2,6 +2,7 @@
   import { tick } from "svelte";
   import { Button } from "$lib/components/ui/button";
   import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
   import { confirmController } from "./confirm.svelte";
 
   let typed = $state("");
@@ -26,7 +27,7 @@
     if (ok && !canConfirm) {
       return;
     }
-    confirmController.resolve(ok);
+    confirmController.settleOnce(ok);
     confirmController.open = false;
   }
 
@@ -44,7 +45,6 @@
 <svelte:window onkeydown={onKeydown} />
 
 {#if confirmController.open}
-  <!-- z above bits-ui dialogs (z-50) so a confirm opened from another dialog sits on top -->
   <div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
     <button
       aria-label="Cancel"
@@ -67,14 +67,14 @@
       </p>
       {#if needsWord}
         <div class="mt-4 space-y-1.5">
-          <label
-            class="block text-xs text-muted-foreground"
+          <Label
+            class="block text-xs/4 font-normal text-muted-foreground"
             for="confirm-name-input"
           >
             Type
             <span class="font-mono text-foreground">{req?.confirmWord}</span>
             to confirm
-          </label>
+          </Label>
           <Input
             autocapitalize="off"
             autocomplete="off"

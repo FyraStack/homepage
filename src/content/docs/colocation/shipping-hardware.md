@@ -10,7 +10,7 @@ Before your server can go live in our Chicago DC, we need to receive it at our o
 
 ## Before You Ship
 
-[Fill out this form](/colocation#inquiry) before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
+[Fill out this form](/#colocation-inquiry) before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
 
 ---
 

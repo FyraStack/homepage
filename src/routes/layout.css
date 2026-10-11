@@ -2,10 +2,46 @@
 @import "tw-animate-css";
 @import "shadcn-svelte/tailwind.css";
 
-@import "@fontsource-variable/inter";
 @import "@fontsource-variable/jetbrains-mono";
 
 @plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Satoshi Variable";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi Variable";
+  src: url("/fonts/Satoshi-VariableItalic.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi Variable Fallback";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo");
+  size-adjust: 106.99%;
+  ascent-override: 94.4%;
+  descent-override: 22.43%;
+  line-gap-override: 9.35%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Variable Fallback";
+  src:
+    local("Courier New"), local("CourierNewPSMT"), local("Liberation Mono"),
+    local("Cousine");
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -116,9 +152,12 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    "Satoshi Variable", "Satoshi Variable Fallback", ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono:
-    "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+    "JetBrains Mono Variable", "JetBrains Mono Variable Fallback", ui-monospace,
+    SFMono-Regular, Menlo, monospace;
   --radius-xs: 0;
   --radius-sm: 0;
   --radius-md: 0;
@@ -143,7 +182,6 @@
     }
   }
   body {
-    font-feature-settings: "ss01", "ss02";
     background-color: var(--background);
     @apply text-foreground antialiased;
   }
@@ -216,5 +254,11 @@
     scrollbar-color: var(--gray-600) transparent;
     scrollbar-width: thin;
     background-color: transparent !important;
+  }
+
+  .docs-code-prompt .line::before {
+    color: var(--muted-foreground);
+    user-select: none;
+    content: "$ ";
   }
 }

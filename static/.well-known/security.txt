@@ -1,0 +1,4 @@
+Contact: mailto:support@fyrastack.com
+Expires: 2027-10-11T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://fyrastack.com/.well-known/security.txt

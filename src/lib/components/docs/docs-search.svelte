@@ -56,10 +56,13 @@
 </script>
 
 <script lang="ts">
-  import Search from "@lucide/svelte/icons/search";
+  import { Command as CommandPrimitive } from "bits-ui";
   import { resolve } from "$app/paths";
+  import * as Command from "$lib/components/ui/command";
   import * as Dialog from "$lib/components/ui/dialog";
+  import * as InputGroup from "$lib/components/ui/input-group";
   import { cn } from "$lib/utils";
+  import Search from "~icons/nucleo/search";
 
   let {
     shortcut = true,
@@ -127,8 +130,8 @@
   }}
   type="button"
 >
-  <Search class="size-4 shrink-0" strokeWidth={1.75} />
-  <span class="flex-1 truncate">Search the docs...</span>
+  <Search class="size-4 shrink-0" />
+  <span class="flex-1 truncate">Search docs...</span>
   <kbd
     class="hidden border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] sm:inline"
     >⌘K</kbd
@@ -141,61 +144,76 @@
     showCloseButton={false}
   >
     <Dialog.Title class="sr-only">Search the docs</Dialog.Title>
-    <label class="flex items-center gap-3 border-b border-border px-4">
-      <Search
-        class="size-4 shrink-0 text-muted-foreground"
-        strokeWidth={1.75}
-      />
-      <input
-        aria-label="Search the docs"
-        class="h-13 flex-1 bg-transparent text-[15px] outline-none placeholder:text-muted-foreground"
-        placeholder="Search the docs..."
-        bind:value={query}
+    <Command.Root class="rounded-none! bg-background p-0" shouldFilter={false}>
+      <InputGroup.Root
+        class="h-13 rounded-none border-0 bg-transparent px-1.5 has-[[data-slot=input-group-control]:focus-visible]:ring-0 dark:bg-transparent"
       >
-    </label>
-    <div class="max-h-[50vh] overflow-y-auto">
-      {#if unavailable}
-        <p class="px-4 py-8 text-center text-sm text-muted-foreground">
-          {#if dev}
-            Search runs on the production build. Use
-            <code class="font-mono text-foreground">pnpm preview</code>
-            to try it.
+        <InputGroup.Addon>
+          <Search class="size-4" />
+        </InputGroup.Addon>
+        <CommandPrimitive.Input bind:value={query}>
+          {#snippet child({
+            props,
+          })}
+            <InputGroup.Input
+              {...props}
+              aria-label="Search the docs"
+              class="text-[15px] md:text-[15px]"
+              placeholder="Search docs..."
+              bind:value={query}
+            />
+          {/snippet}
+        </CommandPrimitive.Input>
+      </InputGroup.Root>
+      {#if query.trim()}
+        <Command.List class="max-h-[50vh] border-t border-border">
+          {#if unavailable}
+            <p class="px-4 py-8 text-center text-sm text-muted-foreground">
+              {#if dev}
+                Search runs on the production build. Use
+                <code class="font-mono text-foreground">pnpm preview</code>
+                to try it.
+              {:else}
+                Search isn't available right now. Try again after the next
+                deploy.
+              {/if}
+            </p>
           {:else}
-            Search isn't available right now. Try again after the next deploy.
+            <Command.Empty class="px-4 py-8 text-muted-foreground">
+              No results for “{query.trim()}”
+            </Command.Empty>
+            <Command.Group class="p-2">
+              {#each results as result (result.url)}
+                <Command.LinkItem
+                  class="cursor-pointer flex-col items-start gap-1.5 rounded-none! px-3 py-3.5 data-selected:bg-gray-850"
+                  href={resolve("/docs/[section]/[slug]", result.route)}
+                  onSelect={() => {
+                    open = false;
+                  }}
+                  value={result.url}
+                >
+                  <span class="text-[15px] font-medium"
+                    >{result.meta.title}</span
+                  >
+                  <span
+                    class="line-clamp-2 text-[13px]/[22px] text-muted-foreground"
+                  >
+                    {#each excerptParts(result.excerpt) as part, index (index)}
+                      {#if part.highlighted}
+                        <mark class="bg-primary/15 px-0.5 text-brand-coral"
+                          >{part.text}</mark
+                        >
+                      {:else}
+                        {part.text}
+                      {/if}
+                    {/each}
+                  </span>
+                </Command.LinkItem>
+              {/each}
+            </Command.Group>
           {/if}
-        </p>
-      {:else if query.trim() && results.length === 0}
-        <p class="px-4 py-8 text-center text-sm text-muted-foreground">
-          No results for “{query.trim()}”
-        </p>
-      {:else}
-        <ul>
-          {#each results as result (result.url)}
-            <li>
-              <a
-                class="flex flex-col gap-1 border-b border-border/60 px-4 py-3 transition-colors hover:bg-gray-850"
-                href={resolve("/docs/[section]/[slug]", result.route)}
-                onclick={() => {
-                  open = false;
-                }}
-              >
-                <span class="text-sm font-medium">{result.meta.title}</span>
-                <span class="line-clamp-2 text-[13px]/5 text-muted-foreground">
-                  {#each excerptParts(result.excerpt) as part, index (index)}
-                    {#if part.highlighted}
-                      <mark class="bg-transparent text-foreground"
-                        >{part.text}</mark
-                      >
-                    {:else}
-                      {part.text}
-                    {/if}
-                  {/each}
-                </span>
-              </a>
-            </li>
-          {/each}
-        </ul>
+        </Command.List>
       {/if}
-    </div>
+    </Command.Root>
   </Dialog.Content>
 </Dialog.Root>

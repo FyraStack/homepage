@@ -92,6 +92,26 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
     gl.linkProgram(program);
     return gl.getProgramParameter(program, gl.LINK_STATUS) ? program : null;
   }
+
+  function centerAnchoredCells(length: number, cellSize: number) {
+    const anchor = Math.floor(0.5 * length + 0.5);
+    const first = Math.floor(-anchor / cellSize);
+    const last = Math.floor((length - 1 - anchor) / cellSize);
+    return {
+      count: last - first + 1,
+      first,
+      offset: anchor + first * cellSize,
+    };
+  }
+
+  function afterPageLoad(callback: () => void) {
+    if (document.readyState === "complete") {
+      callback();
+      return () => undefined;
+    }
+    window.addEventListener("load", callback, { once: true });
+    return () => window.removeEventListener("load", callback);
+  }
 </script>
 
 <script lang="ts">
@@ -111,14 +131,11 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
     class?: string;
   } = $props();
 
+  let container = $state<HTMLDivElement>();
   let canvas = $state<HTMLCanvasElement>();
   let rendering = $state(false);
 
-  onMount(() => {
-    const element = canvas;
-    if (!element) {
-      return;
-    }
+  function startDither(area: HTMLDivElement, element: HTMLCanvasElement) {
     const gl = element.getContext("webgl", {
       antialias: false,
       premultipliedAlpha: false,
@@ -132,6 +149,7 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
     }
 
     const config = { ...defaultSettings, ...settings };
+    config.pxSize = Math.max(1, Math.round(config.pxSize));
     gl.useProgram(program);
 
     const buffer = gl.createBuffer();
@@ -153,13 +171,23 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       gl.uniform3fv(uniform(`u_${key}`), hexToRgb(hex));
     }
     const resolutionLocation = uniform("u_resolution");
+    const cellOffsetLocation = uniform("u_cellOffset");
     const timeLocation = uniform("u_time");
 
     const resize = () => {
-      element.width = Math.max(1, Math.round(element.clientWidth));
-      element.height = Math.max(1, Math.round(element.clientHeight));
-      gl.viewport(0, 0, element.width, element.height);
-      gl.uniform2f(resolutionLocation, element.width, element.height);
+      const width = Math.max(1, area.clientWidth);
+      const height = Math.max(1, area.clientHeight);
+      const columns = centerAnchoredCells(width, config.pxSize);
+      const rows = centerAnchoredCells(height, config.pxSize);
+      element.width = columns.count;
+      element.height = rows.count;
+      element.style.left = `${columns.offset}px`;
+      element.style.bottom = `${rows.offset}px`;
+      element.style.width = `${columns.count * config.pxSize}px`;
+      element.style.height = `${rows.count * config.pxSize}px`;
+      gl.viewport(0, 0, columns.count, rows.count);
+      gl.uniform2f(resolutionLocation, width, height);
+      gl.uniform2f(cellOffsetLocation, columns.first, rows.first);
     };
 
     const draw = (seconds: number) => {
@@ -204,13 +232,13 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       resize();
       draw(shaderSeconds);
     });
-    resizeObserver.observe(element);
+    resizeObserver.observe(area);
 
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       sync();
     });
-    intersectionObserver.observe(element);
+    intersectionObserver.observe(area);
     reducedMotion.addEventListener("change", sync);
 
     return () => {
@@ -219,6 +247,22 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       intersectionObserver.disconnect();
       reducedMotion.removeEventListener("change", sync);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
+    };
+  }
+
+  onMount(() => {
+    const area = container;
+    const element = canvas;
+    if (!(area && element)) {
+      return;
+    }
+    let stopDither: (() => void) | undefined;
+    const cancelStart = afterPageLoad(() => {
+      stopDither = startDither(area, element);
+    });
+    return () => {
+      cancelStart();
+      stopDither?.();
     };
   });
 </script>
@@ -232,6 +276,7 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
 <div
   aria-hidden="true"
   class={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+  bind:this={container}
 >
   <img
     alt=""
@@ -243,7 +288,7 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
   >
   <canvas
     class={cn(
-      "absolute inset-0 size-full transition-opacity duration-700 [image-rendering:pixelated]",
+      "absolute transition-opacity duration-700 [image-rendering:pixelated]",
       rendering ? "opacity-100" : "opacity-0"
     )}
     bind:this={canvas}

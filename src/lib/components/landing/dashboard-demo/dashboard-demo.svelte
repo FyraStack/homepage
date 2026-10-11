@@ -14,11 +14,25 @@
   import { setDemo } from "./context";
   import { DemoState } from "./demo-state.svelte";
   import ServersLayout from "./servers-layout.svelte";
+  import TryItDialog from "./try-it-dialog.svelte";
 
   let {
     createServerUrl,
+    dashboardUrl,
     class: className,
-  }: { createServerUrl: string; class?: string } = $props();
+    style,
+  }: {
+    createServerUrl: string;
+    dashboardUrl: string;
+    class?: string;
+    style?: string;
+  } = $props();
+
+  let tryItOpen = $state(false);
+
+  function showTryIt() {
+    tryItOpen = true;
+  }
 
   const demo = new DemoState();
   setDemo(demo);
@@ -46,6 +60,7 @@
     className
   )}
   id="dashboard-demo"
+  {style}
 >
   <BitsConfig defaultPortalTo="#dashboard-demo">
     <header
@@ -59,12 +74,14 @@
           >
         </span>
         <span class="text-sm text-muted-foreground">/</span>
-        <span
-          class="flex min-w-0 items-center gap-1 px-1.5 py-0.5 text-sm font-medium text-foreground"
+        <button
+          class="flex min-w-0 items-center gap-1 px-1.5 py-0.5 text-sm font-medium text-foreground hover:bg-muted/50"
+          onclick={showTryIt}
+          type="button"
         >
           <span class="truncate">Acme</span>
           <ChevronDown class="h-3 w-3 shrink-0 text-muted-foreground" />
-        </span>
+        </button>
         <span class="hidden text-sm text-muted-foreground @min-[64rem]:inline"
           >/</span
         >
@@ -76,8 +93,10 @@
       </div>
 
       <div class="flex min-w-0 flex-1 items-center justify-end gap-3">
-        <span
-          class="flex shrink-0 items-center gap-2 border border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground"
+        <button
+          class="flex shrink-0 items-center gap-2 border border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
+          onclick={showTryIt}
+          type="button"
         >
           <Search class="h-3 w-3" />
           <span class="hidden @min-[40rem]:inline">Search...</span>
@@ -85,9 +104,13 @@
             class="ml-2 hidden border border-border bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground @min-[40rem]:inline-block"
             >⌘K</kbd
           >
-        </span>
+        </button>
 
-        <span class="flex min-w-0 items-center gap-2.5 rounded-xs px-2 py-1">
+        <button
+          class="flex min-w-0 items-center gap-2.5 rounded-xs px-2 py-1 hover:bg-muted/50"
+          onclick={showTryIt}
+          type="button"
+        >
           <span class="hidden min-w-0 text-right @min-[40rem]:block">
             <span
               class="block truncate text-sm leading-tight font-medium text-foreground"
@@ -100,10 +123,10 @@
           </span>
           <Avatar.Root class="h-8 w-8 shrink-0 border border-border">
             <Avatar.Fallback class="bg-muted text-xs text-muted-foreground"
-              >JD</Avatar.Fallback
+              >AL</Avatar.Fallback
             >
           </Avatar.Root>
-        </span>
+        </button>
       </div>
     </header>
 
@@ -123,6 +146,7 @@
                   class="flex h-8 w-8 items-center justify-center transition-colors duration-100 {item.active
                     ? "border border-red-500 text-foreground"
                     : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}"
+                  onclick={item.active ? undefined : showTryIt}
                   type="button"
                 >
                   <item.icon class="h-4 w-4" />
@@ -142,5 +166,6 @@
     </div>
     <Toaster position="top-center" theme="dark" />
     <ConfirmDialog />
+    <TryItDialog {dashboardUrl} bind:open={tryItOpen} />
   </BitsConfig>
 </section>

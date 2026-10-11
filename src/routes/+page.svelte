@@ -1,22 +1,20 @@
 <script lang="ts">
-  import ArrowRight from "@lucide/svelte/icons/arrow-right";
-  import Check from "@lucide/svelte/icons/check";
-  import Cpu from "@lucide/svelte/icons/cpu";
-  import Gauge from "@lucide/svelte/icons/gauge";
-  import HardDrive from "@lucide/svelte/icons/hard-drive";
-  import LifeBuoy from "@lucide/svelte/icons/life-buoy";
-  import Network from "@lucide/svelte/icons/network";
-  import ReceiptText from "@lucide/svelte/icons/receipt-text";
-  import Server from "@lucide/svelte/icons/server";
-  import Zap from "@lucide/svelte/icons/zap";
+  import { prefersReducedMotion } from "svelte/motion";
+  import { fly } from "svelte/transition";
+  import { replaceState } from "$app/navigation";
   import { resolve } from "$app/paths";
-  import ctaDither from "$lib/assets/cta-dither.png";
-  import heroDither from "$lib/assets/hero-dither.png";
-  import {
-    colocationFeatures,
-    colocationSteps,
-  } from "$lib/components/landing/colocation";
-  import ColocationRack from "$lib/components/landing/colocation-rack.svelte";
+  import { page } from "$app/state";
+  import ctaDither from "$lib/assets/cta-dither.webp";
+  import heroDither from "$lib/assets/hero-dither.webp";
+  import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
+  import fyraLabsPreview from "$lib/assets/projects/fyralabs-preview.webp";
+  import terraLogo from "$lib/assets/projects/terra.svg";
+  import terraPreview from "$lib/assets/projects/terra-preview.webp";
+  import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
+  import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
+  import BlurTypeWord from "$lib/components/landing/blur-type-word.svelte";
+  import { colocationFeatures } from "$lib/components/landing/colocation";
+  import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
   import DashboardDemo from "$lib/components/landing/dashboard-demo/dashboard-demo.svelte";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
@@ -26,38 +24,69 @@
     planSpecs,
     plans,
   } from "$lib/components/landing/plans";
-  import StackMark from "$lib/components/landing/stack-mark.svelte";
+  import ProjectLink from "$lib/components/landing/project-link.svelte";
+  import RollingPrice from "$lib/components/landing/rolling-price.svelte";
+  import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Slider } from "$lib/components/ui/slider";
+  import * as RadioGroup from "$lib/components/ui/radio-group";
+  import * as Tooltip from "$lib/components/ui/tooltip";
+  import { homeJsonLd } from "$lib/structured-data";
+  import ArrowRight from "~icons/nucleo/arrow-right";
+  import Check from "~icons/nucleo/check";
+  import CornerLeftUp from "~icons/nucleo/corner-left-up";
+  import CornerRightUp from "~icons/nucleo/corner-right-up";
+  import Cpu from "~icons/nucleo/cpu";
+  import DoorOpen from "~icons/nucleo/door-open";
+  import Gauge from "~icons/nucleo/gauge";
+  import HardDrive from "~icons/nucleo/hard-drive";
+  import LifeBuoy from "~icons/nucleo/life-ring";
+  import Network from "~icons/nucleo/network";
+  import ReceiptText from "~icons/nucleo/receipt";
+  import Server from "~icons/nucleo/server";
 
   const dashboardUrl = "https://dash.fyrastack.com";
   const createServerUrl = `${dashboardUrl}/servers/new`;
   const signUpUrl = dashboardUrl;
-  const salesUrl = "mailto:support@fyrastack.com?subject=Sales%20question";
-  const discordUrl = "#";
+  const salesUrl = `${resolve("/about")}#contact`;
+  const discordUrl = "https://discord.gg/YwzKxUBu4U";
+
+  const heroWords = [
+    "stack",
+    "database",
+    "app",
+    "website",
+    "API",
+    "CI runners",
+    "game server",
+    "Git forge",
+    "Discord bot",
+    "Mastodon",
+  ];
+
+  const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
+  const demoFitStyle = `width: ${demoWidth}; zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
 
   const whyFeatures = [
     {
-      description:
-        "Fast storage, fast compute, fast networking, fast everything",
-      icon: Zap,
-      title: "Fast by default",
+      description: actuallyOpenDescription,
+      icon: DoorOpen,
+      title: "Actually open",
     },
     {
       description:
-        "Built on infrastructure we own, we don't resell another provider",
+        "Built on infrastructure we own, we don't resell another provider's compute",
       icon: Server,
-      title: "Independent",
+      title: "Our metal",
     },
     {
-      description: "By the engineers that actually maintain the servers",
+      description: "As easy as running into a coworker",
       icon: LifeBuoy,
       title: "Real support",
     },
     {
-      description: "No hidden fees, no egress charges, no surprise bills",
+      description: predictablePricingDescription,
       icon: ReceiptText,
-      title: "Honest pricing",
+      title: "Predictable pricing",
     },
   ];
 
@@ -68,9 +97,9 @@
       title: "Intel Cascade Lake",
     },
     {
-      description: "Rated for datacenter write loads",
+      description: "Rated for data center write loads",
       icon: HardDrive,
-      title: "Enterprise SAS3 SSD",
+      title: "Enterprise SAS3 SSDs",
     },
     {
       description: "On every server",
@@ -84,33 +113,97 @@
     },
   ];
 
-  let comparisonIndex = $state(3);
-  const comparisonPlan = $derived(plans[comparisonIndex]);
-
   const included = [
     "Cascade Lake vCPUs",
     "Dedicated IPv4 + /64 IPv6",
     "Full root access",
-    "Out-of-band serial console",
     "Cancel anytime",
   ];
 
+  const colocationInquiryHash = "#colocation-inquiry";
+  let colocationInquiryOpen = $state(false);
+
+  $effect(() => {
+    if (page.url.hash === colocationInquiryHash) {
+      colocationInquiryOpen = true;
+    }
+  });
+
+  function openColocationInquiry() {
+    colocationInquiryOpen = true;
+  }
+
+  function clearColocationInquiryHash(open: boolean) {
+    if (!open && page.url.hash === colocationInquiryHash) {
+      replaceState(resolve("/"), page.state);
+    }
+  }
+
   let selectedName = $state(plans[0].name);
+  let hasPickedPlan = $state(false);
+  const swapDuration = $derived(prefersReducedMotion.current ? 0 : 220);
+
+  function markPlanPicked() {
+    hasPickedPlan = true;
+  }
   const selected = $derived(
     plans.find((option) => option.name === selectedName) ?? plans[0]
+  );
+  const comparisonOffers = $derived(
+    competitors.map((competitor) => ({
+      offer: competitor.offersByMemoryGb[selected.memoryGb],
+      provider: competitor.provider,
+    }))
+  );
+
+  const mockupNaturalWidth = 1280;
+  const mockupFrameHeight = 824;
+  let mockupFrameWidth = $state(mockupNaturalWidth);
+  const mockupScale = $derived(
+    Math.min(1, mockupFrameWidth / mockupNaturalWidth)
   );
 </script>
 
 <svelte:head>
-  <title>Fyra Stack · Infrastructure without breaking the bank</title>
+  <title>Fyra Stack · We run the servers, you run your stack</title>
   <meta
-    content="Fast, independent VPS hosting and colocation in Chicago from Fyra Labs. Plans start at $5/mo."
+    content="Fyra Stack · We run the servers, you run your stack"
+    property="og:title"
+  >
+  <meta
+    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
     name="description"
   >
+  <meta
+    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
+    property="og:description"
+  >
+  {@html homeJsonLd}
 </svelte:head>
 
+{#snippet actuallyOpenDescription()}
+  Our <TextLink href="https://github.com/FyraStack">code</TextLink>,
+  <TextLink href={discordUrl}>community</TextLink>, and
+  <TextLink href={resolve("/about")}>team</TextLink>
+  are open
+{/snippet}
+
+{#snippet predictablePricingDescription()}
+  No hidden fees, no egress charges, no surprise bills. No
+  <Tooltip.Root>
+    <Tooltip.Trigger
+      class="cursor-help underline decoration-gray-600 decoration-dotted underline-offset-4"
+      >calc</Tooltip.Trigger
+    >
+    <Tooltip.Content
+      >calc stands for calculator, we're just using slang.</Tooltip.Content
+    >
+  </Tooltip.Root>
+  needed
+{/snippet}
+
 <main>
-  <!-- Hero: dithered shader background and server dashboard mockup -->
+  <!-- Hero -->
   <section class="relative isolate overflow-hidden border-b border-border">
     <DitherBackground
       class="-z-10"
@@ -135,13 +228,22 @@
     />
 
     <div
-      class="page-container flex flex-col items-center gap-11 pt-16 sm:pt-18"
+      class="page-container flex flex-col items-center gap-11 pt-16 pb-16 sm:pt-18 md:pb-0"
     >
-      <div class="flex flex-col items-center gap-5 text-center">
+      <div
+        class="relative isolate flex flex-col items-center gap-5 text-center before:absolute before:-inset-x-10 before:-inset-y-12 before:-z-10 before:bg-[radial-gradient(closest-side,var(--color-background)_55%,transparent)] md:before:hidden"
+      >
         <h1
           class="max-w-250 text-[40px]/[1.08] font-semibold tracking-[-0.028em] text-balance sm:text-5xl/[1.06] lg:text-[64px]/[67px]"
         >
-          Infrastructure without breaking the bank, or your mind
+          <span class="sr-only">We run the servers, you run your stack</span>
+          <span aria-hidden="true"
+            >We run the servers,<br>
+            <span class="sm:whitespace-nowrap"
+              >you run your <br class="sm:hidden">
+              <BlurTypeWord words={heroWords} /></span
+            ></span
+          >
         </h1>
         <p
           class="max-w-155 text-base/7 text-pretty text-muted-foreground sm:text-lg/[29px]"
@@ -155,7 +257,7 @@
             href={createServerUrl}
             size="lg"
           >
-            Deploy a server <ArrowRight data-icon="inline-end" />
+            Deploy your Server <ArrowRight data-icon="inline-end" />
           </Button>
           <Button
             class="h-auto px-4 py-2.5 text-muted-foreground"
@@ -168,38 +270,70 @@
         </div>
       </div>
 
-      <div class="h-80 w-full overflow-hidden sm:h-110 lg:h-134 lg:px-16">
-        <DashboardDemo
-          class="h-200 w-360 [zoom:0.8] shadow-[0_24px_64px_#00000099] outline outline-offset-[-0.5px] outline-border"
-          {createServerUrl}
-        />
+      <div
+        class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
+      >
+        <div class="@container flex justify-center">
+          <DashboardDemo
+            class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+            createServerUrl={dashboardUrl}
+            {dashboardUrl}
+            style={demoFitStyle}
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About: "Stack is different" and the four value props -->
-  <section class="border-b border-border py-20 lg:py-28" id="about">
+  <!-- About -->
+  <section class="relative border-b border-border py-20 lg:py-28" id="about">
+    <div
+      class="absolute top-0 left-1/2 hidden -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 text-xs text-muted-foreground md:flex"
+    >
+      <CornerLeftUp class="size-3.5" />
+      Try me
+      <CornerRightUp class="size-3.5" />
+    </div>
     <div class="page-container">
-      <div class="flex max-w-155 flex-col gap-4 pb-14 lg:pb-18">
+      <div
+        class="flex flex-col justify-between gap-6 pb-12 md:flex-row md:gap-10 lg:pb-14"
+      >
         <h2
-          class="text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
+          class="shrink-0 text-[32px]/[1.15] font-semibold tracking-[-0.02em] sm:text-[40px]/[46px]"
         >
-          Stack is different
+          Why Stack?
         </h2>
-        <div
-          class="flex flex-col gap-3 pt-2 text-base/[26px] text-muted-foreground"
-        >
-          <p>
-            Stack is provided by Fyra Labs, the open source community that
-            develops Terra and Ultramarine Linux.
+        <div class="flex max-w-125 flex-col gap-3.5">
+          <p class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty">
+            Stack is built by
+            <ProjectLink
+              color="var(--accent)"
+              href="https://fyralabs.com"
+              logo={fyraLabsLogo}
+              preview={fyraLabsPreview}
+              >Fyra Labs</ProjectLink
+            >, the team that develops
+            <ProjectLink
+              color="#3388ff"
+              href="https://terrapkg.com"
+              logo={terraLogo}
+              preview={terraPreview}
+              >Terra</ProjectLink
+            >
+            and
+            <ProjectLink
+              color="#7c85ec"
+              href="https://ultramarine-linux.org"
+              logo={ultramarineLogo}
+              preview={ultramarinePreview}
+              >Ultramarine</ProjectLink
+            >.
           </p>
-          <p>
-            Everything we do is open source, and you can view and contribute to
-            the very code that powers your server.
-          </p>
-          <p>
-            We focus on servers that just work, built to support and use the
-            open source projects you love.
+          <p class="text-base/[26px] text-pretty text-muted-foreground">
+            We spent years scaling infrastructure to support open-source,
+            reaching millions of unique clients every month, quickly
+            discovering: hosting sucks. We're making it better, so you don't
+            suffer too.
           </p>
         </div>
       </div>
@@ -207,12 +341,16 @@
       <div class="grid gap-x-16 md:grid-cols-2">
         {#each whyFeatures as feature (feature.title)}
           <div class="flex flex-col gap-3 border-t border-border pt-6 pb-10">
-            <feature.icon class="size-5 text-foreground" strokeWidth={1.75} />
+            <feature.icon class="size-5 text-foreground" />
             <h3 class="text-lg font-semibold tracking-[-0.011em]">
               {feature.title}
             </h3>
             <p class="text-base/[26px] text-muted-foreground">
-              {feature.description}
+              {#if typeof feature.description === "string"}
+                {feature.description}
+              {:else}
+                {@render feature.description()}
+              {/if}
             </p>
           </div>
         {/each}
@@ -220,50 +358,45 @@
     </div>
   </section>
 
-  <!-- VPS: hardware pitch, create-server mockup, spec highlights -->
-  <section class="border-b border-border py-20 lg:py-30" id="vps">
+  <!-- VPS -->
+  <section class="border-b border-border py-20 md:pb-0 lg:pt-30" id="vps">
     <div class="page-container flex flex-col gap-16">
       <div class="flex flex-col justify-between gap-10 lg:flex-row">
         <h2
           class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
         >
-          We run the servers<br>
-          <span class="text-muted-foreground">You run your stack</span>
+          Easy to deploy<br>
+          <span class="text-muted-foreground">Hard to outgrow</span>
         </h2>
         <div class="flex max-w-125 flex-col gap-6">
           <div class="flex flex-col gap-3.5">
             <p
               class="text-xl/[29px] font-medium tracking-[-0.01em] text-pretty"
             >
-              Most budget providers cut corners on hardware to hit their price
-              points. We don't.
+              Other VPS providers cut corners to hit their price points. We
+              don't.
             </p>
             <p class="text-base/[26px] text-pretty text-muted-foreground">
-              Powered by Cascade Lake series CPUs, Dell PowerEdge servers, and
-              enterprise SSDs. We buy good hardware, run it efficiently, run a
-              small focused team, don't oversell, and charge a fair price. It's
-              boring, and it works!
+              We run a lean team, buy solid hardware, obsess over developer
+              experience, listen to our community, and build a product we
+              actually love to use.
             </p>
           </div>
           <Button
             class="h-auto self-start px-4 py-2.5"
             href="#pricing"
             size="lg"
-            variant="outline"
+            variant="accent"
           >
             See VPS plans
           </Button>
         </div>
       </div>
 
-      <div class="hidden overflow-x-clip md:block">
-        <CreateServerMockup />
-      </div>
-
       <ul class="grid gap-8 sm:grid-cols-2 lg:flex lg:justify-between">
         {#each vpsSpecs as spec (spec.title)}
           <li class="flex gap-3">
-            <spec.icon class="mt-0.5 size-4.5 shrink-0" strokeWidth={1.75} />
+            <spec.icon class="mt-0.5 size-4.5 shrink-0" />
             <div class="flex flex-col gap-1">
               <span class="text-[15px] font-medium">{spec.title}</span>
               <span class="text-sm text-muted-foreground"
@@ -273,234 +406,62 @@
           </li>
         {/each}
       </ul>
-    </div>
-  </section>
 
-  <!-- Calculator: plan-size slider compared against same-size competitor plans -->
-  <section class="border-b border-border py-20 lg:py-30">
-    <div class="page-container flex flex-col gap-14">
-      <div class="flex flex-col gap-5">
-        <h2 class="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
-          Stack, well... stacks up
-        </h2>
-        <p class="max-w-160 text-[17px]/[27px] text-muted-foreground">
-          Pick a plan size and see what the same machine costs elsewhere.
-        </p>
-      </div>
-
-      <div class="flex flex-col border border-border lg:flex-row">
-        <div class="flex flex-1 flex-col justify-center gap-14 p-6 sm:p-14">
-          <div class="flex flex-col gap-5">
-            <div class="flex items-baseline justify-between">
-              <span
-                class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-                id="plan-size-label"
-              >
-                Plan size
-              </span>
-              <output
-                class="text-[32px]/8 font-semibold tracking-[-0.025em]"
-                for="plan-size"
-              >
-                {comparisonPlan.name}
-              </output>
-            </div>
-            <Slider
-              aria-labelledby="plan-size-label"
-              class="h-6 **:data-[slot=slider-range]:bg-primary **:data-[slot=slider-thumb]:size-6 **:data-[slot=slider-thumb]:border-4 **:data-[slot=slider-thumb]:border-primary **:data-[slot=slider-thumb]:bg-foreground **:data-[slot=slider-thumb]:ring-primary/30 **:data-[slot=slider-track]:bg-gray-700"
-              id="plan-size"
-              max={plans.length - 1}
-              min={0}
-              step={1}
-              type="single"
-              bind:value={comparisonIndex}
-            />
-            <div
-              aria-hidden="true"
-              class="relative h-4 font-mono text-[10px] tracking-[0.04em]"
-            >
-              {#each plans as option, index (option.name)}
-                <button
-                  class={[
-                    "absolute top-0 -translate-x-1/2 transition-colors hover:text-foreground",
-                    index === comparisonIndex
-                      ? "text-foreground"
-                      : "text-muted-foreground",
-                  ]}
-                  onclick={() => {
-                    comparisonIndex = index;
-                  }}
-                  tabindex="-1"
-                  type="button"
-                  style:left="calc(0.75rem + (100% - 1.5rem) * {index /
-                    (plans.length - 1)})"
-                >
-                  {option.memoryGb}G
-                </button>
-              {/each}
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-2.5 rounded-md bg-gray-850 px-4 py-3.5 text-[13px] outline outline-offset-[-0.5px] outline-border"
-          >
-            <Server class="size-4 shrink-0" strokeWidth={1.75} />
-            {planSpecs(comparisonPlan)}
-          </div>
+      <div
+        class="relative hidden [clip-path:inset(-64px_0_0_0)] md:block"
+        style:height="{mockupFrameHeight * mockupScale}px"
+        bind:clientWidth={mockupFrameWidth}
+      >
+        <div style:zoom={mockupScale}>
+          <CreateServerMockup />
         </div>
-
         <div
-          aria-live="polite"
-          class="flex flex-col gap-8 border-t border-border bg-gray-850 p-6 sm:p-14 lg:w-140 lg:border-t-0 lg:border-l"
-        >
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-2">
-              <StackMark class="size-3.5" />
-              <span class="font-mono text-[11px] tracking-[0.11em] uppercase">
-                Stack · {comparisonPlan.name}
-              </span>
-            </div>
-            <div class="flex items-end gap-2">
-              <span
-                class="text-7xl/[0.9] font-semibold tracking-[-0.04em] tabular-nums sm:text-8xl/[86px]"
-              >
-                ${comparisonPlan.price}
-              </span>
-              <span class="text-xl text-muted-foreground">/mo</span>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <span
-              class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
-            >
-              Same size elsewhere
-            </span>
-            <ul>
-              {#each competitors as competitor (competitor.provider)}
-                {@const offer =
-                  competitor.offersByMemoryGb[comparisonPlan.memoryGb]}
-                <li
-                  class="flex items-center gap-4 border-b border-border py-4.5"
-                >
-                  <div class="flex flex-1 flex-col gap-1">
-                    <span class="text-[15px] font-medium"
-                      >{competitor.provider}</span
-                    >
-                    <span
-                      class="font-mono text-[10px] tracking-[0.06em] text-muted-foreground uppercase"
-                    >
-                      {offer
-                        ? offer.spec
-                        : `No ${comparisonPlan.memoryGb} GB plan`}
-                    </span>
-                  </div>
-                  {#if offer}
-                    <span class="text-sm text-muted-foreground tabular-nums"
-                      >{offer.approximate ? "~" : ""}${offer.price}/mo</span
-                    >
-                    <span
-                      class="w-24 text-right font-mono text-base font-semibold tabular-nums"
-                    >
-                      Save ${Math.max(0, offer.price - comparisonPlan.price)}
-                    </span>
-                  {:else}
-                    <span class="text-sm text-muted-foreground"
-                      >Not offered</span
-                    >
-                  {/if}
-                </li>
-              {/each}
-            </ul>
-          </div>
-
-          <Button
-            class="h-auto py-2.5"
-            href={createServerUrl}
-            size="lg"
-            variant="outline"
-          >
-            Deploy {comparisonPlan.name}
-          </Button>
-        </div>
+          class="absolute inset-x-0 bottom-0 h-14 bg-linear-to-b from-background/0 to-background"
+        ></div>
       </div>
     </div>
   </section>
 
-  <!-- Colocation: rack illustration, features, and how it works -->
+  <!-- Colocation: features -->
   <section class="border-b border-border py-20 lg:py-30" id="colocation">
-    <div class="page-container flex flex-col gap-24">
-      <div class="flex flex-col items-center gap-16 lg:flex-row lg:gap-24">
-        <ColocationRack />
-
-        <div class="flex flex-1 flex-col gap-12">
-          <div class="flex flex-col gap-5">
-            <h2
-              class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
-            >
-              Ship your hardware<br>We'll handle the rest
-            </h2>
-            <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
-              Colocation without the enterprise markup, mandatory contracts, or
-              fees for asking questions
-            </p>
-          </div>
-          <ul>
-            {#each colocationFeatures as feature (feature.title)}
-              <li class="flex gap-4 border-t border-border py-5">
-                <feature.icon
-                  class="mt-0.5 size-4.5 shrink-0"
-                  strokeWidth={1.75}
-                />
-                <div class="flex flex-col gap-1">
-                  <span class="text-[15px] font-semibold">{feature.title}</span>
-                  <span class="text-sm/[21px] text-muted-foreground"
-                    >{feature.description}</span
-                  >
-                </div>
-              </li>
-            {/each}
-          </ul>
-          <div class="flex flex-wrap items-center gap-3">
-            <Button
-              class="h-auto px-4 py-2.5"
-              href="{resolve("/colocation")}#inquiry"
-              size="lg"
-              variant="outline"
-            >
-              Start a colocation inquiry
-            </Button>
-            <Button
-              class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
-              href={resolve("/colocation")}
-              size="lg"
-              variant="ghost"
-            >
-              Colocation details <ArrowRight data-icon="inline-end" />
-            </Button>
-          </div>
+    <div class="page-container flex flex-col items-center gap-16">
+      <div class="flex flex-col items-center gap-8 text-center">
+        <div class="flex flex-col items-center gap-5">
+          <h2
+            class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
+          >
+            Ship your hardware<br>We handle the rest
+          </h2>
+          <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
+            Colocation without the enterprise markup or fees just for asking
+            questions
+          </p>
         </div>
+        <Button
+          class="h-auto px-4 py-2.5"
+          id="colocation-inquiry"
+          onclick={openColocationInquiry}
+          size="lg"
+          variant="accent"
+        >
+          Ship us your server
+        </Button>
       </div>
-
-      <div class="flex flex-col gap-6">
-        <h3 class="text-xl font-semibold tracking-[-0.02em]">How it works</h3>
-        <ol class="grid gap-10 md:grid-cols-3">
-          {#each colocationSteps as step, index (step.title)}
-            <li class="flex flex-col gap-2.5 border-t border-border pt-6">
-              <span
-                class="font-mono text-xs tracking-[0.1em] text-brand-yellow"
+      <ul
+        class="grid w-full gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {#each colocationFeatures as feature (feature.title)}
+          <li class="flex flex-col gap-4 bg-background p-6">
+            <feature.icon class="size-5 text-foreground" />
+            <div class="flex flex-col gap-1.5">
+              <span class="text-[15px] font-semibold">{feature.title}</span>
+              <span class="text-sm/[21px] text-pretty text-muted-foreground"
+                >{feature.description}</span
               >
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span class="text-lg font-semibold tracking-[-0.011em]"
-                >{step.title}</span
-              >
-              <span class="text-sm/[21px] text-muted-foreground"
-                >{step.description}</span
-              >
-            </li>
-          {/each}
-        </ol>
-      </div>
+            </div>
+          </li>
+        {/each}
+      </ul>
     </div>
   </section>
 
@@ -513,150 +474,174 @@
             Priced fairly
           </h2>
           <p class="text-[17px]/[27px] text-muted-foreground">
-            Simple, flat-rate plans with no surprise fees
+            Simple plans with no surprise fees
           </p>
         </div>
         <Button
-          class="h-auto self-start px-4 py-2.5 text-muted-foreground sm:self-auto"
+          class="h-auto self-start px-4 py-2.5 sm:self-auto"
           href={salesUrl}
           size="lg"
-          variant="ghost"
+          variant="accent"
         >
           Talk to sales
         </Button>
       </div>
 
-      <div class="flex flex-col gap-8 lg:flex-row lg:items-start">
-        <fieldset class="min-w-0 flex-1 overflow-x-auto border border-border">
-          <legend class="sr-only">Choose a VPS plan</legend>
-          <div class="min-w-180">
-            <div
-              aria-hidden="true"
-              class="flex items-center gap-4 py-3 pr-5 pl-14 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+      <div class="flex flex-col gap-8">
+        <RadioGroup.Root
+          aria-label="Choose a VPS plan"
+          class="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4"
+          onValueChange={markPlanPicked}
+          bind:value={selectedName}
+        >
+          {#each plans as plan (plan.name)}
+            {@const isSelected = plan.name === selectedName}
+            <label
+              class={[
+                "group relative flex cursor-pointer flex-col gap-4 bg-background p-5 transition-colors has-focus-visible:bg-gray-850",
+                isSelected
+                  ? "bg-gray-850 shadow-[inset_0_2px_0_var(--color-primary)]"
+                  : "hover:bg-gray-850/60",
+              ]}
+              for="plan-{plan.name}"
             >
-              <span class="flex-1">Plan</span>
-              <span class="w-24 normal-case">vCPU</span>
-              <span class="w-24">RAM</span>
-              <span class="w-42.5">Storage</span>
-              <span class="w-24 text-right">Price</span>
-            </div>
-            {#each plans as plan (plan.name)}
-              {@const isSelected = plan.name === selectedName}
-              <label
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-sm font-semibold">{plan.name}</span>
+                <RadioGroup.Item
+                  class="border-gray-600 group-hover:border-gray-500"
+                  id="plan-{plan.name}"
+                  value={plan.name}
+                />
+              </div>
+              <div class="flex items-end gap-1">
+                <span
+                  class="text-3xl font-semibold tracking-[-0.03em] tabular-nums"
+                  >${plan.price}</span
+                >
+                <span class="text-sm text-muted-foreground">/mo</span>
+              </div>
+              <span
                 class={[
-                  "group relative flex cursor-pointer items-center gap-4 border-t px-5 py-3.5 text-sm transition-colors has-focus-visible:bg-gray-850",
-                  isSelected
-                    ? "border-l-2 border-t-border border-l-primary bg-gray-850 pl-4.5"
-                    : "border-t-border hover:bg-gray-850/60",
+                  "text-[13px]",
+                  isSelected ? "text-foreground" : "text-muted-foreground",
                 ]}
               >
-                <input
-                  class="peer sr-only"
-                  name="plan"
-                  type="radio"
-                  value={plan.name}
-                  bind:group={selectedName}
-                >
-                <span
-                  class={[
-                    "grid size-5 place-items-center rounded-full",
-                    "peer-focus-visible:ring-2 peer-focus-visible:ring-ring/60",
-                  ]}
-                >
-                  <span
-                    class={[
-                      "size-3.5 rounded-full",
-                      isSelected
-                        ? "border-4 border-primary"
-                        : "border border-gray-600 group-hover:border-gray-500",
-                    ]}
-                  ></span>
-                </span>
-                <span class="flex-1 font-mono font-semibold whitespace-nowrap"
-                  >{plan.name}</span
-                >
-                <span class={["w-24", !isSelected && "text-gray-300"]}
-                  >{plan.vcpu}
-                  vCPU</span
-                >
-                <span class={["w-24", !isSelected && "text-gray-300"]}
-                  >{plan.memoryGb}
-                  GB</span
-                >
-                <span class={["w-42.5", !isSelected && "text-gray-300"]}>
-                  {plan.storageGb}
-                  GB SAS3 SSD
-                </span>
-                <span class="w-24 text-right font-semibold tabular-nums"
-                  >${plan.price}/mo</span
-                >
-              </label>
-            {/each}
-          </div>
-        </fieldset>
-
-        <aside
-          aria-live="polite"
-          class="flex flex-col gap-6 border border-border p-8 lg:w-100 lg:shrink-0"
-        >
-          <span
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
-          >
-            Selected plan
-          </span>
-          <div class="flex flex-col gap-2.5">
-            <span class="font-mono text-xl font-semibold">{selected.name}</span>
-            <div class="flex items-end gap-1.5">
-              <span
-                class="text-7xl/[65px] font-semibold tracking-[-0.04em] tabular-nums"
-              >
-                ${selected.price}
+                {plan.vcpu}
+                vCPU · {plan.memoryGb} GB · {plan.storageGb} GB SSD
               </span>
-              <span class="text-lg text-muted-foreground">/mo</span>
+            </label>
+          {/each}
+        </RadioGroup.Root>
+
+        <div
+          aria-live="polite"
+          class="grid grid-cols-1 border border-border lg:grid-cols-3"
+        >
+          <div class="flex flex-col justify-between gap-6 p-8">
+            <div class="flex flex-col gap-2.5">
+              <span class="font-mono text-xl font-semibold"
+                >{selected.name}</span
+              >
+              <div class="flex items-end gap-1.5">
+                <RollingPrice
+                  class="text-7xl/[65px] font-semibold tracking-[-0.04em] tabular-nums"
+                  value={selected.price}
+                />
+                <span class="text-lg text-muted-foreground">/mo</span>
+              </div>
+              <p class="text-[13px]/5 text-muted-foreground">
+                {planSpecs(selected)}<br>1 Gbps fair-use uplink
+              </p>
             </div>
-            <p class="text-[13px]/5 text-muted-foreground">
-              {planSpecs(selected)}<br>1 Gbps fair-use uplink
-            </p>
-          </div>
-          <div class="h-px bg-border"></div>
-          <div class="flex flex-col gap-3">
-            <span
-              class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+            <Button
+              class="h-auto py-2.5"
+              href={createServerUrl}
+              size="lg"
+              variant="accent"
             >
-              On every plan
-            </span>
+              Deploy {selected.name}
+            </Button>
+          </div>
+          <div
+            class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
+          >
+            <div class="flex items-center gap-3 text-xs text-muted-foreground">
+              <span class="flex-1">Same size elsewhere</span>
+              <span class="w-20 text-right">Their price</span>
+              <span class="w-20 text-right">You save</span>
+            </div>
+            <ul class="flex flex-col">
+              {#each comparisonOffers as { provider, offer } (provider)}
+                <li
+                  class="flex items-center gap-3 overflow-hidden border-b border-border py-3 text-sm last:border-b-0"
+                >
+                  <span class="flex-1">{provider}</span>
+                  <span class="grid justify-items-end">
+                    {#if offer}
+                      <span
+                        class="col-start-1 row-start-1 flex gap-3"
+                        in:fly={{ duration: swapDuration, y: 12 }}
+                        out:fly={{ duration: swapDuration, y: -12 }}
+                      >
+                        <span
+                          class="w-20 text-right text-muted-foreground tabular-nums"
+                          >{offer.approximate ? "~" : ""}<RollingPrice
+                            animateIn={hasPickedPlan}
+                            value={offer.price}
+                          /></span
+                        >
+                        <span
+                          class="w-20 text-right font-mono font-semibold tabular-nums"
+                          ><RollingPrice
+                            animateIn={hasPickedPlan}
+                            value={Math.max(0, offer.price - selected.price)}
+                          /></span
+                        >
+                      </span>
+                    {:else}
+                      <span
+                        class="col-start-1 row-start-1 text-muted-foreground"
+                        in:fly={{ duration: swapDuration, y: 12 }}
+                        out:fly={{ duration: swapDuration, y: -12 }}
+                        >Not offered</span
+                      >
+                    {/if}
+                  </span>
+                </li>
+              {/each}
+            </ul>
+          </div>
+          <div
+            class="flex flex-col gap-3 border-t border-border p-8 lg:border-t-0 lg:border-l"
+          >
+            <span class="text-sm font-medium text-foreground"
+              >On every plan</span
+            >
             <ul class="flex flex-col gap-3">
               {#each included as item (item)}
                 <li class="flex items-center gap-2.5 text-sm/5">
-                  <Check class="size-4 shrink-0" strokeWidth={1.75} />
+                  <Check class="size-4 shrink-0" />
                   {item}
                 </li>
               {/each}
             </ul>
           </div>
-          <Button
-            class="h-auto py-2.5"
-            href={createServerUrl}
-            size="lg"
-            variant="outline"
-          >
-            Deploy {selected.name}
-          </Button>
-        </aside>
+        </div>
       </div>
 
       <div class="flex flex-col border border-border lg:flex-row">
         <div class="flex flex-col gap-2.5 p-6 lg:w-85 lg:shrink-0">
           <h3 class="text-lg font-semibold">Server Colocation</h3>
           <p class="text-sm/[22px] text-muted-foreground">
-            Priced per rack unit, with power and a 1 Gbps port included.
+            Priced per unit, with power and a 1 Gbps port included.
           </p>
-          <a
+          <button
             class="mt-1 inline-flex items-center gap-1.5 self-start text-sm font-medium transition-colors hover:text-gray-300"
-            href={resolve("/colocation")}
+            onclick={openColocationInquiry}
+            type="button"
           >
-            Colocation details <ArrowRight class="size-3.5" />
-          </a>
+            Get in touch <ArrowRight class="size-3.5" />
+          </button>
         </div>
         <ul class="grid flex-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           {#each colocationTiers as tier (tier.units)}
@@ -667,9 +652,7 @@
                 <span class="text-2xl font-semibold tracking-[-0.025em]"
                   >{tier.units}U</span
                 >
-                <span
-                  class="font-mono text-[11px] tracking-[0.04em] text-muted-foreground"
-                >
+                <span class="text-sm text-muted-foreground">
                   {tier.watts}W · 1 Gbps
                 </span>
               </div>
@@ -711,21 +694,21 @@
         <h2
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-          Your first server is five dollars away.
+          Your first server is five dollars away
         </h2>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
-          can resize whenever you outgrow it.
+          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD. Resize
+          whenever you outgrow it.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
         <Button
-          class="h-auto gap-2 bg-background/60 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
+          class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
           href={signUpUrl}
           size="lg"
-          variant="outline"
+          variant="accent"
         >
-          Create an account <ArrowRight data-icon="inline-end" />
+          Deploy your Server <ArrowRight data-icon="inline-end" />
         </Button>
         <Button
           class="h-auto px-4 py-2.5 text-muted-foreground"
@@ -739,3 +722,8 @@
     </div>
   </section>
 </main>
+
+<ColocationInquiryDialog
+  onOpenChange={clearColocationInquiryHash}
+  bind:open={colocationInquiryOpen}
+/>

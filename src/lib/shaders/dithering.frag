@@ -2,11 +2,12 @@
  * Ported from Paper Shaders "Dithering" (https://github.com/paper-design/shaders)
  * Copyright Paper Design, licensed under the Apache License 2.0.
  * Modified: WebGL 1.0 port, multi-color ramp, vertical fade, drift, shimmer, clear zone,
- * center-anchored pixel grid and height-relative clear zone.
+ * center-anchored pixel grid, height-relative clear zone and one-fragment-per-cell rendering.
  */
 precision highp float;
 
 uniform vec2 u_resolution;
+uniform vec2 u_cellOffset;
 uniform float u_time;
 uniform float u_shape;
 uniform float u_pxSize;
@@ -112,7 +113,7 @@ void main() {
   float px = max(1.0, u_pxSize);
 
   vec2 anchor = floor(0.5 * u_resolution + 0.5);
-  vec2 cell = floor((gl_FragCoord.xy - anchor) / px);
+  vec2 cell = floor(gl_FragCoord.xy) + u_cellOffset;
   vec2 centered = (cell + 0.5) * px;
   vec2 center = centered + anchor;
   vec2 uv = centered / u_resolution.y;

@@ -1,0 +1,13 @@
+{
+  "name": "Fyra Stack",
+  "short_name": "Stack",
+  "description": "Fast, independent VPS hosting and colocation.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#18181a",
+  "theme_color": "#a54a4b",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
