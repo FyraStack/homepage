@@ -24,7 +24,7 @@
         {metadata.title}
       </h1>
       <p
-        class="font-mono text-xs tracking-[0.08em] text-muted-foreground uppercase"
+        class="text-sm text-muted-foreground"
       >
         Last updated {metadata.updated}
       </p>

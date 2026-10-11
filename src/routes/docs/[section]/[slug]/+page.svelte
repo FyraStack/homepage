@@ -51,7 +51,7 @@
     {#each docSections as navSection (navSection.id)}
       <div class="flex flex-col">
         <a
-          class="mb-2 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+          class="mb-2 text-sm font-medium text-foreground transition-colors hover:text-gray-300"
           href={resolve("/docs/[section]", { section: navSection.id })}
         >
           {navSection.title}
@@ -193,7 +193,7 @@
         class="sticky top-16 flex flex-col gap-3 py-10"
       >
         <span
-          class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+          class="text-[13px]/5 font-medium text-foreground"
         >
           On this page
         </span>

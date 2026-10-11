@@ -61,7 +61,7 @@
 )}
   <span
     class={cn(
-      "border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em]",
+      "border px-1.5 py-0.5 text-xs",
       who === "Us"
         ? "border-brand-yellow text-brand-yellow"
         : "border-border text-muted-foreground"
@@ -174,7 +174,7 @@
                       {page.title}
                       {#if !page.supported}
                         <span
-                          class="border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
+                          class="border border-border px-1.5 py-0.5 text-xs text-muted-foreground"
                         >
                           Soon
                         </span>
@@ -272,7 +272,7 @@
             >
               <div class="flex flex-col gap-3">
                 <span
-                  class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+                  class="text-sm text-muted-foreground"
                 >
                   Ship to
                 </span>

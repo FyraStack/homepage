@@ -392,7 +392,7 @@
       <dl class="flex flex-col border-b border-border lg:w-160">
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+            class="text-sm text-muted-foreground"
           >
             Company
           </dt>
@@ -400,7 +400,7 @@
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+            class="text-sm text-muted-foreground"
           >
             Support
           </dt>
@@ -414,7 +414,7 @@
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+            class="text-sm text-muted-foreground"
           >
             Community
           </dt>
@@ -432,7 +432,7 @@
         </div>
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt
-            class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+            class="text-sm text-muted-foreground"
           >
             Socials
           </dt>

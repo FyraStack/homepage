@@ -1,6 +1,5 @@
 <script lang="ts">
   import "./layout.css";
-  import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import jetbrainsMonoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
   import ArrowRight from "@lucide/svelte/icons/arrow-right";
   import Menu from "@lucide/svelte/icons/menu";
@@ -65,7 +64,7 @@
   <link
     as="font"
     crossorigin="anonymous"
-    href={interLatin}
+    href="/fonts/Satoshi-Variable.woff2"
     rel="preload"
     type="font/woff2"
   >
@@ -180,7 +179,7 @@
         )}
           <div class="flex flex-col gap-3 md:w-35 md:last:w-auto">
             <h2
-              class="font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase"
+              class="text-sm font-medium text-foreground"
             >
               {heading}
             </h2>

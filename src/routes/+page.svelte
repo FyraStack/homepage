@@ -259,7 +259,7 @@
         <div class="@container flex justify-center">
           <DashboardDemo
             class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
-            {createServerUrl}
+            createServerUrl={dashboardUrl}
             {dashboardUrl}
             style={demoFitStyle}
           />
@@ -271,7 +271,7 @@
   <!-- About -->
   <section class="relative border-b border-border py-20 lg:py-28" id="about">
     <div
-      class="absolute top-0 left-1/2 hidden -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 font-mono text-[11px] tracking-[0.11em] text-muted-foreground uppercase md:flex"
+      class="absolute top-0 left-1/2 hidden -translate-x-1/2 items-center gap-2 border-x border-b border-border bg-muted px-3 py-1.5 text-xs text-muted-foreground md:flex"
     >
       <CornerLeftUp class="size-3.5" />
       Try me
@@ -455,7 +455,7 @@
           {#each colocationSteps as step, index (step.title)}
             <li class="flex flex-col gap-2.5 border-t border-border pt-6">
               <span
-                class="font-mono text-xs tracking-[0.1em] text-brand-yellow"
+                class="text-sm font-medium text-brand-yellow tabular-nums"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -581,7 +581,7 @@
             class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
           >
             <div
-              class="flex items-center gap-3 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+              class="flex items-center gap-3 text-xs text-muted-foreground"
             >
               <span class="flex-1">Same size elsewhere</span>
               <span class="w-20 text-right">Their price</span>
@@ -632,7 +632,7 @@
             class="flex flex-col gap-3 border-t border-border p-8 lg:border-t-0 lg:border-l"
           >
             <span
-              class="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+              class="text-sm font-medium text-foreground"
               >On every plan</span
             >
             <ul class="flex flex-col gap-3">
@@ -671,7 +671,7 @@
                   >{tier.units}U</span
                 >
                 <span
-                  class="font-mono text-[11px] tracking-[0.04em] text-muted-foreground"
+                  class="text-sm text-muted-foreground"
                 >
                   {tier.watts}W · 1 Gbps
                 </span>
