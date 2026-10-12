@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { colocationTiers } from "$lib/components/landing/plans";
   import { Button } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog";
@@ -12,6 +13,7 @@
     submitContactMessage,
   } from "$lib/contact";
   import ArrowRight from "~icons/nucleo/arrow-right";
+  import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let {
     open = $bindable(false),
@@ -147,7 +149,7 @@
           bind:value={inquiry.notes}
         />
       </div>
-      <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
+      <div class="flex flex-wrap items-center gap-x-2 gap-y-4 sm:col-span-2">
         <Button
           class="h-auto gap-2 py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
           disabled={inquiryStatus.kind === "sending"}
@@ -157,6 +159,17 @@
         >
           {inquiryStatus.kind === "sending" ? "Sending…" : "Send inquiry"}
           <ArrowRight data-icon="inline-end" />
+        </Button>
+        <Button
+          class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
+          href={resolve("/docs/[section]", { section: "colocation" })}
+          rel="noopener"
+          size="lg"
+          target="_blank"
+          variant="ghost"
+        >
+          Colocation docs
+          <ArrowUpRight data-icon="inline-end" />
         </Button>
         <p aria-live="polite" class="text-sm text-pretty" role="status">
           {#if inquiryStatus.kind === "sent"}

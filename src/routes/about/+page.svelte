@@ -32,11 +32,42 @@
     submitContactMessage,
   } from "$lib/contact";
   import ArrowRight from "~icons/nucleo/arrow-right";
+  import Bluesky from "~icons/nucleo/bluesky";
+  import Discord from "~icons/nucleo/discord";
+  import GithubIcon from "~icons/nucleo/github";
   import Globe from "~icons/nucleo/globe";
+  import Mastodon from "~icons/nucleo/mastodon";
+  import Twitter from "~icons/nucleo/twitter";
 
   const signUpUrl = "https://dash.fyrastack.com";
   const discordUrl = "https://discord.gg/YwzKxUBu4U";
   const fediverseUrl = "https://fedi.fyralabs.com/@stack";
+
+  const linkGroups = [
+    {
+      label: "Community",
+      links: [
+        { href: discordUrl, icon: Discord, label: "Discord" },
+        {
+          href: "https://github.com/FyraStack",
+          icon: GithubIcon,
+          label: "GitHub",
+        },
+      ],
+    },
+    {
+      label: "Socials",
+      links: [
+        { href: "https://x.com/fyrastack", icon: Twitter, label: "Twitter" },
+        {
+          href: "https://bsky.app/profile/fyrastack.com",
+          icon: Bluesky,
+          label: "Bluesky",
+        },
+        { href: fediverseUrl, icon: Mastodon, label: "Fediverse" },
+      ],
+    },
+  ];
 
   const facts: { note: string | Snippet; value: string | Snippet }[] = [
     { note: "An open-source community", value: "Backed by Fyra Labs" },
@@ -434,47 +465,31 @@
         <div class="flex justify-between gap-6 border-t border-border py-5">
           <dt class="text-sm text-muted-foreground">Support</dt>
           <dd class="text-right text-base/6">
-            <a
-              class="transition-colors hover:text-gray-300"
-              href="mailto:support@fyrastack.com"
-              >support@fyrastack.com</a
+            <TextLink href="mailto:support@fyrastack.com"
+              >support@fyrastack.com</TextLink
             >
           </dd>
         </div>
-        <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt class="text-sm text-muted-foreground">Community</dt>
-          <dd class="text-right text-base/6">
-            <a class="transition-colors hover:text-gray-300" href={discordUrl}
-              >Discord</a
+        {#each linkGroups as group (group.label)}
+          <div class="flex justify-between gap-6 border-t border-border py-5">
+            <dt class="text-sm text-muted-foreground">{group.label}</dt>
+            <dd
+              class="flex flex-wrap justify-end gap-x-5 gap-y-2 text-right text-base/6"
             >
-            ·
-            <a
-              class="transition-colors hover:text-gray-300"
-              href="https://github.com/FyraStack"
-              >GitHub</a
-            >
-          </dd>
-        </div>
-        <div class="flex justify-between gap-6 border-t border-border py-5">
-          <dt class="text-sm text-muted-foreground">Socials</dt>
-          <dd class="text-right text-base/6">
-            <a
-              class="transition-colors hover:text-gray-300"
-              href="https://x.com/fyrastack"
-              >Twitter</a
-            >
-            ·
-            <a
-              class="transition-colors hover:text-gray-300"
-              href="https://bsky.app/profile/fyrastack.com"
-              >Bluesky</a
-            >
-            ·
-            <a class="transition-colors hover:text-gray-300" href={fediverseUrl}
-              >Fediverse</a
-            >
-          </dd>
-        </div>
+              {#each group.links as link (link.href)}
+                <a
+                  class="inline-flex items-center gap-2 text-foreground underline decoration-gray-600 underline-offset-4 transition-colors hover:decoration-foreground"
+                  href={link.href}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  <link.icon aria-hidden="true" class="size-4 shrink-0" />
+                  {link.label}
+                </a>
+              {/each}
+            </dd>
+          </div>
+        {/each}
       </dl>
     </div>
   </section>

@@ -26,10 +26,12 @@
     <span class="text-foreground">{section.title}</span>
   </nav>
   <div class="mt-6 flex max-w-180 flex-col gap-4">
-    <section.icon class="size-6" />
-    <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
-      {section.title}
-    </h1>
+    <div class="flex items-start gap-4">
+      <section.icon class="mt-1 size-11 shrink-0" />
+      <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
+        {section.title}
+      </h1>
+    </div>
     <p class="text-lg/[29px] text-pretty text-muted-foreground">
       {section.description}
     </p>

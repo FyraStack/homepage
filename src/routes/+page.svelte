@@ -56,7 +56,7 @@
     "app",
     "website",
     "API",
-    "CI runners",
+    "CI",
     "game server",
     "Git forge",
     "Discord bot",
@@ -64,7 +64,7 @@
   ];
 
   const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
-  const demoFitStyle = `width: ${demoWidth}; zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
+  const demoFitVars = `--demo-width: ${demoWidth}; --demo-zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
 
   const whyFeatures = [
     {
@@ -273,13 +273,14 @@
       <div
         class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
       >
-        <div class="@container flex justify-center">
-          <DashboardDemo
-            class="h-200 w-360 shrink-0 zoom-[0.8] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
-            createServerUrl={dashboardUrl}
-            {dashboardUrl}
-            style={demoFitStyle}
-          />
+        <div class="@container">
+          <div class="flex justify-center" style={demoFitVars}>
+            <DashboardDemo
+              class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+              createServerUrl={dashboardUrl}
+              {dashboardUrl}
+            />
+          </div>
         </div>
       </div>
     </div>

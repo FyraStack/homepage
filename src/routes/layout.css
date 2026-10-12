@@ -262,3 +262,15 @@
     content: "$ ";
   }
 }
+
+@property --demo-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 1440px;
+}
+
+@property --demo-zoom {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.8;
+}
