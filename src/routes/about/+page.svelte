@@ -204,17 +204,22 @@
         </p>
       </div>
 
-      <dl class="grid border-t border-border sm:grid-cols-3">
+      <dl class="-mt-8 grid border-t border-border sm:mt-0 sm:grid-cols-3">
         {#each facts as fact, index (fact.value)}
           <div
-            class="flex flex-col-reverse gap-2.5 pt-7 pb-10 {index > 0
+            class="flex flex-row-reverse items-baseline justify-between gap-6 py-4 sm:flex-col-reverse sm:justify-start sm:gap-2.5 sm:pt-7 sm:pb-10 {index >
+            0
               ? "border-t border-border sm:border-t-0 sm:border-l sm:pl-7"
               : ""}"
           >
-            <dt class="text-sm text-muted-foreground">
+            <dt
+              class="max-w-44 text-right text-sm text-pretty text-muted-foreground sm:max-w-none sm:text-left"
+            >
               {@render textOrSnippet(fact.note)}
             </dt>
-            <dd class="text-2xl font-semibold tracking-[-0.017em]">
+            <dd
+              class="shrink-0 text-lg font-semibold tracking-[-0.017em] sm:text-2xl"
+            >
               {@render textOrSnippet(fact.value)}
             </dd>
           </div>
