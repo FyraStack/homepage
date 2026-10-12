@@ -96,16 +96,25 @@
 <span
   class="relative inline-block text-left whitespace-nowrap transition-[width] duration-[400ms] ease-in-out motion-reduce:transition-none {className}"
   style:width={boxWidth === undefined ? undefined : `${boxWidth}px`}
-  ><span
+>
+  <span class="whitespace-nowrap before:content-['\200b']">
+    {#each letters as letter (letter.id)}
+      <span
+        class="-mx-[0.15em] -my-[0.3em] inline-block px-[0.15em] py-[0.3em] whitespace-pre"
+        in:blurIn
+        out:blurOut
+      >
+        {letter.char}
+      </span>
+    {/each}
+  </span>
+  <span
     aria-hidden="true"
     class="invisible absolute top-0 left-0 whitespace-pre"
     {@attach trackWidth}
-    >{targetWord}</span
-  >&ZeroWidthSpace;<span class="whitespace-nowrap"
-    >{#each letters as letter (letter.id)}
-      <span class="inline-block whitespace-pre" in:blurIn out:blurOut
-        >{letter.char}</span
-      >
-    {/each}</span
-  ></span
->
+  >
+    {#each targetWord as char, index (index)}
+      <span class="inline-block">{char}</span>
+    {/each}
+  </span>
+</span>
