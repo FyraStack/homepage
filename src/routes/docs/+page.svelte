@@ -2,7 +2,7 @@
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { docSections } from "$lib/docs";
+  import { sectionIcons } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { socialLinks } from "$lib/site";
   import { cn } from "$lib/utils";
@@ -139,13 +139,14 @@
       <div
         class="grid gap-px border border-border bg-border sm:grid-cols-2 xl:grid-cols-4"
       >
-        {#each docSections as section (section.id)}
+        {#each data.docSections as section (section.id)}
+          {@const SectionIcon = sectionIcons[section.id]}
           <div class="flex flex-col gap-6 bg-background p-7">
             <a
               class="group flex flex-col gap-3"
               href={resolve("/docs/[section]", { section: section.id })}
             >
-              <section.icon class="size-5" />
+              <SectionIcon class="size-5" />
               <h3
                 class="text-xl font-semibold tracking-[-0.015em] group-hover:text-gray-300"
               >

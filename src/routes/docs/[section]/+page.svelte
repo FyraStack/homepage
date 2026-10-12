@@ -1,10 +1,12 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import { sectionIcons } from "$lib/docs";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let { data } = $props();
 
   const section = $derived(data.section);
+  const SectionIcon = $derived(sectionIcons[section.id]);
 </script>
 
 <svelte:head>
@@ -27,7 +29,7 @@
   </nav>
   <div class="mt-6 flex max-w-180 flex-col gap-4">
     <div class="flex items-start gap-4">
-      <section.icon class="mt-1 size-11 shrink-0" />
+      <SectionIcon class="mt-1 size-11 shrink-0" />
       <h1 class="text-5xl/[1.05] font-semibold tracking-[-0.03em]">
         {section.title}
       </h1>

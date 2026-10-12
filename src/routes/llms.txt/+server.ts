@@ -3,7 +3,7 @@ import {
   planSpecs,
   plans,
 } from "$lib/components/landing/plans";
-import { docSections } from "$lib/docs";
+import { docSections } from "$lib/server/docs";
 import { absoluteUrl, dashboardUrl, socialLinks } from "$lib/site";
 import type { RequestHandler } from "./$types";
 

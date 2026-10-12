@@ -1,11 +1,11 @@
 import { error } from "@sveltejs/kit";
-import { docSections, findSection } from "$lib/docs";
-import type { EntryGenerator, PageLoad } from "./$types";
+import { docSections, findSection } from "$lib/server/docs";
+import type { EntryGenerator, PageServerLoad } from "./$types";
 
 export const entries: EntryGenerator = () =>
   docSections.map((section) => ({ section: section.id }));
 
-export const load: PageLoad = ({ params }) => {
+export const load: PageServerLoad = ({ params }) => {
   const section = findSection(params.section);
   if (!section) {
     error(404, "Not found");

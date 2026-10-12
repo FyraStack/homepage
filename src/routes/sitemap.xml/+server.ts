@@ -1,4 +1,4 @@
-import { docSections, publishedPages } from "$lib/docs";
+import { docSections, publishedPages } from "$lib/server/docs";
 import { absoluteUrl } from "$lib/site";
 import type { RequestHandler } from "./$types";
 

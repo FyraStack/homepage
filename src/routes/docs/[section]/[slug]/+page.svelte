@@ -3,7 +3,6 @@
   import { resolve } from "$app/paths";
   import DocsSearch from "$lib/components/docs/docs-search.svelte";
   import * as Collapsible from "$lib/components/ui/collapsible";
-  import { docSections, publishedPages } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
   import { proseClass } from "$lib/docs/prose";
   import { cn } from "$lib/utils";
@@ -17,11 +16,8 @@
   const Content = $derived(data.content);
   const section = $derived(data.section);
   const headings = $derived(doc.headings ?? []);
-  const position = $derived(
-    publishedPages.findIndex((page) => page.href === doc.href)
-  );
-  const previous = $derived(publishedPages[position - 1]);
-  const next = $derived(publishedPages[position + 1]);
+  const previous = $derived(data.previous);
+  const next = $derived(data.next);
 
   let activeHeading = $state("");
 
@@ -58,7 +54,7 @@
 
 {#snippet sectionNav()}
   <nav aria-label="Documentation" class="flex flex-col gap-7">
-    {#each docSections as navSection (navSection.id)}
+    {#each data.docSections as navSection (navSection.id)}
       <div class="flex flex-col">
         <a
           class="mb-2 text-sm font-medium text-foreground transition-colors hover:text-gray-300"
