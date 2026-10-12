@@ -97,7 +97,7 @@
       title: "Intel Cascade Lake",
     },
     {
-      description: "Rated for data center write loads",
+      description: "Rated for data center throughput",
       icon: HardDrive,
       title: "Enterprise SAS3 SSDs",
     },
