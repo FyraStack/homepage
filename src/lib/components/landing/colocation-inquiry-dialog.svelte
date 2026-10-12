@@ -8,6 +8,7 @@
   import * as Select from "$lib/components/ui/select";
   import { Textarea } from "$lib/components/ui/textarea";
   import { contactLimits } from "$lib/contact";
+  import { sendColocationInquiry } from "$lib/contact.remote";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let {
@@ -26,25 +27,8 @@
     "Not sure yet",
   ];
   const [, defaultSpace] = spaceOptions;
-  const textFieldLimit = Math.floor((contactLimits.message - 200) / 2);
 
   let space = $state(defaultSpace);
-
-  function toInquiryBody(body: FormData) {
-    const field = (name: string) => String(body.get(name) ?? "").trim();
-    const notes = field("notes");
-    body.set("topic", "Colocation");
-    body.set(
-      "message",
-      [
-        `Rack space: ${field("space")}`,
-        "",
-        "Hardware:",
-        field("hardware"),
-        ...(notes ? ["", "Notes:", notes] : []),
-      ].join("\n")
-    );
-  }
 </script>
 
 <Dialog.Root {onOpenChange} bind:open>
@@ -64,11 +48,11 @@
     </Dialog.Header>
 
     <ContactForm
+      form={sendColocationInquiry}
       idPrefix="inquiry"
       onSent={() => {
         space = defaultSpace;
       }}
-      prepare={toInquiryBody}
       submitLabel="Send inquiry"
     >
       <div class="flex flex-col gap-2 sm:col-span-2">
@@ -89,7 +73,7 @@
         <Textarea
           class=""
           id="inquiry-hardware"
-          maxlength={textFieldLimit}
+          maxlength={contactLimits.inquiryField}
           name="hardware"
           placeholder="Model, size, and expected power draw"
           required
@@ -104,7 +88,7 @@
         <Textarea
           class=""
           id="inquiry-notes"
-          maxlength={textFieldLimit}
+          maxlength={contactLimits.inquiryField}
           name="notes"
           placeholder="Network needs, timeline, questions"
           rows={2}

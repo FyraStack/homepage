@@ -17,6 +17,7 @@
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@kitlangton/rolling-number": "^0.4.1",
+    "arktype": "^2.2.8",
     "bits-ui": "^2.19.3",
     "clsx": "^2.1.1",
     "shadcn-svelte": "^1.7.0",

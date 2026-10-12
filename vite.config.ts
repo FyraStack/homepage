@@ -22,6 +22,7 @@ export default defineConfig({
             ? undefined
             : true,
       },
+      experimental: { remoteFunctions: true },
       extensions: [".svelte", ".md"],
       preprocess: [vitePreprocess(), docsMarkdown()],
     }),

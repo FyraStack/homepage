@@ -1,55 +1,61 @@
-<script lang="ts">
+<script generics="Input extends RemoteFormInput" lang="ts">
+  import type { RemoteForm, RemoteFormInput } from "@sveltejs/kit";
   import type { Snippet } from "svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Input } from "$lib/components/ui/input";
+  import { Input as TextInput } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
-  import {
-    type ContactStatus,
-    contactHoneypotField,
-    contactLimits,
-    submitContactMessage,
-  } from "$lib/contact";
+  import { contactLimits } from "$lib/contact";
   import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
 
   let {
+    form,
     idPrefix,
     submitLabel,
     class: className,
-    prepare,
     onSent,
     children,
     actions,
   }: {
+    form: RemoteForm<Input, void>;
     idPrefix: string;
     submitLabel: string;
     class?: string;
-    prepare?: (body: FormData) => void;
     onSent?: () => void;
     children: Snippet;
     actions?: Snippet;
   } = $props();
 
-  let status = $state<ContactStatus>({ kind: "idle" });
+  let sent = $state(false);
+  let unreachable = $state(false);
 
-  async function send(event: SubmitEvent) {
-    event.preventDefault();
-    const form = event.currentTarget as HTMLFormElement;
-    const body = new FormData(form);
-    prepare?.(body);
-    status = { kind: "sending" };
-    status = await submitContactMessage(body);
-    if (status.kind === "sent") {
-      form.reset();
-      onSent?.();
-    }
-  }
+  const failure = $derived(
+    unreachable
+      ? "We couldn't reach the server. Check your connection and try again."
+      : form.fields.allIssues()?.[0]?.message
+  );
 </script>
 
-<form class={cn("grid gap-5 sm:grid-cols-2", className)} onsubmit={send}>
+<form
+  class={cn("grid gap-5 sm:grid-cols-2", className)}
+  {...form.enhance(async ({ element, submit }) => {
+    sent = false;
+    unreachable = false;
+    try {
+      sent = await submit();
+    } catch {
+      unreachable = true;
+      return;
+    }
+    if (sent) {
+      element.reset();
+      onSent?.();
+    }
+  })}
+>
   <div class="flex flex-col gap-2">
     <Label for="{idPrefix}-name">Name</Label>
-    <Input
+    <TextInput
       autocomplete="name"
       class="h-9"
       id="{idPrefix}-name"
@@ -60,7 +66,7 @@
   </div>
   <div class="flex flex-col gap-2">
     <Label for="{idPrefix}-email">Email</Label>
-    <Input
+    <TextInput
       autocomplete="email"
       class="h-9"
       id="{idPrefix}-email"
@@ -73,10 +79,10 @@
   {@render children()}
   <div aria-hidden="true" class="hidden">
     <Label for="{idPrefix}-website">Leave this empty</Label>
-    <Input
+    <TextInput
       autocomplete="off"
       id="{idPrefix}-website"
-      name={contactHoneypotField}
+      name="company_website"
       tabindex={-1}
     />
   </div>
@@ -88,22 +94,22 @@
   >
     <Button
       class="h-auto gap-2 py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
-      disabled={status.kind === "sending"}
+      disabled={form.pending > 0}
       size="lg"
       type="submit"
       variant="accent"
     >
-      {status.kind === "sending" ? "Sending…" : submitLabel}
+      {form.pending > 0 ? "Sending…" : submitLabel}
       <ArrowRight data-icon="inline-end" />
     </Button>
     {@render actions?.()}
     <p aria-live="polite" class="text-sm text-pretty" role="status">
-      {#if status.kind === "sent"}
+      {#if sent}
         <span class="text-muted-foreground"
           >Thanks, we got it. We'll reply to the email you gave us.</span
         >
-      {:else if status.kind === "failed"}
-        <span class="text-destructive">{status.message}</span>
+      {:else if failure}
+        <span class="text-destructive">{failure}</span>
       {/if}
     </p>
   </div>

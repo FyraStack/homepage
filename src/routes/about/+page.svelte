@@ -24,6 +24,7 @@
   import * as Select from "$lib/components/ui/select";
   import { Textarea } from "$lib/components/ui/textarea";
   import { contactLimits, contactTopics } from "$lib/contact";
+  import { sendContactMessage } from "$lib/contact.remote";
   import { socialLinks } from "$lib/site";
   import Bluesky from "~icons/nucleo/bluesky";
   import Discord from "~icons/nucleo/discord";
@@ -458,7 +459,7 @@
     </div>
   </section>
 
-  <!-- Contact: form that posts to /api/contact, which forwards to our Discord -->
+  <!-- Contact: remote form that forwards to our Discord -->
   <section class="border-b border-border py-20 lg:py-28" id="contact">
     <div
       class="page-container flex flex-col justify-between gap-12 lg:flex-row"
@@ -477,6 +478,7 @@
 
       <ContactForm
         class="lg:w-160"
+        form={sendContactMessage}
         idPrefix="contact"
         onSent={() => {
           contactTopic = defaultContactTopic;
