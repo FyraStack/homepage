@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { toast } from "svelte-sonner";
   import { Button } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog";
   import { Input } from "$lib/components/ui/input";
@@ -8,297 +7,81 @@
   import Loader2 from "~icons/lucide/loader-2";
   import Plus from "~icons/lucide/plus";
   import X from "~icons/lucide/x";
-  import Copy from "~icons/nucleo/copy";
   import Pencil from "~icons/nucleo/pencil";
   import { getDemo } from "../context";
-  import type { Allocation } from "../demo-state.svelte";
-  import { getErrorMessage } from "../format";
+  import CopyButton from "../copy-button.svelte";
 
-  const demo = getDemo();
-  let selectedServer = $derived(demo.selected);
-  let allocations = $derived(demo.allocations[selectedServer.id] ?? []);
-
-  let copied = $state("");
-  let editingKey = $state<string | null>(null);
-  let rdnsValue = $state("");
-  let savingKey = $state<string | null>(null);
   interface PtrEntry {
     key: number;
-    originalAddress: string | null;
-    originalValue: string | null;
     suffix: string;
     value: string;
   }
 
+  const demo = getDemo();
+  let selectedServer = $derived(demo.selected);
+  let prefixBase = $derived(selectedServer.ipv6Prefix.replace(/\/\d+$/, ""));
+
+  let editingIpv4Ptr = $state(false);
+  let ipv4PtrValue = $state("");
+  let savingIpv4Ptr = $state(false);
+
   let subnetDialogOpen = $state(false);
-  let subnetDialogAllocation = $state<Allocation | null>(null);
   let subnetEntries = $state<PtrEntry[]>([]);
   let subnetSaving = $state(false);
   let nextEntryKey = 0;
-
-  const prefixLengthPattern = /::\/\d+$/;
-
-  const ipv4Allocations = $derived(
-    allocations.filter(
-      (allocation) => allocation.family === "ipv4" && allocation.address
-    )
-  );
-  const ipv6AddressAllocations = $derived(
-    allocations.filter(
-      (allocation) => allocation.family === "ipv6" && allocation.address
-    )
-  );
-  const ipv6PrefixAllocations = $derived(
-    allocations.filter(
-      (allocation) => allocation.family === "ipv6" && allocation.prefix
-    )
-  );
-
-  function copyToClipboard(text: string, label: string) {
-    navigator.clipboard.writeText(text);
-    copied = label;
-    setTimeout(() => {
-      copied = "";
-    }, 1500);
-  }
-
-  function ptrValueFor(allocation: Allocation, address: string | null) {
-    if (!address) {
-      return null;
-    }
-    return (
-      allocation.ptrRecords.find((record) => record.address === address)
-        ?.value ?? null
-    );
-  }
-
-  function entryKey(allocationId: string, address: string) {
-    return `${allocationId}|${address}`;
-  }
-
-  function startEditing(
-    allocationId: string,
-    address: string,
-    current: string | null
-  ) {
-    editingKey = entryKey(allocationId, address);
-    rdnsValue = current ?? "";
-  }
-
-  function applyResult(
-    allocationId: string,
-    address: string,
-    result: { address: string; value: string } | null
-  ) {
-    demo.allocations[selectedServer.id] = allocations.map((allocation) => {
-      if (allocation.id !== allocationId) {
-        return allocation;
-      }
-      const others = allocation.ptrRecords.filter(
-        (record) =>
-          record.address !== address && record.address !== result?.address
-      );
-      return {
-        ...allocation,
-        ptrRecords: result
-          ? [...others, result].sort((a, b) =>
-              a.address.localeCompare(b.address)
-            )
-          : others,
-      };
-    });
-  }
-
-  async function savePtr(allocationId: string, address: string, value: string) {
-    savingKey = entryKey(allocationId, address);
-    try {
-      const result = await demo.setVmPtrRecord({
-        address,
-        allocationId,
-        value: value.trim(),
-        vmId: selectedServer.id,
-      });
-      applyResult(allocationId, address, result);
-      editingKey = null;
-    } catch (err) {
-      toast.error(getErrorMessage(err, "Failed to update reverse DNS"));
-    } finally {
-      savingKey = null;
-    }
-  }
-
-  function prefixBase(prefix: string | null) {
-    return prefix?.replace(prefixLengthPattern, "") ?? "";
-  }
-
-  function entrySuffix(address: string, prefix: string | null) {
-    const base = prefixBase(prefix);
-    return base && address.toLowerCase().startsWith(base.toLowerCase())
-      ? address.slice(base.length)
-      : address;
-  }
-
-  function takeEntryKey() {
-    nextEntryKey += 1;
-    return nextEntryKey;
-  }
-
-  function blankEntry(): PtrEntry {
-    return {
-      key: takeEntryKey(),
-      originalAddress: null,
-      originalValue: null,
-      suffix: "",
-      value: "",
-    };
-  }
-
-  function openSubnetDialog(allocation: Allocation) {
-    subnetDialogAllocation = allocation;
-    subnetEntries = allocation.ptrRecords.map((record) => ({
-      key: takeEntryKey(),
-      originalAddress: record.address,
-      originalValue: record.value,
-      suffix: entrySuffix(record.address, allocation.prefix),
-      value: record.value,
-    }));
-    if (subnetEntries.length === 0) {
-      subnetEntries = [blankEntry()];
-    }
-    subnetDialogOpen = true;
-  }
-
-  function removeSubnetEntry(key: number) {
-    subnetEntries = subnetEntries.filter((entry) => entry.key !== key);
-  }
 
   const subnetEntriesValid = $derived(
     subnetEntries.every((entry) => entry.suffix.trim() && entry.value.trim())
   );
 
-  function recordUpdatesFor(entry: PtrEntry & { address: string }) {
-    const value = entry.value.trim();
-    const sameAddress =
-      entry.originalAddress?.toLowerCase() === entry.address.toLowerCase();
-    if (sameAddress && entry.originalValue === value) {
-      return [];
+  function startEditingIpv4Ptr() {
+    ipv4PtrValue = selectedServer.ipv4Ptr;
+    editingIpv4Ptr = true;
+  }
+
+  async function saveIpv4Ptr() {
+    savingIpv4Ptr = true;
+    await demo.setIpv4Ptr(selectedServer.id, ipv4PtrValue.trim());
+    savingIpv4Ptr = false;
+    editingIpv4Ptr = false;
+  }
+
+  function subnetEntry(suffix = "", value = ""): PtrEntry {
+    nextEntryKey += 1;
+    return { key: nextEntryKey, suffix, value };
+  }
+
+  function openSubnetDialog() {
+    subnetEntries = selectedServer.ipv6Ptrs.map((record) =>
+      subnetEntry(record.address.slice(prefixBase.length), record.value)
+    );
+    if (subnetEntries.length === 0) {
+      subnetEntries = [subnetEntry()];
     }
-    const set = { address: entry.address, value };
-    if (entry.originalAddress && !sameAddress) {
-      return [{ address: entry.originalAddress, value: "" }, set];
-    }
-    return [set];
+    subnetDialogOpen = true;
   }
 
   async function saveSubnetEntries() {
-    const allocation = subnetDialogAllocation;
-    if (!(allocation && subnetEntriesValid)) {
+    if (!subnetEntriesValid) {
       return;
     }
-
-    const base = prefixBase(allocation.prefix);
-    const kept = subnetEntries.map((entry) => ({
-      ...entry,
-      address: `${base}${entry.suffix.trim()}`,
-    }));
-
-    const keptAddresses = new Set(
-      kept.map((entry) => entry.address.toLowerCase())
-    );
-    const removed = allocation.ptrRecords.filter(
-      (record) => !keptAddresses.has(record.address.toLowerCase())
-    );
-
-    const updates = [
-      ...removed.map((record) => ({ address: record.address, value: "" })),
-      ...kept.flatMap(recordUpdatesFor),
-    ];
-
     subnetSaving = true;
-    try {
-      const results = await Promise.all(
-        updates.map((update) =>
-          demo.setVmPtrRecord({
-            ...update,
-            allocationId: allocation.id,
-            vmId: selectedServer.id,
-          })
-        )
-      );
-      updates.forEach((update, index) => {
-        applyResult(allocation.id, update.address, results[index]);
-      });
-      subnetDialogOpen = false;
-    } catch (err) {
-      toast.error(getErrorMessage(err, "Failed to update reverse DNS"));
-    } finally {
-      subnetSaving = false;
-    }
+    const recordsByAddress = new Map(
+      subnetEntries.map((entry) => {
+        const address = `${prefixBase}${entry.suffix.trim()}`;
+        return [address, { address, value: entry.value.trim() }];
+      })
+    );
+    await demo.setIpv6Ptrs(
+      selectedServer.id,
+      [...recordsByAddress.values()].sort((a, b) =>
+        a.address.localeCompare(b.address)
+      )
+    );
+    subnetSaving = false;
+    subnetDialogOpen = false;
   }
 </script>
-
-{#snippet rdnsEditor(
-  allocation: Allocation,
-  address: string
-)}
-  {@const key = entryKey(allocation.id, address)}
-  {@const current = ptrValueFor(allocation, address)}
-  <div class="mt-2 flex items-center justify-between">
-    <span class="text-xs text-muted-foreground">Reverse DNS</span>
-    {#if editingKey === key}
-      <div class="flex items-center gap-1.5">
-        <Input
-          class="h-7 w-56 text-xs"
-          placeholder="hostname.example.com"
-          bind:value={rdnsValue}
-        />
-        <Button
-          aria-label="Save reverse DNS"
-          class="h-7 w-7 p-0 text-emerald-500"
-          disabled={savingKey === key}
-          onclick={() => savePtr(allocation.id, address, rdnsValue)}
-          size="sm"
-          variant="ghost"
-        >
-          {#if savingKey === key}
-            <Loader2 class="h-3 w-3 animate-spin" />
-          {:else}
-            <Check class="h-3 w-3" />
-          {/if}
-        </Button>
-        <Button
-          aria-label="Cancel reverse DNS edit"
-          class="h-7 w-7 p-0"
-          disabled={savingKey === key}
-          onclick={() => {
-            editingKey = null;
-          }}
-          size="sm"
-          variant="ghost"
-        >
-          <X class="h-3 w-3" />
-        </Button>
-      </div>
-    {:else}
-      <div class="flex items-center gap-1.5">
-        <span class="font-mono text-xs text-muted-foreground"
-          >{current || "-"}</span
-        >
-        {#if allocation.ptrEditable}
-          <Button
-            aria-label="Edit reverse DNS"
-            class="h-7 w-7 p-0"
-            onclick={() => startEditing(allocation.id, address, current)}
-            size="sm"
-            variant="ghost"
-          >
-            <Pencil class="h-3 w-3" />
-          </Button>
-        {/if}
-      </div>
-    {/if}
-  </div>
-{/snippet}
 
 <div class="flex-1 divide-y divide-border/50 overflow-auto">
   <div class="px-5 py-3">
@@ -307,164 +90,113 @@
       >Public Network</span
     >
   </div>
-  {#each ipv4Allocations as allocation (allocation.id)}
-    <div class="px-5 py-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm font-medium text-foreground">IPv4 Address</p>
-          <p class="mt-0.5 font-mono text-xs text-muted-foreground">
-            {allocation.address}
-          </p>
-        </div>
-        <button
-          aria-label="Copy IPv4 address"
-          class="text-muted-foreground hover:text-foreground"
-          onclick={() =>
-            copyToClipboard(allocation.address ?? "", `ipv4-${allocation.id}`)}
-          type="button"
-        >
-          {#if copied === `ipv4-${allocation.id}`}
-            <Check class="h-3.5 w-3.5 text-emerald-500" />
-          {:else}
-            <Copy class="size-4" />
-          {/if}
-        </button>
+  <div class="px-5 py-3">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-foreground">IPv4 Address</p>
+        <p class="mt-0.5 font-mono text-xs text-muted-foreground">
+          {selectedServer.ip}
+        </p>
       </div>
-      {#if allocation.address}
-        {@render rdnsEditor(allocation, allocation.address)}
-      {/if}
+      <CopyButton
+        iconClass="size-4"
+        label="Copy IPv4 address"
+        text={selectedServer.ip}
+      />
     </div>
-  {/each}
-  {#each ipv6AddressAllocations as allocation (allocation.id)}
-    <div class="px-5 py-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm font-medium text-foreground">IPv6 Address</p>
-          <p class="mt-0.5 font-mono text-xs text-muted-foreground">
-            {allocation.address}
-          </p>
-        </div>
-        <button
-          aria-label="Copy IPv6 address"
-          class="text-muted-foreground hover:text-foreground"
-          onclick={() =>
-            copyToClipboard(allocation.address ?? "", `ipv6-${allocation.id}`)}
-          type="button"
-        >
-          {#if copied === `ipv6-${allocation.id}`}
-            <Check class="h-3.5 w-3.5 text-emerald-500" />
-          {:else}
-            <Copy class="size-4" />
-          {/if}
-        </button>
-      </div>
-      {#if allocation.address}
-        {@render rdnsEditor(allocation, allocation.address)}
-      {/if}
-    </div>
-  {/each}
-  {#each ipv6PrefixAllocations as allocation (allocation.id)}
-    <div class="px-5 py-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm font-medium text-foreground">IPv6 Subnet</p>
-          <p class="mt-0.5 font-mono text-xs text-muted-foreground">
-            {allocation.prefix}
-          </p>
-        </div>
-        <div class="flex items-center gap-2">
-          {#if allocation.ptrEditable}
-            <Button
-              class="h-7 gap-1.5 px-3 text-xs"
-              onclick={() => openSubnetDialog(allocation)}
-              size="sm"
-              variant="outline"
-            >
-              {#if allocation.ptrRecords.length > 0}
-                <Pencil class="h-3 w-3" />Edit Reverse DNS
-              {:else}
-                <Plus class="h-3 w-3" />Add Reverse DNS
-              {/if}
-            </Button>
-          {/if}
-          <button
-            aria-label="Copy IPv6 subnet"
-            class="text-muted-foreground hover:text-foreground"
-            onclick={() =>
-              copyToClipboard(
-                allocation.prefix ?? "",
-                `prefix-${allocation.id}`
-              )}
-            type="button"
+    <div class="mt-2 flex items-center justify-between">
+      <span class="text-xs text-muted-foreground">Reverse DNS</span>
+      {#if editingIpv4Ptr}
+        <div class="flex items-center gap-1.5">
+          <Input
+            class="h-7 w-56 text-xs"
+            placeholder="hostname.example.com"
+            bind:value={ipv4PtrValue}
+          />
+          <Button
+            aria-label="Save reverse DNS"
+            class="h-7 w-7 p-0 text-emerald-500"
+            disabled={savingIpv4Ptr}
+            onclick={saveIpv4Ptr}
+            size="sm"
+            variant="ghost"
           >
-            {#if copied === `prefix-${allocation.id}`}
-              <Check class="h-3.5 w-3.5 text-emerald-500" />
+            {#if savingIpv4Ptr}
+              <Loader2 class="h-3 w-3 animate-spin" />
             {:else}
-              <Copy class="size-4" />
+              <Check class="h-3 w-3" />
             {/if}
-          </button>
-        </div>
-      </div>
-    </div>
-    {#each allocation.ptrRecords as record (record.address)}
-      <div class="flex items-center justify-between px-5 py-2.5">
-        <div class="flex items-center gap-3">
-          <span class="font-mono text-xs text-foreground"
-            >{record.address}</span
+          </Button>
+          <Button
+            aria-label="Cancel reverse DNS edit"
+            class="h-7 w-7 p-0"
+            disabled={savingIpv4Ptr}
+            onclick={() => {
+              editingIpv4Ptr = false;
+            }}
+            size="sm"
+            variant="ghost"
           >
+            <X class="h-3 w-3" />
+          </Button>
+        </div>
+      {:else}
+        <div class="flex items-center gap-1.5">
           <span class="font-mono text-xs text-muted-foreground"
-            >{record.value}</span
+            >{selectedServer.ipv4Ptr || "-"}</span
           >
+          <Button
+            aria-label="Edit reverse DNS"
+            class="h-7 w-7 p-0"
+            onclick={startEditingIpv4Ptr}
+            size="sm"
+            variant="ghost"
+          >
+            <Pencil class="h-3 w-3" />
+          </Button>
         </div>
+      {/if}
+    </div>
+  </div>
+  <div class="px-5 py-3">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-foreground">IPv6 Subnet</p>
+        <p class="mt-0.5 font-mono text-xs text-muted-foreground">
+          {selectedServer.ipv6Prefix}
+        </p>
       </div>
-    {/each}
+      <div class="flex items-center gap-2">
+        <Button
+          class="h-7 gap-1.5 px-3 text-xs"
+          onclick={openSubnetDialog}
+          size="sm"
+          variant="outline"
+        >
+          {#if selectedServer.ipv6Ptrs.length > 0}
+            <Pencil class="h-3 w-3" />Edit Reverse DNS
+          {:else}
+            <Plus class="h-3 w-3" />Add Reverse DNS
+          {/if}
+        </Button>
+        <CopyButton
+          iconClass="size-4"
+          label="Copy IPv6 subnet"
+          text={selectedServer.ipv6Prefix}
+        />
+      </div>
+    </div>
+  </div>
+  {#each selectedServer.ipv6Ptrs as record (record.address)}
+    <div class="flex items-center justify-between px-5 py-2.5">
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-xs text-foreground">{record.address}</span>
+        <span class="font-mono text-xs text-muted-foreground"
+          >{record.value}</span
+        >
+      </div>
+    </div>
   {/each}
-  {#if allocations.length === 0}
-    <div class="px-5 py-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm font-medium text-foreground">IPv4 Address</p>
-          <p class="mt-0.5 font-mono text-xs text-muted-foreground">
-            {selectedServer.ip}
-          </p>
-        </div>
-        <button
-          aria-label="Copy IPv4 address"
-          class="text-muted-foreground hover:text-foreground"
-          onclick={() => copyToClipboard(selectedServer.ip, "net-ipv4")}
-          type="button"
-        >
-          {#if copied === "net-ipv4"}
-            <Check class="h-3.5 w-3.5 text-emerald-500" />
-          {:else}
-            <Copy class="size-4" />
-          {/if}
-        </button>
-      </div>
-    </div>
-    <div class="px-5 py-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm font-medium text-foreground">IPv6 Address</p>
-          <p class="mt-0.5 font-mono text-xs text-muted-foreground">
-            {selectedServer.ipv6}
-          </p>
-        </div>
-        <button
-          aria-label="Copy IPv6 address"
-          class="text-muted-foreground hover:text-foreground"
-          onclick={() => copyToClipboard(selectedServer.ipv6, "net-ipv6")}
-          type="button"
-        >
-          {#if copied === "net-ipv6"}
-            <Check class="h-3.5 w-3.5 text-emerald-500" />
-          {:else}
-            <Copy class="size-4" />
-          {/if}
-        </button>
-      </div>
-    </div>
-  {/if}
 </div>
 
 <Dialog.Root bind:open={subnetDialogOpen}>
@@ -473,7 +205,7 @@
       <Dialog.Title>Edit Reverse DNS</Dialog.Title>
       <Dialog.Description>
         PTR records for addresses in
-        <span class="font-mono">{subnetDialogAllocation?.prefix}</span>.
+        <span class="font-mono">{selectedServer.ipv6Prefix}</span>.
       </Dialog.Description>
     </Dialog.Header>
     <div class="grid gap-3 py-4">
@@ -482,7 +214,7 @@
           <div class="grid flex-1 gap-2">
             <InputGroup.Root>
               <InputGroup.Addon class="font-mono">
-                {prefixBase(subnetDialogAllocation?.prefix ?? null)}
+                {prefixBase}
               </InputGroup.Addon>
               <InputGroup.Input
                 aria-label="IPv6 address suffix"
@@ -501,7 +233,11 @@
             aria-label="Remove entry"
             class="mt-1 h-7 w-7 p-0"
             disabled={subnetSaving}
-            onclick={() => removeSubnetEntry(entry.key)}
+            onclick={() => {
+              subnetEntries = subnetEntries.filter(
+                (other) => other.key !== entry.key
+              );
+            }}
             size="sm"
             variant="ghost"
           >
@@ -510,10 +246,10 @@
         </div>
       {/each}
       <button
-        class="flex w-full items-center justify-center gap-1.5 rounded-md border border-dashed border-border py-2 text-xs text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+        class="flex w-full items-center justify-center gap-1.5 border border-dashed border-border py-2 text-xs text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
         disabled={subnetSaving}
         onclick={() => {
-          subnetEntries = [...subnetEntries, blankEntry()];
+          subnetEntries.push(subnetEntry());
         }}
         type="button"
       >

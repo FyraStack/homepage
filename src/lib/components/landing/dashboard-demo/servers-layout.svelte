@@ -4,57 +4,12 @@
   import Plus from "~icons/lucide/plus";
   import HardDrive from "~icons/nucleo/hard-drive";
   import { getDemo } from "./context";
+  import { statusStyles } from "./server-detail";
   import ServerLayout from "./server-layout.svelte";
 
-  let { createServerUrl }: { createServerUrl: string } = $props();
-
-  function statusDotClass(s: { liveLoaded?: boolean; status: string }) {
-    if (s.status === "deleting") {
-      return "animate-pulse bg-red-500";
-    }
-    if (!s.liveLoaded || s.status === "unknown") {
-      return "bg-muted-foreground";
-    }
-    if (s.status === "running") {
-      return "bg-emerald-500";
-    }
-    if (s.status === "provisioning") {
-      return "animate-pulse bg-blue-500";
-    }
-    if (s.status === "restarting") {
-      return "animate-pulse bg-amber-500";
-    }
-    return "bg-red-500";
-  }
-
-  function statusLabel(s: { liveLoaded?: boolean; status: string }): string {
-    if (s.status === "deleting") {
-      return "Deleting";
-    }
-    if (!s.liveLoaded) {
-      return "Unknown";
-    }
-    if (s.status === "running") {
-      return "Running";
-    }
-    if (s.status === "provisioning") {
-      return "Provisioning";
-    }
-    if (s.status === "restarting") {
-      return "Restarting";
-    }
-    if (s.status === "unknown") {
-      return "Unknown";
-    }
-    return "Stopped";
-  }
+  let { dashboardUrl }: { dashboardUrl: string } = $props();
 
   const demo = getDemo();
-  const currentServers = $derived(
-    demo.servers.filter(
-      (server) => server.status !== "deleting" && server.status !== "error"
-    )
-  );
   const selectedServerId = $derived(demo.selectedId);
 </script>
 
@@ -71,14 +26,14 @@
           >Servers</span
         >
         <Badge class="ml-2 text-xs @min-[64rem]:text-[10px]" variant="secondary"
-          >{currentServers.length}</Badge
+          >{demo.servers.length}</Badge
         >
       </div>
       <div class="flex shrink-0 items-center gap-1">
         <Button
           aria-label="Create server"
           class="relative h-8 w-8 border-red-500/50 p-0 text-red-700 hover:border-red-500 hover:bg-red-100 hover:text-foreground @min-[64rem]:h-6 @min-[64rem]:w-6 dark:text-red-400 dark:hover:bg-red-950"
-          href={createServerUrl}
+          href={dashboardUrl}
           size="sm"
           variant="outline"
         >
@@ -91,7 +46,7 @@
       </div>
     </div>
     <div class="flex-1 overflow-y-auto">
-      {#each currentServers as server (server.id)}
+      {#each demo.servers as server (server.id)}
         <button
           class="flex w-full items-start justify-between border-b border-border px-4 py-3 text-left transition-colors duration-100 {selectedServerId ===
           server.id
@@ -109,23 +64,23 @@
             <p
               class="mt-0.5 truncate text-sm text-muted-foreground @min-[64rem]:text-xs"
             >
-              {server.vcpu}
-              vCPU &bull; {server.ram} &bull;
+              {server.plan.vcpu}
+              vCPU &bull; {server.plan.memoryGb}GB &bull;
               {server.ip}
             </p>
           </div>
           <span
-            aria-label={`Status: ${statusLabel(server)}`}
-            class="mt-1 ml-2 h-2 w-2 shrink-0 rounded-full {statusDotClass(
-              server
-            )}"
+            aria-label={`Status: ${statusStyles[server.status].label}`}
+            class="mt-1 ml-2 h-2 w-2 shrink-0 rounded-full {statusStyles[
+              server.status
+            ].dot}"
             role="img"
-            title={statusLabel(server)}
+            title={statusStyles[server.status].label}
           ></span>
         </button>
       {/each}
 
-      {#if currentServers.length === 0}
+      {#if demo.servers.length === 0}
         <div
           class="flex flex-col items-center justify-center py-8 text-muted-foreground @min-[64rem]:py-16"
         >

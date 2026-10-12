@@ -13,7 +13,6 @@
     pxSize: number;
     scale: number;
     seed: number;
-    shape: 1 | 2 | 3 | 4;
     shimmer: number;
     shimmerRate: number;
     speed: number;
@@ -33,7 +32,6 @@
     pxSize: 4,
     scale: 1,
     seed: 0,
-    shape: 2,
     shimmer: 0.35,
     shimmerRate: 6,
     speed: 1,
@@ -116,6 +114,7 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { prefersReducedMotion } from "svelte/motion";
   import fragmentSource from "$lib/shaders/dithering.frag?raw";
   import { cn } from "$lib/utils";
 
@@ -134,6 +133,12 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
   let container = $state<HTMLDivElement>();
   let canvas = $state<HTMLCanvasElement>();
   let rendering = $state(false);
+  let syncDither: ((reducedMotion: boolean) => void) | undefined;
+
+  $effect(() => {
+    const reducedMotion = prefersReducedMotion.current;
+    syncDither?.(reducedMotion);
+  });
 
   function startDither(area: HTMLDivElement, element: HTMLCanvasElement) {
     const gl = element.getContext("webgl", {
@@ -196,7 +201,6 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       rendering = true;
     };
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let shaderSeconds = 0;
     let lastFrame: number | null = null;
     let rampStart: number | null = null;
@@ -218,10 +222,10 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       frame = requestAnimationFrame(loop);
     };
 
-    const sync = () => {
+    const sync = (reducedMotion = prefersReducedMotion.current) => {
       cancelAnimationFrame(frame);
       lastFrame = null;
-      if (reducedMotion.matches) {
+      if (reducedMotion) {
         draw(0);
       } else if (visible) {
         frame = requestAnimationFrame(loop);
@@ -239,13 +243,13 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
       sync();
     });
     intersectionObserver.observe(area);
-    reducedMotion.addEventListener("change", sync);
+    syncDither = sync;
 
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
-      reducedMotion.removeEventListener("change", sync);
+      syncDither = undefined;
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }

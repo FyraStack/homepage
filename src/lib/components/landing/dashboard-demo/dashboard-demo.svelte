@@ -17,12 +17,10 @@
   import TryItDialog from "./try-it-dialog.svelte";
 
   let {
-    createServerUrl,
     dashboardUrl,
     class: className,
     style,
   }: {
-    createServerUrl: string;
     dashboardUrl: string;
     class?: string;
     style?: string;
@@ -107,7 +105,7 @@
         </button>
 
         <button
-          class="flex min-w-0 items-center gap-2.5 rounded-xs px-2 py-1 hover:bg-muted/50"
+          class="flex min-w-0 items-center gap-2.5 px-2 py-1 hover:bg-muted/50"
           onclick={showTryIt}
           type="button"
         >
@@ -161,10 +159,10 @@
       </aside>
 
       <main class="flex flex-1 overflow-hidden">
-        <ServersLayout {createServerUrl} />
+        <ServersLayout {dashboardUrl} />
       </main>
     </div>
-    <Toaster position="top-center" theme="dark" />
+    <Toaster position="top-center" />
     <ConfirmDialog />
     <TryItDialog {dashboardUrl} bind:open={tryItOpen} />
   </BitsConfig>

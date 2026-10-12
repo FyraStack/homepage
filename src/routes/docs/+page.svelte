@@ -4,6 +4,7 @@
   import { Button } from "$lib/components/ui/button";
   import { docSections } from "$lib/docs";
   import { copyCodeButtons } from "$lib/docs/copy-code";
+  import { socialLinks } from "$lib/site";
   import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
@@ -14,8 +15,6 @@
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
-
-  const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
   const startHere = [
     {
@@ -370,7 +369,7 @@
           </Button>
           <Button
             class="h-auto gap-2 py-2 pl-3.5 text-muted-foreground has-data-[icon=inline-end]:pr-2.5"
-            href={discordUrl}
+            href={socialLinks.discord}
             variant="ghost"
           >
             Ask on Discord

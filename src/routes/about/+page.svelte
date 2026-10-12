@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { resolve } from "$app/paths";
   import acmUmnMark from "$lib/assets/about/acm-umn.webp";
   import addisonPhoto from "$lib/assets/about/addison.jpg";
   import billPhoto from "$lib/assets/about/bill.jpg";
@@ -15,23 +14,17 @@
   import owenPhoto from "$lib/assets/about/owen.jpg";
   import willowPhoto from "$lib/assets/about/willow.jpg";
   import aboutHeroDither from "$lib/assets/about-hero-dither.webp";
-  import ctaDither from "$lib/assets/cta-dither.webp";
+  import ClosingCta from "$lib/components/landing/closing-cta.svelte";
+  import ContactForm from "$lib/components/landing/contact-form.svelte";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
   import GithubMark from "$lib/components/landing/github-mark.svelte";
+  import { openNote } from "$lib/components/landing/open-note.svelte";
   import TextLink from "$lib/components/landing/text-link.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
   import * as Select from "$lib/components/ui/select";
   import { Textarea } from "$lib/components/ui/textarea";
-  import {
-    type ContactStatus,
-    contactHoneypotField,
-    contactLimits,
-    contactTopics,
-    submitContactMessage,
-  } from "$lib/contact";
-  import ArrowRight from "~icons/nucleo/arrow-right";
+  import { contactLimits, contactTopics } from "$lib/contact";
+  import { socialLinks } from "$lib/site";
   import Bluesky from "~icons/nucleo/bluesky";
   import Discord from "~icons/nucleo/discord";
   import GithubIcon from "~icons/nucleo/github";
@@ -39,17 +32,13 @@
   import Mastodon from "~icons/nucleo/mastodon";
   import Twitter from "~icons/nucleo/twitter";
 
-  const signUpUrl = "https://dash.fyrastack.com";
-  const discordUrl = "https://discord.gg/YwzKxUBu4U";
-  const fediverseUrl = "https://fedi.fyralabs.com/@stack";
-
   const linkGroups = [
     {
       label: "Community",
       links: [
-        { href: discordUrl, icon: Discord, label: "Discord" },
+        { href: socialLinks.discord, icon: Discord, label: "Discord" },
         {
-          href: "https://github.com/FyraStack",
+          href: socialLinks.github,
           icon: GithubIcon,
           label: "GitHub",
         },
@@ -58,13 +47,9 @@
     {
       label: "Socials",
       links: [
-        { href: "https://x.com/fyrastack", icon: Twitter, label: "Twitter" },
-        {
-          href: "https://bsky.app/profile/fyrastack.com",
-          icon: Bluesky,
-          label: "Bluesky",
-        },
-        { href: fediverseUrl, icon: Mastodon, label: "Fediverse" },
+        { href: socialLinks.x, icon: Twitter, label: "Twitter" },
+        { href: socialLinks.bluesky, icon: Bluesky, label: "Bluesky" },
+        { href: socialLinks.fediverse, icon: Mastodon, label: "Fediverse" },
       ],
     },
   ];
@@ -145,21 +130,8 @@
     },
   ];
 
-  let contactStatus = $state<ContactStatus>({ kind: "idle" });
-
   const [defaultContactTopic] = contactTopics;
   let contactTopic = $state<string>(defaultContactTopic);
-
-  async function sendContactMessage(event: SubmitEvent) {
-    event.preventDefault();
-    const form = event.currentTarget as HTMLFormElement;
-    contactStatus = { kind: "sending" };
-    contactStatus = await submitContactMessage(new FormData(form));
-    if (contactStatus.kind === "sent") {
-      form.reset();
-      contactTopic = defaultContactTopic;
-    }
-  }
 </script>
 
 <svelte:head>
@@ -183,13 +155,6 @@
   {:else}
     {@render content()}
   {/if}
-{/snippet}
-
-{#snippet openNote()}
-  Our <TextLink href="https://github.com/FyraStack">code</TextLink>,
-  <TextLink href={discordUrl}>community</TextLink>, and
-  <TextLink href={resolve("/about")}>team</TextLink>
-  are open
 {/snippet}
 
 {#snippet networkValue()}
@@ -216,7 +181,6 @@
         intensity: 0.7,
         scale: 2.2,
         seed: 22,
-        shape: 2,
         shimmer: 0.25,
         shimmerRate: 0.4,
         speed: 0.09,
@@ -299,7 +263,7 @@
           <li class="flex items-center gap-5 bg-background px-8 py-7">
             <img
               alt=""
-              class="size-14 shrink-0 rounded-md object-cover outline outline-offset-[-0.5px] outline-white/8"
+              class="size-14 shrink-0 object-cover outline outline-offset-[-0.5px] outline-white/8"
               height="56"
               loading="lazy"
               src={member.photo}
@@ -315,7 +279,7 @@
                     {#if member.github}
                       <a
                         aria-label="{member.name} on GitHub"
-                        class="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
+                        class="flex size-7 items-center justify-center text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
                         href="https://github.com/{member.github}"
                         rel="noopener"
                         target="_blank"
@@ -326,7 +290,7 @@
                     {#if member.website}
                       <a
                         aria-label="{member.name}'s website"
-                        class="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
+                        class="flex size-7 items-center justify-center text-muted-foreground transition-colors hover:bg-gray-850 hover:text-foreground"
                         href={member.website}
                         rel="noopener"
                         target="_blank"
@@ -511,42 +475,23 @@
         </p>
       </div>
 
-      <form
-        class="grid gap-5 sm:grid-cols-2 lg:w-160"
-        onsubmit={sendContactMessage}
+      <ContactForm
+        class="lg:w-160"
+        idPrefix="contact"
+        onSent={() => {
+          contactTopic = defaultContactTopic;
+        }}
+        submitLabel="Send message"
       >
-        <div class="flex flex-col gap-2">
-          <Label for="contact-name">Name</Label>
-          <Input
-            autocomplete="name"
-            class="h-9 rounded-none"
-            id="contact-name"
-            maxlength={contactLimits.name}
-            name="name"
-            required
-          />
-        </div>
-        <div class="flex flex-col gap-2">
-          <Label for="contact-email">Email</Label>
-          <Input
-            autocomplete="email"
-            class="h-9 rounded-none"
-            id="contact-email"
-            maxlength={contactLimits.email}
-            name="email"
-            required
-            type="email"
-          />
-        </div>
         <div class="flex flex-col gap-2 sm:col-span-2">
           <Label for="contact-topic">Topic</Label>
           <Select.Root name="topic" type="single" bind:value={contactTopic}>
-            <Select.Trigger class="h-9 w-full rounded-none" id="contact-topic">
+            <Select.Trigger class="h-9 w-full" id="contact-topic">
               {contactTopic}
             </Select.Trigger>
-            <Select.Content class="rounded-none">
+            <Select.Content class="">
               {#each contactTopics as topic (topic)}
-                <Select.Item class="rounded-none" label={topic} value={topic} />
+                <Select.Item class="" label={topic} value={topic} />
               {/each}
             </Select.Content>
           </Select.Root>
@@ -554,7 +499,7 @@
         <div class="flex flex-col gap-2 sm:col-span-2">
           <Label for="contact-message">Message</Label>
           <Textarea
-            class="rounded-none"
+            class=""
             id="contact-message"
             maxlength={contactLimits.message}
             name="message"
@@ -562,93 +507,9 @@
             rows={5}
           />
         </div>
-        <div aria-hidden="true" class="hidden">
-          <Label for="contact-website">Leave this empty</Label>
-          <Input
-            autocomplete="off"
-            id="contact-website"
-            name={contactHoneypotField}
-            tabindex={-1}
-          />
-        </div>
-        <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
-          <Button
-            class="h-auto gap-2 py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
-            disabled={contactStatus.kind === "sending"}
-            size="lg"
-            type="submit"
-            variant="accent"
-          >
-            {contactStatus.kind === "sending" ? "Sending…" : "Send message"}
-            <ArrowRight data-icon="inline-end" />
-          </Button>
-          <p aria-live="polite" class="text-sm text-pretty" role="status">
-            {#if contactStatus.kind === "sent"}
-              <span class="text-muted-foreground"
-                >Thanks, we got it. We'll reply to the email you gave us.</span
-              >
-            {:else if contactStatus.kind === "failed"}
-              <span class="text-destructive">{contactStatus.message}</span>
-            {/if}
-          </p>
-        </div>
-      </form>
+      </ContactForm>
     </div>
   </section>
 
-  <!-- Closing CTA -->
-  <section
-    class="relative isolate overflow-hidden border-b border-border py-28 lg:py-42"
-  >
-    <DitherBackground
-      class="-z-10"
-      poster={ctaDither}
-      settings={{
-        clearAmount: 0.9,
-        clearH: 0.45,
-        clearW: 1.12,
-        clearX: 0.5,
-        clearY: 0.5,
-        fadeBottom: 0.15,
-        fadeTop: 0.15,
-        intensity: 0.62,
-        scale: 1.2,
-        seed: 40,
-        shape: 2,
-        speed: 0.4,
-      }}
-    />
-
-    <div class="page-container flex flex-col items-center gap-10 text-center">
-      <div class="flex flex-col items-center gap-5">
-        <h2
-          class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
-        >
-          Your first server is five dollars away
-        </h2>
-        <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD, and you
-          can resize whenever you outgrow it.
-        </p>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <Button
-          class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
-          href={signUpUrl}
-          size="lg"
-          variant="accent"
-        >
-          Deploy your Server <ArrowRight data-icon="inline-end" />
-        </Button>
-        <Button
-          class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
-          href={discordUrl}
-          size="lg"
-          variant="ghost"
-        >
-          Join our Discord
-        </Button>
-      </div>
-    </div>
-  </section>
+  <ClosingCta />
 </main>

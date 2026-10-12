@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Attachment } from "svelte/attachments";
   import { cubicOut } from "svelte/easing";
   import { prefersReducedMotion } from "svelte/motion";
+  import { blur } from "svelte/transition";
 
   let {
     words,
@@ -35,26 +35,6 @@
   let letters = $derived(toLetters(words[0] ?? ""));
   let targetWord = $derived(words[0] ?? "");
   let boxWidth = $state<number>();
-
-  const trackWidth: Attachment<HTMLElement> = (node) => {
-    const observer = new ResizeObserver(([entry]) => {
-      boxWidth = entry.borderBoxSize[0].inlineSize;
-    });
-    observer.observe(node);
-    return () => observer.disconnect();
-  };
-
-  const blurIn = (_node: Element) => ({
-    css: (t: number) => `opacity: ${t}; filter: blur(${(1 - t) * 4}px)`,
-    duration: 360,
-    easing: cubicOut,
-  });
-
-  const blurOut = (_node: Element) => ({
-    css: (t: number) => `opacity: ${t}; filter: blur(${(1 - t) * 4}px)`,
-    duration: 260,
-    easing: cubicOut,
-  });
 
   $effect(() => {
     if (prefersReducedMotion.current || words.length < 2) {
@@ -101,8 +81,8 @@
     {#each letters as letter (letter.id)}
       <span
         class="-mx-[0.15em] -my-[0.3em] inline-block px-[0.15em] py-[0.3em] whitespace-pre"
-        in:blurIn
-        out:blurOut
+        in:blur={{ amount: 4, duration: 360, easing: cubicOut }}
+        out:blur={{ amount: 4, duration: 260, easing: cubicOut }}
       >
         {letter.char}
       </span>
@@ -111,7 +91,7 @@
   <span
     aria-hidden="true"
     class="invisible absolute top-0 left-0 whitespace-pre"
-    {@attach trackWidth}
+    bind:offsetWidth={boxWidth}
   >
     {#each targetWord as char, index (index)}
       <span class="inline-block">{char}</span>

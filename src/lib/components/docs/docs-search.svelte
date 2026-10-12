@@ -140,13 +140,13 @@
 
 <Dialog.Root bind:open>
   <Dialog.Content
-    class="top-[18%] translate-y-0 gap-0 rounded-none bg-background p-0 sm:max-w-xl"
+    class="top-[18%] translate-y-0 gap-0 bg-background p-0 sm:max-w-xl"
     showCloseButton={false}
   >
     <Dialog.Title class="sr-only">Search the docs</Dialog.Title>
-    <Command.Root class="rounded-none! bg-background p-0" shouldFilter={false}>
+    <Command.Root class="! bg-background p-0" shouldFilter={false}>
       <InputGroup.Root
-        class="h-13 rounded-none border-0 bg-transparent px-1.5 has-[[data-slot=input-group-control]:focus-visible]:ring-0 dark:bg-transparent"
+        class="h-13 border-0 bg-transparent px-1.5 has-[[data-slot=input-group-control]:focus-visible]:ring-0 dark:bg-transparent"
       >
         <InputGroup.Addon>
           <Search class="size-4" />
@@ -185,7 +185,7 @@
             <Command.Group class="p-2">
               {#each results as result (result.url)}
                 <Command.LinkItem
-                  class="cursor-pointer flex-col items-start gap-1.5 rounded-none! px-3 py-3.5 data-selected:bg-gray-850"
+                  class="cursor-pointer flex-col items-start gap-1.5 ! px-3 py-3.5 data-selected:bg-gray-850"
                   href={resolve("/docs/[section]/[slug]", result.route)}
                   onSelect={() => {
                     open = false;

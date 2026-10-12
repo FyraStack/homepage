@@ -1,5 +1,6 @@
 export const siteUrl = "https://fyrastack.com";
 export const siteName = "Fyra Stack";
+export const dashboardUrl = "https://dash.fyrastack.com";
 
 export const socialLinks = {
   bluesky: "https://bsky.app/profile/fyrastack.com",

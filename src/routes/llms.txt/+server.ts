@@ -4,7 +4,7 @@ import {
   plans,
 } from "$lib/components/landing/plans";
 import { docSections } from "$lib/docs";
-import { absoluteUrl, socialLinks } from "$lib/site";
+import { absoluteUrl, dashboardUrl, socialLinks } from "$lib/site";
 import type { RequestHandler } from "./$types";
 
 export const prerender = true;
@@ -49,7 +49,7 @@ const llmsText = [
   `- [Home and pricing](${absoluteUrl("/")})`,
   `- [About](${absoluteUrl("/about")})`,
   `- [Docs](${absoluteUrl("/docs")})`,
-  "- [Dashboard](https://dash.fyrastack.com)",
+  `- [Dashboard](${dashboardUrl})`,
   "- [Support](mailto:support@fyrastack.com)",
   `- [GitHub](${socialLinks.github})`,
   `- [Discord](${socialLinks.discord})`,

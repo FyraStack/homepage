@@ -8,15 +8,13 @@
   import favicon from "$lib/assets/favicon.svg";
   import StackMark from "$lib/components/landing/stack-mark.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { absoluteUrl, siteName, socialLinks } from "$lib/site";
+  import { absoluteUrl, dashboardUrl, siteName, socialLinks } from "$lib/site";
   import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Menu from "~icons/nucleo/menu";
   import X from "~icons/nucleo/xmark";
 
   let { children } = $props();
-
-  const dashboardUrl = "https://dash.fyrastack.com";
 
   const navLinkClass = (active = false) =>
     cn(

@@ -1,13 +1,8 @@
 import { readFile } from "node:fs/promises";
 import GithubSlugger from "github-slugger";
 import { compile, mdsvex } from "mdsvex";
-import {
-  type BundledLanguage,
-  bundledLanguages,
-  createHighlighter,
-  type Highlighter,
-} from "shiki";
 import type { Plugin } from "vite";
+import { highlightToHtml, isBundledLanguage } from "./highlight.ts";
 
 interface HtmlNode {
   children?: HtmlNode[];
@@ -21,8 +16,6 @@ interface MarkdownFile {
   data: { fm?: Record<string, unknown> };
 }
 
-import { codeThemeName, fyraStackCodeTheme } from "./shiki-theme.ts";
-
 const languageLabels: Record<string, string> = {
   bash: "Shell",
   sh: "Shell",
@@ -30,39 +23,12 @@ const languageLabels: Record<string, string> = {
   text: "Text",
 };
 
-let highlighterPromise: Promise<Highlighter> | undefined;
-
-const getHighlighter = () => {
-  highlighterPromise ??= createHighlighter({
-    langs: [],
-    themes: [fyraStackCodeTheme],
-  });
-  return highlighterPromise;
-};
-
-const isBundledLanguage = (lang?: string | null): lang is BundledLanguage =>
-  Boolean(lang && lang in bundledLanguages);
-
-async function highlighterFor(language: BundledLanguage | "text") {
-  const highlighter = await getHighlighter();
-  if (
-    language !== "text" &&
-    !highlighter.getLoadedLanguages().includes(language)
-  ) {
-    await highlighter.loadLanguage(language);
-  }
-  return highlighter;
-}
-
 const escapeSvelte = (html: string) =>
   html.replaceAll("{", "&#123;").replaceAll("}", "&#125;");
 
 async function highlightCode(code: string, lang?: string | null) {
   const language = isBundledLanguage(lang) ? lang : "text";
-  const highlighter = await highlighterFor(language);
-  const html = highlighter
-    .codeToHtml(code, { lang: language, theme: codeThemeName })
-    .replace(' tabindex="0"', "");
+  const html = await highlightToHtml(code, language);
   const label = languageLabels[language] ?? language;
   return escapeSvelte(
     `<figure class="docs-code not-prose"><figcaption class="docs-code-header" data-pagefind-ignore><span>${label}</span><button type="button" class="docs-code-copy" data-copy-code>Copy</button></figcaption>${html}</figure>`

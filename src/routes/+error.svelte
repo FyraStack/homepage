@@ -42,7 +42,6 @@
         intensity: 0.62,
         scale: 1.2,
         seed: 40,
-        shape: 2,
         speed: 0.4,
       }}
     />

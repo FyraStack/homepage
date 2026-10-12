@@ -10,49 +10,34 @@
   import Pencil from "~icons/nucleo/pencil";
   import { confirmDestructive } from "../confirm.svelte";
   import { getDemo } from "../context";
-  import { getErrorMessage } from "../format";
-  import { isValidPtrHostname } from "../ptr";
+
+  const hostnameLabelPattern = /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/i;
+
+  function isValidHostname(value: string) {
+    return (
+      value.length <= 253 &&
+      value.split(".").every((label) => hostnameLabelPattern.test(label))
+    );
+  }
 
   const demo = getDemo();
   let selectedServer = $derived(demo.selected);
-  let nameValue = $state("");
-  let syncedServerId = $state("");
-  let syncedServerName = $state("");
+  let nameValue = $state(demo.selected.name);
   let editingName = $state(false);
   let renameDialogOpen = $state(false);
   let updateHostname = $state(false);
   let renaming = $state(false);
   let deleting = $state(false);
-  let renameError = $state("");
-  let deleteError = $state("");
   let nameChanged = $derived(
     Boolean(nameValue.trim()) && nameValue.trim() !== selectedServer.name
   );
-  let hostnameValid = $derived(isValidPtrHostname(nameValue.trim()));
-
-  $effect(() => {
-    if (
-      selectedServer.id === syncedServerId &&
-      selectedServer.name === syncedServerName
-    ) {
-      return;
-    }
-
-    syncedServerId = selectedServer.id;
-    syncedServerName = selectedServer.name;
-    nameValue = selectedServer.name;
-    editingName = false;
-    renameDialogOpen = false;
-    updateHostname = false;
-    renameError = "";
-  });
+  let hostnameValid = $derived(isValidHostname(nameValue.trim()));
 
   function openRenameDialog() {
     if (!(editingName && nameChanged) || renaming) {
       return;
     }
     updateHostname = false;
-    renameError = "";
     renameDialogOpen = true;
   }
 
@@ -67,7 +52,6 @@
     }
     renameDialogOpen = false;
     updateHostname = false;
-    renameError = "";
   }
 
   async function handleRename() {
@@ -78,27 +62,16 @@
     }
 
     renaming = true;
-    renameError = "";
-
-    try {
-      const result = await demo.renameVm({
-        name,
-        updateHostname: shouldUpdateHostname,
-        vmId: selectedServer.id,
-      });
-      nameValue = result.name;
-      editingName = false;
-      renameDialogOpen = false;
-      toast.success(
-        shouldUpdateHostname
-          ? "Server renamed. The hostname will update after the next reboot."
-          : "Server renamed."
-      );
-    } catch (error) {
-      renameError = getErrorMessage(error, "Failed to rename server.");
-    } finally {
-      renaming = false;
-    }
+    await demo.rename(selectedServer.id, name);
+    nameValue = name;
+    editingName = false;
+    renameDialogOpen = false;
+    renaming = false;
+    toast.success(
+      shouldUpdateHostname
+        ? "Server renamed. The hostname will update after the next reboot."
+        : "Server renamed."
+    );
   }
 
   async function handleDelete() {
@@ -117,15 +90,7 @@
     }
 
     deleting = true;
-    deleteError = "";
-
-    try {
-      await demo.deleteVm({ vmId: server.id });
-      deleting = false;
-    } catch {
-      deleteError = "Failed to delete server.";
-      deleting = false;
-    }
+    await demo.delete(server.id);
   }
 </script>
 
@@ -182,8 +147,6 @@
         <Button
           aria-label="Edit server name"
           class="size-7 p-0"
-          disabled={selectedServer.status === "provisioning" ||
-            selectedServer.status === "deleting"}
           onclick={() => {
             editingName = true;
           }}
@@ -208,22 +171,15 @@
       value={selectedServer.id}
     />
   </div>
-  {#if deleteError}
-    <p class="text-base text-pretty text-destructive @min-[40rem]:text-sm">
-      {deleteError}
-    </p>
-  {/if}
   <div class="border-t border-border pt-4">
     <Button
       class="border-red-300 text-red-700 hover:bg-red-100 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
-      disabled={deleting || selectedServer.status === "deleting"}
+      disabled={deleting}
       onclick={handleDelete}
       size="sm"
       variant="outline"
     >
-      {deleting || selectedServer.status === "deleting"
-        ? "Deleting..."
-        : "Delete Server"}</Button
+      {deleting ? "Deleting..." : "Delete Server"}</Button
     >
   </div>
 </div>
@@ -247,9 +203,7 @@
     </Dialog.Header>
 
     <div class="py-2">
-      <div
-        class="flex items-start justify-between gap-4 rounded-lg bg-muted/50 p-3"
-      >
+      <div class="flex items-start justify-between gap-4 bg-muted/50 p-3">
         <div class="min-w-0 space-y-1">
           <Label for="update-server-hostname">Update guest hostname</Label>
           <p
@@ -276,13 +230,6 @@
         >
           Use a valid hostname with letters, numbers, dots, or hyphens, or leave
           this option off.
-        </p>
-      {/if}
-      {#if renameError}
-        <p
-          class="pt-2 text-base text-pretty text-destructive @min-[40rem]:text-sm"
-        >
-          {renameError}
         </p>
       {/if}
     </div>

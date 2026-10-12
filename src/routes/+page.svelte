@@ -4,7 +4,6 @@
   import { replaceState } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import ctaDither from "$lib/assets/cta-dither.webp";
   import heroDither from "$lib/assets/hero-dither.webp";
   import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
   import fyraLabsPreview from "$lib/assets/projects/fyralabs-preview.webp";
@@ -13,11 +12,13 @@
   import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
   import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
   import BlurTypeWord from "$lib/components/landing/blur-type-word.svelte";
+  import ClosingCta from "$lib/components/landing/closing-cta.svelte";
   import { colocationFeatures } from "$lib/components/landing/colocation";
   import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
   import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
   import DashboardDemo from "$lib/components/landing/dashboard-demo/dashboard-demo.svelte";
   import DitherBackground from "$lib/components/landing/dither-background.svelte";
+  import { openNote } from "$lib/components/landing/open-note.svelte";
   import {
     colocationTiers,
     competitors,
@@ -26,10 +27,10 @@
   } from "$lib/components/landing/plans";
   import ProjectLink from "$lib/components/landing/project-link.svelte";
   import RollingPrice from "$lib/components/landing/rolling-price.svelte";
-  import TextLink from "$lib/components/landing/text-link.svelte";
   import { Button } from "$lib/components/ui/button";
   import * as RadioGroup from "$lib/components/ui/radio-group";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import { dashboardUrl, socialLinks } from "$lib/site";
   import { homeJsonLd } from "$lib/structured-data";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Check from "~icons/nucleo/check";
@@ -44,11 +45,7 @@
   import ReceiptText from "~icons/nucleo/receipt";
   import Server from "~icons/nucleo/server";
 
-  const dashboardUrl = "https://dash.fyrastack.com";
-  const createServerUrl = `${dashboardUrl}/servers/new`;
-  const signUpUrl = dashboardUrl;
   const salesUrl = `${resolve("/about")}#contact`;
-  const discordUrl = "https://discord.gg/YwzKxUBu4U";
 
   const heroWords = [
     "stack",
@@ -65,10 +62,11 @@
 
   const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
   const demoFitVars = `--demo-width: ${demoWidth}; --demo-zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
+  const mockupFitVars = "--mockup-zoom: min(1, tan(atan2(100cqw, 1280px)))";
 
   const whyFeatures = [
     {
-      description: actuallyOpenDescription,
+      description: openNote,
       icon: DoorOpen,
       title: "Actually open",
     },
@@ -155,13 +153,6 @@
       provider: competitor.provider,
     }))
   );
-
-  const mockupNaturalWidth = 1280;
-  const mockupFrameHeight = 824;
-  let mockupFrameWidth = $state(mockupNaturalWidth);
-  const mockupScale = $derived(
-    Math.min(1, mockupFrameWidth / mockupNaturalWidth)
-  );
 </script>
 
 <svelte:head>
@@ -180,13 +171,6 @@
   >
   {@html homeJsonLd}
 </svelte:head>
-
-{#snippet actuallyOpenDescription()}
-  Our <TextLink href="https://github.com/FyraStack">code</TextLink>,
-  <TextLink href={discordUrl}>community</TextLink>, and
-  <TextLink href={resolve("/about")}>team</TextLink>
-  are open
-{/snippet}
 
 {#snippet predictablePricingDescription()}
   No hidden fees, no egress charges, no surprise bills. No
@@ -222,7 +206,6 @@
         intensity: 0.72,
         scale: 1.1,
         seed: 12,
-        shape: 2,
         speed: 0.3,
       }}
     />
@@ -254,7 +237,7 @@
         <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button
             class="h-auto gap-2 py-2.5 pl-4 has-data-[icon=inline-end]:pr-3"
-            href={createServerUrl}
+            href={dashboardUrl}
             size="lg"
           >
             Deploy your Server <ArrowRight data-icon="inline-end" />
@@ -277,7 +260,6 @@
           <div class="flex justify-center" style={demoFitVars}>
             <DashboardDemo
               class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
-              createServerUrl={dashboardUrl}
               {dashboardUrl}
             />
           </div>
@@ -408,17 +390,18 @@
         {/each}
       </ul>
 
-      <div
-        class="relative hidden [clip-path:inset(-64px_0_0_0)] md:block"
-        style:height="{mockupFrameHeight * mockupScale}px"
-        bind:clientWidth={mockupFrameWidth}
-      >
-        <div style:zoom={mockupScale}>
-          <CreateServerMockup />
-        </div>
+      <div class="hidden @container md:block">
         <div
-          class="absolute inset-x-0 bottom-0 h-14 bg-linear-to-b from-background/0 to-background"
-        ></div>
+          class="relative h-[calc(824px*var(--mockup-zoom))] [clip-path:inset(-64px_0_0_0)]"
+          style={mockupFitVars}
+        >
+          <div class="[zoom:var(--mockup-zoom)]">
+            <CreateServerMockup />
+          </div>
+          <div
+            class="absolute inset-x-0 bottom-0 h-14 bg-linear-to-b from-background/0 to-background"
+          ></div>
+        </div>
       </div>
     </div>
   </section>
@@ -449,7 +432,7 @@
         </Button>
       </div>
       <ul
-        class="grid w-full gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
+        class="grid w-full gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
       >
         {#each colocationFeatures as feature (feature.title)}
           <li class="flex flex-col gap-4 bg-background p-6">
@@ -556,7 +539,7 @@
             </div>
             <Button
               class="h-auto py-2.5"
-              href={createServerUrl}
+              href={dashboardUrl}
               size="lg"
               variant="accent"
             >
@@ -667,61 +650,7 @@
     </div>
   </section>
 
-  <!-- Closing CTA -->
-  <section
-    class="relative isolate overflow-hidden border-b border-border py-28 lg:py-42"
-  >
-    <DitherBackground
-      class="-z-10"
-      poster={ctaDither}
-      settings={{
-        clearAmount: 0.9,
-        clearH: 0.45,
-        clearW: 1.12,
-        clearX: 0.5,
-        clearY: 0.5,
-        fadeBottom: 0.15,
-        fadeTop: 0.15,
-        intensity: 0.62,
-        scale: 1.2,
-        seed: 40,
-        shape: 2,
-        speed: 0.4,
-      }}
-    />
-
-    <div class="page-container flex flex-col items-center gap-10 text-center">
-      <div class="flex flex-col items-center gap-5">
-        <h2
-          class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
-        >
-          Your first server is five dollars away
-        </h2>
-        <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          BASE-2G gets you 2 vCPU, 2 GB of RAM, and 40 GB of SAS3 SSD. Resize
-          whenever you outgrow it.
-        </p>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <Button
-          class="h-auto gap-2 py-2.5 pl-4 backdrop-blur-sm has-data-[icon=inline-end]:pr-3"
-          href={signUpUrl}
-          size="lg"
-          variant="accent"
-        >
-          Deploy your Server <ArrowRight data-icon="inline-end" />
-        </Button>
-        <Button
-          class="h-auto px-4 py-2.5 text-muted-foreground"
-          href={discordUrl}
-          size="lg"
-          variant="ghost"
-        >
-          Join our Discord
-        </Button>
-      </div>
-    </div>
-  </section>
+  <ClosingCta />
 </main>
 
 <ColocationInquiryDialog

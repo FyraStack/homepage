@@ -6,7 +6,6 @@
   "scripts": {
     "build": "vite build && pagefind --site .svelte-kit/cloudflare",
     "cf:deploy": "pnpm run build && wrangler deploy",
-    "cf:gen": "wrangler types",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "vite dev",
@@ -20,7 +19,6 @@
     "@kitlangton/rolling-number": "^0.4.1",
     "bits-ui": "^2.19.3",
     "clsx": "^2.1.1",
-    "mode-watcher": "^1.1.0",
     "shadcn-svelte": "^1.7.0",
     "svelte-sonner": "^1.2.1",
     "tailwind-merge": "^3.7.0",
