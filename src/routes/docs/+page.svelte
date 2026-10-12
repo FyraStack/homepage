@@ -146,12 +146,14 @@
               class="group flex flex-col gap-3"
               href={resolve("/docs/[section]", { section: section.id })}
             >
-              <SectionIcon class="size-5" />
-              <h3
-                class="text-xl font-semibold tracking-[-0.015em] group-hover:text-gray-300"
-              >
-                {section.title}
-              </h3>
+              <div class="flex items-center gap-3">
+                <SectionIcon class="size-5 shrink-0" />
+                <h3
+                  class="text-xl font-semibold tracking-[-0.015em] group-hover:text-gray-300"
+                >
+                  {section.title}
+                </h3>
+              </div>
               <p class="text-sm/[22px] text-muted-foreground">
                 {section.description}
               </p>
