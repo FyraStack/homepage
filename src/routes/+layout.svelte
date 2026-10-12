@@ -33,8 +33,6 @@
   ] as const;
 
   const canonicalUrl = $derived(absoluteUrl(page.url.pathname));
-  const ogImagePngUrl = absoluteUrl("/og-image.png");
-  const ogImageWebpUrl = absoluteUrl("/og-image.webp");
   const ogImageAlt = "Fyra Stack: We run the servers, you run your stack";
 
   const isLinkCurrent = (path: string | null) =>
@@ -72,13 +70,13 @@
   <meta content={siteName} property="og:site_name">
   <meta content="website" property="og:type">
   <meta content={canonicalUrl} property="og:url">
-  <meta content={ogImagePngUrl} property="og:image">
+  <meta content={absoluteUrl("/og-image.png")} property="og:image">
   <meta content="image/png" property="og:image:type">
   <meta content="1200" property="og:image:width">
   <meta content="630" property="og:image:height">
   <meta content={ogImageAlt} property="og:image:alt">
   <meta content="summary_large_image" name="twitter:card">
-  <meta content={ogImageWebpUrl} name="twitter:image">
+  <meta content={absoluteUrl("/og-image.webp")} name="twitter:image">
   <meta content={ogImageAlt} name="twitter:image:alt">
   <meta content="@fyrastack" name="twitter:site">
   <script

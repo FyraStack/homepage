@@ -10,12 +10,6 @@
   const title = $derived(
     isNotFound ? "Page not found" : "Something went wrong"
   );
-  const heading = $derived(isNotFound ? "Stack Overflow" : title);
-  const description = $derived(
-    isNotFound
-      ? "The page you're looking for may have moved, or never existed."
-      : (page.error?.message ?? "We hit an unexpected error loading this page.")
-  );
 </script>
 
 <svelte:head>
@@ -52,10 +46,13 @@
         <h1
           class="max-w-220 text-5xl/[1.02] font-semibold tracking-[-0.033em] text-balance sm:text-[72px]/[73px]"
         >
-          {heading}
+          {isNotFound ? "Stack Overflow" : title}
         </h1>
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
-          {description}
+          {isNotFound
+            ? "The page you're looking for may have moved, or never existed."
+            : (page.error?.message ??
+              "We hit an unexpected error loading this page.")}
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">

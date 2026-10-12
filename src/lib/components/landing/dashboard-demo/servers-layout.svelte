@@ -10,7 +10,6 @@
   let { dashboardUrl }: { dashboardUrl: string } = $props();
 
   const demo = getDemo();
-  const selectedServerId = $derived(demo.selectedId);
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden @min-[64rem]:flex-row">
@@ -48,7 +47,7 @@
     <div class="flex-1 overflow-y-auto">
       {#each demo.servers as server (server.id)}
         <button
-          class="flex w-full items-start justify-between border-b border-border px-4 py-3 text-left transition-colors duration-100 {selectedServerId ===
+          class="flex w-full items-start justify-between border-b border-border px-4 py-3 text-left transition-colors duration-100 {demo.selectedId ===
           server.id
             ? "bg-muted/60"
             : "hover:bg-muted/30"}"

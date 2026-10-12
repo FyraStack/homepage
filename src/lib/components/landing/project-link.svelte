@@ -15,8 +15,6 @@
     color: string;
     children: Snippet;
   } = $props();
-
-  const host = $derived(new URL(href).host);
 </script>
 
 <LinkPreview.Root closeDelay={100} openDelay={300}>
@@ -52,7 +50,7 @@
         class="flex items-center gap-2 border-t border-border px-3 py-2 text-xs text-muted-foreground"
       >
         <img alt="" class="size-3.5" height="14" src={logo} width="14">
-        {host}
+        {new URL(href).host}
       </div>
     </LinkPreview.Content>
   </LinkPreview.Portal>

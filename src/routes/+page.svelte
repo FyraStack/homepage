@@ -45,8 +45,6 @@
   import ReceiptText from "~icons/nucleo/receipt";
   import Server from "~icons/nucleo/server";
 
-  const salesUrl = `${resolve("/about")}#contact`;
-
   const heroWords = [
     "stack",
     "database",
@@ -59,10 +57,6 @@
     "Discord bot",
     "Mastodon",
   ];
-
-  const demoWidth = "clamp(1024px, 100cqw / 0.8, 1440px)";
-  const demoFitVars = `--demo-width: ${demoWidth}; --demo-zoom: min(0.8, tan(atan2(100cqw, ${demoWidth})))`;
-  const mockupFitVars = "--mockup-zoom: min(1, tan(atan2(100cqw, 1280px)))";
 
   const whyFeatures = [
     {
@@ -146,12 +140,6 @@
   }
   const selected = $derived(
     plans.find((option) => option.name === selectedName) ?? plans[0]
-  );
-  const comparisonOffers = $derived(
-    competitors.map((competitor) => ({
-      offer: competitor.offersByMemoryGb[selected.memoryGb],
-      provider: competitor.provider,
-    }))
   );
 </script>
 
@@ -257,7 +245,10 @@
         class="hidden h-110 w-full [clip-path:inset(-64px_0_0_0)] md:block lg:h-134 lg:px-16"
       >
         <div class="@container">
-          <div class="flex justify-center" style={demoFitVars}>
+          <div
+            class="flex justify-center"
+            style="--demo-width: clamp(1024px, 100cqw / 0.8, 1440px); --demo-zoom: min(0.8, tan(atan2(100cqw, var(--demo-width))))"
+          >
             <DashboardDemo
               class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
               {dashboardUrl}
@@ -393,7 +384,7 @@
       <div class="hidden @container md:block">
         <div
           class="relative h-[calc(824px*var(--mockup-zoom))] [clip-path:inset(-64px_0_0_0)]"
-          style={mockupFitVars}
+          style="--mockup-zoom: min(1, tan(atan2(100cqw, 1280px)))"
         >
           <div class="[zoom:var(--mockup-zoom)]">
             <CreateServerMockup />
@@ -463,7 +454,7 @@
         </div>
         <Button
           class="h-auto self-start px-4 py-2.5 sm:self-auto"
-          href={salesUrl}
+          href="{resolve("/about")}#contact"
           size="lg"
           variant="accent"
         >
@@ -555,7 +546,8 @@
               <span class="w-20 text-right">You save</span>
             </div>
             <ul class="flex flex-col">
-              {#each comparisonOffers as { provider, offer } (provider)}
+              {#each competitors as { provider, offersByMemoryGb } (provider)}
+                {@const offer = offersByMemoryGb[selected.memoryGb]}
                 <li
                   class="flex items-center gap-3 overflow-hidden border-b border-border py-3 text-sm last:border-b-0"
                 >

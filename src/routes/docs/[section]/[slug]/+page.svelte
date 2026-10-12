@@ -13,7 +13,6 @@
   let { data } = $props();
 
   const doc = $derived(data.page);
-  const Content = $derived(data.content);
   const section = $derived(data.section);
   const headings = $derived(doc.headings ?? []);
   const previous = $derived(data.previous);
@@ -155,7 +154,7 @@
       </header>
 
       <div class={cn(proseClass, "mt-8")} {@attach copyCodeButtons}>
-        <Content />
+        <data.content />
       </div>
     </article>
 

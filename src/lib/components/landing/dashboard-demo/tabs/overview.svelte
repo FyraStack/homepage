@@ -82,16 +82,6 @@
       };
     });
   });
-
-  let details = $derived([
-    ["Plan", selectedServer.plan.name],
-    ["Region", selectedServer.region],
-    ["vCPU", `${selectedServer.plan.vcpu}`],
-    ["RAM", `${selectedServer.plan.memoryGb}GB`],
-    ["Disk", `${selectedServer.plan.storageGb}GB`],
-    ["Created", selectedServer.created],
-    ["Uptime", selectedServer.uptime],
-  ]);
 </script>
 
 <h2 class="sr-only">Server Overview</h2>
@@ -144,7 +134,15 @@
     >
       Server Details
     </div>
-    {#each details as [label, value] (label)}
+    {#each [
+      ["Plan", selectedServer.plan.name],
+      ["Region", selectedServer.region],
+      ["vCPU", `${selectedServer.plan.vcpu}`],
+      ["RAM", `${selectedServer.plan.memoryGb}GB`],
+      ["Disk", `${selectedServer.plan.storageGb}GB`],
+      ["Created", selectedServer.created],
+      ["Uptime", selectedServer.uptime],
+    ] as [label, value] (label)}
       <div class="flex items-center justify-between px-5 py-2">
         <span class="text-xs text-muted-foreground">{label}</span>
         <span class="text-xs font-medium text-foreground">{value}</span>
