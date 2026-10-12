@@ -128,14 +128,9 @@
   <!-- Guides: every docs section and its pages, generated from src/content/docs -->
   <section class="border-b border-border py-20 lg:py-28">
     <div class="page-container flex flex-col gap-14">
-      <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <h2 class="text-4xl font-semibold tracking-[-0.02em] lg:text-[40px]">
-          Guides
-        </h2>
-        <p class="text-base/[26px] text-pretty text-muted-foreground">
-          In-depth documentation by topic. More is being written as we launch.
-        </p>
-      </div>
+      <h2 class="text-4xl font-semibold tracking-[-0.02em] lg:text-[40px]">
+        Guides
+      </h2>
       <div
         class="grid gap-px border border-border bg-border sm:grid-cols-2 xl:grid-cols-4"
       >
@@ -206,9 +201,6 @@
         >
           Colocation quick start
         </h2>
-        <p class="text-base/[26px] text-pretty text-muted-foreground">
-          From a shipped box to a running server in four steps.
-        </p>
         <dl class="mt-6 flex flex-col gap-3 text-sm text-muted-foreground">
           <div class="flex items-center gap-3">
             <dt>{@render owner("You")}</dt>
