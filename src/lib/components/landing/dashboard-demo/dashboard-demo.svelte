@@ -2,6 +2,7 @@
   import { BitsConfig } from "bits-ui";
   import { onMount } from "svelte";
   import * as Avatar from "#lib/components/ui/avatar/index.js";
+  import { Badge } from "#lib/components/ui/badge/index.js";
   import { Toaster } from "#lib/components/ui/sonner/index.js";
   import * as Tooltip from "#lib/components/ui/tooltip/index.js";
   import { cn } from "#lib/utils.js";
@@ -69,6 +70,9 @@
           <img alt="" class="h-5 w-5" src="/logo.svg">
           <span class="text-sm font-semibold tracking-tight text-foreground"
             >Stack</span
+          >
+          <Badge class="h-4 px-1.5 text-[10px]" variant="secondary"
+            >Alpha</Badge
           >
         </span>
         <span class="text-sm text-muted-foreground">/</span>

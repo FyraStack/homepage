@@ -4,6 +4,7 @@
   import fedora from "#lib/assets/os/fedora.webp";
   import opensuse from "#lib/assets/os/opensuse.webp";
   import ubuntu from "#lib/assets/os/ubuntu.webp";
+  import { Badge } from "#lib/components/ui/badge/index.js";
   import ArrowLeft from "~icons/lucide/arrow-left";
   import Check from "~icons/lucide/check";
   import ChevronDown from "~icons/lucide/chevron-down";
@@ -103,6 +104,7 @@
     <div class="flex items-center gap-2 text-sm">
       <StackMark />
       <span class="font-semibold tracking-[-0.025em]">Stack</span>
+      <Badge class="h-4 px-1.5 text-[10px]" variant="secondary">Alpha</Badge>
       <span class="text-muted-foreground">/</span>
       <span class="flex items-center gap-1 px-1.5 font-medium">
         Acme <ChevronDown class="size-3 text-muted-foreground" />

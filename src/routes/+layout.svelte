@@ -4,6 +4,7 @@
   import { onMount, type Snippet } from "svelte";
   import favicon from "#lib/assets/favicon.svg";
   import StackMark from "#lib/components/landing/stack-mark.svelte";
+  import { Badge } from "#lib/components/ui/badge/index.js";
   import { Button } from "#lib/components/ui/button/index.js";
   import {
     absoluteUrl,
@@ -142,6 +143,7 @@
       <a class="flex items-center gap-2" href={resolve("/")}>
         <StackMark />
         <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
+        <Badge class="h-4 px-1.5 text-[10px]" variant="secondary">Alpha</Badge>
       </a>
       <nav aria-label="Primary" class="hidden items-center gap-1 sm:flex">
         {#each navLinks as link (link.label)}
@@ -219,6 +221,7 @@
         <a class="flex items-center gap-2 self-start" href={resolve("/")}>
           <StackMark />
           <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
+          <Badge class="h-4 px-1.5 text-[10px]" variant="secondary">Alpha</Badge>
         </a>
         <p class="max-w-80 text-sm/[22px] text-muted-foreground">
           Built from the ground up to support the open-source projects we love,
