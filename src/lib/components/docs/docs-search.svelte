@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { dev } from "$app/environment";
+  import { dev } from "$app/env";
 
   interface PagefindResult {
     excerpt: string;
@@ -57,11 +57,11 @@
 
 <script lang="ts">
   import { Command as CommandPrimitive } from "bits-ui";
+  import * as Command from "#lib/components/ui/command/index.js";
+  import * as Dialog from "#lib/components/ui/dialog/index.js";
+  import * as InputGroup from "#lib/components/ui/input-group/index.js";
+  import { cn } from "#lib/utils.js";
   import { resolve } from "$app/paths";
-  import * as Command from "$lib/components/ui/command";
-  import * as Dialog from "$lib/components/ui/dialog";
-  import * as InputGroup from "$lib/components/ui/input-group";
-  import { cn } from "$lib/utils";
   import Search from "~icons/nucleo/search";
 
   let {

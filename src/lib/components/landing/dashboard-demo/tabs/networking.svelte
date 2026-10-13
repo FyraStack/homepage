@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
-  import * as Dialog from "$lib/components/ui/dialog";
-  import { Input } from "$lib/components/ui/input";
-  import * as InputGroup from "$lib/components/ui/input-group";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import * as Dialog from "#lib/components/ui/dialog/index.js";
+  import { Input } from "#lib/components/ui/input/index.js";
+  import * as InputGroup from "#lib/components/ui/input-group/index.js";
   import Check from "~icons/lucide/check";
   import Loader2 from "~icons/lucide/loader-2";
   import Plus from "~icons/lucide/plus";

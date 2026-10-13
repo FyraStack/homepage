@@ -1,4 +1,4 @@
-import type { DocMetadata, DocPage, DocSection } from "$lib/docs";
+import type { DocMetadata, DocPage, DocSection } from "#lib/docs/index.js";
 
 const sectionInfo: Omit<DocSection, "pages">[] = [
   {

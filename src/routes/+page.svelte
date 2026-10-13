@@ -1,37 +1,37 @@
 <script lang="ts">
   import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
-  import { replaceState } from "$app/navigation";
-  import { resolve } from "$app/paths";
-  import { page } from "$app/state";
-  import heroDither from "$lib/assets/hero-dither.webp";
-  import fyraLabsLogo from "$lib/assets/projects/fyralabs.svg";
-  import fyraLabsPreview from "$lib/assets/projects/fyralabs-preview.webp";
-  import terraLogo from "$lib/assets/projects/terra.svg";
-  import terraPreview from "$lib/assets/projects/terra-preview.webp";
-  import ultramarineLogo from "$lib/assets/projects/ultramarine.svg";
-  import ultramarinePreview from "$lib/assets/projects/ultramarine-preview.webp";
-  import BlurTypeWord from "$lib/components/landing/blur-type-word.svelte";
-  import ClosingCta from "$lib/components/landing/closing-cta.svelte";
-  import { colocationFeatures } from "$lib/components/landing/colocation";
-  import ColocationInquiryDialog from "$lib/components/landing/colocation-inquiry-dialog.svelte";
-  import CreateServerMockup from "$lib/components/landing/create-server-mockup.svelte";
-  import DashboardDemo from "$lib/components/landing/dashboard-demo/dashboard-demo.svelte";
-  import DitherBackground from "$lib/components/landing/dither-background.svelte";
-  import { openNote } from "$lib/components/landing/open-note.svelte";
+  import heroDither from "#lib/assets/hero-dither.webp";
+  import fyraLabsLogo from "#lib/assets/projects/fyralabs.svg";
+  import fyraLabsPreview from "#lib/assets/projects/fyralabs-preview.webp";
+  import terraLogo from "#lib/assets/projects/terra.svg";
+  import terraPreview from "#lib/assets/projects/terra-preview.webp";
+  import ultramarineLogo from "#lib/assets/projects/ultramarine.svg";
+  import ultramarinePreview from "#lib/assets/projects/ultramarine-preview.webp";
+  import BlurTypeWord from "#lib/components/landing/blur-type-word.svelte";
+  import ClosingCta from "#lib/components/landing/closing-cta.svelte";
+  import { colocationFeatures } from "#lib/components/landing/colocation.js";
+  import ColocationInquiryDialog from "#lib/components/landing/colocation-inquiry-dialog.svelte";
+  import CreateServerMockup from "#lib/components/landing/create-server-mockup.svelte";
+  import DashboardDemo from "#lib/components/landing/dashboard-demo/dashboard-demo.svelte";
+  import DitherBackground from "#lib/components/landing/dither-background.svelte";
+  import { openNote } from "#lib/components/landing/open-note.svelte";
   import {
     colocationTiers,
     competitors,
     planSpecs,
     plans,
-  } from "$lib/components/landing/plans";
-  import ProjectLink from "$lib/components/landing/project-link.svelte";
-  import RollingPrice from "$lib/components/landing/rolling-price.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import * as RadioGroup from "$lib/components/ui/radio-group";
-  import * as Tooltip from "$lib/components/ui/tooltip";
-  import { dashboardUrl, socialLinks } from "$lib/site";
-  import { homeJsonLd } from "$lib/structured-data";
+  } from "#lib/components/landing/plans.js";
+  import ProjectLink from "#lib/components/landing/project-link.svelte";
+  import RollingPrice from "#lib/components/landing/rolling-price.svelte";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import * as RadioGroup from "#lib/components/ui/radio-group/index.js";
+  import * as Tooltip from "#lib/components/ui/tooltip/index.js";
+  import { dashboardUrl, socialLinks } from "#lib/site.js";
+  import { homeJsonLd } from "#lib/structured-data.js";
+  import { goto } from "$app/navigation";
+  import { resolve } from "$app/paths";
+  import { page } from "$app/state";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Check from "~icons/nucleo/check";
   import CornerLeftUp from "~icons/nucleo/corner-left-up";
@@ -127,7 +127,7 @@
 
   function clearColocationInquiryHash(open: boolean) {
     if (!open && page.url.hash === colocationInquiryHash) {
-      replaceState(resolve("/"), page.state);
+      goto(resolve("/"), { replace: true, shallow: true, state: page.state });
     }
   }
 
@@ -208,13 +208,17 @@
           class="max-w-250 text-[40px]/[1.08] font-semibold tracking-[-0.028em] text-balance sm:text-5xl/[1.06] lg:text-[64px]/[67px]"
         >
           <span class="sr-only">We run the servers, you run your stack</span>
-          <span aria-hidden="true"
-            >We run the servers,<br>
-            <span class="sm:whitespace-nowrap"
-              >you run your <br class="sm:hidden">
-              <BlurTypeWord words={heroWords} /></span
-            ></span
-          >
+
+          <span aria-hidden="true">
+            We run the servers,
+            <br>
+
+            <span class="sm:whitespace-nowrap">
+              you run your
+              <br class="sm:hidden">
+              <BlurTypeWord words={heroWords} />
+            </span>
+          </span>
         </h1>
         <p
           class="max-w-155 text-base/7 text-pretty text-muted-foreground sm:text-lg/[29px]"
@@ -339,7 +343,8 @@
         <h2
           class="text-4xl/[1.1] font-semibold tracking-[-0.03em] sm:text-5xl/[53px]"
         >
-          Easy to deploy<br>
+          Easy to deploy
+          <br>
           <span class="text-muted-foreground">Hard to outgrow</span>
         </h2>
         <div class="flex max-w-125 flex-col gap-6">
@@ -350,6 +355,7 @@
               Other VPS providers cut corners to hit their price points. We
               don't.
             </p>
+
             <p class="text-base/[26px] text-pretty text-muted-foreground">
               We run a lean team, buy solid hardware, obsess over developer
               experience, listen to our community, and build a product we
@@ -407,6 +413,7 @@
           >
             Ship your hardware<br>We handle the rest
           </h2>
+
           <p class="text-[17px]/[27px] text-pretty text-muted-foreground">
             Colocation without the enterprise markup or fees just for asking
             questions
@@ -454,7 +461,7 @@
         </div>
         <Button
           class="h-auto self-start px-4 py-2.5 sm:self-auto"
-          href="{resolve("/about")}#contact"
+          href="{resolve("about")}#contact"
           size="lg"
           variant="accent"
         >
@@ -524,6 +531,7 @@
                 />
                 <span class="text-lg text-muted-foreground">/mo</span>
               </div>
+
               <p class="text-[13px]/5 text-muted-foreground">
                 {planSpecs(selected)}<br>1 Gbps fair-use uplink
               </p>
@@ -561,11 +569,14 @@
                       >
                         <span
                           class="w-20 text-right text-muted-foreground tabular-nums"
-                          >{offer.approximate ? "~" : ""}<RollingPrice
+                        >
+                          {offer.approximate ? "~" : ""}
+                          <RollingPrice
                             animateIn={hasPickedPlan}
                             value={offer.price}
-                          /></span
-                        >
+                          />
+                        </span>
+
                         <span
                           class="w-20 text-right font-mono font-semibold tabular-nums"
                           ><RollingPrice

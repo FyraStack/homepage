@@ -1,10 +1,10 @@
 <script lang="ts">
   import { BitsConfig } from "bits-ui";
   import { onMount } from "svelte";
-  import * as Avatar from "$lib/components/ui/avatar";
-  import { Toaster } from "$lib/components/ui/sonner";
-  import * as Tooltip from "$lib/components/ui/tooltip";
-  import { cn } from "$lib/utils";
+  import * as Avatar from "#lib/components/ui/avatar/index.js";
+  import { Toaster } from "#lib/components/ui/sonner/index.js";
+  import * as Tooltip from "#lib/components/ui/tooltip/index.js";
+  import { cn } from "#lib/utils.js";
   import ChevronDown from "~icons/lucide/chevron-down";
   import CreditCard from "~icons/nucleo/credit-card";
   import Search from "~icons/nucleo/search";

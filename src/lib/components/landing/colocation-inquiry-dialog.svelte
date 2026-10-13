@@ -1,14 +1,14 @@
 <script lang="ts">
+  import ContactForm from "#lib/components/landing/contact-form.svelte";
+  import { colocationTiers } from "#lib/components/landing/plans.js";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import * as Dialog from "#lib/components/ui/dialog/index.js";
+  import { Label } from "#lib/components/ui/label/index.js";
+  import * as Select from "#lib/components/ui/select/index.js";
+  import { Textarea } from "#lib/components/ui/textarea/index.js";
+  import { contactLimits } from "#lib/contact.js";
+  import { sendColocationInquiry } from "#lib/contact.remote.js";
   import { resolve } from "$app/paths";
-  import ContactForm from "$lib/components/landing/contact-form.svelte";
-  import { colocationTiers } from "$lib/components/landing/plans";
-  import { Button } from "$lib/components/ui/button";
-  import * as Dialog from "$lib/components/ui/dialog";
-  import { Label } from "$lib/components/ui/label";
-  import * as Select from "$lib/components/ui/select";
-  import { Textarea } from "$lib/components/ui/textarea";
-  import { contactLimits } from "$lib/contact";
-  import { sendColocationInquiry } from "$lib/contact.remote";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let {
@@ -57,7 +57,11 @@
     >
       <div class="flex flex-col gap-2 sm:col-span-2">
         <Label for="inquiry-space">Rack space</Label>
-        <Select.Root name="space" type="single" bind:value={space}>
+        <Select.Root
+          name={sendColocationInquiry.fields.space.as("select").name}
+          type="single"
+          bind:value={space}
+        >
           <Select.Trigger class="h-9 w-full" id="inquiry-space">
             {space}
           </Select.Trigger>
@@ -74,10 +78,10 @@
           class=""
           id="inquiry-hardware"
           maxlength={contactLimits.inquiryField}
-          name="hardware"
           placeholder="Model, size, and expected power draw"
           required
           rows={3}
+          {...sendColocationInquiry.fields.hardware.as("text")}
         />
       </div>
       <div class="flex flex-col gap-2 sm:col-span-2">
@@ -89,9 +93,9 @@
           class=""
           id="inquiry-notes"
           maxlength={contactLimits.inquiryField}
-          name="notes"
           placeholder="Network needs, timeline, questions"
           rows={2}
+          {...sendColocationInquiry.fields.notes.as("text")}
         />
       </div>
       {#snippet actions()}

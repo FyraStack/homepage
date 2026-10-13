@@ -1,4 +1,4 @@
-import { highlightToHtml } from "$lib/docs/highlight";
+import { highlightToHtml } from "#lib/docs/highlight.js";
 import type { PageServerLoad } from "./$types";
 
 const firstCommands = [

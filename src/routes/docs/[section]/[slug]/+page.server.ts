@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit";
-import { findPage, findSection, publishedPages } from "$lib/server/docs";
+import { findPage, findSection, publishedPages } from "#lib/server/docs.js";
 import type { EntryGenerator, PageServerLoad } from "./$types";
 
 export const entries: EntryGenerator = () =>

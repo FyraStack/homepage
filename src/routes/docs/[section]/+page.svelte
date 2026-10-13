@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { sectionIcons } from "#lib/docs/index.js";
   import { resolve } from "$app/paths";
-  import { sectionIcons } from "$lib/docs";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
 
   let { data } = $props();
@@ -11,8 +11,11 @@
 
 <svelte:head>
   <title>{section.title} · Fyra Stack Docs</title>
+
   <meta content={`${section.title} · Fyra Stack Docs`} property="og:title">
+
   <meta content={section.description} name="description">
+
   <meta content={section.description} property="og:description">
 </svelte:head>
 
@@ -21,9 +24,10 @@
     aria-label="Breadcrumb"
     class="flex items-center gap-2 text-[13px] text-muted-foreground"
   >
-    <a class="transition-colors hover:text-foreground" href={resolve("/docs")}
+    <a class="transition-colors hover:text-foreground" href={resolve("docs")}
       >Docs</a
     >
+
     <span aria-hidden="true">/</span>
     <span class="text-foreground">{section.title}</span>
   </nav>

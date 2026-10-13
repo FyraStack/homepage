@@ -1,6 +1,6 @@
 <script lang="ts">
   import { toast } from "svelte-sonner";
-  import { Button } from "$lib/components/ui/button";
+  import { Button } from "#lib/components/ui/button/index.js";
   import Loader2 from "~icons/lucide/loader-2";
   import { type Plan, plans } from "../../plans";
   import { confirmDestructive } from "../confirm.svelte";

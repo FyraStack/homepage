@@ -1,11 +1,14 @@
-<script generics="Input extends RemoteFormInput" lang="ts">
-  import type { RemoteForm, RemoteFormInput } from "@sveltejs/kit";
+<script lang="ts">
   import type { Snippet } from "svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { Input as TextInput } from "$lib/components/ui/input";
-  import { Label } from "$lib/components/ui/label";
-  import { contactLimits } from "$lib/contact";
-  import { cn } from "$lib/utils";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import { Input as TextInput } from "#lib/components/ui/input/index.js";
+  import { Label } from "#lib/components/ui/label/index.js";
+  import { contactLimits } from "#lib/contact.js";
+  import type {
+    sendColocationInquiry,
+    sendContactMessage,
+  } from "#lib/contact.remote.js";
+  import { cn } from "#lib/utils.js";
   import ArrowRight from "~icons/nucleo/arrow-right";
 
   let {
@@ -17,7 +20,7 @@
     children,
     actions,
   }: {
-    form: RemoteForm<Input, void>;
+    form: typeof sendContactMessage | typeof sendColocationInquiry;
     idPrefix: string;
     submitLabel: string;
     class?: string;
@@ -60,8 +63,8 @@
       class="h-9"
       id="{idPrefix}-name"
       maxlength={contactLimits.name}
-      name="name"
       required
+      {...form.fields.name.as("text")}
     />
   </div>
   <div class="flex flex-col gap-2">
@@ -71,9 +74,8 @@
       class="h-9"
       id="{idPrefix}-email"
       maxlength={contactLimits.email}
-      name="email"
       required
-      type="email"
+      {...form.fields.email.as("email")}
     />
   </div>
   {@render children()}
@@ -82,8 +84,8 @@
     <TextInput
       autocomplete="off"
       id="{idPrefix}-website"
-      name="company_website"
       tabindex={-1}
+      {...form.fields.company_website.as("text")}
     />
   </div>
   <div

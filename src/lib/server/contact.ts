@@ -1,7 +1,11 @@
 import { invalid } from "@sveltejs/kit";
 import { type } from "arktype";
-import { env } from "$env/dynamic/private";
-import { type ContactTopic, contactLimits, contactTopics } from "$lib/contact";
+import {
+  type ContactTopic,
+  contactLimits,
+  contactTopics,
+} from "#lib/contact.js";
+import { DISCORD_CONTACT_WEBHOOK_URL } from "$app/env/private";
 
 const accentColor = 0xc6_71_6d;
 
@@ -87,7 +91,7 @@ function toDiscordPayload(contact: ContactMessage) {
 }
 
 export async function forwardToDiscord(contact: ContactMessage) {
-  const webhookUrl = env.DISCORD_CONTACT_WEBHOOK_URL;
+  const webhookUrl = DISCORD_CONTACT_WEBHOOK_URL;
   if (!webhookUrl) {
     invalid("The contact form isn't available right now.");
   }

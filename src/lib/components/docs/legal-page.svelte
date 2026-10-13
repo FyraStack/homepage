@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component } from "svelte";
-  import { proseClass } from "$lib/docs/prose";
-  import { cn } from "$lib/utils";
+  import { proseClass } from "#lib/docs/prose.js";
+  import { cn } from "#lib/utils.js";
 
   let {
     content: Content,

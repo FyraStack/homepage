@@ -1,31 +1,31 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import acmUmnMark from "$lib/assets/about/acm-umn.webp";
-  import addisonPhoto from "$lib/assets/about/addison.jpg";
-  import billPhoto from "$lib/assets/about/bill.jpg";
-  import calebPhoto from "$lib/assets/about/caleb.jpg";
-  import cappyPhoto from "$lib/assets/about/cappy.jpg";
-  import deepComputingWordmark from "$lib/assets/about/deepcomputing.webp";
-  import fossWikiMark from "$lib/assets/about/fosswiki.webp";
-  import jonahPhoto from "$lib/assets/about/jonah.jpg";
-  import junePhoto from "$lib/assets/about/june.jpg";
-  import lleytonPhoto from "$lib/assets/about/lleyton.jpg";
-  import ogcMark from "$lib/assets/about/ogc.svg";
-  import owenPhoto from "$lib/assets/about/owen.jpg";
-  import willowPhoto from "$lib/assets/about/willow.jpg";
-  import aboutHeroDither from "$lib/assets/about-hero-dither.webp";
-  import ClosingCta from "$lib/components/landing/closing-cta.svelte";
-  import ContactForm from "$lib/components/landing/contact-form.svelte";
-  import DitherBackground from "$lib/components/landing/dither-background.svelte";
-  import GithubMark from "$lib/components/landing/github-mark.svelte";
-  import { openNote } from "$lib/components/landing/open-note.svelte";
-  import TextLink from "$lib/components/landing/text-link.svelte";
-  import { Label } from "$lib/components/ui/label";
-  import * as Select from "$lib/components/ui/select";
-  import { Textarea } from "$lib/components/ui/textarea";
-  import { contactLimits, contactTopics } from "$lib/contact";
-  import { sendContactMessage } from "$lib/contact.remote";
-  import { socialLinks } from "$lib/site";
+  import acmUmnMark from "#lib/assets/about/acm-umn.webp";
+  import addisonPhoto from "#lib/assets/about/addison.jpg";
+  import billPhoto from "#lib/assets/about/bill.jpg";
+  import calebPhoto from "#lib/assets/about/caleb.jpg";
+  import cappyPhoto from "#lib/assets/about/cappy.jpg";
+  import deepComputingWordmark from "#lib/assets/about/deepcomputing.webp";
+  import fossWikiMark from "#lib/assets/about/fosswiki.webp";
+  import jonahPhoto from "#lib/assets/about/jonah.jpg";
+  import junePhoto from "#lib/assets/about/june.jpg";
+  import lleytonPhoto from "#lib/assets/about/lleyton.jpg";
+  import ogcMark from "#lib/assets/about/ogc.svg";
+  import owenPhoto from "#lib/assets/about/owen.jpg";
+  import willowPhoto from "#lib/assets/about/willow.jpg";
+  import aboutHeroDither from "#lib/assets/about-hero-dither.webp";
+  import ClosingCta from "#lib/components/landing/closing-cta.svelte";
+  import ContactForm from "#lib/components/landing/contact-form.svelte";
+  import DitherBackground from "#lib/components/landing/dither-background.svelte";
+  import GithubMark from "#lib/components/landing/github-mark.svelte";
+  import { openNote } from "#lib/components/landing/open-note.svelte";
+  import TextLink from "#lib/components/landing/text-link.svelte";
+  import { Label } from "#lib/components/ui/label/index.js";
+  import * as Select from "#lib/components/ui/select/index.js";
+  import { Textarea } from "#lib/components/ui/textarea/index.js";
+  import { contactLimits, contactTopics } from "#lib/contact.js";
+  import { sendContactMessage } from "#lib/contact.remote.js";
+  import { socialLinks } from "#lib/site.js";
   import Bluesky from "~icons/nucleo/bluesky";
   import Discord from "~icons/nucleo/discord";
   import GithubIcon from "~icons/nucleo/github";
@@ -487,7 +487,11 @@
       >
         <div class="flex flex-col gap-2 sm:col-span-2">
           <Label for="contact-topic">Topic</Label>
-          <Select.Root name="topic" type="single" bind:value={contactTopic}>
+          <Select.Root
+            name={sendContactMessage.fields.topic.as("select").name}
+            type="single"
+            bind:value={contactTopic}
+          >
             <Select.Trigger class="h-9 w-full" id="contact-topic">
               {contactTopic}
             </Select.Trigger>
@@ -504,9 +508,9 @@
             class=""
             id="contact-message"
             maxlength={contactLimits.message}
-            name="message"
             required
             rows={5}
+            {...sendContactMessage.fields.message.as("text")}
           />
         </div>
       </ContactForm>

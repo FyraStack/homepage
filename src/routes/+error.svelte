@@ -1,9 +1,9 @@
 <script lang="ts">
+  import ctaDither from "#lib/assets/cta-dither.webp";
+  import DitherBackground from "#lib/components/landing/dither-background.svelte";
+  import { Button } from "#lib/components/ui/button/index.js";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import ctaDither from "$lib/assets/cta-dither.webp";
-  import DitherBackground from "$lib/components/landing/dither-background.svelte";
-  import { Button } from "$lib/components/ui/button";
   import ArrowRight from "~icons/nucleo/arrow-right";
 
   const isNotFound = $derived(page.status === 404);
@@ -48,6 +48,7 @@
         >
           {isNotFound ? "Stack Overflow" : title}
         </h1>
+
         <p class="max-w-140 text-lg/[29px] text-pretty text-muted-foreground">
           {isNotFound
             ? "The page you're looking for may have moved, or never existed."
@@ -66,7 +67,7 @@
         </Button>
         <Button
           class="h-auto gap-2 py-2.5 pl-4 text-muted-foreground has-data-[icon=inline-end]:pr-3"
-          href={resolve("/docs")}
+          href={resolve("docs")}
           size="lg"
           variant="ghost"
         >

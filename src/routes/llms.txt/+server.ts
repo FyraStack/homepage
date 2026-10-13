@@ -2,9 +2,9 @@ import {
   colocationTiers,
   planSpecs,
   plans,
-} from "$lib/components/landing/plans";
-import { docSections } from "$lib/server/docs";
-import { absoluteUrl, dashboardUrl, socialLinks } from "$lib/site";
+} from "#lib/components/landing/plans.js";
+import { docSections } from "#lib/server/docs.js";
+import { absoluteUrl, dashboardUrl, socialLinks } from "#lib/site.js";
 import type { RequestHandler } from "./$types";
 
 export const prerender = true;

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import almalinux from "$lib/assets/os/almalinux.webp";
-  import debian from "$lib/assets/os/debian.webp";
-  import fedora from "$lib/assets/os/fedora.webp";
-  import opensuse from "$lib/assets/os/opensuse.webp";
-  import ubuntu from "$lib/assets/os/ubuntu.webp";
+  import almalinux from "#lib/assets/os/almalinux.webp";
+  import debian from "#lib/assets/os/debian.webp";
+  import fedora from "#lib/assets/os/fedora.webp";
+  import opensuse from "#lib/assets/os/opensuse.webp";
+  import ubuntu from "#lib/assets/os/ubuntu.webp";
   import ArrowLeft from "~icons/lucide/arrow-left";
   import Check from "~icons/lucide/check";
   import ChevronDown from "~icons/lucide/chevron-down";

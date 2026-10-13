@@ -1,11 +1,11 @@
 <script lang="ts">
+  import DocsSearch from "#lib/components/docs/docs-search.svelte";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import { copyCodeButtons } from "#lib/docs/copy-code.js";
+  import { sectionIcons } from "#lib/docs/index.js";
+  import { socialLinks } from "#lib/site.js";
+  import { cn } from "#lib/utils.js";
   import { resolve } from "$app/paths";
-  import DocsSearch from "$lib/components/docs/docs-search.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { sectionIcons } from "$lib/docs";
-  import { copyCodeButtons } from "$lib/docs/copy-code";
-  import { socialLinks } from "$lib/site";
-  import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import ArrowUpRight from "~icons/nucleo/arrow-up-right";
   import Package from "~icons/nucleo/box";

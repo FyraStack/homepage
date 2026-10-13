@@ -1,8 +1,8 @@
 <script lang="ts">
-  import ctaDither from "$lib/assets/cta-dither.webp";
-  import DitherBackground from "$lib/components/landing/dither-background.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { dashboardUrl, socialLinks } from "$lib/site";
+  import ctaDither from "#lib/assets/cta-dither.webp";
+  import DitherBackground from "#lib/components/landing/dither-background.svelte";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import { dashboardUrl, socialLinks } from "#lib/site.js";
   import ArrowRight from "~icons/nucleo/arrow-right";
 </script>
 

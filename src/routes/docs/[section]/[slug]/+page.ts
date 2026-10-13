@@ -1,4 +1,4 @@
-import { loadPageComponent } from "$lib/docs";
+import { loadPageComponent } from "#lib/docs/index.js";
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({ data }) => ({

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from "$lib/utils";
+  import { cn } from "#lib/utils.js";
   import Check from "~icons/lucide/check";
   import Copy from "~icons/nucleo/copy";
 

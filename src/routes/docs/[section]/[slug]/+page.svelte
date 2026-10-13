@@ -1,11 +1,11 @@
 <script lang="ts">
+  import DocsSearch from "#lib/components/docs/docs-search.svelte";
+  import * as Collapsible from "#lib/components/ui/collapsible/index.js";
+  import { copyCodeButtons } from "#lib/docs/copy-code.js";
+  import { proseClass } from "#lib/docs/prose.js";
+  import { cn } from "#lib/utils.js";
   import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
-  import DocsSearch from "$lib/components/docs/docs-search.svelte";
-  import * as Collapsible from "$lib/components/ui/collapsible";
-  import { copyCodeButtons } from "$lib/docs/copy-code";
-  import { proseClass } from "$lib/docs/prose";
-  import { cn } from "$lib/utils";
   import ArrowLeft from "~icons/nucleo/arrow-left";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import ChevronDown from "~icons/nucleo/chevron-down";
@@ -35,18 +35,25 @@
 
   let sectionNavOpen = $state(false);
 
-  afterNavigate(() => {
+  afterNavigate(({ shallow, type }) => {
+    if (shallow && type === "goto") {
+      return;
+    }
+
     sectionNavOpen = false;
   });
 </script>
 
-<svelte:window onscroll={updateActiveHeading} />
+<svelte:window onscroll={updateActiveHeading}></svelte:window>
 
 <svelte:head>
   <title>{doc.title} · Fyra Stack Docs</title>
+
   <meta content={`${doc.title} · Fyra Stack Docs`} property="og:title">
+
   {#if doc.description}
     <meta content={doc.description} name="description">
+
     <meta content={doc.description} property="og:description">
   {/if}
 </svelte:head>
@@ -130,9 +137,10 @@
       >
         <a
           class="transition-colors hover:text-foreground"
-          href={resolve("/docs")}
+          href={resolve("docs")}
           >Docs</a
         >
+
         <span aria-hidden="true">/</span>
         <a
           class="transition-colors hover:text-foreground"

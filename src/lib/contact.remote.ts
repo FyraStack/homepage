@@ -1,9 +1,9 @@
-import { form } from "$app/server";
 import {
   colocationInquirySchema,
   contactMessageSchema,
   forwardToDiscord,
-} from "$lib/server/contact";
+} from "#lib/server/contact.js";
+import { form } from "$app/server";
 
 export const sendContactMessage = form(
   contactMessageSchema,

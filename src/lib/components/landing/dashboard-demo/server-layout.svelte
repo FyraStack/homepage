@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import { toast } from "svelte-sonner";
-  import { Badge } from "$lib/components/ui/badge";
-  import { Button } from "$lib/components/ui/button";
-  import * as Tabs from "$lib/components/ui/tabs";
-  import { cn } from "$lib/utils";
+  import { Badge } from "#lib/components/ui/badge/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import * as Tabs from "#lib/components/ui/tabs/index.js";
+  import { cn } from "#lib/utils.js";
   import Loader2 from "~icons/lucide/loader-2";
   import Play from "~icons/nucleo/play";
   import Power from "~icons/nucleo/power";

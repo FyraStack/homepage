@@ -1,5 +1,5 @@
-import { planSpecs, plans } from "$lib/components/landing/plans";
-import { absoluteUrl, siteName, siteUrl, socialLinks } from "$lib/site";
+import { planSpecs, plans } from "#lib/components/landing/plans.js";
+import { absoluteUrl, siteName, siteUrl, socialLinks } from "#lib/site.js";
 
 const organizationId = `${siteUrl}/#organization`;
 

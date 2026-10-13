@@ -2,14 +2,19 @@
   import "./layout.css";
   import jetbrainsMonoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
   import { onMount, type Snippet } from "svelte";
+  import favicon from "#lib/assets/favicon.svg";
+  import StackMark from "#lib/components/landing/stack-mark.svelte";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import {
+    absoluteUrl,
+    dashboardUrl,
+    siteName,
+    socialLinks,
+  } from "#lib/site.js";
+  import { cn } from "#lib/utils.js";
   import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import favicon from "$lib/assets/favicon.svg";
-  import StackMark from "$lib/components/landing/stack-mark.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { absoluteUrl, dashboardUrl, siteName, socialLinks } from "$lib/site";
-  import { cn } from "$lib/utils";
   import ArrowRight from "~icons/nucleo/arrow-right";
   import Menu from "~icons/nucleo/menu";
   import X from "~icons/nucleo/xmark";
@@ -26,10 +31,19 @@
     page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
 
   const navLinks = [
-    { href: `${resolve("/")}#pricing`, label: "Pricing", path: null },
-    { href: `${resolve("/")}#colocation`, label: "Colocation", path: null },
-    { href: resolve("/about"), label: "About", path: "/about" },
-    { href: resolve("/docs"), label: "Docs", path: "/docs" },
+    {
+      href: `${resolve("/")}#pricing`,
+      label: "Pricing",
+      path: null,
+    },
+
+    {
+      href: `${resolve("/")}#colocation`,
+      label: "Colocation",
+      path: null,
+    },
+    { href: resolve("about"), label: "About", path: "/about" },
+    { href: resolve("docs"), label: "Docs", path: "/docs" },
   ] as const;
 
   const canonicalUrl = $derived(absoluteUrl(page.url.pathname));
@@ -64,21 +78,28 @@
 <svelte:head>
   <link href={favicon} rel="icon" type="image/svg+xml">
   <link href="/favicon.ico" rel="icon" sizes="48x48">
+
   <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+
   <link href="/manifest.webmanifest" rel="manifest">
   <link href={canonicalUrl} rel="canonical">
   <meta content={siteName} property="og:site_name">
   <meta content="website" property="og:type">
   <meta content={canonicalUrl} property="og:url">
+
   <meta content={absoluteUrl("/og-image.png")} property="og:image">
+
   <meta content="image/png" property="og:image:type">
   <meta content="1200" property="og:image:width">
   <meta content="630" property="og:image:height">
   <meta content={ogImageAlt} property="og:image:alt">
   <meta content="summary_large_image" name="twitter:card">
+
   <meta content={absoluteUrl("/og-image.webp")} name="twitter:image">
+
   <meta content={ogImageAlt} name="twitter:image:alt">
   <meta content="@fyrastack" name="twitter:site">
+
   <script
     data-domain="fyrastack.com"
     defer
@@ -174,7 +195,7 @@
   </nav>
 </header>
 
-<svelte:window onkeydown={closeMobileNavOnEscape} />
+<svelte:window onkeydown={closeMobileNavOnEscape}></svelte:window>
 
 {@render children()}
 
@@ -217,9 +238,9 @@
         {/snippet}
         {@render column("Product", productLinks)}
         {#snippet resourcesLinks()}
-          <li><a href={resolve("/docs")}>Docs</a></li>
-          <li><a href="{resolve("/about")}#contact">Support</a></li>
-          <li><a href={resolve("/about")}>About</a></li>
+          <li><a href={resolve("docs")}>Docs</a></li>
+          <li><a href="{resolve("about")}#contact">Support</a></li>
+          <li><a href={resolve("about")}>About</a></li>
         {/snippet}
         {@render column("Resources", resourcesLinks)}
         {#snippet communityLinks()}
@@ -239,12 +260,13 @@
       <div class="flex gap-6">
         <a
           class="transition-colors hover:text-foreground"
-          href={resolve("/terms-of-service")}
+          href={resolve("terms-of-service")}
           >Terms of Service</a
         >
+
         <a
           class="transition-colors hover:text-foreground"
-          href={resolve("/privacy-statement")}
+          href={resolve("privacy-statement")}
           >Privacy Statement</a
         >
       </div>

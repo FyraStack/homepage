@@ -115,8 +115,8 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
 <script lang="ts">
   import { onMount } from "svelte";
   import { prefersReducedMotion } from "svelte/motion";
-  import fragmentSource from "$lib/shaders/dithering.frag?raw";
-  import { cn } from "$lib/utils";
+  import fragmentSource from "#lib/shaders/dithering.frag?raw";
+  import { cn } from "#lib/utils.js";
 
   let {
     poster,

@@ -1,5 +1,5 @@
-import { docSections, publishedPages } from "$lib/server/docs";
-import { absoluteUrl } from "$lib/site";
+import { docSections, publishedPages } from "#lib/server/docs.js";
+import { absoluteUrl } from "#lib/site.js";
 import type { RequestHandler } from "./$types";
 
 export const prerender = true;
