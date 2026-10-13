@@ -101,10 +101,22 @@
   <meta content="@fyrastack" name="twitter:site">
 
   <script
-    data-domain="fyrastack.com"
-    defer
-    src="https://plausible.fyralabs.com/js/script.js"
+    async
+    src="https://plausible.fyralabs.com/js/pa-NskcgvpEiDLVGaxFEpNHl.js"
   ></script>
+  <script>
+    window.plausible =
+      window.plausible ||
+      function () {
+        (plausible.q = plausible.q || []).push(arguments);
+      };
+    plausible.init =
+      plausible.init ||
+      function (i) {
+        plausible.o = i || {};
+      };
+    plausible.init();
+  </script>
   <link
     as="font"
     crossorigin="anonymous"
