@@ -1,5 +1,6 @@
 allowBuilds:
   workerd: true
   esbuild: true
+  sharp: true
 autoInstallPeers: false
 dedupePeerDependents: false

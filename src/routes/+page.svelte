@@ -2,6 +2,7 @@
   import { prefersReducedMotion } from "svelte/motion";
   import { fly } from "svelte/transition";
   import heroDither from "#lib/assets/hero-dither.webp";
+  import kittyImage from "#lib/assets/kitty.jpg";
   import fyraLabsLogo from "#lib/assets/projects/fyralabs.svg";
   import fyraLabsPreview from "#lib/assets/projects/fyralabs-preview.webp";
   import terraLogo from "#lib/assets/projects/terra.svg";
@@ -111,6 +112,12 @@
     "Full root access",
     "Cancel anytime",
   ];
+
+  let showKitty = $state(false);
+
+  $effect(() => {
+    showKitty = page.url.searchParams.has("kitty");
+  });
 
   const colocationInquiryHash = "#colocation-inquiry";
   let colocationInquiryOpen = $state(false);
@@ -253,10 +260,18 @@
             class="flex justify-center"
             style="--demo-width: clamp(1024px, 100cqw / 0.8, 1440px); --demo-zoom: min(0.8, tan(atan2(100cqw, var(--demo-width))))"
           >
-            <DashboardDemo
-              class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
-              {dashboardUrl}
-            />
+            {#if showKitty}
+              <img
+                alt="A cat"
+                class="h-200 w-(--demo-width) shrink-0 object-fill [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+                src={kittyImage}
+              >
+            {:else}
+              <DashboardDemo
+                class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+                {dashboardUrl}
+              />
+            {/if}
           </div>
         </div>
       </div>
