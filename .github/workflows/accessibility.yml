@@ -1,0 +1,35 @@
+name: Accessibility
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: accessibility-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  axe:
+    name: axe (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up PNPM
+        uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+        with:
+          cache: true
+          runtime: node@lts
+
+      # CI uses the preinstalled Google Chrome (channel: "chrome" in playwright.config.js),
+      # so no Playwright browser download is needed here.
+      - run: pnpm run test:ci
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 7
