@@ -15,7 +15,8 @@ export const colocationFeatures = [
     title: "Redundant power",
   },
   {
-    description: "Providing low-latency access to the entire US on our network",
+    description:
+      "Racked in Chicago, with low-latency access to the entire US on our network",
     icon: Globe,
     title: "Close to your users",
   },
