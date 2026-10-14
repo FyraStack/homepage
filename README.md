@@ -2,6 +2,8 @@
 
 The primary homepage for Fyra Stack. See issues for things to work on.
 
+Our old homepage is now archived. You can see the repository at https://github.com/FyraStack/homepage-old.
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
