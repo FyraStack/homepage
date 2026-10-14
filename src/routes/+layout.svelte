@@ -108,9 +108,10 @@
   <script>
     window.plausible =
       window.plausible ||
-      function () {
-        (plausible.q = plausible.q || []).push(arguments);
-      };
+      ((...args) => {
+        plausible.q = plausible.q || [];
+        plausible.q.push(args);
+      });
     plausible.init =
       plausible.init ||
       ((i) => {

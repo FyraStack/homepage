@@ -99,7 +99,10 @@
 {/snippet}
 
 <main class="page-container flex gap-12 xl:gap-16">
-  <aside aria-label="Documentation navigation" class="hidden w-56 shrink-0 lg:block">
+  <aside
+    aria-label="Documentation navigation"
+    class="hidden w-56 shrink-0 lg:block"
+  >
     <div
       class="sticky top-16 flex max-h-[calc(100dvh-4rem)] flex-col gap-8 overflow-y-auto py-10 pr-2"
     >
