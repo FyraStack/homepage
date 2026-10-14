@@ -36,7 +36,6 @@ export async function highlightToHtml(
   language: BundledLanguage | "text"
 ) {
   const highlighter = await highlighterFor(language);
-  return highlighter
-    .codeToHtml(code, { lang: language, theme: codeThemeName })
-    .replace(' tabindex="0"', "");
+  // Keep Shiki's tabindex="0" so scrollable code blocks are keyboard-accessible.
+  return highlighter.codeToHtml(code, { lang: language, theme: codeThemeName });
 }

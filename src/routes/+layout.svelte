@@ -113,9 +113,9 @@
       };
     plausible.init =
       plausible.init ||
-      function (i) {
+      ((i) => {
         plausible.o = i || {};
-      };
+      });
     plausible.init();
   </script>
   <link
@@ -221,7 +221,9 @@
         <a class="flex items-center gap-2 self-start" href={resolve("/")}>
           <StackMark />
           <span class="text-sm font-semibold tracking-[-0.025em]">Stack</span>
-          <Badge class="h-4 px-1.5 text-[10px]" variant="secondary">Alpha</Badge>
+          <Badge class="h-4 px-1.5 text-[10px]" variant="secondary"
+            >Alpha</Badge
+          >
         </a>
         <p class="max-w-80 text-sm/[22px] text-muted-foreground">
           Built from the ground up to support the open-source projects we love,

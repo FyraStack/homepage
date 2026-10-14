@@ -162,9 +162,9 @@
         {/each}
       </aside>
 
-      <main class="flex flex-1 overflow-hidden">
+      <div class="flex flex-1 overflow-hidden">
         <ServersLayout {dashboardUrl} />
-      </main>
+      </div>
     </div>
     <Toaster position="top-center" />
     <ConfirmDialog />
