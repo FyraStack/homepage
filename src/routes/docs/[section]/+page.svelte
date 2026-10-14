@@ -71,7 +71,7 @@
         {:else}
           <div class="flex h-full items-start justify-between gap-6 p-6">
             <span
-              class="text-[17px] font-semibold tracking-[-0.012em] text-gray-600"
+              class="text-[17px] font-semibold tracking-[-0.012em] text-gray-500"
             >
               {page.title}
             </span>

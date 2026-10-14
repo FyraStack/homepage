@@ -171,7 +171,7 @@
                     </a>
                   {:else}
                     <span
-                      class="flex items-center justify-between gap-3 py-1.5 text-[15px] text-gray-600"
+                      class="flex items-center justify-between gap-3 py-1.5 text-[15px] text-gray-500"
                     >
                       {page.title}
                       {#if !page.supported}

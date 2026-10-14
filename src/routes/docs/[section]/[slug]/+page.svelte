@@ -87,7 +87,7 @@
             </a>
           {:else}
             <span
-              class="border-l border-border py-1 pl-3 text-sm text-gray-700"
+              class="border-l border-border py-1 pl-3 text-sm text-gray-500"
             >
               {page.title}
             </span>
@@ -99,7 +99,10 @@
 {/snippet}
 
 <main class="page-container flex gap-12 xl:gap-16">
-  <aside class="hidden w-56 shrink-0 lg:block">
+  <aside
+    aria-label="Documentation navigation"
+    class="hidden w-56 shrink-0 lg:block"
+  >
     <div
       class="sticky top-16 flex max-h-[calc(100dvh-4rem)] flex-col gap-8 overflow-y-auto py-10 pr-2"
     >
@@ -205,7 +208,7 @@
   </div>
 
   {#if headings.length > 0}
-    <aside class="hidden w-52 shrink-0 xl:block">
+    <aside aria-label="Table of contents" class="hidden w-52 shrink-0 xl:block">
       <nav
         aria-label="On this page"
         class="sticky top-16 flex flex-col gap-3 py-10"
