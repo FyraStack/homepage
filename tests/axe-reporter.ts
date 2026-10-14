@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type AxeBuilder from "@axe-core/playwright";
@@ -9,14 +8,9 @@ import type {
   TestResult,
 } from "@playwright/test/reporter";
 import { convertAxeToSarif } from "axe-sarif-converter";
-import type {
-  Artifact,
-  Location,
-  Log,
-  ReportingDescriptor,
-  Result,
-} from "sarif";
+import type { Log } from "sarif";
 import { siteUrl } from "../src/lib/site.ts";
+import { SarifRunMerger, sourceFileForPath } from "./axe-sarif.ts";
 
 type AxeResults = Awaited<ReturnType<AxeBuilder["analyze"]>>;
 type AxeViolation = AxeResults["violations"][number];
@@ -53,135 +47,6 @@ const nodeKey = (node: AxeNode) => node.target.join(" ");
 
 const escapeMarkdown = (value: string) =>
   value.replaceAll("|", "\\|").replaceAll("\n", " ");
-
-const fingerprint = (
-  ruleId: string | undefined,
-  locations: Location[] | undefined
-) => {
-  const [location] = locations ?? [];
-  const uri = location?.physicalLocation?.artifactLocation?.uri ?? "";
-  const selector = location?.logicalLocations?.[0]?.fullyQualifiedName ?? "";
-
-  return createHash("sha256")
-    .update([ruleId, uri, selector].join("\0"))
-    .digest("hex");
-};
-
-/**
- * Merges several single-page SARIF logs into one run
- */
-class SarifRunMerger {
-  /**
-   * @param rewriteUri Maps the scanned (local) page URL to the URL shown in
-   *   code scanning alerts.
-   */
-  private readonly rewriteUri: (uri: string) => string;
-  private readonly artifactUris: string[] = [];
-  private base: Log | undefined;
-  private readonly results: Result[] = [];
-  private readonly rules = new Map<string, ReportingDescriptor>();
-
-  constructor(rewriteUri: (uri: string) => string) {
-    this.rewriteUri = rewriteUri;
-  }
-
-  add(log: Log) {
-    this.base ??= log;
-    const [run] = log.runs;
-
-    for (const result of run?.results ?? []) {
-      if (result.kind !== "fail") {
-        continue;
-      }
-
-      const rule =
-        result.ruleIndex === undefined
-          ? undefined
-          : run?.tool.driver.rules?.[result.ruleIndex];
-
-      const locations = result.locations?.map((location) =>
-        this.remapLocation(location, run?.artifacts ?? [])
-      );
-
-      this.results.push({
-        ...result,
-        locations,
-        // Every axe result sits on "line 1" of a page, so GitHub's default
-        // line-based fingerprint would collapse distinct elements into one
-        // alert. Fingerprint on rule + page + element selector instead.
-        partialFingerprints: {
-          "axeElement/v1": fingerprint(result.ruleId, locations),
-        },
-        ruleIndex: rule ? this.ruleIndex(rule) : undefined,
-      });
-    }
-  }
-
-  toLog(): Log {
-    const [baseRun] = this.base?.runs ?? [];
-    if (!(this.base && baseRun)) {
-      throw new Error("Unable to build SARIF log: no axe results converted.");
-    }
-
-    return {
-      ...this.base,
-      runs: [
-        {
-          ...baseRun,
-          artifacts: this.artifactUris.map((uri) => ({
-            location: { uri },
-            roles: ["analysisTarget"],
-            sourceLanguage: "html",
-          })),
-          // Invocation details describe a single page scan; drop them for
-          // the merged run.
-          invocations: undefined,
-          results: this.results,
-          tool: {
-            ...baseRun.tool,
-            driver: {
-              ...baseRun.tool.driver,
-              rules: [...this.rules.values()],
-            },
-          },
-        },
-      ],
-    };
-  }
-
-  private ruleIndex(rule: ReportingDescriptor) {
-    if (!this.rules.has(rule.id)) {
-      this.rules.set(rule.id, rule);
-    }
-    return [...this.rules.keys()].indexOf(rule.id);
-  }
-
-  private remapLocation(location: Location, artifacts: Artifact[]): Location {
-    const { physicalLocation } = location;
-    const artifactLocation = physicalLocation?.artifactLocation;
-    const scannedUri =
-      artifactLocation?.index === undefined
-        ? artifactLocation?.uri
-        : artifacts[artifactLocation.index]?.location?.uri;
-    if (!(scannedUri && physicalLocation)) {
-      return location;
-    }
-
-    const uri = this.rewriteUri(scannedUri);
-
-    if (!this.artifactUris.includes(uri)) {
-      this.artifactUris.push(uri);
-    }
-
-    return {
-      ...location,
-      physicalLocation: {
-        ...physicalLocation,
-        artifactLocation: { index: this.artifactUris.indexOf(uri), uri },
-      },
-    };
-  }
-}
 
 /**
  * Collects the axe results attached by `accessibility.test.ts`, merges them
@@ -261,10 +126,7 @@ export default class AxeReporter implements Reporter {
 
   /** Converts each page to SARIF, then merges everything into one run. */
   private buildSarif(): Log {
-    const merger = new SarifRunMerger((uri) => {
-      const { pathname, search, hash } = new URL(uri);
-      return new URL(`${pathname}${search}${hash}`, siteUrl).href;
-    });
+    const merger = new SarifRunMerger();
 
     for (const [url, pageResult] of this.pageResults) {
       const violations = [...(this.pages.get(url)?.values() ?? [])].map(
@@ -276,6 +138,7 @@ export default class AxeReporter implements Reporter {
 
       // Only violations are reported; passes and inapplicable rules would
       // otherwise bloat the log with thousands of "pass" results.
+      const { pathname, search, hash } = new URL(url);
       merger.add(
         convertAxeToSarif({
           ...pageResult,
@@ -283,7 +146,11 @@ export default class AxeReporter implements Reporter {
           incomplete: [],
           passes: [],
           violations,
-        })
+        }),
+        {
+          file: sourceFileForPath(pathname),
+          url: new URL(`${pathname}${search}${hash}`, siteUrl).href,
+        }
       );
     }
 
