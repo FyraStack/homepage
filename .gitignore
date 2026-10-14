@@ -23,6 +23,7 @@ Thumbs.db
 /playwright-report
 /blob-report
 /playwright/.cache
+/a11y-report
 
 # Vite
 vite.config.js.timestamp-*

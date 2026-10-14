@@ -23,7 +23,10 @@ export default defineConfig({
       },
     },
   ],
-  reporter: "list",
+  reporter: [
+    ["list"],
+    ["./tests/axe-reporter.ts", { outputDir: "a11y-report" }],
+  ],
   testDir: "./tests",
   testMatch: /.*\.test\.ts/,
   // The timeout for the accessibility tests only.

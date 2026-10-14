@@ -1,6 +1,7 @@
 import { styleText } from "node:util";
 import { expect } from "@playwright/test";
 import { getSitemap, localURL, test } from "./accessibility";
+import { AXE_ATTACHMENT } from "./axe-reporter";
 
 const urls = await getSitemap();
 
@@ -27,10 +28,18 @@ for (const url of urls) {
   test(`Testing for accessibility violations on ${pageLabel}.`, async ({
     page,
     makeAxeBuilder,
-  }) => {
+  }, testInfo) => {
     await page.goto(pageURL, { waitUntil: "networkidle" });
 
-    const { violations } = await makeAxeBuilder().analyze();
+    const results = await makeAxeBuilder().analyze();
+    const { violations } = results;
+
+    // Picked up by tests/axe-reporter.ts to build the SARIF log and summary.
+    // Passes and inapplicable rules are dropped to keep the attachment small.
+    await testInfo.attach(AXE_ATTACHMENT, {
+      body: JSON.stringify({ ...results, inapplicable: [], passes: [] }),
+      contentType: "application/json",
+    });
     const reportMessage = `Found ${violations.length} accessibility violations on ${pageLabel}.`;
 
     if (violations.length === 0) {
