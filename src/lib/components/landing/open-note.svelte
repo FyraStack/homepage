@@ -8,10 +8,8 @@
 
 {#snippet openNote()}
   Our
-  <TextLink href={socialLinks.github}>code</TextLink>
-  ,
-  <TextLink href={socialLinks.discord}>community</TextLink>
-  , and
+  <TextLink href={socialLinks.github}>code</TextLink>,
+  <TextLink href={socialLinks.discord}>community</TextLink>, and
   <TextLink href={resolve("about")}>team</TextLink>
   are open
 {/snippet}

@@ -42,7 +42,7 @@
   import Gauge from "~icons/nucleo/gauge";
   import HardDrive from "~icons/nucleo/hard-drive";
   import LifeBuoy from "~icons/nucleo/life-ring";
-  import Network from "~icons/nucleo/network";
+  import Location from "~icons/nucleo/location";
   import ReceiptText from "~icons/nucleo/receipt";
   import Server from "~icons/nucleo/server";
 
@@ -95,9 +95,9 @@
       title: "Enterprise SAS3 SSDs",
     },
     {
-      description: "On every server",
-      icon: Network,
-      title: "IPv4 and a /64 of IPv6",
+      description: "Low latency across the US",
+      icon: Location,
+      title: "Hosted in Chicago",
     },
     {
       description: "Fair-use, never billed per GB",
