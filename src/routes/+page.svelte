@@ -5,7 +5,7 @@
   import kittyImage from "#lib/assets/kitty.jpg";
   import fyraLabsLogo from "#lib/assets/projects/fyralabs.svg";
   import fyraLabsPreview from "#lib/assets/projects/fyralabs-preview.webp";
-  import terraLogo from "#lib/assets/projects/terra.svg";
+  import terraLogo from "#lib/assets/projects/terra.webp";
   import terraPreview from "#lib/assets/projects/terra-preview.webp";
   import ultramarineLogo from "#lib/assets/projects/ultramarine.svg";
   import ultramarinePreview from "#lib/assets/projects/ultramarine-preview.webp";
