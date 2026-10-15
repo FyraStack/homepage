@@ -13,7 +13,7 @@
     socialLinks,
   } from "#lib/site.js";
   import { cn } from "#lib/utils.js";
-  import { afterNavigate } from "$app/navigation";
+  import { afterNavigate, onNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
   import ArrowRight from "~icons/nucleo/arrow-right";
@@ -70,6 +70,25 @@
   }
 
   afterNavigate(closeMobileNav);
+
+  onNavigate((navigation) => {
+    const samePage =
+      navigation.from?.url.pathname === navigation.to?.url.pathname;
+    const reducedMotion = matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (samePage || reducedMotion || !document.startViewTransition) {
+      return;
+    }
+
+    return new Promise((resolveTransition) => {
+      document.startViewTransition(async () => {
+        resolveTransition();
+        await navigation.complete;
+      });
+    });
+  });
 
   onMount(() => {
     document.documentElement.dataset.smoothScroll = "";
@@ -137,7 +156,7 @@
 
 <!-- Header: sticky nav shared by every page -->
 <header
-  class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70"
+  class="sticky top-0 z-50 [view-transition-name:site-header] border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70"
 >
   <div class="page-container flex h-16 items-center justify-between">
     <div class="flex items-center gap-8">
