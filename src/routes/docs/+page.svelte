@@ -19,7 +19,10 @@
   const startHere = [
     {
       description: "Create your account, set up billing, and make your VPS.",
-      href: resolve("/docs/[section]/[slug]", { section: "vps", slug: "getting-started" }),
+      href: resolve("/docs/[section]/[slug]", {
+        section: "vps",
+        slug: "getting-started",
+      }),
       icon: Server,
       title: "I want a VPS",
     },
