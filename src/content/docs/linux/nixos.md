@@ -2,7 +2,6 @@
 title: "NixOS"
 description: "How our NixOS image is built, and how to manage your VPS declaratively with nixos-rebuild."
 order: 9
-status: soon
 supported: true
 ---
 
