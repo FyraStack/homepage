@@ -88,13 +88,9 @@ users.users.stackuser = {
 };
 ```
 
-Members of `wheel` can use `sudo`. Our image lets `wheel` use `sudo` without a password, since the user is expected to log in with an SSH key. If you'd rather require a password, set one with `sudo passwd stackuser` and add:
+Members of `wheel` can use `sudo`. Our image lets `wheel` use `sudo` without a password, since the user is expected to log in with an SSH key. If you'd rather require a password, first set `users.mutableUsers` to `true` in `configuration.nix`, and add `security.sudo.wheelNeedsPassword = true;` below it. Rebuild, then set a password with `sudo passwd stackuser`.
 
-```nix
-security.sudo.wheelNeedsPassword = true;
-```
-
-Rebuild, then confirm you can log in as your new user in a second terminal before continuing.
+Confirm you can log in as your new user in a second terminal before continuing.
 
 ---
 
