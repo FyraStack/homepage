@@ -84,6 +84,7 @@ users.users.stackuser = {
   openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAA... you@example"
   ];
+  users.mutableUsers = false;
 };
 ```
 
