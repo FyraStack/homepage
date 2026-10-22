@@ -18,10 +18,13 @@
 
   const startHere = [
     {
-      description: "Connect over SSH, add a user, and harden your server.",
-      href: resolve("/docs/[section]/[slug]", { section: "vps", slug: "ssh" }),
+      description: "Create your account, set up billing, and make your VPS.",
+      href: resolve("/docs/[section]/[slug]", {
+        section: "vps",
+        slug: "getting-started",
+      }),
       icon: Server,
-      title: "I just created a VPS",
+      title: "I want a VPS",
     },
     {
       description: "Pack it up, send it to Chicago, and get IPMI access.",
