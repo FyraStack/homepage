@@ -263,12 +263,12 @@
             {#if showKitty}
               <img
                 alt="A cat"
-                class="h-200 w-(--demo-width) shrink-0 object-fill [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+                class="h-200 w-(--demo-width) shrink-0 object-fill [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-1px] outline-border"
                 src={kittyImage}
               >
             {:else}
               <DashboardDemo
-                class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-0.5px] outline-border"
+                class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-1px] outline-border"
                 {dashboardUrl}
               />
             {/if}

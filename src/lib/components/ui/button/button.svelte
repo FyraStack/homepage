@@ -28,17 +28,17 @@
       },
       variant: {
         accent:
-          "border-primary/45 bg-primary/12 text-foreground hover:border-primary/70 hover:bg-primary/22 aria-expanded:bg-primary/22",
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+          "border-primary/45 bg-primary/12 text-foreground hover:border-primary/70 hover:bg-primary/22 aria-expanded:bg-primary/22 high-contrast:border-primary high-contrast:bg-background high-contrast:hover:border-foreground high-contrast:hover:bg-foreground high-contrast:hover:text-background high-contrast:hover:[&_svg]:text-current",
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80 high-contrast:border-primary high-contrast:hover:border-foreground high-contrast:hover:bg-foreground high-contrast:hover:text-background high-contrast:hover:[&_svg]:text-current",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 dark:hover:bg-destructive/30",
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 dark:hover:bg-destructive/30 high-contrast:border-destructive high-contrast:hover:border-destructive high-contrast:hover:bg-destructive high-contrast:hover:text-destructive-foreground high-contrast:hover:[&_svg]:text-current",
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 high-contrast:hover:border-foreground high-contrast:hover:bg-foreground high-contrast:hover:text-background high-contrast:hover:[&_svg]:text-current",
+        link: "text-primary underline-offset-4 hover:underline high-contrast:underline",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 high-contrast:border-border high-contrast:bg-background high-contrast:hover:border-foreground high-contrast:hover:bg-foreground high-contrast:hover:text-background high-contrast:hover:[&_svg]:text-current",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground high-contrast:border-border high-contrast:hover:border-foreground high-contrast:hover:bg-foreground high-contrast:hover:text-background high-contrast:hover:[&_svg]:text-current",
       },
     },
   });

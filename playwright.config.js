@@ -15,6 +15,15 @@ export default defineConfig({
       },
     },
     {
+      name: "Chrome (High Contrast)",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: isCI ? "chrome" : undefined,
+        contrast: "more",
+        headless: true,
+      },
+    },
+    {
       name: "Mobile Chrome",
       use: {
         ...devices["Pixel 5"],
