@@ -71,6 +71,11 @@
     },
   ];
 
+  const otherImages = [
+    { name: "Gentoo", version: "2026-10-25 systemd" },
+    { name: "Gentoo", version: "2026-10-25 OpenRC" },
+  ];
+
   const steps = [
     { done: true, label: "Name" },
     { done: false, label: "Image" },
@@ -266,18 +271,27 @@
                 </div>
               {/each}
             </div>
-            <div class="flex flex-col gap-2 pt-4">
-              <span
-                class="border-b border-border pb-2 text-[10px] font-semibold tracking-[0.05em] text-muted-foreground uppercase"
+            <!-- Matches "Other Images" on the dashboard's create server page.
+                 pt-1 plus the parent's gap-3 makes the dashboard's mt-4. -->
+            <div class="pt-1">
+              <div
+                class="flex items-center gap-2 border-b border-border/50 pb-2"
               >
-                Other images
-              </span>
-              <div class="flex items-center gap-2.5 px-3 py-1.5">
-                <HardDrive class="size-3.5 text-muted-foreground" />
-                <span class="text-xs">Gentoo</span>
-                <span class="text-[10px] text-muted-foreground"
-                  >2026-10-11</span
+                <span
+                  class="text-[10px] font-semibold tracking-wider text-muted-foreground uppercase"
+                  >Other Images</span
                 >
+              </div>
+              <div class="mt-2 divide-y divide-border/30">
+                {#each otherImages as image (image.version)}
+                  <div class="flex w-full items-center gap-3 px-3 py-2.5">
+                    <HardDrive class="size-4 shrink-0 text-muted-foreground" />
+                    <span class="truncate text-xs">{image.name}</span>
+                    <span class="shrink-0 text-[10px] text-muted-foreground"
+                      >{image.version}</span
+                    >
+                  </div>
+                {/each}
               </div>
             </div>
           </div>
