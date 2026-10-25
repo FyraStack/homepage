@@ -1,39 +1,61 @@
 ---
 title: 'Gentoo'
-description: 'Portage, binary packages, services, updates, and firewall setup on a Gentoo VPS.'
+description: 'Choosing between our systemd and OpenRC images, Portage, binary packages, services, updates, and firewall setup on a Gentoo VPS.'
 order: 10
 supported: true
 ---
 
-Our Gentoo image is Gentoo's official amd64 cloud-init disk image, provisioned with `cloud-init`. Gentoo is a rolling-release, source-based distribution. Packages are usually compiled on your server with Portage, and you control how they're built with USE flags. For help deciding whether Gentoo is right for you, see [Choosing a Linux distribution](/docs/vps/choosing-a-distro).
+We offer two Gentoo images: one with **systemd** and one with **OpenRC**. Both are built from Gentoo's official stage3 tarballs and provisioned with `cloud-init`. Gentoo is a rolling-release, source-based distribution: Portage builds packages on your server, and you control how they're built with USE flags. Our images use Gentoo's binary package host by default, so most installs and updates don't need to compile anything. For help deciding whether Gentoo is right for you, see [Choosing a Linux distribution](/docs/vps/choosing-a-distro).
+
+The images are open source. You can read how they're built in the [FyraStack/gentoo](https://github.com/FyraStack/gentoo) repository.
+
+---
+
+## Choosing systemd or OpenRC
+
+Both images have the same packages, kernel, and Portage setup. They differ in their init system and how networking is managed:
+
+|                  | systemd                                | OpenRC                     |
+| ---------------- | -------------------------------------- | -------------------------- |
+| Profile          | `default/linux/amd64/23.0/systemd`     | `default/linux/amd64/23.0` |
+| Services         | `systemctl`                            | `rc-service`, `rc-update`  |
+| Networking       | `systemd-networkd`, `systemd-resolved` | NetworkManager             |
+| Logging          | journald                               | sysklogd                   |
+
+If you're not sure, choose systemd, since most guides and software assume it. Choose OpenRC if you prefer Gentoo's own init system or want a simpler boot process.
+
+You can't switch an existing VPS between the two. To change, create a new VPS with the other image.
+
+To check which image you're running:
+
+```bash
+cat /proc/1/comm
+```
+
+This prints `systemd` on the systemd image and `init` on the OpenRC image.
 
 ---
 
 ## What's in the image
 
-- **Profile:** `default/linux/amd64/23.0/no-multilib/systemd`. The image uses systemd, not OpenRC, and has no 32-bit libraries.
-- **Packages:** a minimal Gentoo install with Portage, OpenSSH, `sudo`, `cloud-init`, `gentoolkit`, and a few admin tools such as `nano` and `screen`.
-- **Kernel:** Gentoo's distribution kernel, installed with GRUB and `dracut`.
+- **Packages:** a minimal Gentoo install with Portage, OpenSSH, `sudo`, `cloud-init`, `curl`, `nano`, `vim`, and `gentoolkit`.
+- **Kernel:** `gentoo-kernel-bin`, a prebuilt distribution kernel.
+- **Binary packages:** Portage installs packages from Gentoo's binary package host when one matches your USE flags, and checks their signatures.
 - **Networking:** configured by `cloud-init` at boot. See [VPS networking](/docs/vps/networking) for how your addresses are assigned.
+- **SSH:** root login and password authentication are allowed so you can log in for the first time. We recommend turning both off after you [add a non-root user](#add-a-non-root-user) and an SSH key, as shown in our [hardening guide](/docs/vps/hardening).
 - **Firewall:** none is enabled by default. See [Set up a firewall](#set-up-a-firewall).
-
-To check your current profile:
-
-```bash
-eselect profile show
-```
 
 ---
 
 ## Sync the package repository
 
-Before installing anything for the first time, download a copy of the Gentoo package repository:
+The image doesn't include a copy of the Gentoo package repository, since it would be out of date by the time you create your VPS. Before installing anything for the first time, download it:
 
 ```bash
 sudo emerge --sync
 ```
 
-Run this again before installing or updating packages so Portage sees the latest versions.
+Run this again before installing or updating packages so Portage sees the latest versions. Until your first sync, Portage warns that your profile is invalid. This is expected.
 
 ---
 
@@ -45,40 +67,47 @@ Gentoo uses `emerge` to install packages:
 sudo emerge --ask app-misc/htop
 ```
 
-To search for a package, use `eix` (after installing it with `sudo emerge --ask app-portage/eix` and running `sudo eix-update`) or search [packages.gentoo.org](https://packages.gentoo.org):
+To search for a package, search [packages.gentoo.org](https://packages.gentoo.org) or use `eix`, after installing it with `sudo emerge --ask app-portage/eix` and running `sudo eix-update`:
 
 ```bash
 eix htop
 ```
 
-### Use binary packages
-
-Compiling everything from source can be slow on a small VPS. Gentoo runs an official [binary package host](https://wiki.gentoo.org/wiki/Gentoo_Binary_Host_Quickstart) that the image is already configured to use, but Portage only uses it when asked. To use binary packages by default, add the following to `/etc/portage/make.conf`:
-
-```bash
-FEATURES="${FEATURES} getbinpkg binpkg-request-signature"
-```
-
-Portage falls back to compiling from source when a binary package doesn't match your USE flags.
-
-To avoid compiling the kernel on every update, you can also switch to the prebuilt distribution kernel:
-
-```bash
-sudo emerge --ask sys-kernel/gentoo-kernel-bin
-sudo emerge --ask --depclean sys-kernel/gentoo-kernel
-```
+If you change a package's USE flags, Portage can't use the binary package and compiles it on your server instead. This can take a while on a small VPS.
 
 ---
 
 ## Manage services
 
-Our Gentoo image uses systemd, so services are managed with `systemctl`, the same as on most other distributions:
+### systemd
 
 ```bash
 sudo systemctl restart sshd       # Start, stop, or restart a service
 sudo systemctl enable --now nginx # Start a service now and on boot
 systemctl status nginx            # Check a service's status
 ```
+
+### OpenRC
+
+```bash
+sudo rc-service sshd restart      # Start, stop, or restart a service
+sudo rc-update add nginx default  # Start a service on boot
+sudo rc-update del nginx default  # Stop starting a service on boot
+rc-status                         # List services and their status
+```
+
+---
+
+## Network configuration
+
+`cloud-init` writes your network configuration on every boot. Where it goes depends on your image:
+
+- **systemd:** `systemd-networkd` files in `/etc/systemd/network/`. Check the status with `networkctl status`.
+- **OpenRC:** NetworkManager connections in `/etc/NetworkManager/system-connections/`. Check the status with `nmcli device status`.
+
+The OpenRC image doesn't use netifrc (`/etc/conf.d/net`), because `cloud-init` can't configure it. Don't add `net.eth0` services, since they conflict with NetworkManager.
+
+If you need to change your network configuration, read [VPS networking](/docs/vps/networking) first. If you lose access, contact us at [support@fyrastack.com](mailto:support@fyrastack.com).
 
 ---
 
@@ -121,12 +150,7 @@ useradd -m -G wheel stackuser
 passwd stackuser
 ```
 
-Allow members of `wheel` to use `sudo`:
-
-```bash
-echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/wheel
-chmod 440 /etc/sudoers.d/wheel
-```
+Members of `wheel` can already use `sudo` without a password, since you'll log in with an SSH key. If you'd rather require a password, edit `/etc/sudoers.d/90-wheel` with `visudo -f /etc/sudoers.d/90-wheel` and remove `NOPASSWD:`.
 
 Then follow the [SSH key steps](/docs/vps/user-setup#2-add-your-ssh-key) in our non-root user guide.
 
@@ -134,17 +158,26 @@ Then follow the [SSH key steps](/docs/vps/user-setup#2-add-your-ssh-key) in our 
 
 ## Set up a firewall
 
-UFW is available in the Gentoo repository. Install it, allow SSH and any services you run, then enable it:
+UFW is available in the Gentoo repository. Install it, then allow SSH and any services you run:
 
 ```bash
 sudo emerge --ask net-firewall/ufw
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp # Example service
 sudo ufw enable
-sudo systemctl enable --now ufw
 ```
 
-See our [hardening guide](/docs/vps/hardening) for more on SSH and `fail2ban`. On Gentoo, install packages with `emerge` instead of `apt` or `dnf`.
+Then start UFW on boot:
+
+```bash
+# systemd
+sudo systemctl enable --now ufw
+
+# OpenRC
+sudo rc-update add ufw default
+```
+
+See our [hardening guide](/docs/vps/hardening) for more on SSH and `fail2ban`. On Gentoo, install packages with `emerge` instead of `apt` or `dnf`, and on the OpenRC image, use `rc-service` and `rc-update` instead of `systemctl`.
 
 ---
 
