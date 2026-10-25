@@ -15,7 +15,7 @@ The images are open source. You can read how they're built in the [FyraStack/gen
 
 Both images have the same packages, kernel, and Portage setup. They differ in their init system and how networking is managed:
 
-|                  | systemd                                | OpenRC                     |
+| Feature          | systemd                                | OpenRC                     |
 | ---------------- | -------------------------------------- | -------------------------- |
 | Profile          | `default/linux/amd64/23.0/systemd`     | `default/linux/amd64/23.0` |
 | Services         | `systemctl`                            | `rc-service`, `rc-update`  |
