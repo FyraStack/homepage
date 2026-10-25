@@ -54,6 +54,8 @@ In your project, go to the **Servers** tab in the sidebar and click the plus ico
 
 If you're not using an SSH key, **you must save your root password here**. Your generated root password **will not** be shown again, and if you lose it, you won't be able to access your VPS.
 
+**Note:** each distribution has its own page in our [Linux documentation](/docs/linux) covering what's in the image, installing packages, and updating your system. Read the page for the distribution you picked before you start setting up your server.
+
 ---
 
 ## Next: connect to your VPS

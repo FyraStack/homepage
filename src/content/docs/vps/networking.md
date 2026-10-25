@@ -6,6 +6,8 @@ order: 4
 
 By default, your VPS will be set up using `cloud-init` with the correct networking configuration. If you need to make changes to your networking configuration, you can do so by editing the appropriate configuration files for your distribution.
 
+**Note:** where these files live depends on your distribution's network stack, such as NetworkManager, netplan, or `systemd-networkd`. Check your distribution's page in our [Linux documentation](/docs/linux) and its upstream documentation before making changes.
+
 ---
 
 ## Notes

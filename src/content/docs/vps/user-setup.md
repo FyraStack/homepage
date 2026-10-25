@@ -8,6 +8,8 @@ Use a personal admin user for day-to-day access instead of logging in as `root`.
 
 Replace `stackuser` in the examples below with your preferred username.
 
+**Note:** this guide covers Fedora, AlmaLinux, Debian, and Ubuntu. Other distributions create users differently. For example, Alpine uses `doas` instead of `sudo`, and NixOS declares users in its configuration. If you're not using one of the distributions above, follow the steps on your distribution's page in our [Linux documentation](/docs/linux) instead, then come back for [step 2](#2-add-your-ssh-key).
+
 ---
 
 ## 1. Create the User

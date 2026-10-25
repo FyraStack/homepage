@@ -8,6 +8,8 @@ These are baseline steps we recommend after your first login to a new VPS. They 
 
 Before changing SSH settings, keep your current SSH session open and test a second login in a new terminal. That way, you can recover quickly if a port, firewall, or key setting is wrong. **If you have not created a non-root admin user yet, start with [Adding a non-root user](/docs/vps/user-setup)**.
 
+**Note:** the examples below use Fedora and Debian/Ubuntu commands. The same steps apply to other distributions, but package managers, service names, and firewall tools differ. Check your distribution's page in our [Linux documentation](/docs/linux) for the right commands. On NixOS, make these changes in your Nix configuration instead of editing files under `/etc`, as described in the [NixOS guide](/docs/linux/nixos).
+
 ---
 
 ## 1. Update the System
@@ -151,7 +153,7 @@ Set up firewall rules for your VPS before exposing services to the internet. At 
 
 Fyra Stack does not provide a firewall layer for your VPS. You are responsible for configuring your own firewall rules. The only traffic we block by default is SMTP (port 25). See our [VPS networking documentation](/docs/vps/networking) for more information.
 
-The examples below show common guest firewall setups. Adjust the allowed ports for your own services.
+The examples below show common guest firewall setups. Adjust the allowed ports for your own services. For other distributions, see the firewall section on your distribution's page in our [Linux documentation](/docs/linux).
 
 ### Fedora with firewalld
 

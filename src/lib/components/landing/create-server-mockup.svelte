@@ -4,6 +4,7 @@
   import fedora from "#lib/assets/os/fedora.webp";
   import opensuse from "#lib/assets/os/opensuse.webp";
   import ubuntu from "#lib/assets/os/ubuntu.webp";
+  import nixos from "#lib/assets/os/nixos.webp";
   import { Badge } from "#lib/components/ui/badge/index.js";
   import ArrowLeft from "~icons/lucide/arrow-left";
   import Check from "~icons/lucide/check";
@@ -60,6 +61,14 @@
       meta: ["x86", "13", "qcow2"],
       name: "Debian",
       tint: "#ce0056",
+    },
+    {
+      description:
+        "A Linux distribution based on the Nix package manager.",
+      logo: nixos,
+      meta: ["x86", "26.05", "qcow2"],
+      name: "NixOS",
+      tint: "#4d6fb7",
     },
   ];
 
@@ -266,8 +275,8 @@
               </span>
               <div class="flex items-center gap-2.5 px-3 py-1.5">
                 <HardDrive class="size-3.5 text-muted-foreground" />
-                <span class="text-xs">NixOS</span>
-                <span class="text-[10px] text-muted-foreground">26.05</span>
+                <span class="text-xs">Gentoo</span>
+                <span class="text-[10px] text-muted-foreground">2026-10-11</span>
               </div>
             </div>
           </div>
