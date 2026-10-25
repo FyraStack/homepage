@@ -181,3 +181,5 @@ Replace `fyrastack-vps` with any shortcut name you prefer, and replace `your_vps
 ## Next Steps
 
 After you can log in, make sure your SSH key is installed and tested. Next, [add a non-root user](https://fyrastack.com/docs/vps/user-setup), then [harden your server](https://fyrastack.com/docs/vps/hardening).
+
+For package management, updates, and other details specific to your distribution, see its page in our [Linux documentation](/docs/linux).

@@ -13,8 +13,6 @@ The image is open source. You can read its full configuration in the [FyraStack/
 
 ## What's in the image
 
-The image is kept intentionally small:
-
 - **Packages:** `cloud-init`, `curl`, `nano`, and `vim`.
 - **Networking:** `systemd-networkd`, configured by `cloud-init` at boot. See [VPS networking](/docs/vps/networking) for how your addresses are assigned.
 - **Firewall:** the NixOS firewall is enabled, with only TCP port 22 (SSH) open.

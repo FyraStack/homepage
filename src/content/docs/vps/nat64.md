@@ -55,7 +55,11 @@ The generated configuration also places the Fyra Stack DNS64 resolver before the
 
 ---
 
-## Existing IPv6-only VPSes using NetworkManager
+## Existing IPv6-only VPSes
+
+The steps below cover NetworkManager and netplan. If your distribution uses a different network stack, such as `systemd-networkd` or NixOS's declarative networking, add the same route and resolver using your distribution's tools. See your distribution's page in our [Linux documentation](/docs/linux) for details.
+
+### Using NetworkManager
 
 Add the NAT64 route to the active connection. Replace `CONNECTION` with the connection name and use the gateway shown in your VPS networking details:
 
@@ -79,9 +83,7 @@ resolvectl status
 curl -6 https://example.com
 ```
 
----
-
-## Existing IPv6-only Linux VPSes using netplan
+### Using netplan
 
 Back up the current configuration before editing it:
 

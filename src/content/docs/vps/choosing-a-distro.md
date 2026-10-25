@@ -47,3 +47,9 @@ Alpine is a lightweight, security-focused Linux distribution. It is known for it
 ## openSUSE Leap
 
 openSUSE Leap is built with sources from the community and SUSE Linux Enterprise (SLE), which creates a stable and secure experience for those familar with the SUSE ecosystem. The latest version of openSUSE Leap has a two year support cycle.
+
+---
+
+## Gentoo
+
+Gentoo is a rolling-release, source-based distribution that gives you fine-grained control over how every package is built. It's a great choice if you already know Gentoo or want to learn how a Linux system fits together. We offer Gentoo with either systemd or OpenRC. Our images use Gentoo's binary package host, so most packages install without compiling. Anything you customize with USE flags is compiled on your server, which takes longer and uses more resources than on other distributions. If you want a server you can set and forget, choose AlmaLinux or Debian instead. See our [Gentoo guide](/docs/linux/gentoo) for help choosing between systemd and OpenRC.
