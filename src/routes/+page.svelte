@@ -268,7 +268,7 @@
               >
             {:else}
               <DashboardDemo
-                class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] outline outline-offset-[-1px] outline-border"
+                class="h-200 w-(--demo-width) shrink-0 [zoom:var(--demo-zoom)] shadow-[0_2px_4px_#00000066,0_24px_48px_-12px_#000000aa,0_64px_120px_-24px_#000000cc] after:pointer-events-none after:absolute after:inset-0 after:z-40 after:border after:border-border"
                 {dashboardUrl}
               />
             {/if}
