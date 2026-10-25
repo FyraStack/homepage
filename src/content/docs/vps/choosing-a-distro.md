@@ -52,4 +52,4 @@ openSUSE Leap is built with sources from the community and SUSE Linux Enterprise
 
 ## Gentoo
 
-Gentoo is a rolling-release, source-based distribution that gives you fine-grained control over how every package is built. It's a great choice if you already know Gentoo or want to learn how a Linux system fits together. Because packages are compiled on your server by default, installs and updates take longer and use more CPU than on other distributions, though Gentoo's binary package host helps. If you want a server you can set and forget, choose AlmaLinux or Debian instead.
+Gentoo is a rolling-release, source-based distribution that gives you fine-grained control over how every package is built. It's a great choice if you already know Gentoo or want to learn how a Linux system fits together. Because packages are compiled on your server by default, installs and updates take longer and use more resources than on other distributions, though Gentoo's binary package host helps. If you want a server you can set and forget, choose AlmaLinux or Debian instead.
