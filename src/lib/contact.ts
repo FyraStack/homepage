@@ -4,6 +4,7 @@ export const contactTopics = [
   "Colocation",
   "Partnerships and sponsorships",
   "Press",
+  "Abuse",
 ] as const;
 
 export type ContactTopic = (typeof contactTopics)[number];
