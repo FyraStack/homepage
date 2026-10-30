@@ -45,6 +45,9 @@
     colorBack: "#18181a",
   };
 
+  // High contrast pages use a pure black background; match it.
+  const highContrastBack = "#000000";
+
   const rampDurationMs = 4000;
   const maxFrameGapMs = 100;
 
@@ -116,6 +119,7 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
   import { onMount } from "svelte";
   import { prefersReducedMotion } from "svelte/motion";
   import fragmentSource from "#lib/shaders/dithering.frag?raw";
+  import { contrast } from "#lib/state/contrast.svelte.js";
   import { cn } from "#lib/utils.js";
 
   let {
@@ -134,10 +138,16 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
   let canvas = $state<HTMLCanvasElement>();
   let rendering = $state(false);
   let syncDither: ((reducedMotion: boolean) => void) | undefined;
+  let setHighContrast: ((enabled: boolean) => void) | undefined;
 
   $effect(() => {
     const reducedMotion = prefersReducedMotion.current;
     syncDither?.(reducedMotion);
+  });
+
+  $effect(() => {
+    const { enabled } = contrast;
+    setHighContrast?.(enabled);
   });
 
   function startDither(area: HTMLDivElement, element: HTMLCanvasElement) {
@@ -175,6 +185,14 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
     for (const [key, hex] of Object.entries(palette)) {
       gl.uniform3fv(uniform(`u_${key}`), hexToRgb(hex));
     }
+    const colorBackLocation = uniform("u_colorBack");
+    const applyBackground = (highContrast: boolean) => {
+      gl.uniform3fv(
+        colorBackLocation,
+        hexToRgb(highContrast ? highContrastBack : palette.colorBack)
+      );
+    };
+    applyBackground(contrast.enabled);
     const resolutionLocation = uniform("u_resolution");
     const cellOffsetLocation = uniform("u_cellOffset");
     const timeLocation = uniform("u_time");
@@ -244,12 +262,17 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
     });
     intersectionObserver.observe(area);
     syncDither = sync;
+    setHighContrast = (enabled) => {
+      applyBackground(enabled);
+      draw(shaderSeconds);
+    };
 
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       syncDither = undefined;
+      setHighContrast = undefined;
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }
@@ -279,7 +302,10 @@ void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
 <div
   aria-hidden="true"
-  class={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+  class={cn(
+    "pointer-events-none absolute inset-0 overflow-hidden high-contrast:opacity-35",
+    className
+  )}
   bind:this={container}
 >
   <img

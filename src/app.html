@@ -5,6 +5,25 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="scale" name="text-scale">
     <meta content="#a54a4b" name="theme-color">
+    <!-- Resolve high contrast before first paint. Keep in sync with src/lib/state/contrast.svelte.ts. -->
+    <script>
+      "use strict";
+      (() => {
+        let pref = null;
+        try {
+          pref = localStorage.getItem("contrast-preference");
+        } catch {
+          // Storage unavailable; treat the preference as "auto".
+        }
+        const on =
+          pref === "on" ||
+          (pref !== "off" &&
+            window.matchMedia("(prefers-contrast: more)").matches);
+        if (on) {
+          document.documentElement.setAttribute("data-contrast", "more");
+        }
+      })();
+    </script>
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover">

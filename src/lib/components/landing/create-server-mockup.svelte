@@ -108,7 +108,7 @@
 
 <div
   aria-hidden="true"
-  class="relative h-250 w-full min-w-[1280px] overflow-hidden bg-background shadow-[0_24px_64px_#00000066] outline outline-offset-[-0.5px] outline-border select-none"
+  class="relative h-250 w-full min-w-[1280px] overflow-hidden bg-background shadow-[0_24px_64px_#00000066] outline outline-offset-[-1px] outline-border select-none"
   inert
 >
   <div
