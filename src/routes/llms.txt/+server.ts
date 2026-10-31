@@ -1,7 +1,7 @@
 import {
   colocationTiers,
+  planCategories,
   planSpecs,
-  plans,
 } from "#lib/components/landing/plans.js";
 import { docSections } from "#lib/server/docs.js";
 import { absoluteUrl, dashboardUrl, socialLinks } from "#lib/site.js";
@@ -9,9 +9,14 @@ import type { RequestHandler } from "./$types";
 
 export const prerender = true;
 
-const vpsPlanLines = plans.map(
-  (plan) => `- ${plan.name}: $${plan.price}/mo, ${planSpecs(plan)}`
-);
+const vpsPlanLines = planCategories.flatMap((category) => [
+  "",
+  `### ${category.name}`,
+  "",
+  ...category.plans.map(
+    (plan) => `- ${plan.name}: $${plan.price}/mo, ${planSpecs(plan)}`
+  ),
+]);
 
 const colocationLines = colocationTiers.map(
   (tier) => `- ${tier.units}U, ${tier.watts} W, 1 Gbps: $${tier.price}/mo`
@@ -32,12 +37,11 @@ const docsLines = docSections.flatMap((section) => [
 const llmsText = [
   "# Fyra Stack",
   "",
-  "> Fast, independent VPS hosting and colocation in Chicago, run by Fyra Labs on hardware it owns. Plans start at $5/mo with $0 egress.",
+  "> Fast, independent VPS hosting and colocation in Chicago, run by Fyra Labs on hardware it owns. Plans start at $3/mo with $0 egress.",
   "",
   "Fyra Stack (Stack for short) is built by Fyra Labs, the team behind Terra and Ultramarine Linux. Servers run on Intel Cascade Lake CPUs in Dell PowerEdge chassis with enterprise SAS3 SSDs. Every server gets a dedicated IPv4 address, a /64 of IPv6, full root access and a 1 Gbps uplink with fair-use bandwidth that's never billed per GB. There are no hidden fees and you can cancel anytime.",
   "",
   "## VPS plans",
-  "",
   ...vpsPlanLines,
   "",
   "## Colocation",
