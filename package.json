@@ -39,7 +39,7 @@
     "@iconify-json/lucide": "^1.2.142",
     "@internationalized/date": "^3.12.4",
     "@playwright/test": "^1.64.0",
-    "@sveltejs/adapter-cloudflare": "^8.0.0",
+    "@sveltejs/adapter-cloudflare": "^8.0.2",
     "@sveltejs/kit": "^3.0.1",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tailwindcss/typography": "^0.5.20",
