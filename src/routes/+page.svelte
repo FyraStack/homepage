@@ -18,15 +18,17 @@
   import DitherBackground from "#lib/components/landing/dither-background.svelte";
   import { openNote } from "#lib/components/landing/open-note.svelte";
   import {
+    allPlans,
     colocationTiers,
     competitors,
+    planCategories,
     planSpecs,
-    plans,
   } from "#lib/components/landing/plans.js";
   import ProjectLink from "#lib/components/landing/project-link.svelte";
   import RollingPrice from "#lib/components/landing/rolling-price.svelte";
   import { Button } from "#lib/components/ui/button/index.js";
   import * as RadioGroup from "#lib/components/ui/radio-group/index.js";
+  import * as Tabs from "#lib/components/ui/tabs/index.js";
   import * as Tooltip from "#lib/components/ui/tooltip/index.js";
   import { dashboardUrl, socialLinks } from "#lib/site.js";
   import { homeJsonLd } from "#lib/structured-data.js";
@@ -138,16 +140,41 @@
     }
   }
 
-  let selectedName = $state(plans[0].name);
+  let selectedCategoryName = $state(planCategories[0].name);
+  let selectedName = $state(planCategories[0].plans[0].name);
   let hasPickedPlan = $state(false);
   const swapDuration = $derived(prefersReducedMotion.current ? 0 : 220);
 
   function markPlanPicked() {
     hasPickedPlan = true;
   }
+
+  function selectCategory(categoryName: string) {
+    const category = planCategories.find(
+      (option) => option.name === categoryName
+    );
+    if (category) {
+      selectedName = category.plans[0].name;
+      markPlanPicked();
+    }
+  }
+
   const selected = $derived(
-    plans.find((option) => option.name === selectedName) ?? plans[0]
+    allPlans.find((option) => option.name === selectedName) ?? allPlans[0]
   );
+  const selectedCategory = $derived(
+    planCategories.find((category) => category.name === selectedCategoryName) ??
+      planCategories[0]
+  );
+
+  let comparedPlan = $state(allPlans[0]);
+  let pricingSummaryWidth = $state(0);
+
+  $effect.pre(() => {
+    if (selectedCategory.comparesToCompetitors) {
+      comparedPlan = selected;
+    }
+  });
 </script>
 
 <svelte:head>
@@ -157,11 +184,11 @@
     property="og:title"
   >
   <meta
-    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
+    content="Fast, independent VPS hosting and colocation. Plans start at $3/mo."
     name="description"
   >
   <meta
-    content="Fast, independent VPS hosting and colocation. Plans start at $5/mo."
+    content="Fast, independent VPS hosting and colocation. Plans start at $3/mo."
     property="og:description"
   >
   {@html homeJsonLd}
@@ -485,54 +512,90 @@
       </div>
 
       <div class="flex flex-col gap-8">
-        <RadioGroup.Root
-          aria-label="Choose a VPS plan"
-          class="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4"
-          onValueChange={markPlanPicked}
-          bind:value={selectedName}
+        <Tabs.Root
+          class="gap-0"
+          onValueChange={selectCategory}
+          bind:value={selectedCategoryName}
         >
-          {#each plans as plan (plan.name)}
-            {@const isSelected = plan.name === selectedName}
-            <label
-              class={[
-                "group relative flex cursor-pointer flex-col gap-4 bg-background p-5 transition-colors has-focus-visible:bg-gray-850",
-                isSelected
-                  ? "bg-gray-850 shadow-[inset_0_2px_0_var(--color-primary)]"
-                  : "hover:bg-gray-850/60",
-              ]}
-              for="plan-{plan.name}"
-            >
-              <div class="flex items-center justify-between">
-                <span class="font-mono text-sm font-semibold">{plan.name}</span>
-                <RadioGroup.Item
-                  class="border-gray-600 group-hover:border-gray-500"
-                  id="plan-{plan.name}"
-                  value={plan.name}
-                />
-              </div>
-              <div class="flex items-end gap-1">
-                <span
-                  class="text-3xl font-semibold tracking-[-0.03em] tabular-nums"
-                  >${plan.price}</span
-                >
-                <span class="text-sm text-muted-foreground">/mo</span>
-              </div>
-              <span
-                class={[
-                  "text-[13px]",
-                  isSelected ? "text-foreground" : "text-muted-foreground",
-                ]}
+          <Tabs.List
+            class="h-auto! w-full justify-start gap-0 border border-b-0 border-border p-0"
+            variant="line"
+          >
+            {#each planCategories as category (category.name)}
+              <Tabs.Trigger
+                class="h-auto flex-none border-0 px-5 py-3 group-data-horizontal/tabs:after:bottom-0 after:bg-primary"
+                value={category.name}
               >
-                {plan.vcpu}
-                vCPU · {plan.memoryGb} GB · {plan.storageGb} GB SSD
-              </span>
-            </label>
+                {category.name}
+              </Tabs.Trigger>
+            {/each}
+          </Tabs.List>
+          {#each planCategories as category (category.name)}
+            <Tabs.Content value={category.name}>
+              <RadioGroup.Root
+                aria-label="Choose a {category.name} plan"
+                class="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4"
+                onValueChange={markPlanPicked}
+                bind:value={selectedName}
+              >
+                {#each category.plans as plan (plan.name)}
+                  {@const isSelected = plan.name === selectedName}
+                  <label
+                    class={[
+                      "group relative flex cursor-pointer flex-col gap-4 bg-background p-5 transition-colors has-focus-visible:bg-gray-850",
+                      isSelected
+                        ? "bg-gray-850 shadow-[inset_0_-2px_0_var(--color-primary)]"
+                        : "hover:bg-gray-850/60",
+                    ]}
+                    for="plan-{plan.name}"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-sm font-semibold"
+                        >{plan.name}</span
+                      >
+                      <RadioGroup.Item
+                        class="border-gray-600 group-hover:border-gray-500"
+                        id="plan-{plan.name}"
+                        value={plan.name}
+                      />
+                    </div>
+                    <div class="flex items-end gap-1">
+                      <span
+                        class="text-3xl font-semibold tracking-[-0.03em] tabular-nums"
+                        >${plan.price}</span
+                      >
+                      <span class="text-sm text-muted-foreground">/mo</span>
+                    </div>
+                    <span
+                      class={[
+                        "text-[13px]",
+                        isSelected
+                          ? "text-foreground"
+                          : "text-muted-foreground",
+                      ]}
+                    >
+                      {plan.vcpu}
+                      vCPU · {plan.memoryGb} GB · {plan.storageGb} GB SSD
+                    </span>
+                  </label>
+                {/each}
+              </RadioGroup.Root>
+            </Tabs.Content>
           {/each}
-        </RadioGroup.Root>
+        </Tabs.Root>
 
         <div
           aria-live="polite"
-          class="grid grid-cols-1 border border-border lg:grid-cols-3"
+          class={[
+            "grid grid-cols-1 border border-border motion-safe:transition-[grid-template-columns,grid-template-rows] motion-safe:duration-300 motion-safe:ease-out lg:grid-rows-1",
+            selectedCategory.comparesToCompetitors
+              ? "grid-rows-[auto_1fr_auto] lg:grid-cols-[1fr_1fr_1fr]"
+              : "grid-rows-[auto_0fr_auto] lg:grid-cols-[1fr_0fr_1fr]",
+          ]}
+          style:--expanded-column-width={pricingSummaryWidth
+            ? `${pricingSummaryWidth / 3}px`
+            : undefined}
+          bind:clientWidth={pricingSummaryWidth}
         >
           <div class="flex flex-col justify-between gap-6 p-8">
             <div class="flex flex-col gap-2.5">
@@ -561,57 +624,70 @@
             </Button>
           </div>
           <div
-            class="flex flex-col gap-1 border-t border-border p-8 lg:border-t-0 lg:border-l"
+            class="min-h-0 min-w-0 overflow-hidden"
+            inert={!selectedCategory.comparesToCompetitors}
           >
-            <div class="flex items-center gap-3 text-xs text-muted-foreground">
-              <span class="flex-1">Same size elsewhere</span>
-              <span class="w-20 text-right">Their price</span>
-              <span class="w-20 text-right">You save</span>
-            </div>
-            <ul class="flex flex-col">
-              {#each competitors as { provider, offersByMemoryGb } (provider)}
-                {@const offer = offersByMemoryGb[selected.memoryGb]}
-                <li
-                  class="flex items-center gap-3 overflow-hidden border-b border-border py-3 text-sm last:border-b-0"
-                >
-                  <span class="flex-1">{provider}</span>
-                  <span class="grid justify-items-end">
-                    {#if offer}
-                      <span
-                        class="col-start-1 row-start-1 flex gap-3"
-                        in:fly={{ duration: swapDuration, y: 12 }}
-                        out:fly={{ duration: swapDuration, y: -12 }}
-                      >
+            <div
+              class={[
+                "flex flex-col gap-1 border-t border-border p-8 motion-safe:transition-opacity motion-safe:duration-300 lg:w-[var(--expanded-column-width,auto)] lg:border-t-0 lg:border-l",
+                !selectedCategory.comparesToCompetitors && "opacity-0",
+              ]}
+            >
+              <div
+                class="flex items-center gap-3 text-xs text-muted-foreground"
+              >
+                <span class="flex-1">Same size elsewhere</span>
+                <span class="w-20 text-right">Their price</span>
+                <span class="w-20 text-right">You save</span>
+              </div>
+              <ul class="flex flex-col">
+                {#each competitors as { provider, offersByPlanName } (provider)}
+                  {@const offer = offersByPlanName[comparedPlan.name]}
+                  <li
+                    class="flex items-center gap-3 overflow-hidden border-b border-border py-3 text-sm last:border-b-0"
+                  >
+                    <span class="flex-1">{provider}</span>
+                    <span class="grid justify-items-end">
+                      {#if offer}
                         <span
-                          class="w-20 text-right text-muted-foreground tabular-nums"
+                          class="col-start-1 row-start-1 flex gap-3"
+                          in:fly={{ duration: swapDuration, y: 12 }}
+                          out:fly={{ duration: swapDuration, y: -12 }}
                         >
-                          {offer.approximate ? "~" : ""}
-                          <RollingPrice
-                            animateIn={hasPickedPlan}
-                            value={offer.price}
-                          />
-                        </span>
+                          <span
+                            class="w-20 text-right text-muted-foreground tabular-nums"
+                          >
+                            {offer.approximate ? "~" : ""}
+                            <RollingPrice
+                              animateIn={hasPickedPlan}
+                              value={offer.price}
+                            />
+                          </span>
 
+                          <span
+                            class="w-20 text-right font-mono font-semibold tabular-nums"
+                            ><RollingPrice
+                              animateIn={hasPickedPlan}
+                              value={Math.max(
+                                0,
+                                offer.price - comparedPlan.price
+                              )}
+                            /></span
+                          >
+                        </span>
+                      {:else}
                         <span
-                          class="w-20 text-right font-mono font-semibold tabular-nums"
-                          ><RollingPrice
-                            animateIn={hasPickedPlan}
-                            value={Math.max(0, offer.price - selected.price)}
-                          /></span
+                          class="col-start-1 row-start-1 text-muted-foreground"
+                          in:fly={{ duration: swapDuration, y: 12 }}
+                          out:fly={{ duration: swapDuration, y: -12 }}
+                          >Not offered</span
                         >
-                      </span>
-                    {:else}
-                      <span
-                        class="col-start-1 row-start-1 text-muted-foreground"
-                        in:fly={{ duration: swapDuration, y: 12 }}
-                        out:fly={{ duration: swapDuration, y: -12 }}
-                        >Not offered</span
-                      >
-                    {/if}
-                  </span>
-                </li>
-              {/each}
-            </ul>
+                      {/if}
+                    </span>
+                  </li>
+                {/each}
+              </ul>
+            </div>
           </div>
           <div
             class="flex flex-col gap-3 border-t border-border p-8 lg:border-t-0 lg:border-l"

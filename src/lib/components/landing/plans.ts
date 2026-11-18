@@ -17,6 +17,34 @@ export const plans: Plan[] = [
   { memoryGb: 16, name: "BASE-16G", price: 48, storageGb: 180, vcpu: 8 },
 ];
 
+export const computePlans: Plan[] = [
+  { memoryGb: 0.5, name: "COMPUTE-512M", price: 3, storageGb: 10, vcpu: 2 },
+  { memoryGb: 1, name: "COMPUTE-1G", price: 6, storageGb: 15, vcpu: 4 },
+  { memoryGb: 2, name: "COMPUTE-2G", price: 9, storageGb: 20, vcpu: 6 },
+  { memoryGb: 3, name: "COMPUTE-3G", price: 12, storageGb: 25, vcpu: 8 },
+  { memoryGb: 4, name: "COMPUTE-4G", price: 15, storageGb: 30, vcpu: 10 },
+  { memoryGb: 5, name: "COMPUTE-5G", price: 20, storageGb: 35, vcpu: 12 },
+  { memoryGb: 6, name: "COMPUTE-6G", price: 26, storageGb: 40, vcpu: 15 },
+  { memoryGb: 8, name: "COMPUTE-8G", price: 32, storageGb: 50, vcpu: 18 },
+];
+
+export interface PlanCategory {
+  comparesToCompetitors: boolean;
+  name: string;
+  plans: Plan[];
+}
+
+export const planCategories: PlanCategory[] = [
+  { comparesToCompetitors: true, name: "General Purpose", plans },
+  {
+    comparesToCompetitors: false,
+    name: "Compute Optimized",
+    plans: computePlans,
+  },
+];
+
+export const allPlans = planCategories.flatMap((category) => category.plans);
+
 export interface CompetitorOffer {
   approximate?: boolean;
   price: number;
@@ -32,36 +60,36 @@ const fromEur = (spec: string, priceEur: number): CompetitorOffer => ({
 });
 
 export interface Competitor {
-  offersByMemoryGb: Partial<Record<number, CompetitorOffer>>;
+  offersByPlanName: Partial<Record<string, CompetitorOffer>>;
   provider: string;
 }
 
 export const competitors: Competitor[] = [
   {
-    offersByMemoryGb: {
-      2: { price: 18, spec: "Basic · 2 vCPU / 2 GB" },
-      4: { price: 24, spec: "Basic · 2 vCPU / 4 GB" },
-      8: { price: 48, spec: "Basic · 4 vCPU / 8 GB" },
-      16: { price: 96, spec: "Basic · 8 vCPU / 16 GB" },
+    offersByPlanName: {
+      "BASE-2G": { price: 18, spec: "Basic · 2 vCPU / 2 GB" },
+      "BASE-4G": { price: 24, spec: "Basic · 2 vCPU / 4 GB" },
+      "BASE-8G": { price: 48, spec: "Basic · 4 vCPU / 8 GB" },
+      "BASE-16G": { price: 96, spec: "Basic · 8 vCPU / 16 GB" },
     },
     provider: "DigitalOcean",
   },
   {
-    offersByMemoryGb: {
-      2: fromEur("CPX12 · 1 vCPU / 2 GB", 11.49),
-      4: fromEur("CPX22 · 2 vCPU / 4 GB", 19.49),
-      8: fromEur("CPX32 · 4 vCPU / 8 GB", 35.49),
-      16: fromEur("CPX42 · 8 vCPU / 16 GB", 69.49),
+    offersByPlanName: {
+      "BASE-2G": fromEur("CPX12 · 1 vCPU / 2 GB", 11.49),
+      "BASE-4G": fromEur("CPX22 · 2 vCPU / 4 GB", 19.49),
+      "BASE-8G": fromEur("CPX32 · 4 vCPU / 8 GB", 35.49),
+      "BASE-16G": fromEur("CPX42 · 8 vCPU / 16 GB", 69.49),
     },
     provider: "Hetzner",
   },
   {
-    offersByMemoryGb: {
-      2: { price: 7, spec: "Slice 2048 · 1 core / 2 GB" },
-      4: { price: 15, spec: "Slice 4096 · 1 core / 4 GB" },
-      8: { price: 30, spec: "Slice 8192 · 2 cores / 8 GB" },
-      12: { price: 45, spec: "KVM Slice · 3 cores / 12 GB" },
-      16: { price: 60, spec: "Slice 16384 · 4 cores / 16 GB" },
+    offersByPlanName: {
+      "BASE-2G": { price: 7, spec: "Slice 2048 · 1 core / 2 GB" },
+      "BASE-4G": { price: 15, spec: "Slice 4096 · 1 core / 4 GB" },
+      "BASE-8G": { price: 30, spec: "Slice 8192 · 2 cores / 8 GB" },
+      "BASE-12G": { price: 45, spec: "KVM Slice · 3 cores / 12 GB" },
+      "BASE-16G": { price: 60, spec: "Slice 16384 · 4 cores / 16 GB" },
     },
     provider: "BuyVM",
   },

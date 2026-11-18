@@ -1,4 +1,4 @@
-import { planSpecs, plans } from "#lib/components/landing/plans.js";
+import { allPlans, planSpecs } from "#lib/components/landing/plans.js";
 import { absoluteUrl, siteName, siteUrl, socialLinks } from "#lib/site.js";
 
 const organizationId = `${siteUrl}/#organization`;
@@ -32,7 +32,7 @@ const vpsProduct = {
   description:
     "Virtual private servers on Intel Cascade Lake with enterprise SAS3 SSDs, a dedicated IPv4 and a /64 of IPv6, in Chicago.",
   name: "Fyra Stack VPS",
-  offers: plans.map((plan) => ({
+  offers: allPlans.map((plan) => ({
     "@type": "Offer",
     availability: "https://schema.org/InStock",
     description: planSpecs(plan),
