@@ -1,0 +1,6 @@
+[files]
+extend-exclude = ["pnpm-lock.yaml"]
+
+[default.extend-identifiers]
+nodejs_als = "nodejs_als"
+8ba7 = "8ba7"
