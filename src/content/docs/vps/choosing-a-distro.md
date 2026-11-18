@@ -46,7 +46,7 @@ Alpine is a lightweight, security-focused Linux distribution. It is known for it
 
 ## openSUSE Leap
 
-openSUSE Leap is built with sources from the community and SUSE Linux Enterprise (SLE), which creates a stable and secure experience for those familar with the SUSE ecosystem. The latest version of openSUSE Leap has a two year support cycle.
+openSUSE Leap is built with sources from the community and SUSE Linux Enterprise (SLE), which creates a stable and secure experience for those familiar with the SUSE ecosystem. The latest version of openSUSE Leap has a two year support cycle.
 
 ---
 
