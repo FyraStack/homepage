@@ -87,7 +87,7 @@
 <h2 class="sr-only">Server Overview</h2>
 
 <div
-  class="grid shrink-0 grid-cols-2 gap-px border-b border-border bg-muted @min-[64rem]:grid-cols-4"
+  class="grid shrink-0 grid-cols-2 gap-px border-b border-border bg-muted @min-[64rem]:grid-cols-4 high-contrast:bg-border"
 >
   {#each charts as chart (chart.label)}
     <div class="relative flex flex-col bg-background">
@@ -126,7 +126,7 @@
 </div>
 
 <div
-  class="grid shrink-0 grid-cols-1 gap-px border-b border-border bg-muted @min-[64rem]:grid-cols-5"
+  class="grid shrink-0 grid-cols-1 gap-px border-b border-border bg-muted @min-[64rem]:grid-cols-5 high-contrast:bg-border"
 >
   <div class="col-span-2 divide-y divide-border/50 bg-background">
     <div

@@ -12,6 +12,10 @@
     siteName,
     socialLinks,
   } from "#lib/site.js";
+  import {
+    type ContrastPreference,
+    contrast,
+  } from "#lib/state/contrast.svelte.js";
   import { cn } from "#lib/utils.js";
   import { afterNavigate, onNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
@@ -93,6 +97,16 @@
   onMount(() => {
     document.documentElement.dataset.smoothScroll = "";
   });
+
+  $effect(() => {
+    contrast.apply();
+  });
+
+  const contrastOptions: { value: ContrastPreference; label: string }[] = [
+    { label: "Auto", value: "auto" },
+    { label: "On", value: "on" },
+    { label: "Off", value: "off" },
+  ];
 </script>
 
 <svelte:head>
@@ -229,7 +243,10 @@
   </nav>
 </header>
 
-<svelte:window onkeydown={closeMobileNavOnEscape}></svelte:window>
+<svelte:window
+  onkeydown={closeMobileNavOnEscape}
+  onstorage={(event) => contrast.syncFromStorage(event)}
+></svelte:window>
 
 {@render children()}
 
@@ -294,18 +311,43 @@
       class="flex flex-col gap-3 border-t border-border pt-6 text-[13px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
     >
       <span>© 2026 Fyra Stack Limited</span>
-      <div class="flex gap-6">
-        <a
-          class="transition-colors hover:text-foreground"
-          href={resolve("terms-of-service")}
-          >Terms of Service</a
-        >
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+        <fieldset class="flex items-center gap-2">
+          <legend class="float-left mr-2">High contrast</legend>
+          <div class="flex border border-border">
+            {#each contrastOptions as option (option.value)}
+              <button
+                aria-pressed={contrast.preference === option.value}
+                class={cn(
+                  "px-2 py-0.5 transition-colors",
+                  contrast.preference === option.value
+                    ? "bg-secondary high-contrast:bg-foreground high-contrast:text-background text-foreground"
+                    : "hover:text-foreground"
+                )}
+                onclick={() => contrast.setPreference(option.value)}
+                title={option.value === "auto"
+                  ? `Follow your system setting (currently ${contrast.systemPrefersMore ? "on" : "off"})`
+                  : undefined}
+                type="button"
+              >
+                {option.label}
+              </button>
+            {/each}
+          </div>
+        </fieldset>
+        <div class="flex gap-6">
+          <a
+            class="transition-colors hover:text-foreground"
+            href={resolve("terms-of-service")}
+            >Terms of Service</a
+          >
 
-        <a
-          class="transition-colors hover:text-foreground"
-          href={resolve("privacy-statement")}
-          >Privacy Statement</a
-        >
+          <a
+            class="transition-colors hover:text-foreground"
+            href={resolve("privacy-statement")}
+            >Privacy Statement</a
+          >
+        </div>
       </div>
     </div>
   </div>
